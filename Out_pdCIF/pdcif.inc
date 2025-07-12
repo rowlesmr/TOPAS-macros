@@ -4,6 +4,79 @@
 Written by Matthew Rowles.
 Inspiration taken from topas.inc and http://topas.dur.ac.uk/topaswiki/doku.php?id=out_out_general_cif_test
 
+The macros to be used by the user are:
+* Out_pdCIF,
+* Out_pdCIF_multi, and/or potentially,
+* Out_pdCIF_per_xdd.
+
+To see their definitions, see the end of this file.
+
+In general:
+
+macro Out_pdCIF_per_xdd(ciffile)                     { Out_pdCIF_per_xdd(ciffile, "proc", =Get(bkg);) }
+macro Out_pdCIF_per_xdd(ciffile, data_type)          { Out_pdCIF_per_xdd(ciffile, data_type, =Get(bkg);) }
+macro Out_pdCIF_per_xdd(ciffile, data_type, bkq_eqn) {
+
+Out_pdCIF_per_xdd outputs diffraction data and crystal structure information for the xdd under which it is called.
+
+The macro takes three arguments:
+ciffile: the name of the file you want to write to. The data is appended.
+data_type: "meas" - data as-measured; or "proc" - data has been processed before analysis
+bkg_eqn: an equation defining your background function so it can be ouput in the CIF
+
+Two helper macros are given if you only wish to call the macro with one or two arguments. The remaining
+arguments are automaticaly set as shown.
+
+###############
+
+macro Out_pdCIF(ciffile)                     { Out_pdCIF(ciffile, "proc", =Get(bkg);) }
+macro Out_pdCIF(ciffile, data_type)          { Out_pdCIF(ciffile, data_type, =Get(bkg);) }
+macro Out_pdCIF(ciffile, data_type, bkq_eqn) { Out_pdCIF(ciffile, data_type, bkq_eqn, , ) }
+macro Out_pdCIF(ciffile, data_type, bkq_eqn, n, m) {
+
+Out_pdCIF outputs diffraction data and crystal structure information for all xdds given in the macro call.
+It is meant for use in situations where each xdd is independent of the other xdds.
+
+The macro takes five arguments:
+ciffile: the name of the file you want to write to. The data is appended.
+data_type: "meas" - data as-measured; or "proc" - data has been processed before analysis
+bkg_eqn: an equation defining your background function so it can be ouput in the CIF
+n: the inclusive number of the xdd at which to start the pdCIF output
+m: the inclusive number of the xdd at which to stop the pdCIF output
+
+The macro with five arguments would be called rarely, and exits for completeness. Normally, the helper
+macro with three arguments would be called; this outputs all xdds and all strs in those xdds.
+
+Three helper macros are given if you only wish to call the macro with one, two, or three arguments. The
+remaining arguments are automaticaly set as shown.
+
+###############
+
+macro Out_pdCIF_multi(ciffile)                     { Out_pdCIF_multi(ciffile, "proc", =Get(bkg);) }
+macro Out_pdCIF_multi(ciffile, data_type)          { Out_pdCIF_multi(ciffile, data_type, =Get(bkg);) }
+macro Out_pdCIF_multi(ciffile, data_type, bkg_eqn) { Out_pdCIF_multi(ciffile, data_type, bkg_eqn, 1, ) }
+macro Out_pdCIF_multi(ciffile, data_type, bkg_eqn, n, m) {
+
+Out_pdCIF_multi outputs diffraction data and crystal structure information for all xdds given in the macro call.
+It is meant for use in situations where some xdds are dependent on other xdds. eg multi-bank tof refinements
+
+The macro takes five arguments:
+ciffile: the name of the file you want to write to. The data is appended.
+data_type: "meas" - data as-measured; or "proc" - data has been processed before analysis
+bkg_eqn: an equation defining your background function so it can be ouput in the CIF
+n: the inclusive number of the xdd at which to start the pdCIF output
+m: the inclusive number of the xdd at which to stop the pdCIF output
+
+The macro with five arguments would be called in a situation where there are many groups of xdds in a
+single inp file. The macro would be called as many times as there are groups, with the start and stop xdd
+numbers given in each macro call. It is assumed that each group of xdds is contiguous in the inp file.
+In there event of having only a single group in the inp file, the three-argument version can be used.
+
+Three helper macros are given if you only wish to call the macro with one, two, or three arguments. The
+remaining arguments are automaticaly set as shown.
+
+###############
+
 Read the first sections for information only. Unless you want to build
 your own CIF file output. Best head on to the end of this file for the
 actual macros to use (and the comments immediately preceeding).
