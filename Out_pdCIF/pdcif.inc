@@ -972,7 +972,7 @@ _chemical_formula_sum
    example
    'C18 H19 N7 O8 S'
 */
-	Out(formula, "\n_chemical_formula_sum\n;%s\n")
+	Out(formula, "\n_chemical_formula_sum\n;%s\n;")
 }
 
 macro Out_CIF_diffrn_measurement_device_type(goniotype) {
