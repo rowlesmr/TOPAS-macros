@@ -77,6 +77,38 @@ remaining arguments are automaticaly set as shown.
 
 ###############
 
+Reserved parameter names
+CIF_AUDIT_DATASET - string. Per dataset
+
+CIF_ID - number, non-negative integer
+
+CIF_PHASE_ID - string. Per phase. Defaults to phase name appended with CIF_ID. Must have no whitespace.
+CIF_DIFFRACTOGRAM_ID - string. Per xdd. Defaults to xdd_path_name with CIF_ID. Must have no whitespace.
+
+CIF_MODEL_ID - string. Per structure. Defaults to CIF_PHASE_ID
+CIF_STRUCTURE_ID - string. Per structure. Defaults to CIF_PHASE_ID
+CIF_SPACE_GROUP_ID - string. Per structure. Defaults to CIF_PHASE_ID
+
+CIF_DIFFRN_ID - string. Per diffraction conditions, ie temperature or pressure. Strictly, anything in DIFFRN that would cause a change in _diffrn.id
+CIF_INSTR_ID - string. Per instrument
+CIF_RADIATION_ID - string. Per radiation source
+
+CIF_TEMPERATURE - number, kelvin
+CIF_PRESSURE - number, kilopascals
+CIF_PEAK_CUTOFF - number, fraction. See wavelength macros
+CIF_TH2_FIXED - number, 2Th degrees
+CIF_Z - number. Per structure. Formula units per cell
+CIF_SUM_FORMULA - string. Per structure
+CIF_CRYSTAL_SYSTEM - string, enumeration. Per structure
+CIF_PHASE_TEXT - string, CIF-compliant. Per phase
+CIF_DATETIME - string, DateTime. Per xdd
+CIF_DIFFRACTOMETER_NAME - string, _pd_instr.special_details
+CIF_SCAN_METHOD - string, enumeration. Per xdd
+CIF_DIFFRACTOGRAM_TEXT - string, CIF-compliant. Per xdd
+
+###############
+
+
 Read the first sections for information only. Unless you want to build
 your own CIF file output. Best head on to the end of this file for the
 actual macros to use (and the comments immediately preceeding).
@@ -151,6 +183,37 @@ macro n_to_m(n,m) {
 	#m_endif
 }
 
+
+macro If_Local_Eqn_Rpt(c, v, det1, det2)
+{
+   #m_ifarg c #m_code
+      local c
+      #m_ifarg c #m_code_refine
+         #m_ifarg v #m_one_word
+            v det1 det2
+         #m_else
+            v det2
+         #m_endif
+      #m_else
+         #m_first_word v v
+      #m_endif
+   #m_else
+      #m_ifarg c #m_eqn
+      	local = c; : #m_first_word v v
+      #m_endif
+   #m_endif
+}
+macro If_Local_Eqn_Rpt(c, v, dets)
+{
+   If_Local_Eqn_Rpt(c, v, dets,)
+}
+
+
+'macro Out_CIF2_error_or_dot(prmname, fmt) {
+'    if (Error(prmname) > 0.0001 ) { Out_String(".") } else { Out(Error(prmname), fmt)  }
+'}
+
+
 '##############################################################'
 ' Macros common to diffraction data and crystal structures'
 '##############################################################'
@@ -165,23 +228,6 @@ macro Out_CIF2_section_break(comment) {
 	Out_String("\n#######  ")
 	Out_String(comment)
 	Out_String("  #######")
-}
-
-macro Out_CIF2_datablock(blocknamebase, id) {
-/*
-Create the start of an entry in a CIF file. All CIF files must contain at least
-one datablock. The name must be unique.
-
-blocknamebase: a string that you want to appear in the datablock name. No spaces!
-id: an identifier to be appended to the blocknamebase to ensure the
-    datablock name is unique. No spaces!
-*/
-	Out_String("\ndata_")
-	Out(blocknamebase, "%s")
-	Out(id, "_%V")
-}
-macro Out_CIF2_datablock_dataname {
-	Out_String("\ndata_")
 }
 
 macro Out_unique_phase_id(id) {
@@ -207,10 +253,12 @@ macro Out_CIF2_audit_dataset {
 }
 
 '##############################################################'
-' ID macros for phase blocks'
+' ID macros for phase/diffractogram blocks'
 '##############################################################'
 
 macro Out_pdCIF2_phaseblockIDs(id) {
+    check_diffrn_id_presence(id)
+
     Out_CIF2_audit_dataset
     Out_String("\n\n_pd_phase.id\t")      Out_unique_phase_id(id)
 	Out_pdCIF2_phase_name
@@ -219,12 +267,43 @@ macro Out_pdCIF2_phaseblockIDs(id) {
     Out_String("\n_space_group.id\t")   if Prm_There(CIF_SPACE_GROUP_ID) { Out(CIF_SPACE_GROUP_ID, "%s") } else { Out_unique_phase_id(id) }
 
     Out_String("\n_model.structure_id\t")       if Prm_There(CIF_STRUCTURE_ID)   { Out(CIF_STRUCTURE_ID, "%s") }   else { Out_unique_phase_id(id) }
-    if Prm_There(CIF_DIFFRN_ID) { Out_String("\n_structure.diffrn_id\t") Out(CIF_DIFFRN_ID, "%s") }
     Out_String("\n_structure.space_group_id\t") if Prm_There(CIF_SPACE_GROUP_ID) { Out(CIF_SPACE_GROUP_ID, "%s") } else { Out_unique_phase_id(id) }
+    if Prm_There(CIF_DIFFRN_ID) {  Out_String("\n_structure.diffrn_id\t") Out(CIF_DIFFRN_ID, "%s") }
+    Out_String("\n")
+}
 
+macro Out_pdCIF2_diffractogramblockIDs(id) {
+    check_diffrn_id_presence(id)
+
+    Out_CIF2_audit_dataset
+    Out_String("\n\n_pd_diffractogram.id\t") Out_unique_diffractogram_id(id)
+
+    if Prm_There(CIF_DIFFRN_ID) {
+        Out_String("\n_diffrn.id\t") Out(CIF_DIFFRN_ID, "%s")
+        Out_String("\n_pd_diffractogram.diffrn_id\t") Out(CIF_DIFFRN_ID, "%s")
+    }
+
+    if Prm_There(CIF_INSTR_ID) {
+        Out_String("\n_pd_instr.id\t") Out(CIF_INSTR_ID, "%s")
+        if Prm_There(CIF_RADIATION_ID) { Out_String("\n_pd_instr.radiation_id\t") Out(CIF_RADIATION_ID, "%s") }
+        Out_String("\n_pd_diffractogram.instr_id\t") Out(CIF_INSTR_ID, "%s")
+    }
 
     Out_String("\n")
 }
+
+
+'if temperature or pressure is defined, and CIF_DIFFRN_ID is not defined,
+' make the diffractogram_id be the diffrn_id
+macro check_diffrn_id_presence(id) {
+    if Or(Prm_There(CIF_TEMPERATURE), Prm_There(CIF_PRESSURE)) {
+        if Prm_There(CIF_DIFFRN_ID) {}
+        else {
+            local CIF_DIFFRN_ID = Concat(Get(xdd_path_name), "_", id);
+        }
+    }
+}
+
 
 macro Out_CIF2_free_text(text) {
 'Inserts a string into the CIF. Must conform to CIF standards'
@@ -236,49 +315,49 @@ macro Out_CIF2_free_text(text) {
 ' Macros for wavelengths                                       '
 '##############################################################'
 
-macro Out_CIF_wavelength( yminmax,
-                         la0, lo0, lh0, lg0) { Out_CIF_wavelength( yminmax, la0, lo0, lh0, lg0, , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , ) }
+macro Out_CIF_wavelength(ciffile, rad_id, id, yminmax,
+                         la0, lo0, lh0, lg0) { Out_CIF_wavelength(ciffile, rad_id, id, yminmax, la0, lo0, lh0, lg0, , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , ) }
 
-macro Out_CIF_wavelength( yminmax,
+macro Out_CIF_wavelength(ciffile, rad_id, id, yminmax,
                          la0, lo0, lh0, lg0,
-                         la1, lo1, lh1, lg1) { Out_CIF_wavelength( yminmax, la0, lo0, lh0, lg0, la1, lo1, lh1, lg1, , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , ) }
+                         la1, lo1, lh1, lg1) { Out_CIF_wavelength(ciffile, rad_id, id, yminmax, la0, lo0, lh0, lg0, la1, lo1, lh1, lg1, , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , ) }
 
-macro Out_CIF_wavelength( yminmax,
+macro Out_CIF_wavelength(ciffile, rad_id, id, yminmax,
                          la0, lo0, lh0, lg0,
                          la1, lo1, lh1, lg1,
-                         la2, lo2, lh2, lg2) { Out_CIF_wavelength( yminmax, la0, lo0, lh0, lg0, la1, lo1, lh1, lg1, la2, lo2, lh2, lg2, , , , , , , , , , , , , , , , , , , , , , , , , , , , ) }
+                         la2, lo2, lh2, lg2) { Out_CIF_wavelength(ciffile, rad_id, id, yminmax, la0, lo0, lh0, lg0, la1, lo1, lh1, lg1, la2, lo2, lh2, lg2, , , , , , , , , , , , , , , , , , , , , , , , , , , , ) }
 
-macro Out_CIF_wavelength( yminmax,
+macro Out_CIF_wavelength(ciffile, rad_id, id, yminmax,
                          la0, lo0, lh0, lg0,
                          la1, lo1, lh1, lg1,
                          la2, lo2, lh2, lg2,
-                         la3, lo3, lh3, lg3) { Out_CIF_wavelength( yminmax, la0, lo0, lh0, lg0, la1, lo1, lh1, lg1, la2, lo2, lh2, lg2, la3, lo3, lh3, lg3, , , , , , , , , , , , , , , , , , , , , , , , ) }
+                         la3, lo3, lh3, lg3) { Out_CIF_wavelength(ciffile, rad_id, id, yminmax, la0, lo0, lh0, lg0, la1, lo1, lh1, lg1, la2, lo2, lh2, lg2, la3, lo3, lh3, lg3, , , , , , , , , , , , , , , , , , , , , , , , ) }
 
-macro Out_CIF_wavelength( yminmax,
+macro Out_CIF_wavelength(ciffile, rad_id, id, yminmax,
                          la0, lo0, lh0, lg0,
                          la1, lo1, lh1, lg1,
                          la2, lo2, lh2, lg2,
                          la3, lo3, lh3, lg3,
-                         la4, lo4, lh4, lg4) { Out_CIF_wavelength( yminmax, la0, lo0, lh0, lg0, la1, lo1, lh1, lg1, la2, lo2, lh2, lg2, la3, lo3, lh3, lg3, la4, lo4, lh4, lg4, , , , , , , , , , , , , , , , , , , , ) }
+                         la4, lo4, lh4, lg4) { Out_CIF_wavelength(ciffile, rad_id, id, yminmax, la0, lo0, lh0, lg0, la1, lo1, lh1, lg1, la2, lo2, lh2, lg2, la3, lo3, lh3, lg3, la4, lo4, lh4, lg4, , , , , , , , , , , , , , , , , , , , ) }
 
-macro Out_CIF_wavelength( yminmax,
+macro Out_CIF_wavelength(ciffile, rad_id, id, yminmax,
                          la0, lo0, lh0, lg0,
                          la1, lo1, lh1, lg1,
                          la2, lo2, lh2, lg2,
                          la3, lo3, lh3, lg3,
                          la4, lo4, lh4, lg4,
-                         la5, lo5, lh5, lg5) { Out_CIF_wavelength( yminmax, la0, lo0, lh0, lg0, la1, lo1, lh1, lg1, la2, lo2, lh2, lg2, la3, lo3, lh3, lg3, la4, lo4, lh4, lg4, la5, lo5, lh5, lg5, , , , , , , , , , , , , , , , ) }
+                         la5, lo5, lh5, lg5) { Out_CIF_wavelength(ciffile, rad_id, id, yminmax, la0, lo0, lh0, lg0, la1, lo1, lh1, lg1, la2, lo2, lh2, lg2, la3, lo3, lh3, lg3, la4, lo4, lh4, lg4, la5, lo5, lh5, lg5, , , , , , , , , , , , , , , , ) }
 
-macro Out_CIF_wavelength( yminmax,
+macro Out_CIF_wavelength(ciffile, rad_id, id, yminmax,
                          la0, lo0, lh0, lg0,
                          la1, lo1, lh1, lg1,
                          la2, lo2, lh2, lg2,
                          la3, lo3, lh3, lg3,
                          la4, lo4, lh4, lg4,
                          la5, lo5, lh5, lg5,
-                         la6, lo6, lh6, lg6) { Out_CIF_wavelength( yminmax, la0, lo0, lh0, lg0, la1, lo1, lh1, lg1, la2, lo2, lh2, lg2, la3, lo3, lh3, lg3, la4, lo4, lh4, lg4, la5, lo5, lh5, lg5, la6, lo6, lh6, lg6, , , , , , , , , , , , ) }
+                         la6, lo6, lh6, lg6) { Out_CIF_wavelength(ciffile, rad_id, id, yminmax, la0, lo0, lh0, lg0, la1, lo1, lh1, lg1, la2, lo2, lh2, lg2, la3, lo3, lh3, lg3, la4, lo4, lh4, lg4, la5, lo5, lh5, lg5, la6, lo6, lh6, lg6, , , , , , , , , , , , ) }
 
-macro Out_CIF_wavelength( yminmax,
+macro Out_CIF_wavelength(ciffile, rad_id, id, yminmax,
                          la0, lo0, lh0, lg0,
                          la1, lo1, lh1, lg1,
                          la2, lo2, lh2, lg2,
@@ -286,9 +365,9 @@ macro Out_CIF_wavelength( yminmax,
                          la4, lo4, lh4, lg4,
                          la5, lo5, lh5, lg5,
                          la6, lo6, lh6, lg6,
-                         la7, lo7, lh7, lg7) { Out_CIF_wavelength( yminmax, la0, lo0, lh0, lg0, la1, lo1, lh1, lg1, la2, lo2, lh2, lg2, la3, lo3, lh3, lg3, la4, lo4, lh4, lg4, la5, lo5, lh5, lg5, la6, lo6, lh6, lg6, la7, lo7, lh7, lg7, , , , , , , , ) }
+                         la7, lo7, lh7, lg7) { Out_CIF_wavelength(ciffile, rad_id, id, yminmax, la0, lo0, lh0, lg0, la1, lo1, lh1, lg1, la2, lo2, lh2, lg2, la3, lo3, lh3, lg3, la4, lo4, lh4, lg4, la5, lo5, lh5, lg5, la6, lo6, lh6, lg6, la7, lo7, lh7, lg7, , , , , , , , ) }
 
-macro Out_CIF_wavelength( yminmax,
+macro Out_CIF_wavelength(ciffile, rad_id, id, yminmax,
                          la0, lo0, lh0, lg0,
                          la1, lo1, lh1, lg1,
                          la2, lo2, lh2, lg2,
@@ -297,9 +376,9 @@ macro Out_CIF_wavelength( yminmax,
                          la5, lo5, lh5, lg5,
                          la6, lo6, lh6, lg6,
                          la7, lo7, lh7, lg7,
-                         la8, lo8, lh8, lg8) { Out_CIF_wavelength( yminmax, la0, lo0, lh0, lg0, la1, lo1, lh1, lg1, la2, lo2, lh2, lg2, la3, lo3, lh3, lg3, la4, lo4, lh4, lg4, la5, lo5, lh5, lg5, la6, lo6, lh6, lg6, la7, lo7, lh7, lg7, la8, lo8, lh8, lg8, , , , ) }
+                         la8, lo8, lh8, lg8) { Out_CIF_wavelength(ciffile, rad_id, id, yminmax, la0, lo0, lh0, lg0, la1, lo1, lh1, lg1, la2, lo2, lh2, lg2, la3, lo3, lh3, lg3, la4, lo4, lh4, lg4, la5, lo5, lh5, lg5, la6, lo6, lh6, lg6, la7, lo7, lh7, lg7, la8, lo8, lh8, lg8, , , , ) }
 
-macro Out_CIF_wavelength( yminmax,
+macro Out_CIF_wavelength(ciffile, rad_id, id, yminmax,
                          la0, lo0, lh0, lg0,
                          la1, lo1, lh1, lg1,
                          la2, lo2, lh2, lg2,
@@ -364,15 +443,26 @@ macro Out_CIF_wavelength( yminmax,
         #m_ifarg lg9 "" #m_else lg lg9 #m_endif
 
 
+    local !CIF_PEAK_CUTOFF yminmax
+    #m_ifarg rad_id "" #m_else  local !CIF_RADIATION_ID = rad_id ; #m_endif
+
 	Out_CIF2_newfile(ciffile)
 	Out_String("\n")
 	Out_CIF2_section_break("Begin wavelength information")
-	Out_CIF2_datablock_dataname Out_unique_diffractogram_id(id) Out_String("_") Out_String("wavelength")
+	Out_String("\ndata_") Out_unique_diffractogram_id(id) Out_String("_") Out_String("wavelength")
+    Out_CIF2_audit_dataset
     if Prm_There(CIF_RADIATION_ID) { Out_String("\n_diffrn_radiation.id\t") Out(CIF_RADIATION_ID, "%s") }
+
+	if Obj_There(neutron) {
+		Out_String("\n_diffrn_radiation.probe\tneutron")
+	} else {
+		Out_String("\n_diffrn_radiation.probe\tx-ray")
+	}
+
 
     Out_String("\nloop_")
     Out_String("\n_diffrn_radiation_wavelength.id")
-    Out_String("\n_diffrn_radiation_wavelength.weight")
+    Out_String("\n_diffrn_radiation_wavelength.wt")
     Out_String("\n_diffrn_radiation_wavelength.value")
                             Out("0", "\n%s\t") Out(la0, "%11.7f\t") Out(lo0, "%11.7f")
     #m_ifarg la1 "" #m_else Out("1", "\n%s\t") Out(la1, "%11.7f\t") Out(lo1, "%11.7f") #m_endif
@@ -385,17 +475,31 @@ macro Out_CIF_wavelength( yminmax,
     #m_ifarg la8 "" #m_else Out("8", "\n%s\t") Out(la8, "%11.7f\t") Out(lo8, "%11.7f") #m_endif
     #m_ifarg la9 "" #m_else Out("9", "\n%s\t") Out(la9, "%11.7f\t") Out(lo9, "%11.7f") #m_endif
 
-	Out_CIF2_section_break("End wavelength information")
+	'Out_CIF2_section_break("End wavelength information")
 }
 
-macro Out_CIF_wavelength_coka3 {
-Out_CIF_wavelength(0.0001,
-      0.5981,1.788960,0.4700,,
-      0.0503,1.789879,0.3357,,
-      0.3516,1.792850,0.8052,)
+
+
+macro Out_CIF2_tube_settings(kv, ma) {
+    #m_ifarg ma "" #m_else Out_String("\n_diffrn_source.current\t") Out(ma, "%V") #m_endif
+    Out_String("\n_diffrn_source.device\ttube")
+    #m_ifarg ma "" #m_else #m_ifarg kv "" #m_else Out_String("\n_diffrn_source.power\t") Out(ma*kv, "%V") #m_endif #m_endif
+    #m_ifarg kv "" #m_else Out_String("\n_diffrn_source.voltage\t") Out(kv, "%V") #m_endif
+}
+
+macro Out_CIF_wavelength_coka3(ciffile)                     { Out_CIF_wavelength_coka3(ciffile,, CIF_ID,,) }
+macro Out_CIF_wavelength_coka3(ciffile, kv, ma)             { Out_CIF_wavelength_coka3(ciffile,, CIF_ID, kv, ma) }
+macro Out_CIF_wavelength_coka3(ciffile, rad_id, kv, ma)     { Out_CIF_wavelength_coka3(ciffile, rad_id, CIF_ID, kv, ma) }
+macro Out_CIF_wavelength_coka3(ciffile, rad_id, id, kv, ma) {
+    Out_CIF_wavelength(ciffile, rad_id, id, 0.0001,
+        0.5981,1.788960,0.4700,,
+        0.0503,1.789879,0.3357,,
+        0.3516,1.792850,0.8052,)
+    Out_CIF2_tube_settings(kv, ma)
+    Out_String("\n_diffrn_source.target\tCo")
 }
 macro Out_CIF_wavelength_crka7_holzer {
-Out_CIF_wavelength(0.0001,
+Out_CIF_wavelength(ciffile, rad_id, id,0.0001,
       0.378, 2.2896977, 0.6160974,,
       0.132, 2.2900254, 0.7444350,,
       0.084, 2.2905983, 1.3279580,,
@@ -403,64 +507,77 @@ Out_CIF_wavelength(0.0001,
       0.009, 2.2882482, 0.8395685,,
       0.271, 2.2936467, 0.9436726,,
       0.054, 2.2943110, 2.0124101,)
+    Out_String("\n_diffrn_source.target\tCr")
 }
 macro Out_CIF_wavelength_crkb5_holzer {
-    Out_CIF_wavelength(0.0001,
+    Out_CIF_wavelength(ciffile, rad_id, id, 0.0001,
       0.307, 2.0848200, 0.5959633,,
       0.236, 2.0889262, 5.6241545,,
       0.172, 2.0850864, 0.6662470,,
       0.148, 2.0865602, 2.3492088,)
+    Out_String("\n_diffrn_source.target\tCr")
 }
 macro Out_CIF_wavelength_cuk1sharp {
-    Out_CIF_wavelength(0.0001,1,1.540596,0.401844,)
+    Out_CIF_wavelength(ciffile, rad_id, id, 0.0001,1,1.540596,0.401844,)
+    Out_String("\n_diffrn_source.target\tCu")
 }
 macro Out_CIF_wavelength_cuka1 {
-    Out_CIF_wavelength(0.0001,1,1.540596,0.501844,)
-)
+    Out_CIF_wavelength(ciffile, rad_id, id, 0.0001,1,1.540596,0.501844,)
+    Out_String("\n_diffrn_source.target\tCu")
 }
 macro Out_CIF_wavelength_cuka2 {
-    Out_CIF_wavelength(0.0001,
+    Out_CIF_wavelength(ciffile, rad_id, id, 0.0001,
       0.653817,1.540596,0.501844,,
       0.346183,1.544493,0.626579,)
+    Out_String("\n_diffrn_source.target\tCu")
 }
 macro Out_CIF_wavelength_cuka2_analyt {
-    Out_CIF_wavelength(0.0001,
+    Out_CIF_wavelength(ciffile, rad_id, id, 0.0001,
       0.653817,1.540598,0.5,,
       0.346183,1.544426,0.5,)
+    Out_String("\n_diffrn_source.target\tCu")
 }
 macro Out_CIF_wavelength_cuka4_holzer {
-    Out_CIF_wavelength(0.0001,
+    Out_CIF_wavelength(ciffile, rad_id, id, 0.0001,
       0.579, 1.5405909, 0.4374157,,
       0.080, 1.5410639, 0.6432140,,
       0.236, 1.5443990, 0.5128764,,
       0.105, 1.5446855, 0.6872322,)
+    Out_String("\n_diffrn_source.target\tCu")
 }
 macro Out_CIF_wavelength_cuka5 {
-    Out_CIF_wavelength(0.0001,
+    Out_CIF_wavelength(ciffile, rad_id, id, 0.0001,
 		0.5791, 1.540596, 0.437,,
 		0.0159, 1.534753, 3.6854,,
 		0.0762, 1.541058, 0.6,,
 		0.2417, 1.54441 , 0.52,,
 		0.0871, 1.544721, 0.62,)
+    Out_String("\n_diffrn_source.target\tCu")
 }
-macro Out_CIF_wavelength_cuka5_berger {
-    Out_CIF_wavelength(0.0001,
+macro Out_CIF_wavelength_cuka5_berger(ciffile)                     { Out_CIF_wavelength_cuka5_berger(ciffile,, CIF_ID,,) }
+macro Out_CIF_wavelength_cuka5_berger(ciffile, kv, ma)             { Out_CIF_wavelength_cuka5_berger(ciffile,, CIF_ID, kv, ma) }
+macro Out_CIF_wavelength_cuka5_berger(ciffile, rad_id, kv, ma)     { Out_CIF_wavelength_cuka5_berger(ciffile, rad_id, CIF_ID, kv, ma) }
+macro Out_CIF_wavelength_cuka5_berger(ciffile, rad_id, id, kv, ma) {
+    Out_CIF_wavelength(ciffile, rad_id, id, 0.0001,
       0.5691, 1.540596, 0.4370,,
       0.0159, 1.534753, 3.6854,,
       0.0762, 1.541058, 0.6000,,
       0.2517, 1.544410, 0.5200,,
       0.0871, 1.544721, 0.6200,)
+      Out_CIF2_tube_settings(kv, ma)
+    Out_String("\n_diffrn_source.target\tCu")
 }
 macro Out_CIF_wavelength_cukb4_holzer {
-    Out_CIF_wavelength(0.0001,
+    Out_CIF_wavelength(ciffile, rad_id, id, 0.0001,
 		0.485, 1.3922160, 0.5502872,,
 		0.248, 1.3925949, 0.5505868,,
 		0.110, 1.3917581, 0.5546122,,
 		0.100, 1.3934905, 1.2654733,,
 		0.055, 1.3913004, 0.8290293,)
+    Out_String("\n_diffrn_source.target\tCu")
 }
 macro Out_CIF_wavelength_feka7_holzer {
-    Out_CIF_wavelength(0.0001,
+    Out_CIF_wavelength(ciffile, rad_id, id, 0.0001,
       0.278, 1.9359990, 0.4876162,,
       0.182, 1.9362569, 0.5941855,,
       0.106, 1.9370562, 1.4626310,,
@@ -468,16 +585,18 @@ macro Out_CIF_wavelength_feka7_holzer {
       0.207, 1.9399242, 0.7548816,,
       0.066, 1.9405570, 0.7104222,,
       0.065, 1.9402020, 1.3459384,)
+    Out_String("\n_diffrn_source.target\tFe")
 }
 macro Out_CIF_wavelength_fekb4_holzer {
-    Out_CIF_wavelength(0.0001,
+    Out_CIF_wavelength(ciffile, rad_id, id, 0.0001,
 		0.301, 1.7594154, 3.5378594,,
 		0.279, 1.7568450, 0.7767031,,
 		0.241, 1.7565588, 0.4902585,,
 		0.179, 1.7574577, 1.5893663,)
+    Out_String("\n_diffrn_source.target\tFe")
 }
 macro Out_CIF_wavelength_mnka7_holzer {
-    Out_CIF_wavelength(0.0001,
+    Out_CIF_wavelength(ciffile, rad_id, id, 0.0001,
       0.353, 2.1018365, 0.6110764,,
       0.141, 2.1021879, 0.7281904,,
       0.079, 2.1032712, 1.6052406,,
@@ -485,39 +604,40 @@ macro Out_CIF_wavelength_mnka7_holzer {
       0.005, 2.1016355, 0.3452010,,
       0.229, 2.1058026, 0.8444323,,
       0.110, 2.1062490, 1.5085288,)
+    Out_String("\n_diffrn_source.target\tMn")
 }
 macro Out_CIF_wavelength_mnkb5_holzer {
-    Out_CIF_wavelength(0.0001,
+    Out_CIF_wavelength(ciffile, rad_id, id, 0.0001,
 		0.254, 1.9101270, 0.5385290,,
 		0.234, 1.9114758, 2.7701238,,
 		0.234, 1.9140076, 3.9061842,,
 		0.164, 1.9103713, 0.5327797,,
 		0.114, 1.9107334, 0.8274467,)
+    Out_String("\n_diffrn_source.target\tMn")
 }
 macro Out_CIF_wavelength_moka2 {
-    Out_CIF_wavelength(0.0001,
+    Out_CIF_wavelength(ciffile, rad_id, id, 0.0001,
 			0.6533, 0.709300, 0.2695,,
 			0.3467, 0.713574, 0.2795,)
+    Out_String("\n_diffrn_source.target\tMo")
 }
 macro Out_CIF_wavelength_nika5_holzer {
-    Out_CIF_wavelength(0.0001,
+    Out_CIF_wavelength(ciffile, rad_id, id, 0.0001,
       0.487, 1.6579244, 0.4462793,,
       0.171, 1.6583129, 1.0449117,,
       0.250, 1.6617352, 0.5955505,,
       0.064, 1.6620153, 0.6770710,,
       0.028, 1.6624264, 0.9977195,)
+    Out_String("\n_diffrn_source.target\tNi")
 }
 macro Out_CIF_wavelength_nikb4_holzer {
-    Out_CIF_wavelength(0.0001,
+    Out_CIF_wavelength(ciffile, rad_id, id, 0.0001,
 		0.450, 1.5001100, 0.6824449,,
 		0.258, 1.5004731, 0.7880970,,
 		0.203, 1.5016253, 2.4915953,,
 		0.089, 1.4994406, 0.9393379,)
+    Out_String("\n_diffrn_source.target\tNi")
 }
-'macro Out_CIF_wavelength_ {
-'    Out_CIF_wavelength(
-')
-'}
 
 
 '##############################################################'
@@ -525,13 +645,69 @@ macro Out_CIF_wavelength_nikb4_holzer {
 '##############################################################'
 
 
+'use these ones. These are the helpers, the rest are the actual implementation.
+macro Out_pdCIF2_PO_March_Dollase(ciffile,po1, po1_v, h1,k1,l1) {
+    Out_pdCIF2_PO_March_Dollase(ciffile,CIF_ID, po1, po1_v, h1,k1,l1)
+}
+macro Out_pdCIF2_PO_Two_Directions_March_Dollase(ciffile,po1, po1_v, h1,k1,l1, po2, po2_v, h2,k2,l2, mix, mix_v) {
+    Out_pdCIF2_PO_Two_Directions_March_Dollase(ciffile,CIF_ID, po1, po1_v, h1,k1,l1, po2, po2_v, h2,k2,l2, mix, mix_v)
+}
+macro Out_pdCIF2_PO_Three_Directions_March_Dollase(ciffile,po1, po1_v, h1,k1,l1, po2, po2_v, h2,k2,l2, po3, po3_v, h3,k3,l3, mix1, mix1_v, mix2, mix2_v, mix3_v) {
+    Out_pdCIF2_PO_Three_Directions_March_Dollase(ciffile,CIF_ID, po1, po1_v, h1,k1,l1, po2, po2_v, h2,k2,l2, po3, po3_v, h3,k3,l3, mix1, mix1_v, mix2, mix2_v, mix3_v)
+}
 
 
-macro PO_Two_Directions_simple(
-   & c1, ang1, hkl1,
-   & c2, ang2, hkl2,
-   & w1c
-   )
+
+macro Out_pdCIF2_PO_March_Dollase(ciffile,id, po1, po1_v, h1,k1,l1) {
+   	#m_argu po1
+    If_Local_Eqn_Rpt(po1, po1_v, min 0.5 max 2)
+    Out_pdCIF2_PO_simple_March_Dollase(ciffile,id, CeV(po1, po1_v),, h1,k1,l1)
+}
+
+macro Out_pdCIF2_PO_Two_Directions_March_Dollase(ciffile,id, po1, po1_v, h1,k1,l1, po2, po2_v, h2,k2,l2, mix, mix_v) {
+   	#m_argu po1
+   	#m_argu po2
+   	#m_argu mix
+
+    If_Local_Eqn_Rpt(po1, po1_v, min 0.5 max 2)
+    If_Local_Eqn_Rpt(po2, po2_v, min 0.5 max 2)
+    If_Local_Eqn_Rpt(mix, mix_v, min 0 max 1)
+
+    Out_pdCIF2_PO_Two_Directions_simple_March_Dollase(ciffile,id, CeV(po1, po1_v),, h1,k1,l1, CeV(po2, po2_v),, h2,k2,l2, CeV(mix, mix_v))
+}
+
+macro Out_pdCIF2_PO_Three_Directions_March_Dollase(ciffile,id, po1, po1_v, h1,k1,l1, po2, po2_v, h2,k2,l2, po3, po3_v, h3,k3,l3, mix1, mix1_v, mix2, mix2_v, mix3_v) {
+    #m_argu po1
+    #m_argu po2
+    #m_argu po3
+    #m_argu mix1
+    #m_argu mix2
+
+    If_Local_Eqn_Rpt(po1, po1_v, min 0.5 max 2)
+    If_Local_Eqn_Rpt(po2, po2_v, min 0.5 max 2)
+    If_Local_Eqn_Rpt(po3, po3_v, min 0.5 max 2)
+
+    If_Local_Eqn_Rpt(mix1, mix1_v, min 0.0001 max = Min(1, 1 - mix1);)
+    If_Local_Eqn_Rpt(mix2, mix2_v, min 0.0001 max = Min(1, 1 - mix2);)
+
+    local = 1 - CeV(mix1, mix1_v) - CeV(mix2, mix2_v); : mix3_v
+
+    Out_pdCIF2_PO_Three_Directions_simple_March_Dollase(ciffile,id, CeV(po1, po1_v),, h1,k1,l1, CeV(po2, po2_v),, h2,k2,l2, CeV(po3, po3_v),, h3,k3,l3, CeV(mix1, mix1_v), CeV(mix2, mix2_v))
+}
+
+macro Out_pdCIF2_PO_simple_March_Dollase(ciffile,id, & c1, ang1, h1,k1,l1)
+{
+   #m_ifarg ang1 ""
+      #m_unique_not_refine ang1
+   #m_endif
+
+	march_dollase ang1 h1 k1 l1 = c1;
+	scale_pks = ang1;
+
+    Out_pdCIF2_pref_orient_march_dollase_text(ciffile,id, h1,k1,l1, c1, "srefln")
+}
+
+macro Out_pdCIF2_PO_Two_Directions_simple_March_Dollase(ciffile,id, & c1, ang1, h1,k1,l1, & c2, ang2, h2,k2,l2,  & w1c)
 {
    #m_ifarg ang1 ""
       #m_unique_not_refine ang1
@@ -540,18 +716,15 @@ macro PO_Two_Directions_simple(
       #m_unique_not_refine ang2
    #m_endif
 
-	march_dollase ang1 hkl1 = c1;
-	march_dollase ang2 hkl2 = c2;
-	scale_pks = w1c ang1 + (1-w1c) ang2;
+	march_dollase ang1 h1 k1 l1 = c1;
+	march_dollase ang2 h2 k2 l2 = c2;
+    local w2c = 1-w1c;
+	scale_pks = w1c ang1 + w2c ang2;
+
+    Out_pdCIF2_pref_orient_march_dollase_text(ciffile,id, h1,k1,l1, w1c, c1,   h2,k2,l2, w2c, c2, "srefln")
 }
 
-macro PO_Three_Directions_simple(
-	& c1, ang1, hkl1,
-	& c2, ang2, hkl2,
-	& c3, ang3, hkl3,
-	& w1c,
-	& w2c
-	)
+macro Out_pdCIF2_PO_Three_Directions_simple_March_Dollase(ciffile,id, & c1, ang1, h1,k1,l1, & c2, ang2, h2,k2,l2, & c3, ang3, h3,k3,l3, & w1c, & w2c)
 {
 	#m_ifarg ang1 ""
 		#m_unique_not_refine ang1
@@ -563,60 +736,114 @@ macro PO_Three_Directions_simple(
 		#m_unique_not_refine ang3
 	#m_endif
 
+	march_dollase ang1 h1 k1 l1 = c1;
+	march_dollase ang2 h2 k2 l2 = c2;
+	march_dollase ang3 h3 k3 l3 = c3;
+    local w3c = 1-w1c-w2c;
+	scale_pks = w1c ang1 + w2c ang2 + w3c ang3;
 
-	march_dollase ang1 hkl1 = c1;
-	march_dollase ang2 hkl2 = c2;
-	march_dollase ang3 hkl3 = c3;
-
-	scale_pks = w1c ang1 + w2c ang2 + (1-w1c-w2c) ang3;
+	Out_pdCIF2_pref_orient_march_dollase_text(ciffile,id, h1,k1,l1, w1c, c1,   h2,k2,l2, w2c, c2,  h3,k3,l3, w3c, c3, "srefln")
 }
 
-macro GLOBAL_PO_LIMITS { min 0.5 max 2 }
-
-'	Add_PO_Two_Directions(po1, 1, #h #k #l , po2, 1, #h #k #l, mix, 0.5)
-macro Add_PO_Two_Directions(po1, po1_v, hkl1, po2, po2_v, hkl2, mix, mix_v) {
-   	#m_argu po1
-   	#m_argu po2
-   	#m_argu mix
-		If_Local_Eqn_Rpt(po1, po1_v, GLOBAL_PO_LIMITS)
-		If_Local_Eqn_Rpt(po2, po2_v, GLOBAL_PO_LIMITS)
-		If_Local_Eqn_Rpt(mix, mix_v, min 0 max 1)
-		PO_Two_Directions_simple(CeV(po1, po1_v),, hkl1, CeV(po2, po2_v),, hkl2, CeV(mix, mix_v))
+macro Out_pdCIF2_pref_orient_march_dollase_text(ciffile,id, h1,k1,l1, c1, geom) {
+    Out_pdCIF2_pref_orient_march_dollase_text(ciffile,id, h1,k1,l1, , c1,   ,,, , ,  ,,, , , geom)
+}
+macro Out_pdCIF2_pref_orient_march_dollase_text(ciffile,id, h1,k1,l1, w1c, c1,   h2,k2,l2, w2c, c2, geom) {
+    Out_pdCIF2_pref_orient_march_dollase_text(ciffile,id, h1,k1,l1, w1c, c1,   h2,k2,l2, w2c, c2,  ,,, , , geom)
+}
+macro Out_pdCIF2_pref_orient_march_dollase_text(ciffile,id, h1,k1,l1, w1c, c1,   h2,k2,l2, w2c, c2,  h3,k3,l3, w3c, c3, geom) {
+	Out_CIF2_newfile(ciffile)
+	Out_String("\n")
+	Out_CIF2_section_break("Begin preferred orientation information")
+	Out_String("\ndata_") Out_unique_phase_id(id) Out_String("_") Out_unique_diffractogram_id(id) Out_String("_") Out_String("preferred_orientation")
+    Out_CIF2_audit_dataset
+    Out_String("\n_pd_phase.id\t") Out_unique_phase_id(id)
+    Out_String("\n_pd_diffractogram.id\t") Out_unique_diffractogram_id(id)
+    Out(geom, "\n_pd_pref_orient.geom\t%s")
+    Out_String("\nloop_")
+    Out_String("\n_pd_pref_orient_March_Dollase.id")
+    Out_String("\n_pd_pref_orient_March_Dollase.hkl")
+    #m_ifarg w1c "" #m_else Out_String("\n_pd_pref_orient_March_Dollase.fract") #m_endif
+    Out_String("\n_pd_pref_orient_March_Dollase.r")
+    Out_String("\n0\t") Out(h1, "[ %V ") Out(k1, "%V ") Out(l1, "%V ]\t") #m_ifarg w1c "" #m_else Out(w1c, "%V\t") #m_endif Out(c1, "%V")
+    #m_ifarg h2 "" #m_else Out_String("\n1\t") Out(h2, "[ %V ") Out(k2, "%V ") Out(l2, "%V ]\t") Out(w2c, "%V\t") Out(c2, "%V") #m_endif
+    #m_ifarg h3 "" #m_else Out_String("\n2\t") Out(h3, "[ %V ") Out(k3, "%V ") Out(l3, "%V ]\t") Out(w3c, "%V\t") Out(c3, "%V") #m_endif
+	Out_CIF2_section_break("End preferred orientation information")
 }
 
-'	Add_PO_Three_Directions(po1, 1, #h #k #l, po2, 1, #h #k #l, po3, 1, #h #k #l, mix1, 0.3, mix2, 0.3, 0.4)
-macro Add_PO_Three_Directions(po1, po1_v, hkl1, po2, po2_v, hkl2, po3, po3_v, hkl3, mix1, mix1_v, mix2, mix2_v, mix3_v) {
-		#m_argu po1
-		#m_argu po2
-		#m_argu po3
-		#m_argu mix1
-		#m_argu mix2
 
-		If_Local_Eqn_Rpt(po1, po1_v, GLOBAL_PO_LIMITS)
-		If_Local_Eqn_Rpt(po2, po2_v, GLOBAL_PO_LIMITS)
-		If_Local_Eqn_Rpt(po3, po3_v, GLOBAL_PO_LIMITS)
+macro Out_pdCIF2_PO_Spherical_Harmonics(ciffile, id, sh, order)
+{
+    #m_ifarg sh ""
+        #m_unique_not_refine sh
+    #m_endif
+    spherical_harmonics_hkl sh
+        sh_order order
+    scale_pks = sh;
 
-		If_Local_Eqn_Rpt(mix1, mix1_v, min 0.0001 max = Min(1, 1 - mix1);)
-		If_Local_Eqn_Rpt(mix2, mix2_v, min 0.0001 max = Min(1, 1 - mix2);)
 
-		local = 1 - CeV(mix1, mix1_v) - CeV(mix2, mix2_v); : mix3_v
+	Out_CIF2_newfile(ciffile)
+	Out_String("\n")
+	Out_CIF2_section_break("Begin preferred orientation information")
+	Out_String("\ndata_") Out_unique_phase_id(id) Out_String("_") Out_unique_diffractogram_id(id) Out_String("_") Out_String("preferred_orientation")
+    Out_CIF2_audit_dataset
+    Out_String("\n_pd_phase.id\t") Out_unique_phase_id(id)
+    Out_String("\n_pd_diffractogram.id\t") Out_unique_diffractogram_id(id)
+    Out("srefln", "\n_pd_pref_orient.geom\t%s")
+    Out_String("\nloop_")
+    Out_String("\n_pd_pref_orient_spherical_harmonics.id")
+    Out_String("\n_pd_pref_orient_spherical_harmonics.y_ij")
+    Out_String("\n_pd_pref_orient_spherical_harmonics.c_ij")
 
-		PO_Three_Directions_simple(CeV(po1, po1_v),, hkl1,
-		                           CeV(po2, po2_v),, hkl2,
-		                           CeV(po3, po3_v),, hkl3,
-		                           CeV(mix1, mix1_v), CeV(mix2, mix2_v)
-		                           )
+    Out_String("\ny00 \t") Out_String("[ 0  0 ]\t") Out(String_To_Prm(Concat(sh, "_c00")), "%V")
+    Out_String("\ny20 \t") Out_String("[ 2  0 ]\t") Out(String_To_Prm(Concat(sh, "_c20")), "%V")
+    Out_String("\ny21p\t") Out_String("[ 2  1 ]\t") Out(String_To_Prm(Concat(sh,"_c21p")), "%V")
+    Out_String("\ny21m\t") Out_String("[ 2 -1 ]\t") Out(String_To_Prm(Concat(sh,"_c21m")), "%V")
+    Out_String("\ny22p\t") Out_String("[ 2  2 ]\t") Out(String_To_Prm(Concat(sh,"_c22p")), "%V")
+    Out_String("\ny22m\t") Out_String("[ 2 -2 ]\t") Out(String_To_Prm(Concat(sh,"_c22m")), "%V")
+    Out_String("\ny40 \t") Out_String("[ 4  0 ]\t") Out(String_To_Prm(Concat(sh," _c40")), "%V")
+    Out_String("\ny41p\t") Out_String("[ 4  1 ]\t") Out(String_To_Prm(Concat(sh,"_c41p")), "%V")
+    Out_String("\ny41m\t") Out_String("[ 4 -1 ]\t") Out(String_To_Prm(Concat(sh,"_c41m")), "%V")
+    Out_String("\ny42p\t") Out_String("[ 4  2 ]\t") Out(String_To_Prm(Concat(sh,"_c42p")), "%V")
+    Out_String("\ny42m\t") Out_String("[ 4 -2 ]\t") Out(String_To_Prm(Concat(sh,"_c42m")), "%V")
+    Out_String("\ny43p\t") Out_String("[ 4  3 ]\t") Out(String_To_Prm(Concat(sh,"_c43p")), "%V")
+    Out_String("\ny43m\t") Out_String("[ 4 -3 ]\t") Out(String_To_Prm(Concat(sh,"_c43m")), "%V")
+    Out_String("\ny44p\t") Out_String("[ 4  4 ]\t") Out(String_To_Prm(Concat(sh,"_c44p")), "%V")
+    Out_String("\ny44m\t") Out_String("[ 4 -4 ]\t") Out(String_To_Prm(Concat(sh,"_c44m")), "%V")
+    Out_String("\ny60 \t") Out_String("[ 6  0 ]\t") Out(String_To_Prm(Concat(sh, "_c60")), "%V")
+    Out_String("\ny61p\t") Out_String("[ 6  1 ]\t") Out(String_To_Prm(Concat(sh,"_c61p")), "%V")
+    Out_String("\ny61m\t") Out_String("[ 6 -1 ]\t") Out(String_To_Prm(Concat(sh,"_c61m")), "%V")
+    Out_String("\ny62p\t") Out_String("[ 6  2 ]\t") Out(String_To_Prm(Concat(sh,"_c62p")), "%V")
+    Out_String("\ny62m\t") Out_String("[ 6 -2 ]\t") Out(String_To_Prm(Concat(sh,"_c62m")), "%V")
+    Out_String("\ny63p\t") Out_String("[ 6  3 ]\t") Out(String_To_Prm(Concat(sh,"_c63p")), "%V")
+    Out_String("\ny63m\t") Out_String("[ 6 -3 ]\t") Out(String_To_Prm(Concat(sh,"_c63m")), "%V")
+    Out_String("\ny64p\t") Out_String("[ 6  4 ]\t") Out(String_To_Prm(Concat(sh,"_c64p")), "%V")
+    Out_String("\ny64m\t") Out_String("[ 6 -4 ]\t") Out(String_To_Prm(Concat(sh,"_c64m")), "%V")
+    Out_String("\ny65p\t") Out_String("[ 6  5 ]\t") Out(String_To_Prm(Concat(sh,"_c65p")), "%V")
+    Out_String("\ny65m\t") Out_String("[ 6 -5 ]\t") Out(String_To_Prm(Concat(sh,"_c65m")), "%V")
+    Out_String("\ny66p\t") Out_String("[ 6  6 ]\t") Out(String_To_Prm(Concat(sh,"_c66p")), "%V")
+    Out_String("\ny66m\t") Out_String("[ 6 -6 ]\t") Out(String_To_Prm(Concat(sh,"_c66m")), "%V")
+    Out_String("\ny80 \t") Out_String("[ 8  0 ]\t") Out(String_To_Prm(Concat(sh, "_c80")), "%V")
+    Out_String("\ny81p\t") Out_String("[ 8  1 ]\t") Out(String_To_Prm(Concat(sh,"_c81p")), "%V")
+    Out_String("\ny81m\t") Out_String("[ 8 -1 ]\t") Out(String_To_Prm(Concat(sh,"_c81m")), "%V")
+    Out_String("\ny82p\t") Out_String("[ 8  2 ]\t") Out(String_To_Prm(Concat(sh,"_c82p")), "%V")
+    Out_String("\ny82m\t") Out_String("[ 8 -2 ]\t") Out(String_To_Prm(Concat(sh,"_c82m")), "%V")
+    Out_String("\ny83p\t") Out_String("[ 8  3 ]\t") Out(String_To_Prm(Concat(sh,"_c83p")), "%V")
+    Out_String("\ny83m\t") Out_String("[ 8 -3 ]\t") Out(String_To_Prm(Concat(sh,"_c83m")), "%V")
+    Out_String("\ny84p\t") Out_String("[ 8  4 ]\t") Out(String_To_Prm(Concat(sh,"_c84p")), "%V")
+    Out_String("\ny84m\t") Out_String("[ 8 -4 ]\t") Out(String_To_Prm(Concat(sh,"_c84m")), "%V")
+    Out_String("\ny85p\t") Out_String("[ 8  5 ]\t") Out(String_To_Prm(Concat(sh,"_c85p")), "%V")
+    Out_String("\ny85m\t") Out_String("[ 8 -5 ]\t") Out(String_To_Prm(Concat(sh,"_c85m")), "%V")
+    Out_String("\ny86p\t") Out_String("[ 8  6 ]\t") Out(String_To_Prm(Concat(sh,"_c86p")), "%V")
+    Out_String("\ny86m\t") Out_String("[ 8 -6 ]\t") Out(String_To_Prm(Concat(sh,"_c86m")), "%V")
+    Out_String("\ny87p\t") Out_String("[ 8  7 ]\t") Out(String_To_Prm(Concat(sh,"_c87p")), "%V")
+    Out_String("\ny87m\t") Out_String("[ 8 -7 ]\t") Out(String_To_Prm(Concat(sh,"_c87m")), "%V")
+    Out_String("\ny88p\t") Out_String("[ 8  8 ]\t") Out(String_To_Prm(Concat(sh,"_c88p")), "%V")
+    Out_String("\ny88m\t") Out_String("[ 8 -8 ]\t") Out(String_To_Prm(Concat(sh,"_c88m")), "%V")
+
+	Out_CIF2_section_break("End preferred orientation information")
+
 }
-
-'macro PO_Spherical_Harmonics(sh, order)
-'{
-'   #m_ifarg sh ""
-'      #m_unique_not_refine sh
-'   #m_endif
-'   spherical_harmonics_hkl sh
-'      sh_order order
-'   scale_pks = sh;
-'}
 
 
 ' March-Dollase Preferred orientation correction for asymmetric reflection, capillary transmission, or symmetric reflection
@@ -785,6 +1012,11 @@ macro Out_pdCIF2_instr_special_details(details) {
 	Out(details, "\n_pd_instr.special_details\n;%s\n;")
 }
 
+
+macro Out_pdCIF2_peak_cutoff_ratio(ratio) {
+    Out(ratio, "\n_pd_proc_ls.peak_cutoff\t%V")
+}
+
 macro Out_pdCIF2_datetime_initiated(datetime) {
 /*
    The date and time of the data-set measurement. Entries follow
@@ -826,10 +1058,11 @@ macro Out_pdCIF2_phase_mass {
 }
 
 macro Out_pdCIF2_Rfactors {
-	Out(Get(gof),       "\n_pd_proc_ls.prof_gof_factor \t%1.5f")
-	Out(Get(r_p)/100,   "\n_pd_proc_ls.prof_R_factor   \t%1.5f")
-	Out(Get(r_wp)/100,  "\n_pd_proc_ls.prof_wR_factor  \t%1.5f")
-	Out(Get(r_exp)/100, "\n_pd_proc_ls.prof_wR_expected\t%1.5f")
+	Out(Get(gof),       "\n_pd_proc_ls.prof_gof_factor   \t%1.5f")
+	Out(Get(r_p)/100,   "\n_pd_proc_ls.prof_R_factor     \t%1.5f")
+	Out(Get(r_wp)/100,  "\n_pd_proc_ls.prof_wR_factor    \t%1.5f")
+	Out(Get(r_exp)/100, "\n_pd_proc_ls.prof_wR_expected  \t%1.5f")
+    Out(Get(wdw),       "\n_pd_proc_ls.prof_wDW_statistic\t%1.5f")
 }
 
 /*
@@ -1327,7 +1560,7 @@ You must name it "CIF_Z".
 	Out_CIF2_newfile(ciffile)
 	Out_String("\n")
 	Out_CIF2_section_break("Begin powder crystal structure")
-	Out_CIF2_datablock_dataname Out_unique_phase_id(id)
+	Out_String("\ndata_") Out_unique_phase_id(id)
     Out_pdCIF2_phaseblockIDs(id)
 	Out_CIF2_unit_cell_prms
 	if Prm_There(CIF_Z) { Out_CIF2_Z_molecular_weight(CIF_Z) }
@@ -1354,7 +1587,7 @@ macro Out_pdCIF2_phase_diffractogram_data(ciffile, id) {
 	Out_CIF2_newfile(ciffile)
 	Out_String("\n")
 	Out_CIF2_section_break("Begin phase and diffractogram information")
-	Out_CIF2_datablock_dataname Out_unique_phase_id(id) Out_String("_") Out_unique_diffractogram_id(id)
+	Out_String("\ndata_") Out_unique_phase_id(id) Out_String("_") Out_unique_diffractogram_id(id)
     Out_CIF2_audit_dataset
     Out_String("\n_pd_phase.id\t") Out_unique_phase_id(id)
     Out_String("\n_pd_diffractogram.id\t") Out_unique_diffractogram_id(id)
@@ -1372,7 +1605,7 @@ macro Out_pdCIF2_phase_diffractogram_data(ciffile, id) {
 
 
 
-macro Out_pdCIF2_diffraction_data(ciffile, data_type, bkg_eqn, phase_id, id) {
+macro Out_pdCIF2_diffraction_data(ciffile, data_type, bkg_eqn, id) {
 /*
 This macro constructs a powder diffraction pattern in CIF format.
 
@@ -1399,22 +1632,17 @@ is: a number uniquely identifying an xdd, or group of xdds in the case of a mult
 	Out_CIF2_newfile(ciffile)
 	Out_String("\n")
 	Out_CIF2_section_break("Begin powder diffraction data")
-	Out_CIF2_datablock_dataname Out_unique_diffractogram_id(id)
-	Out_pdCIF2_blockid_dataname Out_unique_diffractogram_id(id)
+	Out_String("\ndata_") Out_unique_diffractogram_id(id)
+    Out_pdCIF2_diffractogramblockIDs(id)
 	if Prm_There(CIF_DATETIME) { Out_pdCIF2_datetime_initiated(CIF_DATETIME) }
 	Out_String("\n_pd_calc.method\tRietveld")
-	if Obj_There(neutron) {
-		Out_String("\n_diffrn_radiation.probe\tneutron")
-	} else {
-		Out_String("\n_diffrn_radiation.probe\tx-ray")
-	}
 	if Prm_There(CIF_DIFFRACTOMETER_NAME) { Out_pdCIF2_instr_special_details(CIF_DIFFRACTOMETER_NAME) }
 	TOF_ED_CW(Out_pdCIF2_scan_method("tof"),
 	          Out_pdCIF2_scan_method("disp"),
-	          if Prm_There(CIF_SCAN_METHOD) { Out_pdCIF2_scan_method(CIF_SCAN_METHOD) }
-	          if Obj_There(lam) { Out_CIF2_wavelength } )
-	if Prm_There(CIF_TEMP) { Out_CIF2_temperature(CIF_TEMP) }
-	if Prm_There(CIF_PRES) { Out_CIF2_pressure(CIF_PRES) }
+	          if Prm_There(CIF_SCAN_METHOD) { Out_pdCIF2_scan_method(CIF_SCAN_METHOD) } )
+	if Prm_There(CIF_TEMPERATURE) { Out_CIF2_temperature(CIF_TEMPERATURE) }
+	if Prm_There(CIF_PRESSURE) { Out_CIF2_pressure(CIF_PRESSURE) }
+    if Prm_There(CIF_PEAK_CUTOFF) { Out_pdCIF2_peak_cutoff_ratio(CIF_PEAK_CUTOFF) }
 	Out_pdCIF2_Rfactors
 	if Prm_There(CIF_DIFFRACTOGRAM_TEXT) { Out_CIF2_free_text(CIF_DIFFRACTOGRAM_TEXT) }
 	TOF_ED_CW(Out_pdCIF2_time_of_flight_data(ciffile, data_type, bkg_eqn),
@@ -1428,7 +1656,13 @@ is: a number uniquely identifying an xdd, or group of xdds in the case of a mult
 macro Out_CIF2_magic_number(ciffile) {
 'write the CIF version number to file.'
 	out ciffile append
-	Out_String("#\#CIF_2.0\n")
+    if Obj_There(num_runs) {
+        #if Run_Number == 0;
+            Out_String("#\#CIF_2.0\n")
+        #endif
+    } else {
+        Out_String("#\#CIF_2.0\n")
+    }
 }
 '##############################################################%#####################################     '
 '####################################################################################################     '
