@@ -771,7 +771,9 @@ macro Out_pdCIF2_pref_orient_march_dollase_text(ciffile,id, h1,k1,l1, w1c, c1,  
 	Out_CIF2_section_break("End preferred orientation information")
 }
 
-
+macro Out_pdCIF2_PO_Spherical_Harmonics(ciffile, sh, order) {
+    Out_pdCIF2_PO_Spherical_Harmonics(ciffile, CIF_ID, sh, order)
+}
 macro Out_pdCIF2_PO_Spherical_Harmonics(ciffile, id, sh, order)
 {
     #m_ifarg sh ""
@@ -781,7 +783,10 @@ macro Out_pdCIF2_PO_Spherical_Harmonics(ciffile, id, sh, order)
         sh_order order
     scale_pks = sh;
 
+    Out_pdCIF2_pref_orient_spherical_harmonics_text(ciffile, id, sh, order, "srefln")
+}
 
+macro Out_pdCIF2_pref_orient_spherical_harmonics_text(ciffile, id, sh, order, geom) {
 	Out_CIF2_newfile(ciffile)
 	Out_String("\n")
 	Out_CIF2_section_break("Begin preferred orientation information")
@@ -789,60 +794,57 @@ macro Out_pdCIF2_PO_Spherical_Harmonics(ciffile, id, sh, order)
     Out_CIF2_audit_dataset
     Out_String("\n_pd_phase.id\t") Out_unique_phase_id(id)
     Out_String("\n_pd_diffractogram.id\t") Out_unique_diffractogram_id(id)
-    Out("srefln", "\n_pd_pref_orient.geom\t%s")
+    Out(geom, "\n_pd_pref_orient.geom\t%s")
     Out_String("\nloop_")
     Out_String("\n_pd_pref_orient_spherical_harmonics.id")
     Out_String("\n_pd_pref_orient_spherical_harmonics.y_ij")
     Out_String("\n_pd_pref_orient_spherical_harmonics.c_ij")
-
-    Out_String("\ny00 \t") Out_String("[ 0  0 ]\t") Out(String_To_Prm(Concat(sh, "_c00")), "%V")
-    Out_String("\ny20 \t") Out_String("[ 2  0 ]\t") Out(String_To_Prm(Concat(sh, "_c20")), "%V")
-    Out_String("\ny21p\t") Out_String("[ 2  1 ]\t") Out(String_To_Prm(Concat(sh,"_c21p")), "%V")
-    Out_String("\ny21m\t") Out_String("[ 2 -1 ]\t") Out(String_To_Prm(Concat(sh,"_c21m")), "%V")
-    Out_String("\ny22p\t") Out_String("[ 2  2 ]\t") Out(String_To_Prm(Concat(sh,"_c22p")), "%V")
-    Out_String("\ny22m\t") Out_String("[ 2 -2 ]\t") Out(String_To_Prm(Concat(sh,"_c22m")), "%V")
-    Out_String("\ny40 \t") Out_String("[ 4  0 ]\t") Out(String_To_Prm(Concat(sh," _c40")), "%V")
-    Out_String("\ny41p\t") Out_String("[ 4  1 ]\t") Out(String_To_Prm(Concat(sh,"_c41p")), "%V")
-    Out_String("\ny41m\t") Out_String("[ 4 -1 ]\t") Out(String_To_Prm(Concat(sh,"_c41m")), "%V")
-    Out_String("\ny42p\t") Out_String("[ 4  2 ]\t") Out(String_To_Prm(Concat(sh,"_c42p")), "%V")
-    Out_String("\ny42m\t") Out_String("[ 4 -2 ]\t") Out(String_To_Prm(Concat(sh,"_c42m")), "%V")
-    Out_String("\ny43p\t") Out_String("[ 4  3 ]\t") Out(String_To_Prm(Concat(sh,"_c43p")), "%V")
-    Out_String("\ny43m\t") Out_String("[ 4 -3 ]\t") Out(String_To_Prm(Concat(sh,"_c43m")), "%V")
-    Out_String("\ny44p\t") Out_String("[ 4  4 ]\t") Out(String_To_Prm(Concat(sh,"_c44p")), "%V")
-    Out_String("\ny44m\t") Out_String("[ 4 -4 ]\t") Out(String_To_Prm(Concat(sh,"_c44m")), "%V")
-    Out_String("\ny60 \t") Out_String("[ 6  0 ]\t") Out(String_To_Prm(Concat(sh, "_c60")), "%V")
-    Out_String("\ny61p\t") Out_String("[ 6  1 ]\t") Out(String_To_Prm(Concat(sh,"_c61p")), "%V")
-    Out_String("\ny61m\t") Out_String("[ 6 -1 ]\t") Out(String_To_Prm(Concat(sh,"_c61m")), "%V")
-    Out_String("\ny62p\t") Out_String("[ 6  2 ]\t") Out(String_To_Prm(Concat(sh,"_c62p")), "%V")
-    Out_String("\ny62m\t") Out_String("[ 6 -2 ]\t") Out(String_To_Prm(Concat(sh,"_c62m")), "%V")
-    Out_String("\ny63p\t") Out_String("[ 6  3 ]\t") Out(String_To_Prm(Concat(sh,"_c63p")), "%V")
-    Out_String("\ny63m\t") Out_String("[ 6 -3 ]\t") Out(String_To_Prm(Concat(sh,"_c63m")), "%V")
-    Out_String("\ny64p\t") Out_String("[ 6  4 ]\t") Out(String_To_Prm(Concat(sh,"_c64p")), "%V")
-    Out_String("\ny64m\t") Out_String("[ 6 -4 ]\t") Out(String_To_Prm(Concat(sh,"_c64m")), "%V")
-    Out_String("\ny65p\t") Out_String("[ 6  5 ]\t") Out(String_To_Prm(Concat(sh,"_c65p")), "%V")
-    Out_String("\ny65m\t") Out_String("[ 6 -5 ]\t") Out(String_To_Prm(Concat(sh,"_c65m")), "%V")
-    Out_String("\ny66p\t") Out_String("[ 6  6 ]\t") Out(String_To_Prm(Concat(sh,"_c66p")), "%V")
-    Out_String("\ny66m\t") Out_String("[ 6 -6 ]\t") Out(String_To_Prm(Concat(sh,"_c66m")), "%V")
-    Out_String("\ny80 \t") Out_String("[ 8  0 ]\t") Out(String_To_Prm(Concat(sh, "_c80")), "%V")
-    Out_String("\ny81p\t") Out_String("[ 8  1 ]\t") Out(String_To_Prm(Concat(sh,"_c81p")), "%V")
-    Out_String("\ny81m\t") Out_String("[ 8 -1 ]\t") Out(String_To_Prm(Concat(sh,"_c81m")), "%V")
-    Out_String("\ny82p\t") Out_String("[ 8  2 ]\t") Out(String_To_Prm(Concat(sh,"_c82p")), "%V")
-    Out_String("\ny82m\t") Out_String("[ 8 -2 ]\t") Out(String_To_Prm(Concat(sh,"_c82m")), "%V")
-    Out_String("\ny83p\t") Out_String("[ 8  3 ]\t") Out(String_To_Prm(Concat(sh,"_c83p")), "%V")
-    Out_String("\ny83m\t") Out_String("[ 8 -3 ]\t") Out(String_To_Prm(Concat(sh,"_c83m")), "%V")
-    Out_String("\ny84p\t") Out_String("[ 8  4 ]\t") Out(String_To_Prm(Concat(sh,"_c84p")), "%V")
-    Out_String("\ny84m\t") Out_String("[ 8 -4 ]\t") Out(String_To_Prm(Concat(sh,"_c84m")), "%V")
-    Out_String("\ny85p\t") Out_String("[ 8  5 ]\t") Out(String_To_Prm(Concat(sh,"_c85p")), "%V")
-    Out_String("\ny85m\t") Out_String("[ 8 -5 ]\t") Out(String_To_Prm(Concat(sh,"_c85m")), "%V")
-    Out_String("\ny86p\t") Out_String("[ 8  6 ]\t") Out(String_To_Prm(Concat(sh,"_c86p")), "%V")
-    Out_String("\ny86m\t") Out_String("[ 8 -6 ]\t") Out(String_To_Prm(Concat(sh,"_c86m")), "%V")
-    Out_String("\ny87p\t") Out_String("[ 8  7 ]\t") Out(String_To_Prm(Concat(sh,"_c87p")), "%V")
-    Out_String("\ny87m\t") Out_String("[ 8 -7 ]\t") Out(String_To_Prm(Concat(sh,"_c87m")), "%V")
-    Out_String("\ny88p\t") Out_String("[ 8  8 ]\t") Out(String_To_Prm(Concat(sh,"_c88p")), "%V")
-    Out_String("\ny88m\t") Out_String("[ 8 -8 ]\t") Out(String_To_Prm(Concat(sh,"_c88m")), "%V")
-
+    if Prm_There(sh##_c00 ) { Out_String("\ny00 \t") Out_String("[ 0  0 ]\t") Out(sh##_c00 , "%V") }
+    if Prm_There(sh##_c20 ) { Out_String("\ny20 \t") Out_String("[ 2  0 ]\t") Out(sh##_c20 , "%V") }
+    if Prm_There(sh##_c21p) { Out_String("\ny21p\t") Out_String("[ 2  1 ]\t") Out(sh##_c21p, "%V") }
+    if Prm_There(sh##_c21m) { Out_String("\ny21m\t") Out_String("[ 2 -1 ]\t") Out(sh##_c21m, "%V") }
+    if Prm_There(sh##_c22p) { Out_String("\ny22p\t") Out_String("[ 2  2 ]\t") Out(sh##_c22p, "%V") }
+    if Prm_There(sh##_c22m) { Out_String("\ny22m\t") Out_String("[ 2 -2 ]\t") Out(sh##_c22m, "%V") }
+    if Prm_There(sh##_c40 ) { Out_String("\ny40 \t") Out_String("[ 4  0 ]\t") Out(sh##_c40 , "%V") }
+    if Prm_There(sh##_c41p) { Out_String("\ny41p\t") Out_String("[ 4  1 ]\t") Out(sh##_c41p, "%V") }
+    if Prm_There(sh##_c41m) { Out_String("\ny41m\t") Out_String("[ 4 -1 ]\t") Out(sh##_c41m, "%V") }
+    if Prm_There(sh##_c42p) { Out_String("\ny42p\t") Out_String("[ 4  2 ]\t") Out(sh##_c42p, "%V") }
+    if Prm_There(sh##_c42m) { Out_String("\ny42m\t") Out_String("[ 4 -2 ]\t") Out(sh##_c42m, "%V") }
+    if Prm_There(sh##_c43p) { Out_String("\ny43p\t") Out_String("[ 4  3 ]\t") Out(sh##_c43p, "%V") }
+    if Prm_There(sh##_c43m) { Out_String("\ny43m\t") Out_String("[ 4 -3 ]\t") Out(sh##_c43m, "%V") }
+    if Prm_There(sh##_c44p) { Out_String("\ny44p\t") Out_String("[ 4  4 ]\t") Out(sh##_c44p, "%V") }
+    if Prm_There(sh##_c44m) { Out_String("\ny44m\t") Out_String("[ 4 -4 ]\t") Out(sh##_c44m, "%V") }
+    if Prm_There(sh##_c60 ) { Out_String("\ny60 \t") Out_String("[ 6  0 ]\t") Out(sh##_c60 , "%V") }
+    if Prm_There(sh##_c61p) { Out_String("\ny61p\t") Out_String("[ 6  1 ]\t") Out(sh##_c61p, "%V") }
+    if Prm_There(sh##_c61m) { Out_String("\ny61m\t") Out_String("[ 6 -1 ]\t") Out(sh##_c61m, "%V") }
+    if Prm_There(sh##_c62p) { Out_String("\ny62p\t") Out_String("[ 6  2 ]\t") Out(sh##_c62p, "%V") }
+    if Prm_There(sh##_c62m) { Out_String("\ny62m\t") Out_String("[ 6 -2 ]\t") Out(sh##_c62m, "%V") }
+    if Prm_There(sh##_c63p) { Out_String("\ny63p\t") Out_String("[ 6  3 ]\t") Out(sh##_c63p, "%V") }
+    if Prm_There(sh##_c63m) { Out_String("\ny63m\t") Out_String("[ 6 -3 ]\t") Out(sh##_c63m, "%V") }
+    if Prm_There(sh##_c64p) { Out_String("\ny64p\t") Out_String("[ 6  4 ]\t") Out(sh##_c64p, "%V") }
+    if Prm_There(sh##_c64m) { Out_String("\ny64m\t") Out_String("[ 6 -4 ]\t") Out(sh##_c64m, "%V") }
+    if Prm_There(sh##_c65p) { Out_String("\ny65p\t") Out_String("[ 6  5 ]\t") Out(sh##_c65p, "%V") }
+    if Prm_There(sh##_c65m) { Out_String("\ny65m\t") Out_String("[ 6 -5 ]\t") Out(sh##_c65m, "%V") }
+    if Prm_There(sh##_c66p) { Out_String("\ny66p\t") Out_String("[ 6  6 ]\t") Out(sh##_c66p, "%V") }
+    if Prm_There(sh##_c66m) { Out_String("\ny66m\t") Out_String("[ 6 -6 ]\t") Out(sh##_c66m, "%V") }
+    if Prm_There(sh##_c80 ) { Out_String("\ny80 \t") Out_String("[ 8  0 ]\t") Out(sh##_c80 , "%V") }
+    if Prm_There(sh##_c81p) { Out_String("\ny81p\t") Out_String("[ 8  1 ]\t") Out(sh##_c81p, "%V") }
+    if Prm_There(sh##_c81m) { Out_String("\ny81m\t") Out_String("[ 8 -1 ]\t") Out(sh##_c81m, "%V") }
+    if Prm_There(sh##_c82p) { Out_String("\ny82p\t") Out_String("[ 8  2 ]\t") Out(sh##_c82p, "%V") }
+    if Prm_There(sh##_c82m) { Out_String("\ny82m\t") Out_String("[ 8 -2 ]\t") Out(sh##_c82m, "%V") }
+    if Prm_There(sh##_c83p) { Out_String("\ny83p\t") Out_String("[ 8  3 ]\t") Out(sh##_c83p, "%V") }
+    if Prm_There(sh##_c83m) { Out_String("\ny83m\t") Out_String("[ 8 -3 ]\t") Out(sh##_c83m, "%V") }
+    if Prm_There(sh##_c84p) { Out_String("\ny84p\t") Out_String("[ 8  4 ]\t") Out(sh##_c84p, "%V") }
+    if Prm_There(sh##_c84m) { Out_String("\ny84m\t") Out_String("[ 8 -4 ]\t") Out(sh##_c84m, "%V") }
+    if Prm_There(sh##_c85p) { Out_String("\ny85p\t") Out_String("[ 8  5 ]\t") Out(sh##_c85p, "%V") }
+    if Prm_There(sh##_c85m) { Out_String("\ny85m\t") Out_String("[ 8 -5 ]\t") Out(sh##_c85m, "%V") }
+    if Prm_There(sh##_c86p) { Out_String("\ny86p\t") Out_String("[ 8  6 ]\t") Out(sh##_c86p, "%V") }
+    if Prm_There(sh##_c86m) { Out_String("\ny86m\t") Out_String("[ 8 -6 ]\t") Out(sh##_c86m, "%V") }
+    if Prm_There(sh##_c87p) { Out_String("\ny87p\t") Out_String("[ 8  7 ]\t") Out(sh##_c87p, "%V") }
+    if Prm_There(sh##_c87m) { Out_String("\ny87m\t") Out_String("[ 8 -7 ]\t") Out(sh##_c87m, "%V") }
+    if Prm_There(sh##_c88p) { Out_String("\ny88p\t") Out_String("[ 8  8 ]\t") Out(sh##_c88p, "%V") }
+    if Prm_There(sh##_c88m) { Out_String("\ny88m\t") Out_String("[ 8 -8 ]\t") Out(sh##_c88m, "%V") }
 	Out_CIF2_section_break("End preferred orientation information")
-
 }
 
 
