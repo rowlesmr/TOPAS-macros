@@ -2023,10 +2023,11 @@ Out_CIF2_magic_number(CIF_OUTPUT_FILE)
 prm CIF_AUDIT_DATASET = "another_completely_random_UUID";
 xdd
 	local CIF_ID 1
-	local !CIF_SCAN_METHOD = "fixed";
+	local !CIF_SCAN_METHOD = "scan";
 	local CIF_PRESSURE 100
     local !CIF_INSTR_ID = "sync_inst";
     local !CIF_DIFFRN_ID = "100kPa";
+    Out_CIF_wavelength(CIF_OUTPUT_FILE, "synch_src", CIF_ID, 0.0001, 1, 0.123456, 0.05,)
 	...
 	str
 		local !CIF_Z 4
@@ -2034,20 +2035,25 @@ xdd
 xdd
 	local CIF_ID 2
 	local !CIF_SCAN_METHOD = "cont";
-	local CIF_PRES 400
+	local CIF_PRESSURE 400
+    local !CIF_INSTR_ID = "sync_inst";
+    local !CIF_DIFFRN_ID = "400kPa";
+    Out_CIF_wavelength(CIF_OUTPUT_FILE, "synch_src", CIF_ID, 0.0001, 1, 0.123456, 0.05,)
+    pdCIF2_Debye_Scherrer_specimen_displacement(spa_c, 0, spe_c, 0)
 	...
 	str
-		local CIF_PHASE_ID 1
+		local !CIF_Z 4
+        Out_pdCIF2_PO_March_Dollase(CIF_OUTPUT_FILE,po1, 1,  1,0,0)
 		...
 	str
-		local CIF_PHASE_ID 2
+		local CIF_SUM_FORMULA = "O2 Si";
 		local !CIF_Z 6
 		...
 	str
-		local CIF_PHASE_ID 3
+		local CIF_CRYSTAL_SYSTEM = "tetragonal";
 		...
 ...
-Out_pdCIF("filename.cif", meas)
+Out_pdCIF(CIF_OUTPUT_FILE, meas)
 
 -----------------------------------------------
 -----------------------------------------------
@@ -2061,20 +2067,20 @@ file_02.xye	45
 ...
 }
 prm CIF_ID = Run_Number;
-prm CIF_TEMP = Temperature(Run_Number);
+prm CIF_TEMPERATURE = Temperature(Run_Number);
 prm CIF_SCAN_METHOD = "fixed";
+prm CIF_AUDIT_DATASET = "another_further_completely_random_UUID";
+
+Out_CIF2_magic_number(CIF_OUTPUT_FILE)
 xdd
 	...
 	str
-		local CIF_PHASE_ID 1
 		local !CIF_Z = 6;
 		...
 	str
-		local CIF_PHASE_ID 2
 		local !CIF_Z = 8;
 		...
 	str
-		local CIF_PHASE_ID 3
 		...
 Out_pdCIF(CIF_OUTPUT_FILE, meas)
 -----------------------------------------------
