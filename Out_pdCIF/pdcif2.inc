@@ -2105,30 +2105,38 @@ Some examples on how to use the Out_pdCIF2_multi macro:
 
 -----------------------------------------------
 # 1: multiple patterns, multiple strs
-prm CIF_ID 1
-prm CIF_TEMP 5
+
+macro CIF_OUTPUT_FILE { "filename.cif" }
+
+prm !CIF_ID 1
+prm !CIF_TEMPERATURE 5
+prm CIF_DIFFRN_ID = "5K";
+prm CIF_AUDIT_DATASET = "rooly_trooly_random_completely_random_UUID";
+
+Out_CIF2_magic_number(CIF_OUTPUT_FILE)
 xdd 'eg bank 1 of a tof dataset'
 	...
 	str
-		local CIF_PHASE_ID 1
+		local CIF_CRYSTAL_SYSTEM = "trigonal";
+        ...
+	str
+		local CIF_SUM_FORMULA = "Ce O2";
+        local !CIF_Z 6
 		...
 	str
-		local CIF_PHASE_ID 2
-		...
-	str
-		local CIF_PHASE_ID 3
+		local !CIF_Z 6
 		...
 xdd 'eg bank 2 of a tof dataset'
 	...
 	str
-		local CIF_PHASE_ID 1
+		local CIF_CRYSTAL_SYSTEM = "trigonal";
 		...
 	str
-		local CIF_PHASE_ID 2
+		local CIF_SUM_FORMULA = "Ce O2";
+        local !CIF_Z 6
+		...
+	str
 		local !CIF_Z 6
-		...
-	str
-		local CIF_PHASE_ID 3
 		...
 ...
 Out_pdCIF2_multi("filename.cif", proc)
@@ -2139,13 +2147,17 @@ Out_pdCIF2_multi("filename.cif", proc)
 
 macro CIF_OUTPUT_FILE { "filename.cif" }
 num_runs 30
-#list File_Name_b1 File_Name_b2 File_Name_b3 Temperature {
-file_b1_01.xye	file_b2_01.xye	file_b3_01.xye	30
-file_b1_02.xye	file_b2_02.xye	file_b3_02.xye	35
+#list File_Name_b1 File_Name_b2 File_Name_b3 Temperature DiffrnID {
+file_b1_01.xye	file_b2_01.xye	file_b3_01.xye	30        30K
+file_b1_02.xye	file_b2_02.xye	file_b3_02.xye	35        35K
 ...
 }
 prm CIF_ID = Run_Number;
-prm CIF_TEMP = Temperature(Run_Number);
+prm CIF_TEMPERATURE = Temperature(Run_Number);
+prm CIF_DIFFRN_ID = DiffrnID(Run_Number);
+prm CIF_AUDIT_DATASET = "rooly_trooly_random_honestly_random_UUID";
+
+Out_CIF2_magic_number(CIF_OUTPUT_FILE)
 xdd File_Name_b1(Run_Number)
 	...
 	str
@@ -2167,11 +2179,9 @@ xdd File_Name_b3(Run_Number)
 for xdds {
 	local CIF_SCAN_METHOD = "cont";
 	for strs 1 to 1 {
-		local CIF_PHASE_ID 1
 		local CIF_Z = 6;
 	}
 	for strs 2 to 2 {
-		local CIF_PHASE_ID 2
 		local CIF_Z = 8;
 	}
 }
