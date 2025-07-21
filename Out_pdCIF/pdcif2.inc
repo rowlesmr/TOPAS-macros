@@ -772,19 +772,79 @@ macro Out_pdCIF2_pref_orient_march_dollase_text(ciffile,id, h1,k1,l1, w1c, c1,  
 }
 
 macro Out_pdCIF2_PO_Spherical_Harmonics(ciffile, sh, order) {
-    Out_pdCIF2_PO_Spherical_Harmonics(ciffile, CIF_ID, sh, order)
+    Out_pdCIF2_PO_Spherical_Harmonics(ciffile, CIF_ID, "srefln",,0, sh, order)
 }
-macro Out_pdCIF2_PO_Spherical_Harmonics(ciffile, id, sh, order)
+macro Out_pdCIF2_PO_symmetric_reflection_Spherical_Harmonics(ciffile, sh, order) {
+    Out_pdCIF2_PO_Spherical_Harmonics(ciffile, CIF_ID, "srefln",,0, sh, order)
+}
+macro Out_pdCIF2_PO_symmetric_transmission_Spherical_Harmonics(ciffile, sh, order) {
+    Out_pdCIF2_PO_Spherical_Harmonics(ciffile, CIF_ID, "strans",,90, sh, order)
+}
+macro Out_pdCIF2_PO_capillary_transmission_Spherical_Harmonics(ciffile, sh, order) {
+    Out_pdCIF2_PO_Spherical_Harmonics(ciffile, CIF_ID, "cap",,90, sh, order)
+}
+macro Out_pdCIF2_PO_asymmetric_transmission_Spherical_Harmonics(ciffile, omega_v, sh, order) {
+    Out_pdCIF2_PO_asymmetric_transmission_Spherical_Harmonics(ciffile, CIF_ID, , omega_v, sh, order)
+}
+macro Out_pdCIF2_PO_asymmetric_reflection_Spherical_Harmonics(ciffile, omega_v, sh, order) {
+    Out_pdCIF2_PO_asymmetric_reflection_Spherical_Harmonics(ciffile, CIF_ID, , omega_v, sh, order)
+}
+
+
+macro Out_pdCIF2_PO_asymmetric_transmission_Spherical_Harmonics(ciffile, id, omega_v, sh, order) {
+    Out_pdCIF2_PO_asymmetric_transmission_Spherical_Harmonics(ciffile, id, , omega_v, sh, order)
+}
+macro Out_pdCIF2_PO_asymmetric_transmission_Spherical_Harmonics(ciffile, id, omega_c, omega_v, sh, order)
 {
+	#m_argu omega_c
+	If_Local_Eqn_Rpt(omega_c, omega_v, min 0.0001 max 90) 'incident angle in degrees
+	prm #m_unique Delta = Abs(Th + ((CeV(omega_c,omega_v))*Deg)) ;
+    Out_pdCIF2_PO_Spherical_Harmonics(ciffile, id, "atrans", , Delta, sh, order)
+}
+
+macro Out_pdCIF2_PO_asymmetric_reflection_Spherical_Harmonics(ciffile, id, omega_v, sh, order) {
+    Out_pdCIF2_PO_asymmetric_reflection_Spherical_Harmonics(ciffile, id, , omega_v, sh, order)
+}
+macro Out_pdCIF2_PO_asymmetric_reflection_Spherical_Harmonics(ciffile, id, omega_c, omega_v, sh, order)
+{
+	#m_argu omega_c
+	If_Local_Eqn_Rpt(omega_c, omega_v, min 0.0001 max 90) 'incident angle in degrees
+	prm #m_unique Delta = Abs(Th - ((CeV(omega_c,omega_v))*Deg)) ;
+    Out_pdCIF2_PO_Spherical_Harmonics(ciffile, id, "arefln", , Delta, sh, order)
+}
+
+
+macro Out_pdCIF2_PO_Spherical_Harmonics(ciffile, id, geom, Delta_c, Delta_v, sh, order)
+{
+    #m_argu Delta_c
+    If_Local_Eqn_Rpt(Delta_c, Delta_v, min 0.0001 max =Pi;) 'angle in radians:  ==0 symmetric reflection, ==Pi/2 capillary transmission, ==Abs(Th-Omega) asymmetric reflection
+
     #m_ifarg sh ""
         #m_unique_not_refine sh
     #m_endif
     spherical_harmonics_hkl sh
         sh_order order
+        sh_alpha = CeV(Delta_c,Delta_v);
     scale_pks = sh;
 
-    Out_pdCIF2_pref_orient_spherical_harmonics_text(ciffile, id, sh, order, "srefln")
+    Out_pdCIF2_pref_orient_spherical_harmonics_text(ciffile, id, sh, order, geom)
 }
+
+
+macro POSHTI_(s, c)
+   {
+      If(Prm_There(s##_##c), s##_##c^2, 0)
+   }
+macro pdCIF2_PO_Spherical_Harmonics_texture_index(s)
+   {
+      local CIF_POSH_TEXTURE_INDEX = {
+         return 1
+         +1/5  (POSHTI_(s,c20)+POSHTI_(s,c21p)+POSHTI_(s,c21m)+POSHTI_(s,c22p)+POSHTI_(s,c22m))
+         +1/9  (POSHTI_(s,c41)+POSHTI_(s,c41p)+POSHTI_(s,c41m)+POSHTI_(s,c42p)+POSHTI_(s,c42m)+POSHTI_(s,c43p)+POSHTI_(s,c43m)+POSHTI_(s,c44p)+POSHTI_(s,c44m))
+         +1/13 (POSHTI_(s,c60)+POSHTI_(s,c61p)+POSHTI_(s,c61m)+POSHTI_(s,c62p)+POSHTI_(s,c62m)+POSHTI_(s,c63p)+POSHTI_(s,c63m)+POSHTI_(s,c64p)+POSHTI_(s,c64m)+POSHTI_(s,c65p)+POSHTI_(s,c65m)+POSHTI_(s,c66p)+POSHTI_(s,c66m))
+         +1/17 (POSHTI_(s,c80)+POSHTI_(s,c81p)+POSHTI_(s,c81m)+POSHTI_(s,c82p)+POSHTI_(s,c82m)+POSHTI_(s,c83p)+POSHTI_(s,c83m)+POSHTI_(s,c84p)+POSHTI_(s,c84m)+POSHTI_(s,c85p)+POSHTI_(s,c85m)+POSHTI_(s,c86p)+POSHTI_(s,c86m)+POSHTI_(s,c87p)+POSHTI_(s,c87m)+POSHTI_(s,c88p)+POSHTI_(s,c88m));
+      }
+   }
 
 macro Out_pdCIF2_pref_orient_spherical_harmonics_text(ciffile, id, sh, order, geom) {
 	Out_CIF2_newfile(ciffile)
@@ -795,55 +855,57 @@ macro Out_pdCIF2_pref_orient_spherical_harmonics_text(ciffile, id, sh, order, ge
     Out_String("\n_pd_phase.id\t") Out_unique_phase_id(id)
     Out_String("\n_pd_diffractogram.id\t") Out_unique_diffractogram_id(id)
     Out(geom, "\n_pd_pref_orient.geom\t%s")
+    pdCIF2_PO_Spherical_Harmonics_texture_index(sh)
+    Out(CIF_POSH_TEXTURE_INDEX, "\n_pd_pref_orient.spherical_harmonics_texture_index\t%V")
     Out_String("\nloop_")
     Out_String("\n_pd_pref_orient_spherical_harmonics.id")
     Out_String("\n_pd_pref_orient_spherical_harmonics.y_ij")
     Out_String("\n_pd_pref_orient_spherical_harmonics.c_ij")
-    if Prm_There(sh##_c00 ) { Out_String("\ny00 \t") Out_String("[ 0  0 ]\t") Out(sh##_c00 , "%V") }
-    if Prm_There(sh##_c20 ) { Out_String("\ny20 \t") Out_String("[ 2  0 ]\t") Out(sh##_c20 , "%V") }
-    if Prm_There(sh##_c21p) { Out_String("\ny21p\t") Out_String("[ 2  1 ]\t") Out(sh##_c21p, "%V") }
-    if Prm_There(sh##_c21m) { Out_String("\ny21m\t") Out_String("[ 2 -1 ]\t") Out(sh##_c21m, "%V") }
-    if Prm_There(sh##_c22p) { Out_String("\ny22p\t") Out_String("[ 2  2 ]\t") Out(sh##_c22p, "%V") }
-    if Prm_There(sh##_c22m) { Out_String("\ny22m\t") Out_String("[ 2 -2 ]\t") Out(sh##_c22m, "%V") }
-    if Prm_There(sh##_c40 ) { Out_String("\ny40 \t") Out_String("[ 4  0 ]\t") Out(sh##_c40 , "%V") }
-    if Prm_There(sh##_c41p) { Out_String("\ny41p\t") Out_String("[ 4  1 ]\t") Out(sh##_c41p, "%V") }
-    if Prm_There(sh##_c41m) { Out_String("\ny41m\t") Out_String("[ 4 -1 ]\t") Out(sh##_c41m, "%V") }
-    if Prm_There(sh##_c42p) { Out_String("\ny42p\t") Out_String("[ 4  2 ]\t") Out(sh##_c42p, "%V") }
-    if Prm_There(sh##_c42m) { Out_String("\ny42m\t") Out_String("[ 4 -2 ]\t") Out(sh##_c42m, "%V") }
-    if Prm_There(sh##_c43p) { Out_String("\ny43p\t") Out_String("[ 4  3 ]\t") Out(sh##_c43p, "%V") }
-    if Prm_There(sh##_c43m) { Out_String("\ny43m\t") Out_String("[ 4 -3 ]\t") Out(sh##_c43m, "%V") }
-    if Prm_There(sh##_c44p) { Out_String("\ny44p\t") Out_String("[ 4  4 ]\t") Out(sh##_c44p, "%V") }
-    if Prm_There(sh##_c44m) { Out_String("\ny44m\t") Out_String("[ 4 -4 ]\t") Out(sh##_c44m, "%V") }
-    if Prm_There(sh##_c60 ) { Out_String("\ny60 \t") Out_String("[ 6  0 ]\t") Out(sh##_c60 , "%V") }
-    if Prm_There(sh##_c61p) { Out_String("\ny61p\t") Out_String("[ 6  1 ]\t") Out(sh##_c61p, "%V") }
-    if Prm_There(sh##_c61m) { Out_String("\ny61m\t") Out_String("[ 6 -1 ]\t") Out(sh##_c61m, "%V") }
-    if Prm_There(sh##_c62p) { Out_String("\ny62p\t") Out_String("[ 6  2 ]\t") Out(sh##_c62p, "%V") }
-    if Prm_There(sh##_c62m) { Out_String("\ny62m\t") Out_String("[ 6 -2 ]\t") Out(sh##_c62m, "%V") }
-    if Prm_There(sh##_c63p) { Out_String("\ny63p\t") Out_String("[ 6  3 ]\t") Out(sh##_c63p, "%V") }
-    if Prm_There(sh##_c63m) { Out_String("\ny63m\t") Out_String("[ 6 -3 ]\t") Out(sh##_c63m, "%V") }
-    if Prm_There(sh##_c64p) { Out_String("\ny64p\t") Out_String("[ 6  4 ]\t") Out(sh##_c64p, "%V") }
-    if Prm_There(sh##_c64m) { Out_String("\ny64m\t") Out_String("[ 6 -4 ]\t") Out(sh##_c64m, "%V") }
-    if Prm_There(sh##_c65p) { Out_String("\ny65p\t") Out_String("[ 6  5 ]\t") Out(sh##_c65p, "%V") }
-    if Prm_There(sh##_c65m) { Out_String("\ny65m\t") Out_String("[ 6 -5 ]\t") Out(sh##_c65m, "%V") }
-    if Prm_There(sh##_c66p) { Out_String("\ny66p\t") Out_String("[ 6  6 ]\t") Out(sh##_c66p, "%V") }
-    if Prm_There(sh##_c66m) { Out_String("\ny66m\t") Out_String("[ 6 -6 ]\t") Out(sh##_c66m, "%V") }
-    if Prm_There(sh##_c80 ) { Out_String("\ny80 \t") Out_String("[ 8  0 ]\t") Out(sh##_c80 , "%V") }
-    if Prm_There(sh##_c81p) { Out_String("\ny81p\t") Out_String("[ 8  1 ]\t") Out(sh##_c81p, "%V") }
-    if Prm_There(sh##_c81m) { Out_String("\ny81m\t") Out_String("[ 8 -1 ]\t") Out(sh##_c81m, "%V") }
-    if Prm_There(sh##_c82p) { Out_String("\ny82p\t") Out_String("[ 8  2 ]\t") Out(sh##_c82p, "%V") }
-    if Prm_There(sh##_c82m) { Out_String("\ny82m\t") Out_String("[ 8 -2 ]\t") Out(sh##_c82m, "%V") }
-    if Prm_There(sh##_c83p) { Out_String("\ny83p\t") Out_String("[ 8  3 ]\t") Out(sh##_c83p, "%V") }
-    if Prm_There(sh##_c83m) { Out_String("\ny83m\t") Out_String("[ 8 -3 ]\t") Out(sh##_c83m, "%V") }
-    if Prm_There(sh##_c84p) { Out_String("\ny84p\t") Out_String("[ 8  4 ]\t") Out(sh##_c84p, "%V") }
-    if Prm_There(sh##_c84m) { Out_String("\ny84m\t") Out_String("[ 8 -4 ]\t") Out(sh##_c84m, "%V") }
-    if Prm_There(sh##_c85p) { Out_String("\ny85p\t") Out_String("[ 8  5 ]\t") Out(sh##_c85p, "%V") }
-    if Prm_There(sh##_c85m) { Out_String("\ny85m\t") Out_String("[ 8 -5 ]\t") Out(sh##_c85m, "%V") }
-    if Prm_There(sh##_c86p) { Out_String("\ny86p\t") Out_String("[ 8  6 ]\t") Out(sh##_c86p, "%V") }
-    if Prm_There(sh##_c86m) { Out_String("\ny86m\t") Out_String("[ 8 -6 ]\t") Out(sh##_c86m, "%V") }
-    if Prm_There(sh##_c87p) { Out_String("\ny87p\t") Out_String("[ 8  7 ]\t") Out(sh##_c87p, "%V") }
-    if Prm_There(sh##_c87m) { Out_String("\ny87m\t") Out_String("[ 8 -7 ]\t") Out(sh##_c87m, "%V") }
-    if Prm_There(sh##_c88p) { Out_String("\ny88p\t") Out_String("[ 8  8 ]\t") Out(sh##_c88p, "%V") }
-    if Prm_There(sh##_c88m) { Out_String("\ny88m\t") Out_String("[ 8 -8 ]\t") Out(sh##_c88m, "%V") }
+    if Prm_There(sh##_c00 ) { Out_String("\n 0\t") Out_String("[ 0  0 ]\t") Out(sh##_c00 , "%V") }
+    if Prm_There(sh##_c20 ) { Out_String("\n 1\t") Out_String("[ 2  0 ]\t") Out(sh##_c20 , "%V") }
+    if Prm_There(sh##_c21p) { Out_String("\n 2\t") Out_String("[ 2  1 ]\t") Out(sh##_c21p, "%V") }
+    if Prm_There(sh##_c21m) { Out_String("\n 3\t") Out_String("[ 2 -1 ]\t") Out(sh##_c21m, "%V") }
+    if Prm_There(sh##_c22p) { Out_String("\n 4\t") Out_String("[ 2  2 ]\t") Out(sh##_c22p, "%V") }
+    if Prm_There(sh##_c22m) { Out_String("\n 5\t") Out_String("[ 2 -2 ]\t") Out(sh##_c22m, "%V") }
+    if Prm_There(sh##_c40 ) { Out_String("\n 6\t") Out_String("[ 4  0 ]\t") Out(sh##_c40 , "%V") }
+    if Prm_There(sh##_c41p) { Out_String("\n 7\t") Out_String("[ 4  1 ]\t") Out(sh##_c41p, "%V") }
+    if Prm_There(sh##_c41m) { Out_String("\n 8\t") Out_String("[ 4 -1 ]\t") Out(sh##_c41m, "%V") }
+    if Prm_There(sh##_c42p) { Out_String("\n 9\t") Out_String("[ 4  2 ]\t") Out(sh##_c42p, "%V") }
+    if Prm_There(sh##_c42m) { Out_String("\n10\t") Out_String("[ 4 -2 ]\t") Out(sh##_c42m, "%V") }
+    if Prm_There(sh##_c43p) { Out_String("\n11\t") Out_String("[ 4  3 ]\t") Out(sh##_c43p, "%V") }
+    if Prm_There(sh##_c43m) { Out_String("\n12\t") Out_String("[ 4 -3 ]\t") Out(sh##_c43m, "%V") }
+    if Prm_There(sh##_c44p) { Out_String("\n13\t") Out_String("[ 4  4 ]\t") Out(sh##_c44p, "%V") }
+    if Prm_There(sh##_c44m) { Out_String("\n14\t") Out_String("[ 4 -4 ]\t") Out(sh##_c44m, "%V") }
+    if Prm_There(sh##_c60 ) { Out_String("\n15\t") Out_String("[ 6  0 ]\t") Out(sh##_c60 , "%V") }
+    if Prm_There(sh##_c61p) { Out_String("\n16\t") Out_String("[ 6  1 ]\t") Out(sh##_c61p, "%V") }
+    if Prm_There(sh##_c61m) { Out_String("\n17\t") Out_String("[ 6 -1 ]\t") Out(sh##_c61m, "%V") }
+    if Prm_There(sh##_c62p) { Out_String("\n18\t") Out_String("[ 6  2 ]\t") Out(sh##_c62p, "%V") }
+    if Prm_There(sh##_c62m) { Out_String("\n19\t") Out_String("[ 6 -2 ]\t") Out(sh##_c62m, "%V") }
+    if Prm_There(sh##_c63p) { Out_String("\n20\t") Out_String("[ 6  3 ]\t") Out(sh##_c63p, "%V") }
+    if Prm_There(sh##_c63m) { Out_String("\n21\t") Out_String("[ 6 -3 ]\t") Out(sh##_c63m, "%V") }
+    if Prm_There(sh##_c64p) { Out_String("\n22\t") Out_String("[ 6  4 ]\t") Out(sh##_c64p, "%V") }
+    if Prm_There(sh##_c64m) { Out_String("\n23\t") Out_String("[ 6 -4 ]\t") Out(sh##_c64m, "%V") }
+    if Prm_There(sh##_c65p) { Out_String("\n24\t") Out_String("[ 6  5 ]\t") Out(sh##_c65p, "%V") }
+    if Prm_There(sh##_c65m) { Out_String("\n25\t") Out_String("[ 6 -5 ]\t") Out(sh##_c65m, "%V") }
+    if Prm_There(sh##_c66p) { Out_String("\n26\t") Out_String("[ 6  6 ]\t") Out(sh##_c66p, "%V") }
+    if Prm_There(sh##_c66m) { Out_String("\n27\t") Out_String("[ 6 -6 ]\t") Out(sh##_c66m, "%V") }
+    if Prm_There(sh##_c80 ) { Out_String("\n28\t") Out_String("[ 8  0 ]\t") Out(sh##_c80 , "%V") }
+    if Prm_There(sh##_c81p) { Out_String("\n29\t") Out_String("[ 8  1 ]\t") Out(sh##_c81p, "%V") }
+    if Prm_There(sh##_c81m) { Out_String("\n30\t") Out_String("[ 8 -1 ]\t") Out(sh##_c81m, "%V") }
+    if Prm_There(sh##_c82p) { Out_String("\n31\t") Out_String("[ 8  2 ]\t") Out(sh##_c82p, "%V") }
+    if Prm_There(sh##_c82m) { Out_String("\n32\t") Out_String("[ 8 -2 ]\t") Out(sh##_c82m, "%V") }
+    if Prm_There(sh##_c83p) { Out_String("\n33\t") Out_String("[ 8  3 ]\t") Out(sh##_c83p, "%V") }
+    if Prm_There(sh##_c83m) { Out_String("\n34\t") Out_String("[ 8 -3 ]\t") Out(sh##_c83m, "%V") }
+    if Prm_There(sh##_c84p) { Out_String("\n35\t") Out_String("[ 8  4 ]\t") Out(sh##_c84p, "%V") }
+    if Prm_There(sh##_c84m) { Out_String("\n36\t") Out_String("[ 8 -4 ]\t") Out(sh##_c84m, "%V") }
+    if Prm_There(sh##_c85p) { Out_String("\n37\t") Out_String("[ 8  5 ]\t") Out(sh##_c85p, "%V") }
+    if Prm_There(sh##_c85m) { Out_String("\n38\t") Out_String("[ 8 -5 ]\t") Out(sh##_c85m, "%V") }
+    if Prm_There(sh##_c86p) { Out_String("\n39\t") Out_String("[ 8  6 ]\t") Out(sh##_c86p, "%V") }
+    if Prm_There(sh##_c86m) { Out_String("\n40\t") Out_String("[ 8 -6 ]\t") Out(sh##_c86m, "%V") }
+    if Prm_There(sh##_c87p) { Out_String("\n41\t") Out_String("[ 8  7 ]\t") Out(sh##_c87p, "%V") }
+    if Prm_There(sh##_c87m) { Out_String("\n42\t") Out_String("[ 8 -7 ]\t") Out(sh##_c87m, "%V") }
+    if Prm_There(sh##_c88p) { Out_String("\n43\t") Out_String("[ 8  8 ]\t") Out(sh##_c88p, "%V") }
+    if Prm_There(sh##_c88m) { Out_String("\n44\t") Out_String("[ 8 -8 ]\t") Out(sh##_c88m, "%V") }
 	Out_CIF2_section_break("End preferred orientation information")
 }
 
@@ -935,60 +997,149 @@ macro & PO_f(& r, & alpha, & Delta)
 
 
 'angles in radians
-macro generalised_PO_eqn(r_c, r_v, alpha, hkl, Delta_c, Delta_v)
+macro generalised_POMD_eqn(ciffile,id, r_c, r_v, alpha, h,k,l, Delta_c, Delta_v, geom)
 {
-   #m_argu r_c
-   #m_argu Delta_c
-   If_Prm_Eqn_Rpt(r_c, r_v, min 0.0001 max = 2 Val + .5;) 'preferred orientation parameter
-   If_Prm_Eqn_Rpt(Delta_c, Delta_v, min 0.0001 max =Pi;) 'angle in radians:  ==0 symmetric reflection, ==Pi/2 capillary transmission, ==Abs(Th-Omega) asymmetric reflection
+    #m_argu r_c
+    #m_argu Delta_c
+    If_Local_Eqn_Rpt(r_c, r_v, min 0.0001 max = 2 Val + .5;) 'preferred orientation parameter
+    If_Local_Eqn_Rpt(Delta_c, Delta_v, min 0.0001 max =Pi;) 'angle in radians:  ==0 symmetric reflection, ==Pi/2 capillary transmission, ==Abs(Th-Omega) asymmetric reflection
 
-	#m_ifarg alpha ""
-      #m_unique_not_refine alpha
+    #m_ifarg alpha ""
+        #m_unique_not_refine alpha
     #m_endif
-    str_hkl_angle alpha hkl 'angle in radians between PO direction and current diffraction vector
+    str_hkl_angle alpha h k l 'angle in radians between PO direction and current diffraction vector
     scale_pks = Multiplicities_Sum(  PO_f(CeV(r_c,r_v), alpha, CeV(Delta_c,Delta_v))  );
+
+    Out_pdCIF2_pref_orient_march_dollase_text(ciffile,id, h,k,l, CeV(r_c,r_v), geom)
 }
 
-macro PO_symmetric_reflection(r_c, r_v, hkl)
+
+
+macro Out_pdCIF2_PO_symmetric_reflection_March_Dollase(ciffile, r_c, r_v, h,k,l) {
+    Out_pdCIF2_PO_symmetric_reflection_March_Dollase(ciffile,CIF_ID, r_c, r_v, h,k,l)
+}
+
+macro Out_pdCIF2_PO_capillary_transmission_March_Dollase(ciffile, r_c, r_v, h,k,l) {
+    Out_pdCIF2_PO_capillary_transmission_March_Dollase(ciffile,CIF_ID, r_c, r_v, h,k,l)
+}
+
+macro Out_pdCIF2_PO_symmetric_transmission_March_Dollase(ciffile, r_c, r_v, h,k,l) {
+    Out_pdCIF2_PO_symmetric_transmission_March_Dollase(ciffile,CIF_ID, r_c, r_v, h,k,l)
+}
+
+macro Out_pdCIF2_PO_asymmetric_transmission_March_Dollase(ciffile, r_c, r_v,omega_v, hkl) {
+    Out_pdCIF2_PO_asymmetric_transmission_March_Dollase(ciffile,CIF_ID, r_c, r_v,omega_v, hkl)
+}
+
+macro Out_pdCIF2_PO_asymmetric_reflection_March_Dollase(ciffile, r_c, r_v,omega_v, hkl) {
+    Out_pdCIF2_PO_asymmetric_reflection_March_Dollase(ciffile,CIF_ID, r_c, r_v,omega_v, hkl)
+}
+
+macro Out_pdCIF2_PO_symmetric_reflection_March_Dollase(ciffile,id, r_c, r_v, h,k,l)
 {
-	generalised_PO_eqn(r_c, r_v, , hkl, , 0)
+	generalised_POMD_eqn(ciffile,id, r_c, r_v, , h,k,l, , 0, "srefln")
 }
 
-macro PO_capillary_transmission(r_c, r_v, hkl)
+macro Out_pdCIF2_PO_capillary_transmission_March_Dollase(ciffile,id, r_c, r_v, h,k,l)
 {
-	generalised_PO_eqn(r_c, r_v, , hkl, , (Pi/2))
+	generalised_POMD_eqn(ciffile,id, r_c, r_v, , h,k,l, , (Pi/2), "cap")
 }
 
-macro PO_asymmetric_reflection(r_c, r_v,omega_v, hkl) { PO_asymmetric_reflection(r_c, r_v,,omega_v, hkl) }
-macro PO_asymmetric_reflection(r_c, r_v,omega_c,omega_v, hkl)
+macro POMD_symmetric_transmission(ciffile,id, r_c, r_v, h,k,l)
+{
+	generalised_POMD_eqn(ciffile,id, r_c, r_v, , h,k,l, , (Pi/2), "strans")
+}
+
+macro Out_pdCIF2_PO_asymmetric_transmission_March_Dollase(ciffile,id, r_c, r_v,omega_v, hkl) {
+    Out_pdCIF2_PO_asymmetric_transmission_March_Dollase(ciffile,id, r_c, r_v,,omega_v, hkl)
+}
+macro Out_pdCIF2_PO_asymmetric_transmission_March_Dollase(ciffile,id, r_c, r_v,omega_c,omega_v, hkl)
+{
+	#m_argu omega_c
+	If_Prm_Eqn_Rpt(omega_c, omega_v, min 0.0001 max 90) 'incident angle in degrees
+	prm #m_unique Delta = Abs(Th + ((CeV(omega_c,omega_v))*Deg)) ;
+	generalised_POMD_eqn(ciffile,id, r_c, r_v, , h,k,l, , Delta, "atrans")
+}
+
+macro Out_pdCIF2_PO_asymmetric_reflection_March_Dollase(ciffile,id, r_c, r_v,omega_v, hkl) { Out_pdCIF2_PO_asymmetric_reflection_March_Dollase(ciffile,id, r_c, r_v,,omega_v, hkl) }
+macro Out_pdCIF2_PO_asymmetric_reflection_March_Dollase(ciffile,id, r_c, r_v,omega_c,omega_v, hkl)
 {
 	#m_argu omega_c
 	If_Prm_Eqn_Rpt(omega_c, omega_v, min 0.0001 max 90) 'incident angle in degrees
 	prm #m_unique Delta = Abs(Th - ((CeV(omega_c,omega_v))*Deg)) ;
-	generalised_PO_eqn(r_c, r_v, , hkl, , Delta)
+	generalised_POMD_eqn(ciffile,id, r_c, r_v, , h,k,l, , Delta, "arefln")
 }
 
-macro PO_asymmetric_reflection_special(r_c, r_v,omega_c,omega_v, hkl,f)
-{
-	#m_argu omega_c
-	If_Prm_Eqn_Rpt(omega_c, omega_v, min 0.0001 max 90) 'incident angle in degrees
-	prm #m_unique Delta = Abs(Th - ((CeV(omega_c,omega_v))*Deg)) ;
-	generalised_PO_eqn_special(r_c, r_v, , hkl, , Delta,f)
+
+
+
+'##############################################################'
+' Macros for specimen displacement                             '
+'##############################################################'
+
+macro pdCIF2_Bragg_Brentano_specimen_displacement(sd_v) {
+    pdCIF2_Bragg_Brentano_specimen_displacement(, 0, , sd_v)
 }
-macro generalised_PO_eqn_special(r_c, r_v, alpha, hkl, Delta_c, Delta_v,f)
-{
-   #m_argu r_c
-   #m_argu Delta_c
-   If_Prm_Eqn_Rpt(r_c, r_v, min 0.0001 max = 2 Val + .5;) 'preferred orientation parameter
-   If_Prm_Eqn_Rpt(Delta_c, Delta_v, min 0.0001 max =Pi;) 'angle in radians:  ==0 symmetric reflection, ==Pi/2 capillary transmission, ==Abs(Th-Omega) asymmetric reflection
+macro pdCIF2_Bragg_Brentano_specimen_displacement(sd_c, sd_v) {
+    pdCIF2_Bragg_Brentano_specimen_displacement(, 0, sd_c, sd_v)
+}
+macro pdCIF2_Bragg_Brentano_specimen_displacement(ze_v, sd_c, sd_v) {
+    pdCIF2_Bragg_Brentano_specimen_displacement(, ze_v, sd_c, sd_v)
+}
+macro pdCIF2_Bragg_Brentano_specimen_displacement(ze_c, ze_v, sd_c, sd_v) {
+    #m_argu ze_c
+    #m_argu sd_c
+    If_Local_Eqn_Rpt(ze_c, ze_v,
+        min = Max(Val - 20 Yobs_dx_at(X1), -100 Yobs_dx_at(X1));
+        max = Min(Val + 20 Yobs_dx_at(X2),  100 Yobs_dx_at(X2));
+        del = .01 Yobs_dx_at(X1);
+        val_on_continue 0
+    )
+    If_Local_Eqn_Rpt(sd_c, sd_v, min = Val-.1; max = Val+.1; del 0.001)
 
-	#m_ifarg alpha ""
-      #m_unique_not_refine alpha
-   #m_endif
+    local !CIF_TWOTHETA_ZERO = CeV(ze_c,ze_v);
+    local !CIF_BRAGG_BRENTANO_SPECIMEN_DISPLACEMENT = CeV(sd_c,sd_v);
 
-   str_hkl_angle alpha hkl 'angle in radians between PO direction and current diffraction vector
+    th2_offset = pdCIF2_Bragg_Brentano_specimen_displacement_eqn(Th);
 
-   scale_pks = f Multiplicities_Sum(  PO_f(CeV(r_c,r_v), alpha, CeV(Delta_c,Delta_v))  );
+}
+
+macro pdCIF2_Debye_Scherrer_specimen_displacement(spa_v, spe_v) {
+    pdCIF2_Debye_Scherrer_specimen_displacement(, 0, , spa_v, , spe_v)
+}
+macro pdCIF2_Debye_Scherrer_specimen_displacement(spa_c, spa_v, spe_c, spe_v) {
+    pdCIF2_Debye_Scherrer_specimen_displacement(, 0, spa_c, spa_v, spe_c, spe_v)
+}
+macro pdCIF2_Debye_Scherrer_specimen_displacement(ze_v, spa_c, spa_v, spe_c, spe_v) {
+    pdCIF2_Debye_Scherrer_specimen_displacement(, ze_v, spa_c, spa_v, spe_c, spe_v)
+}
+macro pdCIF2_Debye_Scherrer_specimen_displacement(ze_c, ze_v, spa_c, spa_v, spe_c, spe_v) {
+    #m_argu ze_c
+    #m_argu spa_c
+    #m_argu spe_c
+    If_Local_Eqn_Rpt(ze_c, ze_v,
+        min = Max(Val - 20 Yobs_dx_at(X1), -100 Yobs_dx_at(X1));
+        max = Min(Val + 20 Yobs_dx_at(X2),  100 Yobs_dx_at(X2));
+        del = .01 Yobs_dx_at(X1);
+        val_on_continue 0
+    )
+    If_Local_Eqn_Rpt(spa_c, spa_v, min = Val-.1; max = Val+.1; del 0.001)
+    If_Local_Eqn_Rpt(spe_c, spe_v, min = Val-.1; max = Val+.1; del 0.001)
+
+    local !CIF_TWOTHETA_ZERO = CeV(ze_c,ze_v);
+    local !CIF_DEBYE_SCHERRER_SPECIMEN_DISPLACEMENT_PARALLEL = CeV(spa_c, spa_v);
+    local !CIF_DEBYE_SCHERRER_SPECIMEN_DISPLACEMENT_PERPENDICULAR = CeV(spe_c, spe_v);
+
+    th2_offset = pdCIF2_Debye_Scherrer_specimen_displacement_eqn(Th);
+
+}
+
+macro & pdCIF2_Bragg_Brentano_specimen_displacement_eqn(& x) {
+    CIF_TWOTHETA_ZERO + (2 Rad CIF_BRAGG_BRENTANO_SPECIMEN_DISPLACEMENT Cos(x) / Rs)
+}
+
+macro & pdCIF2_Debye_Scherrer_specimen_displacement_eqn(& x) {
+    CIF_TWOTHETA_ZERO + (Rad/Rs) (CIF_DEBYE_SCHERRER_SPECIMEN_DISPLACEMENT_PERPENDICULAR Cos(2 x) - CIF_DEBYE_SCHERRER_SPECIMEN_DISPLACEMENT_PARALLEL Sin(2 x))
 }
 
 
@@ -1090,6 +1241,7 @@ bkg_eqn - topas equation. The equation you arre using for your background.
 	Out_String("\nloop_")
 	Out_String("\n\t_pd_data.point_id")
 	Out_String("\n\t_pd_meas.2theta_scan")
+    if Or(Prm_There(CIF_BRAGG_BRENTANO_SPECIMEN_DISPLACEMENT), Prm_There(CIF_DEBYE_SCHERRER_SPECIMEN_DISPLACEMENT_PERPENDICULAR)) { Out_String("\n\t_pd_proc.2theta_corrected") }
 	#if type == "meas";
 		Out_String("\n\t_pd_meas.intensity_total")
 	#else
@@ -1098,25 +1250,71 @@ bkg_eqn - topas equation. The equation you arre using for your background.
 	Out_String("\n\t_pd_proc.ls_weight")
 	Out_String("\n\t_pd_calc.intensity_total")
 	#m_ifarg bkg_eqn ""
-        xdd_out ciffile append
-            load out_record out_fmt out_eqn {
-                "\n%9.0f  "  = Xi;
-                "  %11.6f  " = X;
-                "  %11.6f  " = Yobs;
-                "  %11.6f  " = Get(weighting);
-                "  %11.6f  " = Ycalc;
-            }
+        if Prm_There(CIF_BRAGG_BRENTANO_SPECIMEN_DISPLACEMENT) {
+            xdd_out ciffile append
+                load out_record out_fmt out_eqn {
+                    "\n%9.0f  "  = Xi;
+                    "  %11.6f  " = X;
+                    "  %11.6f  " = X - pdCIF2_Bragg_Brentano_specimen_displacement_eqn(X Deg_on_2);
+                    "  %11.6f  " = Yobs;
+                    "  %11.6f  " = Get(weighting);
+                    "  %11.6f  " = Ycalc;
+                }
+        } else if Prm_There(CIF_DEBYE_SCHERRER_SPECIMEN_DISPLACEMENT_PERPENDICULAR) {
+            xdd_out ciffile append
+                load out_record out_fmt out_eqn {
+                    "\n%9.0f  "  = Xi;
+                    "  %11.6f  " = X;
+                    "  %11.6f  " = X - pdCIF2_Debye_Scherrer_specimen_displacement_eqn(X Deg_on_2);
+                    "  %11.6f  " = Yobs;
+                    "  %11.6f  " = Get(weighting);
+                    "  %11.6f  " = Ycalc;
+                }
+        } else {
+            xdd_out ciffile append
+                load out_record out_fmt out_eqn {
+                    "\n%9.0f  "  = Xi;
+                    "  %11.6f  " = X;
+                    "  %11.6f  " = Yobs;
+                    "  %11.6f  " = Get(weighting);
+                    "  %11.6f  " = Ycalc;
+                }
+        }
 	#m_else
         Out_String("\n\t_pd_calc.intensity_bkg")
-        xdd_out ciffile append
-            load out_record out_fmt out_eqn {
-                "\n%9.0f  "  = Xi;
-                "  %11.6f  " = X;
-                "  %11.6f  " = Yobs;
-                "  %11.6f  " = Get(weighting);
-                "  %11.6f  " = Ycalc;
-                "  %11.6f  " bkg_eqn
-            }
+        if Prm_There(CIF_BRAGG_BRENTANO_SPECIMEN_DISPLACEMENT) {
+            xdd_out ciffile append
+                load out_record out_fmt out_eqn {
+                    "\n%9.0f  "  = Xi;
+                    "  %11.6f  " = X;
+                    "  %11.6f  " = X - pdCIF2_Bragg_Brentano_specimen_displacement_eqn(X Deg_on_2);
+                    "  %11.6f  " = Yobs;
+                    "  %11.6f  " = Get(weighting);
+                    "  %11.6f  " = Ycalc;
+                    "  %11.6f  " bkg_eqn
+                }
+        } else if Prm_There(CIF_DEBYE_SCHERRER_SPECIMEN_DISPLACEMENT_PERPENDICULAR) {
+            xdd_out ciffile append
+                load out_record out_fmt out_eqn {
+                    "\n%9.0f  "  = Xi;
+                    "  %11.6f  " = X;
+                    "  %11.6f  " = X - pdCIF2_Debye_Scherrer_specimen_displacement_eqn(X Deg_on_2);
+                    "  %11.6f  " = Yobs;
+                    "  %11.6f  " = Get(weighting);
+                    "  %11.6f  " = Ycalc;
+                    "  %11.6f  " bkg_eqn
+                }
+        } else {
+            xdd_out ciffile append
+                load out_record out_fmt out_eqn {
+                    "\n%9.0f  "  = Xi;
+                    "  %11.6f  " = X;
+                    "  %11.6f  " = Yobs;
+                    "  %11.6f  " = Get(weighting);
+                    "  %11.6f  " = Ycalc;
+                    "  %11.6f  " bkg_eqn
+                }
+        }
 	#m_endif
 }
 
