@@ -1211,11 +1211,9 @@ macro Out_pdCIF2_phase_mass {
 }
 
 macro Out_pdCIF2_Rfactors {
-	Out(Get(gof),       "\n_pd_proc_ls.prof_gof_factor   \t%1.5f")
 	Out(Get(r_p)/100,   "\n_pd_proc_ls.prof_R_factor     \t%1.5f")
 	Out(Get(r_wp)/100,  "\n_pd_proc_ls.prof_wR_factor    \t%1.5f")
 	Out(Get(r_exp)/100, "\n_pd_proc_ls.prof_wR_expected  \t%1.5f")
-    Out(Get(wdw),       "\n_pd_proc_ls.prof_wDW_statistic\t%1.5f")
 }
 
 /*
@@ -1427,20 +1425,17 @@ ciffile - string. The name of the cif file you want to write to.
 '############################################################## '
 
 macro Out_pdCIF2_phase_name {
-
-    if Obj_There(phase_name) {
-	    Out(Get(phase_name), "\n_pd_phase.name\t%s")
-    }
+    Out(Get(phase_name), "\n_pd_phase.name\t%s")
 }
 
 macro Out_CIF2_unit_cell_prms {
-	Out(Get(a),  "\n_cell.length_a    %V")
-	Out(Get(b),  "\n_cell.length_b    %V")
-	Out(Get(c),  "\n_cell.length_c    %V")
-	Out(Get(al), "\n_cell.angle_alpha %V")
-	Out(Get(be), "\n_cell.angle_beta  %V")
-	Out(Get(ga), "\n_cell.angle_gamma %V")
-	Out(Get(cell_volume), "\n_cell.volume %V")
+	Out(Get(a),           "\n_cell.length_a    %V")
+	Out(Get(b),           "\n_cell.length_b    %V")
+	Out(Get(c),           "\n_cell.length_c    %V")
+	Out(Get(al),          "\n_cell.angle_alpha %V")
+	Out(Get(be),          "\n_cell.angle_beta  %V")
+	Out(Get(ga),          "\n_cell.angle_gamma %V")
+	Out(Get(cell_volume), "\n_cell.volume      %V")
 }
 
 macro Out_CIF2_Z_molecular_weight(Z) {
@@ -1532,8 +1527,6 @@ macro Out_CIF2_atom_coords(ciffile) {
 		}
 }
 
-
-' todo: add _refln.id column
 macro Out_CIF2_hkls(ciffile) {
 	Out_CIF2_newfile(ciffile)
 	Out_String("\nloop_")
@@ -1910,7 +1903,6 @@ CIF_PHASE_TEXT	str	Free-text entry that goes in the data block containing the st
 ciffile: the name of the file you want to write to. The data is appended.
 data_type: "meas" - data as-measured; or "proc" - data has been processed before analysis
 bkg_eqn: an equation defining your background function so it can be ouput in the CIF
-n,m: numbers representing the xdds over which the output should be run.
 */
 '######################################################################'
 
@@ -1922,8 +1914,9 @@ If you wish to change the output on a per-xdd basis, use this macro in each xdd.
 Otherwise, use Out_pdCIF()
 */
 	Out_pdCIF2_xdd_setup
-	if Obj_There(str) { for strs { Out_pdCIF2_STR(ciffile, CIF_PHASE_ID, CIF_ID) } }
-	Out_pdCIF2_diffraction_data(ciffile, data_type, bkq_eqn, CIF_PHASE_ID, CIF_ID)
+	if Obj_There(str) { for strs { Out_pdCIF2_STR(ciffile, CIF_ID) } }
+    if Obj_There(str) { for strs { Out_pdCIF2_phase_diffractogram_data(ciffile, CIF_ID) } }
+	Out_pdCIF2_diffraction_data(ciffile, data_type, bkq_eqn, CIF_ID)
 }
 
 
@@ -2110,7 +2103,14 @@ Out_pdCIF2_multi(CIF_OUTPUT_FILE, meas)
 		local CIF_MULTI_DIFFRACTOGRAM_ID  1
 	}
 	Out_CIF2_newfile(ciffile)
-	for xdds n to n { if Obj_There(str) { for strs { Out_pdCIF2_STR(ciffile, CIF_PHASE_ID, CIF_ID, n, m) } } }
-	for xdds n_to_m(n,m) { Out_pdCIF2_diffraction_data(ciffile, data_type, bkg_eqn, CIF_PHASE_ID, CIF_ID) }
+	for xdds n to n {
+        if Obj_There(str) { for strs { Out_pdCIF2_STR(ciffile, CIF_ID) } }
+    }
+	for xdds n_to_m(n,m) {
+        if Obj_There(str) { for strs { Out_pdCIF2_phase_diffractogram_data(ciffile, CIF_ID) } }
+    }
+	for xdds n_to_m(n,m) {
+        Out_pdCIF2_diffraction_data(ciffile, data_type, bkg_eqn, CIF_ID)
+    }
 }
 #endif
