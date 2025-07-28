@@ -287,16 +287,15 @@ macro Out_pdCIF2_diffractogramblockIDs(id) {
     Out_CIF2_audit_dataset
     Out_String("\n\n_pd_diffractogram.id\t") Out_unique_diffractogram_id(id)
 
-    if Prm_There(CIF_DIFFRN_ID) {
-        Out_String("\n_diffrn.id\t") Out(CIF_DIFFRN_ID, "%s")
-        Out_String("\n_pd_diffractogram.diffrn_id\t") Out(CIF_DIFFRN_ID, "%s")
-    }
+    if Prm_There(CIF_DIFFRN_ID) { Out_String("\n_diffrn.id\t") Out(CIF_DIFFRN_ID, "%s") }
 
     if Prm_There(CIF_INSTR_ID) {
         Out_String("\n_pd_instr.id\t") Out(CIF_INSTR_ID, "%s")
         if Prm_There(CIF_RADIATION_ID) { Out_String("\n_pd_instr.radiation_id\t") Out(CIF_RADIATION_ID, "%s") }
-        Out_String("\n_pd_diffractogram.instr_id\t") Out(CIF_INSTR_ID, "%s")
     }
+
+    if Prm_There(CIF_DIFFRN_ID) { Out_String("\n_pd_diffractogram.diffrn_id\t") Out(CIF_DIFFRN_ID, "%s") }
+    if Prm_There(CIF_INSTR_ID) { Out_String("\n_pd_diffractogram.instr_id\t") Out(CIF_INSTR_ID, "%s") }
 
     Out_String("\n")
 }
@@ -1297,10 +1296,10 @@ meas denotes intensity measurements at the measurement point
 proc denotes intensity measurements that have been processed in some way at the measurement point
 */
 macro Out_pdCIF2_angle_dispersive_measured_data(ciffile) {
-	Out_pdCIF2_angle_dispersive_data(ciffile, meas, =Get(bkg);)
+	Out_pdCIF2_angle_dispersive_data(ciffile, "meas", =Get(bkg);)
 }
 macro Out_pdCIF2_angle_dispersive_processed_data(ciffile) {
-	Out_pdCIF2_angle_dispersive_data(ciffile, proc, =Get(bkg);)
+	Out_pdCIF2_angle_dispersive_data(ciffile, "proc", =Get(bkg);)
 }
 macro Out_pdCIF2_angle_dispersive_data(ciffile, type, bkg_eqn) {
 /*
@@ -1312,7 +1311,9 @@ bkg_eqn - topas equation. The equation you arre using for your background.
 	Out_String("\nloop_")
 	Out_String("\n\t_pd_data.point_id")
 	Out_String("\n\t_pd_meas.2theta_scan")
-    if Or(Prm_There(CIF_BRAGG_BRENTANO_SPECIMEN_DISPLACEMENT), Prm_There(CIF_DEBYE_SCHERRER_SPECIMEN_DISPLACEMENT_PERPENDICULAR)) { Out_String("\n\t_pd_proc.2theta_corrected") }
+    if Or(Prm_There(CIF_BRAGG_BRENTANO_SPECIMEN_DISPLACEMENT), Prm_There(CIF_DEBYE_SCHERRER_SPECIMEN_DISPLACEMENT_PERPENDICULAR)) {
+        Out_String("\n\t_pd_proc.2theta_corrected")
+    }
 	#if type == "meas";
 		Out_String("\n\t_pd_meas.intensity_total")
 	#else
@@ -1608,6 +1609,7 @@ macro Out_CIF2_hkls(ciffile) {
 	Out_String("\n_refln.index_k")
 	Out_String("\n_refln.index_l")
 	Out_String("\n_refln.d_spacing")
+	Out_String("\n_refln.wavelength_id")
 	Out_String("\n_refln.F_squared_calc")
 	Out_String("\n_refln.F_squared_meas")
 	phase_out ciffile append
@@ -1622,6 +1624,7 @@ macro Out_CIF2_hkls(ciffile) {
 			" %4.0f" = K;
 			" %4.0f" = L;
 			" %11.6f" = D_spacing;
+            " %3.0f" = 0;
 			" %12.6f" = I_no_scale_pks;
 			" %12.6f" = Iobs_no_scale_pks;
 		}
