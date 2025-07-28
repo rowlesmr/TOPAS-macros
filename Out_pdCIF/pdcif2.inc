@@ -153,6 +153,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+
+'##############################################################'
+
+' These macros not for general use. Please keep going.
+
 '##############################################################'
 'Helper macros'
 macro TOF_ED_CW(tof,ed,cw) {
@@ -276,8 +281,8 @@ macro Out_pdCIF2_phaseblockIDs(id) {
     Out_String("\n_space_group.id\t")   if Prm_There(CIF_SPACE_GROUP_ID) { Out(CIF_SPACE_GROUP_ID, "%s") } else { Out_unique_phase_id(id) }
 
     Out_String("\n_model.structure_id\t")       if Prm_There(CIF_STRUCTURE_ID)   { Out(CIF_STRUCTURE_ID, "%s") }   else { Out_unique_phase_id(id) }
-    Out_String("\n_structure.space_group_id\t") if Prm_There(CIF_SPACE_GROUP_ID) { Out(CIF_SPACE_GROUP_ID, "%s") } else { Out_unique_phase_id(id) }
     if Prm_There(CIF_DIFFRN_ID) {  Out_String("\n_structure.diffrn_id\t") Out(CIF_DIFFRN_ID, "%s") }
+    Out_String("\n_structure.space_group_id\t") if Prm_There(CIF_SPACE_GROUP_ID) { Out(CIF_SPACE_GROUP_ID, "%s") } else { Out_unique_phase_id(id) }
     Out_String("\n")
 }
 
@@ -319,423 +324,19 @@ macro Out_CIF2_free_text(text) {
 }
 
 
-'##############################################################'
-' Macros for wavelengths                                       '
-'##############################################################'
-
-macro Out_CIF_wavelength(ciffile, rad_id, id, yminmax,
-                         la0, lo0, lh0, lg0) { Out_CIF_wavelength(ciffile, rad_id, id, yminmax, la0, lo0, lh0, lg0, , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , ) }
-
-macro Out_CIF_wavelength(ciffile, rad_id, id, yminmax,
-                         la0, lo0, lh0, lg0,
-                         la1, lo1, lh1, lg1) { Out_CIF_wavelength(ciffile, rad_id, id, yminmax, la0, lo0, lh0, lg0, la1, lo1, lh1, lg1, , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , ) }
-
-macro Out_CIF_wavelength(ciffile, rad_id, id, yminmax,
-                         la0, lo0, lh0, lg0,
-                         la1, lo1, lh1, lg1,
-                         la2, lo2, lh2, lg2) { Out_CIF_wavelength(ciffile, rad_id, id, yminmax, la0, lo0, lh0, lg0, la1, lo1, lh1, lg1, la2, lo2, lh2, lg2, , , , , , , , , , , , , , , , , , , , , , , , , , , , ) }
-
-macro Out_CIF_wavelength(ciffile, rad_id, id, yminmax,
-                         la0, lo0, lh0, lg0,
-                         la1, lo1, lh1, lg1,
-                         la2, lo2, lh2, lg2,
-                         la3, lo3, lh3, lg3) { Out_CIF_wavelength(ciffile, rad_id, id, yminmax, la0, lo0, lh0, lg0, la1, lo1, lh1, lg1, la2, lo2, lh2, lg2, la3, lo3, lh3, lg3, , , , , , , , , , , , , , , , , , , , , , , , ) }
-
-macro Out_CIF_wavelength(ciffile, rad_id, id, yminmax,
-                         la0, lo0, lh0, lg0,
-                         la1, lo1, lh1, lg1,
-                         la2, lo2, lh2, lg2,
-                         la3, lo3, lh3, lg3,
-                         la4, lo4, lh4, lg4) { Out_CIF_wavelength(ciffile, rad_id, id, yminmax, la0, lo0, lh0, lg0, la1, lo1, lh1, lg1, la2, lo2, lh2, lg2, la3, lo3, lh3, lg3, la4, lo4, lh4, lg4, , , , , , , , , , , , , , , , , , , , ) }
-
-macro Out_CIF_wavelength(ciffile, rad_id, id, yminmax,
-                         la0, lo0, lh0, lg0,
-                         la1, lo1, lh1, lg1,
-                         la2, lo2, lh2, lg2,
-                         la3, lo3, lh3, lg3,
-                         la4, lo4, lh4, lg4,
-                         la5, lo5, lh5, lg5) { Out_CIF_wavelength(ciffile, rad_id, id, yminmax, la0, lo0, lh0, lg0, la1, lo1, lh1, lg1, la2, lo2, lh2, lg2, la3, lo3, lh3, lg3, la4, lo4, lh4, lg4, la5, lo5, lh5, lg5, , , , , , , , , , , , , , , , ) }
-
-macro Out_CIF_wavelength(ciffile, rad_id, id, yminmax,
-                         la0, lo0, lh0, lg0,
-                         la1, lo1, lh1, lg1,
-                         la2, lo2, lh2, lg2,
-                         la3, lo3, lh3, lg3,
-                         la4, lo4, lh4, lg4,
-                         la5, lo5, lh5, lg5,
-                         la6, lo6, lh6, lg6) { Out_CIF_wavelength(ciffile, rad_id, id, yminmax, la0, lo0, lh0, lg0, la1, lo1, lh1, lg1, la2, lo2, lh2, lg2, la3, lo3, lh3, lg3, la4, lo4, lh4, lg4, la5, lo5, lh5, lg5, la6, lo6, lh6, lg6, , , , , , , , , , , , ) }
-
-macro Out_CIF_wavelength(ciffile, rad_id, id, yminmax,
-                         la0, lo0, lh0, lg0,
-                         la1, lo1, lh1, lg1,
-                         la2, lo2, lh2, lg2,
-                         la3, lo3, lh3, lg3,
-                         la4, lo4, lh4, lg4,
-                         la5, lo5, lh5, lg5,
-                         la6, lo6, lh6, lg6,
-                         la7, lo7, lh7, lg7) { Out_CIF_wavelength(ciffile, rad_id, id, yminmax, la0, lo0, lh0, lg0, la1, lo1, lh1, lg1, la2, lo2, lh2, lg2, la3, lo3, lh3, lg3, la4, lo4, lh4, lg4, la5, lo5, lh5, lg5, la6, lo6, lh6, lg6, la7, lo7, lh7, lg7, , , , , , , , ) }
-
-macro Out_CIF_wavelength(ciffile, rad_id, id, yminmax,
-                         la0, lo0, lh0, lg0,
-                         la1, lo1, lh1, lg1,
-                         la2, lo2, lh2, lg2,
-                         la3, lo3, lh3, lg3,
-                         la4, lo4, lh4, lg4,
-                         la5, lo5, lh5, lg5,
-                         la6, lo6, lh6, lg6,
-                         la7, lo7, lh7, lg7,
-                         la8, lo8, lh8, lg8) { Out_CIF_wavelength(ciffile, rad_id, id, yminmax, la0, lo0, lh0, lg0, la1, lo1, lh1, lg1, la2, lo2, lh2, lg2, la3, lo3, lh3, lg3, la4, lo4, lh4, lg4, la5, lo5, lh5, lg5, la6, lo6, lh6, lg6, la7, lo7, lh7, lg7, la8, lo8, lh8, lg8, , , , ) }
-
-macro Out_CIF_wavelength(ciffile, rad_id, id, yminmax,
-                         la0, lo0, lh0, lg0,
-                         la1, lo1, lh1, lg1,
-                         la2, lo2, lh2, lg2,
-                         la3, lo3, lh3, lg3,
-                         la4, lo4, lh4, lg4,
-                         la5, lo5, lh5, lg5,
-                         la6, lo6, lh6, lg6,
-                         la7, lo7, lh7, lg7,
-                         la8, lo8, lh8, lg8,
-                         la9, lo9, lh9, lg9) {
-    lam
-        ymin_on_ymax yminmax
-
-        la la0
-        lo lo0
-        #m_ifarg lh0 "" #m_else lh lh0 #m_endif
-        #m_ifarg lg0 "" #m_else lg lg0 #m_endif
-
-        #m_ifarg la1 "" #m_else la la1 #m_endif
-        #m_ifarg lo1 "" #m_else lo lo1 #m_endif
-        #m_ifarg lh1 "" #m_else lh lh1 #m_endif
-        #m_ifarg lg1 "" #m_else lg lg1 #m_endif
-
-        #m_ifarg la2 "" #m_else la la2 #m_endif
-        #m_ifarg lo2 "" #m_else lo lo2 #m_endif
-        #m_ifarg lh2 "" #m_else lh lh2 #m_endif
-        #m_ifarg lg2 "" #m_else lg lg2 #m_endif
-
-        #m_ifarg la3 "" #m_else la la3 #m_endif
-        #m_ifarg lo3 "" #m_else lo lo3 #m_endif
-        #m_ifarg lh3 "" #m_else lh lh3 #m_endif
-        #m_ifarg lg3 "" #m_else lg lg3 #m_endif
-
-        #m_ifarg la4 "" #m_else la la4 #m_endif
-        #m_ifarg lo4 "" #m_else lo lo4 #m_endif
-        #m_ifarg lh4 "" #m_else lh lh4 #m_endif
-        #m_ifarg lg4 "" #m_else lg lg4 #m_endif
-
-        #m_ifarg la5 "" #m_else la la5 #m_endif
-        #m_ifarg lo5 "" #m_else lo lo5 #m_endif
-        #m_ifarg lh5 "" #m_else lh lh5 #m_endif
-        #m_ifarg lg5 "" #m_else lg lg5 #m_endif
-
-        #m_ifarg la6 "" #m_else la la6 #m_endif
-        #m_ifarg lo6 "" #m_else lo lo6 #m_endif
-        #m_ifarg lh6 "" #m_else lh lh6 #m_endif
-        #m_ifarg lg6 "" #m_else lg lg6 #m_endif
-
-        #m_ifarg la7 "" #m_else la la7 #m_endif
-        #m_ifarg lo7 "" #m_else lo lo7 #m_endif
-        #m_ifarg lh7 "" #m_else lh lh7 #m_endif
-        #m_ifarg lg7 "" #m_else lg lg7 #m_endif
-
-        #m_ifarg la8 "" #m_else la la8 #m_endif
-        #m_ifarg lo8 "" #m_else lo lo8 #m_endif
-        #m_ifarg lh8 "" #m_else lh lh8 #m_endif
-        #m_ifarg lg8 "" #m_else lg lg8 #m_endif
-
-        #m_ifarg la9 "" #m_else la la9 #m_endif
-        #m_ifarg lo9 "" #m_else lo lo9 #m_endif
-        #m_ifarg lh9 "" #m_else lh lh9 #m_endif
-        #m_ifarg lg9 "" #m_else lg lg9 #m_endif
-
-
-    local !CIF_PEAK_CUTOFF yminmax
-    #m_ifarg rad_id "" #m_else  local !CIF_RADIATION_ID = rad_id ; #m_endif
-
-	Out_CIF2_newfile(ciffile)
-	Out_String("\n")
-	Out_CIF2_section_break("Begin wavelength information")
-	Out_String("\ndata_") Out_unique_diffractogram_id(id) Out_String("_") Out_String("wavelength")
-    Out_CIF2_audit_dataset
-    if Prm_There(CIF_RADIATION_ID) { Out_String("\n_diffrn_radiation.id\t") Out(CIF_RADIATION_ID, "%s") }
-
-	if Obj_There(neutron) {
-		Out_String("\n_diffrn_radiation.probe\tneutron")
-	} else {
-		Out_String("\n_diffrn_radiation.probe\tx-ray")
-	}
-
-
-    Out_String("\nloop_")
-    Out_String("\n_diffrn_radiation_wavelength.id")
-    Out_String("\n_diffrn_radiation_wavelength.wt")
-    Out_String("\n_diffrn_radiation_wavelength.value")
-                            Out("0", "\n%s\t") Out(la0, "%11.7f\t") Out(lo0, "%11.7f")
-    #m_ifarg la1 "" #m_else Out("1", "\n%s\t") Out(la1, "%11.7f\t") Out(lo1, "%11.7f") #m_endif
-    #m_ifarg la2 "" #m_else Out("2", "\n%s\t") Out(la2, "%11.7f\t") Out(lo2, "%11.7f") #m_endif
-    #m_ifarg la3 "" #m_else Out("3", "\n%s\t") Out(la3, "%11.7f\t") Out(lo3, "%11.7f") #m_endif
-    #m_ifarg la4 "" #m_else Out("4", "\n%s\t") Out(la4, "%11.7f\t") Out(lo4, "%11.7f") #m_endif
-    #m_ifarg la5 "" #m_else Out("5", "\n%s\t") Out(la5, "%11.7f\t") Out(lo5, "%11.7f") #m_endif
-    #m_ifarg la6 "" #m_else Out("6", "\n%s\t") Out(la6, "%11.7f\t") Out(lo6, "%11.7f") #m_endif
-    #m_ifarg la7 "" #m_else Out("7", "\n%s\t") Out(la7, "%11.7f\t") Out(lo7, "%11.7f") #m_endif
-    #m_ifarg la8 "" #m_else Out("8", "\n%s\t") Out(la8, "%11.7f\t") Out(lo8, "%11.7f") #m_endif
-    #m_ifarg la9 "" #m_else Out("9", "\n%s\t") Out(la9, "%11.7f\t") Out(lo9, "%11.7f") #m_endif
-
-	'Out_CIF2_section_break("End wavelength information")
-}
-
-
-
-macro Out_CIF2_tube_settings(kv, ma) {
-    #m_ifarg ma "" #m_else Out_String("\n_diffrn_source.current\t") Out(ma, "%V") #m_endif
-    Out_String("\n_diffrn_source.device\ttube")
-    #m_ifarg ma "" #m_else #m_ifarg kv "" #m_else Out_String("\n_diffrn_source.power\t") Out(ma*kv, "%V") #m_endif #m_endif
-    #m_ifarg kv "" #m_else Out_String("\n_diffrn_source.voltage\t") Out(kv, "%V") #m_endif
-}
-
-macro Out_CIF_wavelength_coka3(ciffile)                     { Out_CIF_wavelength_coka3(ciffile,, CIF_ID,,) }
-macro Out_CIF_wavelength_coka3(ciffile, kv, ma)             { Out_CIF_wavelength_coka3(ciffile,, CIF_ID, kv, ma) }
-macro Out_CIF_wavelength_coka3(ciffile, rad_id, kv, ma)     { Out_CIF_wavelength_coka3(ciffile, rad_id, CIF_ID, kv, ma) }
-macro Out_CIF_wavelength_coka3(ciffile, rad_id, id, kv, ma) {
-    Out_CIF_wavelength(ciffile, rad_id, id, 0.0001,
-        0.5981,1.788960,0.4700,,
-        0.0503,1.789879,0.3357,,
-        0.3516,1.792850,0.8052,)
-    Out_CIF2_tube_settings(kv, ma)
-    Out_String("\n_diffrn_source.target\tCo")
-}
-macro Out_CIF_wavelength_crka7_holzer(ciffile)                     { Out_CIF_wavelength_crka7_holzer(ciffile,, CIF_ID,,) }
-macro Out_CIF_wavelength_crka7_holzer(ciffile, kv, ma)             { Out_CIF_wavelength_crka7_holzer(ciffile,, CIF_ID, kv, ma) }
-macro Out_CIF_wavelength_crka7_holzer(ciffile, rad_id, kv, ma)     { Out_CIF_wavelength_crka7_holzer(ciffile, rad_id, CIF_ID, kv, ma) }
-macro Out_CIF_wavelength_crka7_holzer(ciffile, rad_id, id, kv, ma) {
-    Out_CIF_wavelength(ciffile, rad_id, id,0.0001,
-        0.378, 2.2896977, 0.6160974,,
-        0.132, 2.2900254, 0.7444350,,
-        0.084, 2.2905983, 1.3279580,,
-        0.073, 2.2915136, 2.1807273,,
-        0.009, 2.2882482, 0.8395685,,
-        0.271, 2.2936467, 0.9436726,,
-        0.054, 2.2943110, 2.0124101,)
-    Out_CIF2_tube_settings(kv, ma)
-    Out_String("\n_diffrn_source.target\tCr")
-}
-macro Out_CIF_wavelength_crkb5_holzer(ciffile)                     { Out_CIF_wavelength_crkb5_holzer(ciffile,, CIF_ID,,) }
-macro Out_CIF_wavelength_crkb5_holzer(ciffile, kv, ma)             { Out_CIF_wavelength_crkb5_holzer(ciffile,, CIF_ID, kv, ma) }
-macro Out_CIF_wavelength_crkb5_holzer(ciffile, rad_id, kv, ma)     { Out_CIF_wavelength_crkb5_holzer(ciffile, rad_id, CIF_ID, kv, ma) }
-macro Out_CIF_wavelength_crkb5_holzer(ciffile, rad_id, id, kv, ma) {
-    Out_CIF_wavelength(ciffile, rad_id, id, 0.0001,
-        0.307, 2.0848200, 0.5959633,,
-        0.236, 2.0889262, 5.6241545,,
-        0.172, 2.0850864, 0.6662470,,
-        0.148, 2.0865602, 2.3492088,)
-    Out_CIF2_tube_settings(kv, ma)
-    Out_String("\n_diffrn_source.target\tCr")
-}
-macro Out_CIF_wavelength_cuk1sharp(ciffile)                     { Out_CIF_wavelength_cuk1sharp(ciffile,, CIF_ID,,) }
-macro Out_CIF_wavelength_cuk1sharp(ciffile, kv, ma)             { Out_CIF_wavelength_cuk1sharp(ciffile,, CIF_ID, kv, ma) }
-macro Out_CIF_wavelength_cuk1sharp(ciffile, rad_id, kv, ma)     { Out_CIF_wavelength_cuk1sharp(ciffile, rad_id, CIF_ID, kv, ma) }
-macro Out_CIF_wavelength_cuk1sharp(ciffile, rad_id, id, kv, ma) {
-    Out_CIF_wavelength(ciffile, rad_id, id, 0.0001,1,1.540596,0.401844,)
-    Out_CIF2_tube_settings(kv, ma)
-    Out_String("\n_diffrn_source.target\tCu")
-}
-macro Out_CIF_wavelength_cuka1(ciffile)                     { Out_CIF_wavelength_cuka1(ciffile,, CIF_ID,,) }
-macro Out_CIF_wavelength_cuka1(ciffile, kv, ma)             { Out_CIF_wavelength_cuka1(ciffile,, CIF_ID, kv, ma) }
-macro Out_CIF_wavelength_cuka1(ciffile, rad_id, kv, ma)     { Out_CIF_wavelength_cuka1(ciffile, rad_id, CIF_ID, kv, ma) }
-macro Out_CIF_wavelength_cuka1(ciffile, rad_id, id, kv, ma) {
-    Out_CIF_wavelength(ciffile, rad_id, id, 0.0001,1,1.540596,0.501844,)
-    Out_CIF2_tube_settings(kv, ma)
-    Out_String("\n_diffrn_source.target\tCu")
-}
-macro Out_CIF_wavelength_cuka2(ciffile)                     { Out_CIF_wavelength_cuka2(ciffile,, CIF_ID,,) }
-macro Out_CIF_wavelength_cuka2(ciffile, kv, ma)             { Out_CIF_wavelength_cuka2(ciffile,, CIF_ID, kv, ma) }
-macro Out_CIF_wavelength_cuka2(ciffile, rad_id, kv, ma)     { Out_CIF_wavelength_cuka2(ciffile, rad_id, CIF_ID, kv, ma) }
-macro Out_CIF_wavelength_cuka2(ciffile, rad_id, id, kv, ma) {
-    Out_CIF_wavelength(ciffile, rad_id, id, 0.0001,
-        0.653817,1.540596,0.501844,,
-        0.346183,1.544493,0.626579,)
-    Out_CIF2_tube_settings(kv, ma)
-    Out_String("\n_diffrn_source.target\tCu")
-}
-macro Out_CIF_wavelength_cuka2_analyt(ciffile)                     { Out_CIF_wavelength_cuka2_analyt(ciffile,, CIF_ID,,) }
-macro Out_CIF_wavelength_cuka2_analyt(ciffile, kv, ma)             { Out_CIF_wavelength_cuka2_analyt(ciffile,, CIF_ID, kv, ma) }
-macro Out_CIF_wavelength_cuka2_analyt(ciffile, rad_id, kv, ma)     { Out_CIF_wavelength_cuka2_analyt(ciffile, rad_id, CIF_ID, kv, ma) }
-macro Out_CIF_wavelength_cuka2_analyt(ciffile, rad_id, id, kv, ma) {
-    Out_CIF_wavelength(ciffile, rad_id, id, 0.0001,
-        0.653817,1.540598,0.5,,
-        0.346183,1.544426,0.5,)
-    Out_CIF2_tube_settings(kv, ma)
-    Out_String("\n_diffrn_source.target\tCu")
-}
-macro Out_CIF_wavelength_cuka4_holzer(ciffile)                     { Out_CIF_wavelength_cuka4_holzer(ciffile,, CIF_ID,,) }
-macro Out_CIF_wavelength_cuka4_holzer(ciffile, kv, ma)             { Out_CIF_wavelength_cuka4_holzer(ciffile,, CIF_ID, kv, ma) }
-macro Out_CIF_wavelength_cuka4_holzer(ciffile, rad_id, kv, ma)     { Out_CIF_wavelength_cuka4_holzer(ciffile, rad_id, CIF_ID, kv, ma) }
-macro Out_CIF_wavelength_cuka4_holzer(ciffile, rad_id, id, kv, ma) {
-    Out_CIF_wavelength(ciffile, rad_id, id, 0.0001,
-        0.579, 1.5405909, 0.4374157,,
-        0.080, 1.5410639, 0.6432140,,
-        0.236, 1.5443990, 0.5128764,,
-        0.105, 1.5446855, 0.6872322,)
-    Out_CIF2_tube_settings(kv, ma)
-    Out_String("\n_diffrn_source.target\tCu")
-}
-macro Out_CIF_wavelength_cuka5(ciffile)                     { Out_CIF_wavelength_cuka5(ciffile,, CIF_ID,,) }
-macro Out_CIF_wavelength_cuka5(ciffile, kv, ma)             { Out_CIF_wavelength_cuka5(ciffile,, CIF_ID, kv, ma) }
-macro Out_CIF_wavelength_cuka5(ciffile, rad_id, kv, ma)     { Out_CIF_wavelength_cuka5(ciffile, rad_id, CIF_ID, kv, ma) }
-macro Out_CIF_wavelength_cuka5(ciffile, rad_id, id, kv, ma) {
-    Out_CIF_wavelength(ciffile, rad_id, id, 0.0001,
-        0.5791, 1.540596, 0.437,,
-        0.0159, 1.534753, 3.6854,,
-        0.0762, 1.541058, 0.6,,
-        0.2417, 1.54441 , 0.52,,
-        0.0871, 1.544721, 0.62,)
-    Out_CIF2_tube_settings(kv, ma)
-    Out_String("\n_diffrn_source.target\tCu")
-}
-macro Out_CIF_wavelength_cuka5_berger(ciffile)                     { Out_CIF_wavelength_cuka5_berger(ciffile,, CIF_ID,,) }
-macro Out_CIF_wavelength_cuka5_berger(ciffile, kv, ma)             { Out_CIF_wavelength_cuka5_berger(ciffile,, CIF_ID, kv, ma) }
-macro Out_CIF_wavelength_cuka5_berger(ciffile, rad_id, kv, ma)     { Out_CIF_wavelength_cuka5_berger(ciffile, rad_id, CIF_ID, kv, ma) }
-macro Out_CIF_wavelength_cuka5_berger(ciffile, rad_id, id, kv, ma) {
-    Out_CIF_wavelength(ciffile, rad_id, id, 0.0001,
-        0.5691, 1.540596, 0.4370,,
-        0.0159, 1.534753, 3.6854,,
-        0.0762, 1.541058, 0.6000,,
-        0.2517, 1.544410, 0.5200,,
-        0.0871, 1.544721, 0.6200,)
-    Out_CIF2_tube_settings(kv, ma)
-    Out_String("\n_diffrn_source.target\tCu")
-}
-macro Out_CIF_wavelength_cukb4_holzer(ciffile)                     { Out_CIF_wavelength_cukb4_holzer(ciffile,, CIF_ID,,) }
-macro Out_CIF_wavelength_cukb4_holzer(ciffile, kv, ma)             { Out_CIF_wavelength_cukb4_holzer(ciffile,, CIF_ID, kv, ma) }
-macro Out_CIF_wavelength_cukb4_holzer(ciffile, rad_id, kv, ma)     { Out_CIF_wavelength_cukb4_holzer(ciffile, rad_id, CIF_ID, kv, ma) }
-macro Out_CIF_wavelength_cukb4_holzer(ciffile, rad_id, id, kv, ma) {
-    Out_CIF_wavelength(ciffile, rad_id, id, 0.0001,
-        0.485, 1.3922160, 0.5502872,,
-        0.248, 1.3925949, 0.5505868,,
-        0.110, 1.3917581, 0.5546122,,
-        0.100, 1.3934905, 1.2654733,,
-        0.055, 1.3913004, 0.8290293,)
-    Out_CIF2_tube_settings(kv, ma)
-    Out_String("\n_diffrn_source.target\tCu")
-}
-macro Out_CIF_wavelength_feka7_holzer(ciffile)                     { Out_CIF_wavelength_feka7_holzer(ciffile,, CIF_ID,,) }
-macro Out_CIF_wavelength_feka7_holzer(ciffile, kv, ma)             { Out_CIF_wavelength_feka7_holzer(ciffile,, CIF_ID, kv, ma) }
-macro Out_CIF_wavelength_feka7_holzer(ciffile, rad_id, kv, ma)     { Out_CIF_wavelength_feka7_holzer(ciffile, rad_id, CIF_ID, kv, ma) }
-macro Out_CIF_wavelength_feka7_holzer(ciffile, rad_id, id, kv, ma) {
-    Out_CIF_wavelength(ciffile, rad_id, id, 0.0001,
-        0.278, 1.9359990, 0.4876162,,
-        0.182, 1.9362569, 0.5941855,,
-        0.106, 1.9370562, 1.4626310,,
-        0.094, 1.9366253, 0.8479062,,
-        0.207, 1.9399242, 0.7548816,,
-        0.066, 1.9405570, 0.7104222,,
-        0.065, 1.9402020, 1.3459384,)
-    Out_CIF2_tube_settings(kv, ma)
-    Out_String("\n_diffrn_source.target\tFe")
-}
-macro Out_CIF_wavelength_fekb4_holzer(ciffile)                     { Out_CIF_wavelength_fekb4_holzer(ciffile,, CIF_ID,,) }
-macro Out_CIF_wavelength_fekb4_holzer(ciffile, kv, ma)             { Out_CIF_wavelength_fekb4_holzer(ciffile,, CIF_ID, kv, ma) }
-macro Out_CIF_wavelength_fekb4_holzer(ciffile, rad_id, kv, ma)     { Out_CIF_wavelength_fekb4_holzer(ciffile, rad_id, CIF_ID, kv, ma) }
-macro Out_CIF_wavelength_fekb4_holzer(ciffile, rad_id, id, kv, ma) {
-    Out_CIF_wavelength(ciffile, rad_id, id, 0.0001,
-        0.301, 1.7594154, 3.5378594,,
-        0.279, 1.7568450, 0.7767031,,
-        0.241, 1.7565588, 0.4902585,,
-        0.179, 1.7574577, 1.5893663,)
-    Out_CIF2_tube_settings(kv, ma)
-    Out_String("\n_diffrn_source.target\tFe")
-}
-macro Out_CIF_wavelength_mnka7_holzer(ciffile)                     { Out_CIF_wavelength_mnka7_holzer(ciffile,, CIF_ID,,) }
-macro Out_CIF_wavelength_mnka7_holzer(ciffile, kv, ma)             { Out_CIF_wavelength_mnka7_holzer(ciffile,, CIF_ID, kv, ma) }
-macro Out_CIF_wavelength_mnka7_holzer(ciffile, rad_id, kv, ma)     { Out_CIF_wavelength_mnka7_holzer(ciffile, rad_id, CIF_ID, kv, ma) }
-macro Out_CIF_wavelength_mnka7_holzer(ciffile, rad_id, id, kv, ma) {
-    Out_CIF_wavelength(ciffile, rad_id, id, 0.0001,
-        0.353, 2.1018365, 0.6110764,,
-        0.141, 2.1021879, 0.7281904,,
-        0.079, 2.1032712, 1.6052406,,
-        0.066, 2.1026638, 0.9496080,,
-        0.005, 2.1016355, 0.3452010,,
-        0.229, 2.1058026, 0.8444323,,
-        0.110, 2.1062490, 1.5085288,)
-    Out_CIF2_tube_settings(kv, ma)
-    Out_String("\n_diffrn_source.target\tMn")
-}
-macro Out_CIF_wavelength_mnkb5_holzer(ciffile)                     { Out_CIF_wavelength_mnkb5_holzer(ciffile,, CIF_ID,,) }
-macro Out_CIF_wavelength_mnkb5_holzer(ciffile, kv, ma)             { Out_CIF_wavelength_mnkb5_holzer(ciffile,, CIF_ID, kv, ma) }
-macro Out_CIF_wavelength_mnkb5_holzer(ciffile, rad_id, kv, ma)     { Out_CIF_wavelength_mnkb5_holzer(ciffile, rad_id, CIF_ID, kv, ma) }
-macro Out_CIF_wavelength_mnkb5_holzer(ciffile, rad_id, id, kv, ma) {
-    Out_CIF_wavelength(ciffile, rad_id, id, 0.0001,
-        0.254, 1.9101270, 0.5385290,,
-        0.234, 1.9114758, 2.7701238,,
-        0.234, 1.9140076, 3.9061842,,
-        0.164, 1.9103713, 0.5327797,,
-        0.114, 1.9107334, 0.8274467,)
-    Out_CIF2_tube_settings(kv, ma)
-    Out_String("\n_diffrn_source.target\tMn")
-}
-macro Out_CIF_wavelength_moka2(ciffile)                     { Out_CIF_wavelength_moka2(ciffile,, CIF_ID,,) }
-macro Out_CIF_wavelength_moka2(ciffile, kv, ma)             { Out_CIF_wavelength_moka2(ciffile,, CIF_ID, kv, ma) }
-macro Out_CIF_wavelength_moka2(ciffile, rad_id, kv, ma)     { Out_CIF_wavelength_moka2(ciffile, rad_id, CIF_ID, kv, ma) }
-macro Out_CIF_wavelength_moka2(ciffile, rad_id, id, kv, ma) {
-    Out_CIF_wavelength(ciffile, rad_id, id, 0.0001,
-        0.6533, 0.709300, 0.2695,,
-        0.3467, 0.713574, 0.2795,)
-    Out_CIF2_tube_settings(kv, ma)
-    Out_String("\n_diffrn_source.target\tMo")
-}
-macro Out_CIF_wavelength_nika5_holzer(ciffile)                     { Out_CIF_wavelength_nika5_holzer(ciffile,, CIF_ID,,) }
-macro Out_CIF_wavelength_nika5_holzer(ciffile, kv, ma)             { Out_CIF_wavelength_nika5_holzer(ciffile,, CIF_ID, kv, ma) }
-macro Out_CIF_wavelength_nika5_holzer(ciffile, rad_id, kv, ma)     { Out_CIF_wavelength_nika5_holzer(ciffile, rad_id, CIF_ID, kv, ma) }
-macro Out_CIF_wavelength_nika5_holzer(ciffile, rad_id, id, kv, ma) {
-    Out_CIF_wavelength(ciffile, rad_id, id, 0.0001,
-        0.487, 1.6579244, 0.4462793,,
-        0.171, 1.6583129, 1.0449117,,
-        0.250, 1.6617352, 0.5955505,,
-        0.064, 1.6620153, 0.6770710,,
-        0.028, 1.6624264, 0.9977195,)
-    Out_CIF2_tube_settings(kv, ma)
-    Out_String("\n_diffrn_source.target\tNi")
-}
-macro Out_CIF_wavelength_nikb4_holzer(ciffile)                     { Out_CIF_wavelength_nikb4_holzer(ciffile,, CIF_ID,,) }
-macro Out_CIF_wavelength_nikb4_holzer(ciffile, kv, ma)             { Out_CIF_wavelength_nikb4_holzer(ciffile,, CIF_ID, kv, ma) }
-macro Out_CIF_wavelength_nikb4_holzer(ciffile, rad_id, kv, ma)     { Out_CIF_wavelength_nikb4_holzer(ciffile, rad_id, CIF_ID, kv, ma) }
-macro Out_CIF_wavelength_nikb4_holzer(ciffile, rad_id, id, kv, ma) {
-    Out_CIF_wavelength(ciffile, rad_id, id, 0.0001,
-        0.450, 1.5001100, 0.6824449,,
-        0.258, 1.5004731, 0.7880970,,
-        0.203, 1.5016253, 2.4915953,,
-        0.089, 1.4994406, 0.9393379,)
-    Out_CIF2_tube_settings(kv, ma)
-    Out_String("\n_diffrn_source.target\tNi")
-}
-
 
 '##############################################################'
 ' Macros for preferred orientation                             '
 '##############################################################'
 
 
-'use these ones. These are the helpers, the rest are the actual implementation.
-macro Out_pdCIF2_PO_March_Dollase(ciffile,po1, po1_v, h1,k1,l1) {
-    Out_pdCIF2_PO_March_Dollase(ciffile,CIF_ID, po1, po1_v, h1,k1,l1)
-}
-macro Out_pdCIF2_PO_Two_Directions_March_Dollase(ciffile,po1, po1_v, h1,k1,l1, po2, po2_v, h2,k2,l2, mix, mix_v) {
-    Out_pdCIF2_PO_Two_Directions_March_Dollase(ciffile,CIF_ID, po1, po1_v, h1,k1,l1, po2, po2_v, h2,k2,l2, mix, mix_v)
-}
-macro Out_pdCIF2_PO_Three_Directions_March_Dollase(ciffile,po1, po1_v, h1,k1,l1, po2, po2_v, h2,k2,l2, po3, po3_v, h3,k3,l3, mix1, mix1_v, mix2, mix2_v, mix3_v) {
-    Out_pdCIF2_PO_Three_Directions_March_Dollase(ciffile,CIF_ID, po1, po1_v, h1,k1,l1, po2, po2_v, h2,k2,l2, po3, po3_v, h3,k3,l3, mix1, mix1_v, mix2, mix2_v, mix3_v)
-}
 
-
-
+'the POMD actual implementation.
 macro Out_pdCIF2_PO_March_Dollase(ciffile,id, po1, po1_v, h1,k1,l1) {
    	#m_argu po1
     If_Local_Eqn_Rpt(po1, po1_v, min 0.5 max 2)
     Out_pdCIF2_PO_simple_March_Dollase(ciffile,id, CeV(po1, po1_v),, h1,k1,l1)
 }
-
 macro Out_pdCIF2_PO_Two_Directions_March_Dollase(ciffile,id, po1, po1_v, h1,k1,l1, po2, po2_v, h2,k2,l2, mix, mix_v) {
    	#m_argu po1
    	#m_argu po2
@@ -747,7 +348,6 @@ macro Out_pdCIF2_PO_Two_Directions_March_Dollase(ciffile,id, po1, po1_v, h1,k1,l
 
     Out_pdCIF2_PO_Two_Directions_simple_March_Dollase(ciffile,id, CeV(po1, po1_v),, h1,k1,l1, CeV(po2, po2_v),, h2,k2,l2, CeV(mix, mix_v))
 }
-
 macro Out_pdCIF2_PO_Three_Directions_March_Dollase(ciffile,id, po1, po1_v, h1,k1,l1, po2, po2_v, h2,k2,l2, po3, po3_v, h3,k3,l3, mix1, mix1_v, mix2, mix2_v, mix3_v) {
     #m_argu po1
     #m_argu po2
@@ -817,6 +417,7 @@ macro Out_pdCIF2_PO_Three_Directions_simple_March_Dollase(ciffile,id, & c1, ang1
 	Out_pdCIF2_pref_orient_march_dollase_text(ciffile,id, h1,k1,l1, w1c, c1,   h2,k2,l2, w2c, c2,  h3,k3,l3, w3c, c3, "srefln")
 }
 
+'the CIF text for POMD
 macro Out_pdCIF2_pref_orient_march_dollase_text(ciffile,id, h1,k1,l1, c1, geom) {
     Out_pdCIF2_pref_orient_march_dollase_text(ciffile,id, h1,k1,l1, , c1,   ,,, , ,  ,,, , , geom)
 }
@@ -843,26 +444,8 @@ macro Out_pdCIF2_pref_orient_march_dollase_text(ciffile,id, h1,k1,l1, w1c, c1,  
 	Out_CIF2_section_break("End preferred orientation information")
 }
 
-macro Out_pdCIF2_PO_Spherical_Harmonics(ciffile, sh, order) {
-    Out_pdCIF2_PO_Spherical_Harmonics(ciffile, CIF_ID, "srefln",,0, sh, order)
-}
-macro Out_pdCIF2_PO_symmetric_reflection_Spherical_Harmonics(ciffile, sh, order) {
-    Out_pdCIF2_PO_Spherical_Harmonics(ciffile, CIF_ID, "srefln",,0, sh, order)
-}
-macro Out_pdCIF2_PO_symmetric_transmission_Spherical_Harmonics(ciffile, sh, order) {
-    Out_pdCIF2_PO_Spherical_Harmonics(ciffile, CIF_ID, "strans",,90, sh, order)
-}
-macro Out_pdCIF2_PO_capillary_transmission_Spherical_Harmonics(ciffile, sh, order) {
-    Out_pdCIF2_PO_Spherical_Harmonics(ciffile, CIF_ID, "cap",,90, sh, order)
-}
-macro Out_pdCIF2_PO_asymmetric_transmission_Spherical_Harmonics(ciffile, omega_v, sh, order) {
-    Out_pdCIF2_PO_asymmetric_transmission_Spherical_Harmonics(ciffile, CIF_ID, , omega_v, sh, order)
-}
-macro Out_pdCIF2_PO_asymmetric_reflection_Spherical_Harmonics(ciffile, omega_v, sh, order) {
-    Out_pdCIF2_PO_asymmetric_reflection_Spherical_Harmonics(ciffile, CIF_ID, , omega_v, sh, order)
-}
 
-
+'POSH implementations
 macro Out_pdCIF2_PO_asymmetric_transmission_Spherical_Harmonics(ciffile, id, omega_v, sh, order) {
     Out_pdCIF2_PO_asymmetric_transmission_Spherical_Harmonics(ciffile, id, , omega_v, sh, order)
 }
@@ -885,7 +468,6 @@ macro Out_pdCIF2_PO_asymmetric_reflection_Spherical_Harmonics(ciffile, id, omega
     Out_pdCIF2_PO_Spherical_Harmonics(ciffile, id, "arefln", , Delta, sh, order)
 }
 
-
 macro Out_pdCIF2_PO_Spherical_Harmonics(ciffile, id, geom, Delta_c, Delta_v, sh, order)
 {
     #m_argu Delta_c
@@ -902,22 +484,22 @@ macro Out_pdCIF2_PO_Spherical_Harmonics(ciffile, id, geom, Delta_c, Delta_v, sh,
     Out_pdCIF2_pref_orient_spherical_harmonics_text(ciffile, id, sh, order, geom)
 }
 
-
 macro POSHTI_(s, c)
-   {
-      If(Prm_There(s##_##c), s##_##c^2, 0)
-   }
+{
+    If(Prm_There(s##_##c), s##_##c^2, 0)
+}
 macro pdCIF2_PO_Spherical_Harmonics_texture_index(s)
-   {
-      local CIF_POSH_TEXTURE_INDEX = {
-         return 1
-         +1/5  (POSHTI_(s,c20)+POSHTI_(s,c21p)+POSHTI_(s,c21m)+POSHTI_(s,c22p)+POSHTI_(s,c22m))
-         +1/9  (POSHTI_(s,c41)+POSHTI_(s,c41p)+POSHTI_(s,c41m)+POSHTI_(s,c42p)+POSHTI_(s,c42m)+POSHTI_(s,c43p)+POSHTI_(s,c43m)+POSHTI_(s,c44p)+POSHTI_(s,c44m))
-         +1/13 (POSHTI_(s,c60)+POSHTI_(s,c61p)+POSHTI_(s,c61m)+POSHTI_(s,c62p)+POSHTI_(s,c62m)+POSHTI_(s,c63p)+POSHTI_(s,c63m)+POSHTI_(s,c64p)+POSHTI_(s,c64m)+POSHTI_(s,c65p)+POSHTI_(s,c65m)+POSHTI_(s,c66p)+POSHTI_(s,c66m))
-         +1/17 (POSHTI_(s,c80)+POSHTI_(s,c81p)+POSHTI_(s,c81m)+POSHTI_(s,c82p)+POSHTI_(s,c82m)+POSHTI_(s,c83p)+POSHTI_(s,c83m)+POSHTI_(s,c84p)+POSHTI_(s,c84m)+POSHTI_(s,c85p)+POSHTI_(s,c85m)+POSHTI_(s,c86p)+POSHTI_(s,c86m)+POSHTI_(s,c87p)+POSHTI_(s,c87m)+POSHTI_(s,c88p)+POSHTI_(s,c88m));
-      }
-   }
+{
+    local CIF_POSH_TEXTURE_INDEX = {
+        return 1
+        +1/5  (POSHTI_(s,c20)+POSHTI_(s,c21p)+POSHTI_(s,c21m)+POSHTI_(s,c22p)+POSHTI_(s,c22m))
+        +1/9  (POSHTI_(s,c41)+POSHTI_(s,c41p)+POSHTI_(s,c41m)+POSHTI_(s,c42p)+POSHTI_(s,c42m)+POSHTI_(s,c43p)+POSHTI_(s,c43m)+POSHTI_(s,c44p)+POSHTI_(s,c44m))
+        +1/13 (POSHTI_(s,c60)+POSHTI_(s,c61p)+POSHTI_(s,c61m)+POSHTI_(s,c62p)+POSHTI_(s,c62m)+POSHTI_(s,c63p)+POSHTI_(s,c63m)+POSHTI_(s,c64p)+POSHTI_(s,c64m)+POSHTI_(s,c65p)+POSHTI_(s,c65m)+POSHTI_(s,c66p)+POSHTI_(s,c66m))
+        +1/17 (POSHTI_(s,c80)+POSHTI_(s,c81p)+POSHTI_(s,c81m)+POSHTI_(s,c82p)+POSHTI_(s,c82m)+POSHTI_(s,c83p)+POSHTI_(s,c83m)+POSHTI_(s,c84p)+POSHTI_(s,c84m)+POSHTI_(s,c85p)+POSHTI_(s,c85m)+POSHTI_(s,c86p)+POSHTI_(s,c86m)+POSHTI_(s,c87p)+POSHTI_(s,c87m)+POSHTI_(s,c88p)+POSHTI_(s,c88m));
+    }
+}
 
+'POSH CIF text
 macro Out_pdCIF2_pref_orient_spherical_harmonics_text(ciffile, id, sh, order, geom) {
 	Out_CIF2_newfile(ciffile)
 	Out_String("\n")
@@ -1001,70 +583,22 @@ macro & PO_f(& r, & alpha, & Delta)
 	'I've hard coded this for N==64, as the sum thing doesn't work.
 	'(1/N)*Sum( PO_P(r,alpha,Delta,(j+(1/2))*Pi/N) ,j=0,j<=N-1,j=j+1)
 	 (1/64)*
-	 (PO_P(r,alpha,Delta,( 0+0.5)*Pi/64) +
-	  PO_P(r,alpha,Delta,( 1+0.5)*Pi/64) +
-	  PO_P(r,alpha,Delta,( 2+0.5)*Pi/64) +
-	  PO_P(r,alpha,Delta,( 3+0.5)*Pi/64) +
-	  PO_P(r,alpha,Delta,( 4+0.5)*Pi/64) +
-	  PO_P(r,alpha,Delta,( 5+0.5)*Pi/64) +
-	  PO_P(r,alpha,Delta,( 6+0.5)*Pi/64) +
-	  PO_P(r,alpha,Delta,( 7+0.5)*Pi/64) +
-	  PO_P(r,alpha,Delta,( 8+0.5)*Pi/64) +
-	  PO_P(r,alpha,Delta,( 9+0.5)*Pi/64) +
-	  PO_P(r,alpha,Delta,(10+0.5)*Pi/64) +
-	  PO_P(r,alpha,Delta,(11+0.5)*Pi/64) +
-	  PO_P(r,alpha,Delta,(12+0.5)*Pi/64) +
-	  PO_P(r,alpha,Delta,(13+0.5)*Pi/64) +
-	  PO_P(r,alpha,Delta,(14+0.5)*Pi/64) +
-	  PO_P(r,alpha,Delta,(15+0.5)*Pi/64) +
-	  PO_P(r,alpha,Delta,(16+0.5)*Pi/64) +
-	  PO_P(r,alpha,Delta,(17+0.5)*Pi/64) +
-	  PO_P(r,alpha,Delta,(18+0.5)*Pi/64) +
-	  PO_P(r,alpha,Delta,(19+0.5)*Pi/64) +
-	  PO_P(r,alpha,Delta,(20+0.5)*Pi/64) +
-	  PO_P(r,alpha,Delta,(21+0.5)*Pi/64) +
-	  PO_P(r,alpha,Delta,(22+0.5)*Pi/64) +
-	  PO_P(r,alpha,Delta,(23+0.5)*Pi/64) +
-	  PO_P(r,alpha,Delta,(24+0.5)*Pi/64) +
-	  PO_P(r,alpha,Delta,(25+0.5)*Pi/64) +
-	  PO_P(r,alpha,Delta,(26+0.5)*Pi/64) +
-	  PO_P(r,alpha,Delta,(27+0.5)*Pi/64) +
-	  PO_P(r,alpha,Delta,(28+0.5)*Pi/64) +
-	  PO_P(r,alpha,Delta,(29+0.5)*Pi/64) +
-	  PO_P(r,alpha,Delta,(30+0.5)*Pi/64) +
-	  PO_P(r,alpha,Delta,(31+0.5)*Pi/64) +
-	  PO_P(r,alpha,Delta,(32+0.5)*Pi/64) +
-	  PO_P(r,alpha,Delta,(33+0.5)*Pi/64) +
-	  PO_P(r,alpha,Delta,(34+0.5)*Pi/64) +
-	  PO_P(r,alpha,Delta,(35+0.5)*Pi/64) +
-	  PO_P(r,alpha,Delta,(36+0.5)*Pi/64) +
-	  PO_P(r,alpha,Delta,(37+0.5)*Pi/64) +
-	  PO_P(r,alpha,Delta,(38+0.5)*Pi/64) +
-	  PO_P(r,alpha,Delta,(39+0.5)*Pi/64) +
-	  PO_P(r,alpha,Delta,(40+0.5)*Pi/64) +
-	  PO_P(r,alpha,Delta,(41+0.5)*Pi/64) +
-	  PO_P(r,alpha,Delta,(42+0.5)*Pi/64) +
-	  PO_P(r,alpha,Delta,(43+0.5)*Pi/64) +
-	  PO_P(r,alpha,Delta,(44+0.5)*Pi/64) +
-	  PO_P(r,alpha,Delta,(45+0.5)*Pi/64) +
-	  PO_P(r,alpha,Delta,(46+0.5)*Pi/64) +
-	  PO_P(r,alpha,Delta,(47+0.5)*Pi/64) +
-	  PO_P(r,alpha,Delta,(48+0.5)*Pi/64) +
-	  PO_P(r,alpha,Delta,(49+0.5)*Pi/64) +
-	  PO_P(r,alpha,Delta,(50+0.5)*Pi/64) +
-	  PO_P(r,alpha,Delta,(51+0.5)*Pi/64) +
-	  PO_P(r,alpha,Delta,(52+0.5)*Pi/64) +
-	  PO_P(r,alpha,Delta,(53+0.5)*Pi/64) +
-	  PO_P(r,alpha,Delta,(54+0.5)*Pi/64) +
-	  PO_P(r,alpha,Delta,(55+0.5)*Pi/64) +
-	  PO_P(r,alpha,Delta,(56+0.5)*Pi/64) +
-	  PO_P(r,alpha,Delta,(57+0.5)*Pi/64) +
-	  PO_P(r,alpha,Delta,(58+0.5)*Pi/64) +
-	  PO_P(r,alpha,Delta,(59+0.5)*Pi/64) +
-	  PO_P(r,alpha,Delta,(60+0.5)*Pi/64) +
-	  PO_P(r,alpha,Delta,(61+0.5)*Pi/64) +
-	  PO_P(r,alpha,Delta,(62+0.5)*Pi/64) +
-	  PO_P(r,alpha,Delta,(63+0.5)*Pi/64))
+	 (PO_P(r,alpha,Delta,( 0+0.5)*Pi/64) + PO_P(r,alpha,Delta,( 1+0.5)*Pi/64) + PO_P(r,alpha,Delta,( 2+0.5)*Pi/64) + PO_P(r,alpha,Delta,( 3+0.5)*Pi/64) +
+	  PO_P(r,alpha,Delta,( 4+0.5)*Pi/64) + PO_P(r,alpha,Delta,( 5+0.5)*Pi/64) + PO_P(r,alpha,Delta,( 6+0.5)*Pi/64) + PO_P(r,alpha,Delta,( 7+0.5)*Pi/64) +
+	  PO_P(r,alpha,Delta,( 8+0.5)*Pi/64) + PO_P(r,alpha,Delta,( 9+0.5)*Pi/64) + PO_P(r,alpha,Delta,(10+0.5)*Pi/64) + PO_P(r,alpha,Delta,(11+0.5)*Pi/64) +
+	  PO_P(r,alpha,Delta,(12+0.5)*Pi/64) + PO_P(r,alpha,Delta,(13+0.5)*Pi/64) + PO_P(r,alpha,Delta,(14+0.5)*Pi/64) + PO_P(r,alpha,Delta,(15+0.5)*Pi/64) +
+	  PO_P(r,alpha,Delta,(16+0.5)*Pi/64) + PO_P(r,alpha,Delta,(17+0.5)*Pi/64) + PO_P(r,alpha,Delta,(18+0.5)*Pi/64) + PO_P(r,alpha,Delta,(19+0.5)*Pi/64) +
+	  PO_P(r,alpha,Delta,(20+0.5)*Pi/64) + PO_P(r,alpha,Delta,(21+0.5)*Pi/64) + PO_P(r,alpha,Delta,(22+0.5)*Pi/64) + PO_P(r,alpha,Delta,(23+0.5)*Pi/64) +
+	  PO_P(r,alpha,Delta,(24+0.5)*Pi/64) + PO_P(r,alpha,Delta,(25+0.5)*Pi/64) + PO_P(r,alpha,Delta,(26+0.5)*Pi/64) + PO_P(r,alpha,Delta,(27+0.5)*Pi/64) +
+	  PO_P(r,alpha,Delta,(28+0.5)*Pi/64) + PO_P(r,alpha,Delta,(29+0.5)*Pi/64) + PO_P(r,alpha,Delta,(30+0.5)*Pi/64) + PO_P(r,alpha,Delta,(31+0.5)*Pi/64) +
+	  PO_P(r,alpha,Delta,(32+0.5)*Pi/64) + PO_P(r,alpha,Delta,(33+0.5)*Pi/64) + PO_P(r,alpha,Delta,(34+0.5)*Pi/64) + PO_P(r,alpha,Delta,(35+0.5)*Pi/64) +
+	  PO_P(r,alpha,Delta,(36+0.5)*Pi/64) + PO_P(r,alpha,Delta,(37+0.5)*Pi/64) + PO_P(r,alpha,Delta,(38+0.5)*Pi/64) + PO_P(r,alpha,Delta,(39+0.5)*Pi/64) +
+	  PO_P(r,alpha,Delta,(40+0.5)*Pi/64) + PO_P(r,alpha,Delta,(41+0.5)*Pi/64) + PO_P(r,alpha,Delta,(42+0.5)*Pi/64) + PO_P(r,alpha,Delta,(43+0.5)*Pi/64) +
+	  PO_P(r,alpha,Delta,(44+0.5)*Pi/64) + PO_P(r,alpha,Delta,(45+0.5)*Pi/64) + PO_P(r,alpha,Delta,(46+0.5)*Pi/64) + PO_P(r,alpha,Delta,(47+0.5)*Pi/64) +
+	  PO_P(r,alpha,Delta,(48+0.5)*Pi/64) + PO_P(r,alpha,Delta,(49+0.5)*Pi/64) + PO_P(r,alpha,Delta,(50+0.5)*Pi/64) + PO_P(r,alpha,Delta,(51+0.5)*Pi/64) +
+	  PO_P(r,alpha,Delta,(52+0.5)*Pi/64) + PO_P(r,alpha,Delta,(53+0.5)*Pi/64) + PO_P(r,alpha,Delta,(54+0.5)*Pi/64) + PO_P(r,alpha,Delta,(55+0.5)*Pi/64) +
+	  PO_P(r,alpha,Delta,(56+0.5)*Pi/64) + PO_P(r,alpha,Delta,(57+0.5)*Pi/64) + PO_P(r,alpha,Delta,(58+0.5)*Pi/64) + PO_P(r,alpha,Delta,(59+0.5)*Pi/64) +
+	  PO_P(r,alpha,Delta,(60+0.5)*Pi/64) + PO_P(r,alpha,Delta,(61+0.5)*Pi/64) + PO_P(r,alpha,Delta,(62+0.5)*Pi/64) + PO_P(r,alpha,Delta,(63+0.5)*Pi/64))
 }
 
 
@@ -1085,27 +619,6 @@ macro generalised_POMD_eqn(ciffile,id, r_c, r_v, alpha, h,k,l, Delta_c, Delta_v,
     Out_pdCIF2_pref_orient_march_dollase_text(ciffile,id, h,k,l, CeV(r_c,r_v), geom)
 }
 
-
-
-macro Out_pdCIF2_PO_symmetric_reflection_March_Dollase(ciffile, r_c, r_v, h,k,l) {
-    Out_pdCIF2_PO_symmetric_reflection_March_Dollase(ciffile,CIF_ID, r_c, r_v, h,k,l)
-}
-
-macro Out_pdCIF2_PO_capillary_transmission_March_Dollase(ciffile, r_c, r_v, h,k,l) {
-    Out_pdCIF2_PO_capillary_transmission_March_Dollase(ciffile,CIF_ID, r_c, r_v, h,k,l)
-}
-
-macro Out_pdCIF2_PO_symmetric_transmission_March_Dollase(ciffile, r_c, r_v, h,k,l) {
-    Out_pdCIF2_PO_symmetric_transmission_March_Dollase(ciffile,CIF_ID, r_c, r_v, h,k,l)
-}
-
-macro Out_pdCIF2_PO_asymmetric_transmission_March_Dollase(ciffile, r_c, r_v,omega_v, hkl) {
-    Out_pdCIF2_PO_asymmetric_transmission_March_Dollase(ciffile,CIF_ID, r_c, r_v,omega_v, hkl)
-}
-
-macro Out_pdCIF2_PO_asymmetric_reflection_March_Dollase(ciffile, r_c, r_v,omega_v, hkl) {
-    Out_pdCIF2_PO_asymmetric_reflection_March_Dollase(ciffile,CIF_ID, r_c, r_v,omega_v, hkl)
-}
 
 macro Out_pdCIF2_PO_symmetric_reflection_March_Dollase(ciffile,id, r_c, r_v, h,k,l)
 {
@@ -1143,76 +656,6 @@ macro Out_pdCIF2_PO_asymmetric_reflection_March_Dollase(ciffile,id, r_c, r_v,ome
 }
 
 
-
-
-'##############################################################'
-' Macros for specimen displacement                             '
-'##############################################################'
-
-macro pdCIF2_Bragg_Brentano_specimen_displacement(sd_v) {
-    pdCIF2_Bragg_Brentano_specimen_displacement(, 0, , sd_v)
-}
-macro pdCIF2_Bragg_Brentano_specimen_displacement(sd_c, sd_v) {
-    pdCIF2_Bragg_Brentano_specimen_displacement(, 0, sd_c, sd_v)
-}
-macro pdCIF2_Bragg_Brentano_specimen_displacement(ze_v, sd_c, sd_v) {
-    pdCIF2_Bragg_Brentano_specimen_displacement(, ze_v, sd_c, sd_v)
-}
-macro pdCIF2_Bragg_Brentano_specimen_displacement(ze_c, ze_v, sd_c, sd_v) {
-    #m_argu ze_c
-    #m_argu sd_c
-    If_Local_Eqn_Rpt(ze_c, ze_v,
-        min = Max(Val - 20 Yobs_dx_at(X1), -100 Yobs_dx_at(X1));
-        max = Min(Val + 20 Yobs_dx_at(X2),  100 Yobs_dx_at(X2));
-        del = .01 Yobs_dx_at(X1);
-        val_on_continue 0
-    )
-    If_Local_Eqn_Rpt(sd_c, sd_v, min = Val-.1; max = Val+.1; del 0.001)
-
-    local !CIF_TWOTHETA_ZERO = CeV(ze_c,ze_v);
-    local !CIF_BRAGG_BRENTANO_SPECIMEN_DISPLACEMENT = CeV(sd_c,sd_v);
-
-    th2_offset = pdCIF2_Bragg_Brentano_specimen_displacement_eqn(Th);
-
-}
-
-macro pdCIF2_Debye_Scherrer_specimen_displacement(spa_v, spe_v) {
-    pdCIF2_Debye_Scherrer_specimen_displacement(, 0, , spa_v, , spe_v)
-}
-macro pdCIF2_Debye_Scherrer_specimen_displacement(spa_c, spa_v, spe_c, spe_v) {
-    pdCIF2_Debye_Scherrer_specimen_displacement(, 0, spa_c, spa_v, spe_c, spe_v)
-}
-macro pdCIF2_Debye_Scherrer_specimen_displacement(ze_v, spa_c, spa_v, spe_c, spe_v) {
-    pdCIF2_Debye_Scherrer_specimen_displacement(, ze_v, spa_c, spa_v, spe_c, spe_v)
-}
-macro pdCIF2_Debye_Scherrer_specimen_displacement(ze_c, ze_v, spa_c, spa_v, spe_c, spe_v) {
-    #m_argu ze_c
-    #m_argu spa_c
-    #m_argu spe_c
-    If_Local_Eqn_Rpt(ze_c, ze_v,
-        min = Max(Val - 20 Yobs_dx_at(X1), -100 Yobs_dx_at(X1));
-        max = Min(Val + 20 Yobs_dx_at(X2),  100 Yobs_dx_at(X2));
-        del = .01 Yobs_dx_at(X1);
-        val_on_continue 0
-    )
-    If_Local_Eqn_Rpt(spa_c, spa_v, min = Val-.1; max = Val+.1; del 0.001)
-    If_Local_Eqn_Rpt(spe_c, spe_v, min = Val-.1; max = Val+.1; del 0.001)
-
-    local !CIF_TWOTHETA_ZERO = CeV(ze_c,ze_v);
-    local !CIF_DEBYE_SCHERRER_SPECIMEN_DISPLACEMENT_PARALLEL = CeV(spa_c, spa_v);
-    local !CIF_DEBYE_SCHERRER_SPECIMEN_DISPLACEMENT_PERPENDICULAR = CeV(spe_c, spe_v);
-
-    th2_offset = pdCIF2_Debye_Scherrer_specimen_displacement_eqn(Th);
-
-}
-
-macro & pdCIF2_Bragg_Brentano_specimen_displacement_eqn(& x) {
-    CIF_TWOTHETA_ZERO + (2 Rad CIF_BRAGG_BRENTANO_SPECIMEN_DISPLACEMENT Cos(x) / Rs)
-}
-
-macro & pdCIF2_Debye_Scherrer_specimen_displacement_eqn(& x) {
-    CIF_TWOTHETA_ZERO + (Rad/Rs) (CIF_DEBYE_SCHERRER_SPECIMEN_DISPLACEMENT_PERPENDICULAR Cos(2 x) - CIF_DEBYE_SCHERRER_SPECIMEN_DISPLACEMENT_PARALLEL Sin(2 x))
-}
 
 
 '##############################################################'
@@ -1763,9 +1206,560 @@ _atom_site_moment.crystalaxis_z
 		}
 }
 
-'##############################################################%####### '
-' These are the consolidiated macros to report structures and patterns   '
-'###################################################################### '
+'########################################################################################### '
+' These are the consolidiated macros to report structures, patterns, and other information   '
+'########################################################################################### '
+
+'########################################################################################### '
+' If you just want to use this library, start here.                                          '
+'########################################################################################### '
+
+
+'##############################################################'
+' Macros for wavelengths                                       '
+'##############################################################'
+
+macro Out_CIF_wavelength(ciffile, rad_id, id, yminmax,
+                         la0, lo0, lh0, lg0) { Out_CIF_wavelength(ciffile, rad_id, id, yminmax, la0, lo0, lh0, lg0, , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , ) }
+
+macro Out_CIF_wavelength(ciffile, rad_id, id, yminmax,
+                         la0, lo0, lh0, lg0,
+                         la1, lo1, lh1, lg1) { Out_CIF_wavelength(ciffile, rad_id, id, yminmax, la0, lo0, lh0, lg0, la1, lo1, lh1, lg1, , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , ) }
+
+macro Out_CIF_wavelength(ciffile, rad_id, id, yminmax,
+                         la0, lo0, lh0, lg0,
+                         la1, lo1, lh1, lg1,
+                         la2, lo2, lh2, lg2) { Out_CIF_wavelength(ciffile, rad_id, id, yminmax, la0, lo0, lh0, lg0, la1, lo1, lh1, lg1, la2, lo2, lh2, lg2, , , , , , , , , , , , , , , , , , , , , , , , , , , , ) }
+
+macro Out_CIF_wavelength(ciffile, rad_id, id, yminmax,
+                         la0, lo0, lh0, lg0,
+                         la1, lo1, lh1, lg1,
+                         la2, lo2, lh2, lg2,
+                         la3, lo3, lh3, lg3) { Out_CIF_wavelength(ciffile, rad_id, id, yminmax, la0, lo0, lh0, lg0, la1, lo1, lh1, lg1, la2, lo2, lh2, lg2, la3, lo3, lh3, lg3, , , , , , , , , , , , , , , , , , , , , , , , ) }
+
+macro Out_CIF_wavelength(ciffile, rad_id, id, yminmax,
+                         la0, lo0, lh0, lg0,
+                         la1, lo1, lh1, lg1,
+                         la2, lo2, lh2, lg2,
+                         la3, lo3, lh3, lg3,
+                         la4, lo4, lh4, lg4) { Out_CIF_wavelength(ciffile, rad_id, id, yminmax, la0, lo0, lh0, lg0, la1, lo1, lh1, lg1, la2, lo2, lh2, lg2, la3, lo3, lh3, lg3, la4, lo4, lh4, lg4, , , , , , , , , , , , , , , , , , , , ) }
+
+macro Out_CIF_wavelength(ciffile, rad_id, id, yminmax,
+                         la0, lo0, lh0, lg0,
+                         la1, lo1, lh1, lg1,
+                         la2, lo2, lh2, lg2,
+                         la3, lo3, lh3, lg3,
+                         la4, lo4, lh4, lg4,
+                         la5, lo5, lh5, lg5) { Out_CIF_wavelength(ciffile, rad_id, id, yminmax, la0, lo0, lh0, lg0, la1, lo1, lh1, lg1, la2, lo2, lh2, lg2, la3, lo3, lh3, lg3, la4, lo4, lh4, lg4, la5, lo5, lh5, lg5, , , , , , , , , , , , , , , , ) }
+
+macro Out_CIF_wavelength(ciffile, rad_id, id, yminmax,
+                         la0, lo0, lh0, lg0,
+                         la1, lo1, lh1, lg1,
+                         la2, lo2, lh2, lg2,
+                         la3, lo3, lh3, lg3,
+                         la4, lo4, lh4, lg4,
+                         la5, lo5, lh5, lg5,
+                         la6, lo6, lh6, lg6) { Out_CIF_wavelength(ciffile, rad_id, id, yminmax, la0, lo0, lh0, lg0, la1, lo1, lh1, lg1, la2, lo2, lh2, lg2, la3, lo3, lh3, lg3, la4, lo4, lh4, lg4, la5, lo5, lh5, lg5, la6, lo6, lh6, lg6, , , , , , , , , , , , ) }
+
+macro Out_CIF_wavelength(ciffile, rad_id, id, yminmax,
+                         la0, lo0, lh0, lg0,
+                         la1, lo1, lh1, lg1,
+                         la2, lo2, lh2, lg2,
+                         la3, lo3, lh3, lg3,
+                         la4, lo4, lh4, lg4,
+                         la5, lo5, lh5, lg5,
+                         la6, lo6, lh6, lg6,
+                         la7, lo7, lh7, lg7) { Out_CIF_wavelength(ciffile, rad_id, id, yminmax, la0, lo0, lh0, lg0, la1, lo1, lh1, lg1, la2, lo2, lh2, lg2, la3, lo3, lh3, lg3, la4, lo4, lh4, lg4, la5, lo5, lh5, lg5, la6, lo6, lh6, lg6, la7, lo7, lh7, lg7, , , , , , , , ) }
+
+macro Out_CIF_wavelength(ciffile, rad_id, id, yminmax,
+                         la0, lo0, lh0, lg0,
+                         la1, lo1, lh1, lg1,
+                         la2, lo2, lh2, lg2,
+                         la3, lo3, lh3, lg3,
+                         la4, lo4, lh4, lg4,
+                         la5, lo5, lh5, lg5,
+                         la6, lo6, lh6, lg6,
+                         la7, lo7, lh7, lg7,
+                         la8, lo8, lh8, lg8) { Out_CIF_wavelength(ciffile, rad_id, id, yminmax, la0, lo0, lh0, lg0, la1, lo1, lh1, lg1, la2, lo2, lh2, lg2, la3, lo3, lh3, lg3, la4, lo4, lh4, lg4, la5, lo5, lh5, lg5, la6, lo6, lh6, lg6, la7, lo7, lh7, lg7, la8, lo8, lh8, lg8, , , , ) }
+
+macro Out_CIF_wavelength(ciffile, rad_id, id, yminmax,
+                         la0, lo0, lh0, lg0,
+                         la1, lo1, lh1, lg1,
+                         la2, lo2, lh2, lg2,
+                         la3, lo3, lh3, lg3,
+                         la4, lo4, lh4, lg4,
+                         la5, lo5, lh5, lg5,
+                         la6, lo6, lh6, lg6,
+                         la7, lo7, lh7, lg7,
+                         la8, lo8, lh8, lg8,
+                         la9, lo9, lh9, lg9) {
+    lam
+        ymin_on_ymax yminmax
+
+        la la0
+        lo lo0
+        #m_ifarg lh0 "" #m_else lh lh0 #m_endif
+        #m_ifarg lg0 "" #m_else lg lg0 #m_endif
+
+        #m_ifarg la1 "" #m_else la la1 #m_endif
+        #m_ifarg lo1 "" #m_else lo lo1 #m_endif
+        #m_ifarg lh1 "" #m_else lh lh1 #m_endif
+        #m_ifarg lg1 "" #m_else lg lg1 #m_endif
+
+        #m_ifarg la2 "" #m_else la la2 #m_endif
+        #m_ifarg lo2 "" #m_else lo lo2 #m_endif
+        #m_ifarg lh2 "" #m_else lh lh2 #m_endif
+        #m_ifarg lg2 "" #m_else lg lg2 #m_endif
+
+        #m_ifarg la3 "" #m_else la la3 #m_endif
+        #m_ifarg lo3 "" #m_else lo lo3 #m_endif
+        #m_ifarg lh3 "" #m_else lh lh3 #m_endif
+        #m_ifarg lg3 "" #m_else lg lg3 #m_endif
+
+        #m_ifarg la4 "" #m_else la la4 #m_endif
+        #m_ifarg lo4 "" #m_else lo lo4 #m_endif
+        #m_ifarg lh4 "" #m_else lh lh4 #m_endif
+        #m_ifarg lg4 "" #m_else lg lg4 #m_endif
+
+        #m_ifarg la5 "" #m_else la la5 #m_endif
+        #m_ifarg lo5 "" #m_else lo lo5 #m_endif
+        #m_ifarg lh5 "" #m_else lh lh5 #m_endif
+        #m_ifarg lg5 "" #m_else lg lg5 #m_endif
+
+        #m_ifarg la6 "" #m_else la la6 #m_endif
+        #m_ifarg lo6 "" #m_else lo lo6 #m_endif
+        #m_ifarg lh6 "" #m_else lh lh6 #m_endif
+        #m_ifarg lg6 "" #m_else lg lg6 #m_endif
+
+        #m_ifarg la7 "" #m_else la la7 #m_endif
+        #m_ifarg lo7 "" #m_else lo lo7 #m_endif
+        #m_ifarg lh7 "" #m_else lh lh7 #m_endif
+        #m_ifarg lg7 "" #m_else lg lg7 #m_endif
+
+        #m_ifarg la8 "" #m_else la la8 #m_endif
+        #m_ifarg lo8 "" #m_else lo lo8 #m_endif
+        #m_ifarg lh8 "" #m_else lh lh8 #m_endif
+        #m_ifarg lg8 "" #m_else lg lg8 #m_endif
+
+        #m_ifarg la9 "" #m_else la la9 #m_endif
+        #m_ifarg lo9 "" #m_else lo lo9 #m_endif
+        #m_ifarg lh9 "" #m_else lh lh9 #m_endif
+        #m_ifarg lg9 "" #m_else lg lg9 #m_endif
+
+
+    local !CIF_PEAK_CUTOFF yminmax
+    #m_ifarg rad_id "" #m_else  local !CIF_RADIATION_ID = rad_id ; #m_endif
+
+	Out_CIF2_newfile(ciffile)
+	Out_String("\n")
+	Out_CIF2_section_break("Begin wavelength information")
+	Out_String("\ndata_") Out_unique_diffractogram_id(id) Out_String("_") Out_String("wavelength")
+    Out_CIF2_audit_dataset
+    if Prm_There(CIF_RADIATION_ID) { Out_String("\n_diffrn_radiation.id\t") Out(CIF_RADIATION_ID, "%s") }
+
+	if Obj_There(neutron) {
+		Out_String("\n_diffrn_radiation.probe\tneutron")
+	} else {
+		Out_String("\n_diffrn_radiation.probe\tx-ray")
+	}
+
+
+    Out_String("\nloop_")
+    Out_String("\n_diffrn_radiation_wavelength.id")
+    Out_String("\n_diffrn_radiation_wavelength.wt")
+    Out_String("\n_diffrn_radiation_wavelength.value")
+                            Out("0", "\n%s\t") Out(la0, "%11.7f\t") Out(lo0, "%11.7f")
+    #m_ifarg la1 "" #m_else Out("1", "\n%s\t") Out(la1, "%11.7f\t") Out(lo1, "%11.7f") #m_endif
+    #m_ifarg la2 "" #m_else Out("2", "\n%s\t") Out(la2, "%11.7f\t") Out(lo2, "%11.7f") #m_endif
+    #m_ifarg la3 "" #m_else Out("3", "\n%s\t") Out(la3, "%11.7f\t") Out(lo3, "%11.7f") #m_endif
+    #m_ifarg la4 "" #m_else Out("4", "\n%s\t") Out(la4, "%11.7f\t") Out(lo4, "%11.7f") #m_endif
+    #m_ifarg la5 "" #m_else Out("5", "\n%s\t") Out(la5, "%11.7f\t") Out(lo5, "%11.7f") #m_endif
+    #m_ifarg la6 "" #m_else Out("6", "\n%s\t") Out(la6, "%11.7f\t") Out(lo6, "%11.7f") #m_endif
+    #m_ifarg la7 "" #m_else Out("7", "\n%s\t") Out(la7, "%11.7f\t") Out(lo7, "%11.7f") #m_endif
+    #m_ifarg la8 "" #m_else Out("8", "\n%s\t") Out(la8, "%11.7f\t") Out(lo8, "%11.7f") #m_endif
+    #m_ifarg la9 "" #m_else Out("9", "\n%s\t") Out(la9, "%11.7f\t") Out(lo9, "%11.7f") #m_endif
+
+	'Out_CIF2_section_break("End wavelength information")
+}
+
+
+
+macro Out_CIF2_tube_settings(kv, ma) {
+    #m_ifarg ma "" #m_else Out_String("\n_diffrn_source.current\t") Out(ma, "%V") #m_endif
+    Out_String("\n_diffrn_source.device\ttube")
+    #m_ifarg ma "" #m_else #m_ifarg kv "" #m_else Out_String("\n_diffrn_source.power\t") Out(ma*kv, "%V") #m_endif #m_endif
+    #m_ifarg kv "" #m_else Out_String("\n_diffrn_source.voltage\t") Out(kv, "%V") #m_endif
+}
+
+macro Out_CIF_wavelength_coka3(ciffile)                     { Out_CIF_wavelength_coka3(ciffile,, CIF_ID,,) }
+macro Out_CIF_wavelength_coka3(ciffile, kv, ma)             { Out_CIF_wavelength_coka3(ciffile,, CIF_ID, kv, ma) }
+macro Out_CIF_wavelength_coka3(ciffile, rad_id, kv, ma)     { Out_CIF_wavelength_coka3(ciffile, rad_id, CIF_ID, kv, ma) }
+macro Out_CIF_wavelength_coka3(ciffile, rad_id, id, kv, ma) {
+    Out_CIF_wavelength(ciffile, rad_id, id, 0.0001,
+        0.5981,1.788960,0.4700,,
+        0.0503,1.789879,0.3357,,
+        0.3516,1.792850,0.8052,)
+    Out_CIF2_tube_settings(kv, ma)
+    Out_String("\n_diffrn_source.target\tCo")
+}
+macro Out_CIF_wavelength_crka7_holzer(ciffile)                     { Out_CIF_wavelength_crka7_holzer(ciffile,, CIF_ID,,) }
+macro Out_CIF_wavelength_crka7_holzer(ciffile, kv, ma)             { Out_CIF_wavelength_crka7_holzer(ciffile,, CIF_ID, kv, ma) }
+macro Out_CIF_wavelength_crka7_holzer(ciffile, rad_id, kv, ma)     { Out_CIF_wavelength_crka7_holzer(ciffile, rad_id, CIF_ID, kv, ma) }
+macro Out_CIF_wavelength_crka7_holzer(ciffile, rad_id, id, kv, ma) {
+    Out_CIF_wavelength(ciffile, rad_id, id,0.0001,
+        0.378, 2.2896977, 0.6160974,,
+        0.132, 2.2900254, 0.7444350,,
+        0.084, 2.2905983, 1.3279580,,
+        0.073, 2.2915136, 2.1807273,,
+        0.009, 2.2882482, 0.8395685,,
+        0.271, 2.2936467, 0.9436726,,
+        0.054, 2.2943110, 2.0124101,)
+    Out_CIF2_tube_settings(kv, ma)
+    Out_String("\n_diffrn_source.target\tCr")
+}
+macro Out_CIF_wavelength_crkb5_holzer(ciffile)                     { Out_CIF_wavelength_crkb5_holzer(ciffile,, CIF_ID,,) }
+macro Out_CIF_wavelength_crkb5_holzer(ciffile, kv, ma)             { Out_CIF_wavelength_crkb5_holzer(ciffile,, CIF_ID, kv, ma) }
+macro Out_CIF_wavelength_crkb5_holzer(ciffile, rad_id, kv, ma)     { Out_CIF_wavelength_crkb5_holzer(ciffile, rad_id, CIF_ID, kv, ma) }
+macro Out_CIF_wavelength_crkb5_holzer(ciffile, rad_id, id, kv, ma) {
+    Out_CIF_wavelength(ciffile, rad_id, id, 0.0001,
+        0.307, 2.0848200, 0.5959633,,
+        0.236, 2.0889262, 5.6241545,,
+        0.172, 2.0850864, 0.6662470,,
+        0.148, 2.0865602, 2.3492088,)
+    Out_CIF2_tube_settings(kv, ma)
+    Out_String("\n_diffrn_source.target\tCr")
+}
+macro Out_CIF_wavelength_cuk1sharp(ciffile)                     { Out_CIF_wavelength_cuk1sharp(ciffile,, CIF_ID,,) }
+macro Out_CIF_wavelength_cuk1sharp(ciffile, kv, ma)             { Out_CIF_wavelength_cuk1sharp(ciffile,, CIF_ID, kv, ma) }
+macro Out_CIF_wavelength_cuk1sharp(ciffile, rad_id, kv, ma)     { Out_CIF_wavelength_cuk1sharp(ciffile, rad_id, CIF_ID, kv, ma) }
+macro Out_CIF_wavelength_cuk1sharp(ciffile, rad_id, id, kv, ma) {
+    Out_CIF_wavelength(ciffile, rad_id, id, 0.0001,1,1.540596,0.401844,)
+    Out_CIF2_tube_settings(kv, ma)
+    Out_String("\n_diffrn_source.target\tCu")
+}
+macro Out_CIF_wavelength_cuka1(ciffile)                     { Out_CIF_wavelength_cuka1(ciffile,, CIF_ID,,) }
+macro Out_CIF_wavelength_cuka1(ciffile, kv, ma)             { Out_CIF_wavelength_cuka1(ciffile,, CIF_ID, kv, ma) }
+macro Out_CIF_wavelength_cuka1(ciffile, rad_id, kv, ma)     { Out_CIF_wavelength_cuka1(ciffile, rad_id, CIF_ID, kv, ma) }
+macro Out_CIF_wavelength_cuka1(ciffile, rad_id, id, kv, ma) {
+    Out_CIF_wavelength(ciffile, rad_id, id, 0.0001,1,1.540596,0.501844,)
+    Out_CIF2_tube_settings(kv, ma)
+    Out_String("\n_diffrn_source.target\tCu")
+}
+macro Out_CIF_wavelength_cuka2(ciffile)                     { Out_CIF_wavelength_cuka2(ciffile,, CIF_ID,,) }
+macro Out_CIF_wavelength_cuka2(ciffile, kv, ma)             { Out_CIF_wavelength_cuka2(ciffile,, CIF_ID, kv, ma) }
+macro Out_CIF_wavelength_cuka2(ciffile, rad_id, kv, ma)     { Out_CIF_wavelength_cuka2(ciffile, rad_id, CIF_ID, kv, ma) }
+macro Out_CIF_wavelength_cuka2(ciffile, rad_id, id, kv, ma) {
+    Out_CIF_wavelength(ciffile, rad_id, id, 0.0001,
+        0.653817,1.540596,0.501844,,
+        0.346183,1.544493,0.626579,)
+    Out_CIF2_tube_settings(kv, ma)
+    Out_String("\n_diffrn_source.target\tCu")
+}
+macro Out_CIF_wavelength_cuka2_analyt(ciffile)                     { Out_CIF_wavelength_cuka2_analyt(ciffile,, CIF_ID,,) }
+macro Out_CIF_wavelength_cuka2_analyt(ciffile, kv, ma)             { Out_CIF_wavelength_cuka2_analyt(ciffile,, CIF_ID, kv, ma) }
+macro Out_CIF_wavelength_cuka2_analyt(ciffile, rad_id, kv, ma)     { Out_CIF_wavelength_cuka2_analyt(ciffile, rad_id, CIF_ID, kv, ma) }
+macro Out_CIF_wavelength_cuka2_analyt(ciffile, rad_id, id, kv, ma) {
+    Out_CIF_wavelength(ciffile, rad_id, id, 0.0001,
+        0.653817,1.540598,0.5,,
+        0.346183,1.544426,0.5,)
+    Out_CIF2_tube_settings(kv, ma)
+    Out_String("\n_diffrn_source.target\tCu")
+}
+macro Out_CIF_wavelength_cuka4_holzer(ciffile)                     { Out_CIF_wavelength_cuka4_holzer(ciffile,, CIF_ID,,) }
+macro Out_CIF_wavelength_cuka4_holzer(ciffile, kv, ma)             { Out_CIF_wavelength_cuka4_holzer(ciffile,, CIF_ID, kv, ma) }
+macro Out_CIF_wavelength_cuka4_holzer(ciffile, rad_id, kv, ma)     { Out_CIF_wavelength_cuka4_holzer(ciffile, rad_id, CIF_ID, kv, ma) }
+macro Out_CIF_wavelength_cuka4_holzer(ciffile, rad_id, id, kv, ma) {
+    Out_CIF_wavelength(ciffile, rad_id, id, 0.0001,
+        0.579, 1.5405909, 0.4374157,,
+        0.080, 1.5410639, 0.6432140,,
+        0.236, 1.5443990, 0.5128764,,
+        0.105, 1.5446855, 0.6872322,)
+    Out_CIF2_tube_settings(kv, ma)
+    Out_String("\n_diffrn_source.target\tCu")
+}
+macro Out_CIF_wavelength_cuka5(ciffile)                     { Out_CIF_wavelength_cuka5(ciffile,, CIF_ID,,) }
+macro Out_CIF_wavelength_cuka5(ciffile, kv, ma)             { Out_CIF_wavelength_cuka5(ciffile,, CIF_ID, kv, ma) }
+macro Out_CIF_wavelength_cuka5(ciffile, rad_id, kv, ma)     { Out_CIF_wavelength_cuka5(ciffile, rad_id, CIF_ID, kv, ma) }
+macro Out_CIF_wavelength_cuka5(ciffile, rad_id, id, kv, ma) {
+    Out_CIF_wavelength(ciffile, rad_id, id, 0.0001,
+        0.5791, 1.540596, 0.437,,
+        0.0159, 1.534753, 3.6854,,
+        0.0762, 1.541058, 0.6,,
+        0.2417, 1.54441 , 0.52,,
+        0.0871, 1.544721, 0.62,)
+    Out_CIF2_tube_settings(kv, ma)
+    Out_String("\n_diffrn_source.target\tCu")
+}
+macro Out_CIF_wavelength_cuka5_berger(ciffile)                     { Out_CIF_wavelength_cuka5_berger(ciffile,, CIF_ID,,) }
+macro Out_CIF_wavelength_cuka5_berger(ciffile, kv, ma)             { Out_CIF_wavelength_cuka5_berger(ciffile,, CIF_ID, kv, ma) }
+macro Out_CIF_wavelength_cuka5_berger(ciffile, rad_id, kv, ma)     { Out_CIF_wavelength_cuka5_berger(ciffile, rad_id, CIF_ID, kv, ma) }
+macro Out_CIF_wavelength_cuka5_berger(ciffile, rad_id, id, kv, ma) {
+    Out_CIF_wavelength(ciffile, rad_id, id, 0.0001,
+        0.5691, 1.540596, 0.4370,,
+        0.0159, 1.534753, 3.6854,,
+        0.0762, 1.541058, 0.6000,,
+        0.2517, 1.544410, 0.5200,,
+        0.0871, 1.544721, 0.6200,)
+    Out_CIF2_tube_settings(kv, ma)
+    Out_String("\n_diffrn_source.target\tCu")
+}
+macro Out_CIF_wavelength_cukb4_holzer(ciffile)                     { Out_CIF_wavelength_cukb4_holzer(ciffile,, CIF_ID,,) }
+macro Out_CIF_wavelength_cukb4_holzer(ciffile, kv, ma)             { Out_CIF_wavelength_cukb4_holzer(ciffile,, CIF_ID, kv, ma) }
+macro Out_CIF_wavelength_cukb4_holzer(ciffile, rad_id, kv, ma)     { Out_CIF_wavelength_cukb4_holzer(ciffile, rad_id, CIF_ID, kv, ma) }
+macro Out_CIF_wavelength_cukb4_holzer(ciffile, rad_id, id, kv, ma) {
+    Out_CIF_wavelength(ciffile, rad_id, id, 0.0001,
+        0.485, 1.3922160, 0.5502872,,
+        0.248, 1.3925949, 0.5505868,,
+        0.110, 1.3917581, 0.5546122,,
+        0.100, 1.3934905, 1.2654733,,
+        0.055, 1.3913004, 0.8290293,)
+    Out_CIF2_tube_settings(kv, ma)
+    Out_String("\n_diffrn_source.target\tCu")
+}
+macro Out_CIF_wavelength_feka7_holzer(ciffile)                     { Out_CIF_wavelength_feka7_holzer(ciffile,, CIF_ID,,) }
+macro Out_CIF_wavelength_feka7_holzer(ciffile, kv, ma)             { Out_CIF_wavelength_feka7_holzer(ciffile,, CIF_ID, kv, ma) }
+macro Out_CIF_wavelength_feka7_holzer(ciffile, rad_id, kv, ma)     { Out_CIF_wavelength_feka7_holzer(ciffile, rad_id, CIF_ID, kv, ma) }
+macro Out_CIF_wavelength_feka7_holzer(ciffile, rad_id, id, kv, ma) {
+    Out_CIF_wavelength(ciffile, rad_id, id, 0.0001,
+        0.278, 1.9359990, 0.4876162,,
+        0.182, 1.9362569, 0.5941855,,
+        0.106, 1.9370562, 1.4626310,,
+        0.094, 1.9366253, 0.8479062,,
+        0.207, 1.9399242, 0.7548816,,
+        0.066, 1.9405570, 0.7104222,,
+        0.065, 1.9402020, 1.3459384,)
+    Out_CIF2_tube_settings(kv, ma)
+    Out_String("\n_diffrn_source.target\tFe")
+}
+macro Out_CIF_wavelength_fekb4_holzer(ciffile)                     { Out_CIF_wavelength_fekb4_holzer(ciffile,, CIF_ID,,) }
+macro Out_CIF_wavelength_fekb4_holzer(ciffile, kv, ma)             { Out_CIF_wavelength_fekb4_holzer(ciffile,, CIF_ID, kv, ma) }
+macro Out_CIF_wavelength_fekb4_holzer(ciffile, rad_id, kv, ma)     { Out_CIF_wavelength_fekb4_holzer(ciffile, rad_id, CIF_ID, kv, ma) }
+macro Out_CIF_wavelength_fekb4_holzer(ciffile, rad_id, id, kv, ma) {
+    Out_CIF_wavelength(ciffile, rad_id, id, 0.0001,
+        0.301, 1.7594154, 3.5378594,,
+        0.279, 1.7568450, 0.7767031,,
+        0.241, 1.7565588, 0.4902585,,
+        0.179, 1.7574577, 1.5893663,)
+    Out_CIF2_tube_settings(kv, ma)
+    Out_String("\n_diffrn_source.target\tFe")
+}
+macro Out_CIF_wavelength_mnka7_holzer(ciffile)                     { Out_CIF_wavelength_mnka7_holzer(ciffile,, CIF_ID,,) }
+macro Out_CIF_wavelength_mnka7_holzer(ciffile, kv, ma)             { Out_CIF_wavelength_mnka7_holzer(ciffile,, CIF_ID, kv, ma) }
+macro Out_CIF_wavelength_mnka7_holzer(ciffile, rad_id, kv, ma)     { Out_CIF_wavelength_mnka7_holzer(ciffile, rad_id, CIF_ID, kv, ma) }
+macro Out_CIF_wavelength_mnka7_holzer(ciffile, rad_id, id, kv, ma) {
+    Out_CIF_wavelength(ciffile, rad_id, id, 0.0001,
+        0.353, 2.1018365, 0.6110764,,
+        0.141, 2.1021879, 0.7281904,,
+        0.079, 2.1032712, 1.6052406,,
+        0.066, 2.1026638, 0.9496080,,
+        0.005, 2.1016355, 0.3452010,,
+        0.229, 2.1058026, 0.8444323,,
+        0.110, 2.1062490, 1.5085288,)
+    Out_CIF2_tube_settings(kv, ma)
+    Out_String("\n_diffrn_source.target\tMn")
+}
+macro Out_CIF_wavelength_mnkb5_holzer(ciffile)                     { Out_CIF_wavelength_mnkb5_holzer(ciffile,, CIF_ID,,) }
+macro Out_CIF_wavelength_mnkb5_holzer(ciffile, kv, ma)             { Out_CIF_wavelength_mnkb5_holzer(ciffile,, CIF_ID, kv, ma) }
+macro Out_CIF_wavelength_mnkb5_holzer(ciffile, rad_id, kv, ma)     { Out_CIF_wavelength_mnkb5_holzer(ciffile, rad_id, CIF_ID, kv, ma) }
+macro Out_CIF_wavelength_mnkb5_holzer(ciffile, rad_id, id, kv, ma) {
+    Out_CIF_wavelength(ciffile, rad_id, id, 0.0001,
+        0.254, 1.9101270, 0.5385290,,
+        0.234, 1.9114758, 2.7701238,,
+        0.234, 1.9140076, 3.9061842,,
+        0.164, 1.9103713, 0.5327797,,
+        0.114, 1.9107334, 0.8274467,)
+    Out_CIF2_tube_settings(kv, ma)
+    Out_String("\n_diffrn_source.target\tMn")
+}
+macro Out_CIF_wavelength_moka2(ciffile)                     { Out_CIF_wavelength_moka2(ciffile,, CIF_ID,,) }
+macro Out_CIF_wavelength_moka2(ciffile, kv, ma)             { Out_CIF_wavelength_moka2(ciffile,, CIF_ID, kv, ma) }
+macro Out_CIF_wavelength_moka2(ciffile, rad_id, kv, ma)     { Out_CIF_wavelength_moka2(ciffile, rad_id, CIF_ID, kv, ma) }
+macro Out_CIF_wavelength_moka2(ciffile, rad_id, id, kv, ma) {
+    Out_CIF_wavelength(ciffile, rad_id, id, 0.0001,
+        0.6533, 0.709300, 0.2695,,
+        0.3467, 0.713574, 0.2795,)
+    Out_CIF2_tube_settings(kv, ma)
+    Out_String("\n_diffrn_source.target\tMo")
+}
+macro Out_CIF_wavelength_nika5_holzer(ciffile)                     { Out_CIF_wavelength_nika5_holzer(ciffile,, CIF_ID,,) }
+macro Out_CIF_wavelength_nika5_holzer(ciffile, kv, ma)             { Out_CIF_wavelength_nika5_holzer(ciffile,, CIF_ID, kv, ma) }
+macro Out_CIF_wavelength_nika5_holzer(ciffile, rad_id, kv, ma)     { Out_CIF_wavelength_nika5_holzer(ciffile, rad_id, CIF_ID, kv, ma) }
+macro Out_CIF_wavelength_nika5_holzer(ciffile, rad_id, id, kv, ma) {
+    Out_CIF_wavelength(ciffile, rad_id, id, 0.0001,
+        0.487, 1.6579244, 0.4462793,,
+        0.171, 1.6583129, 1.0449117,,
+        0.250, 1.6617352, 0.5955505,,
+        0.064, 1.6620153, 0.6770710,,
+        0.028, 1.6624264, 0.9977195,)
+    Out_CIF2_tube_settings(kv, ma)
+    Out_String("\n_diffrn_source.target\tNi")
+}
+macro Out_CIF_wavelength_nikb4_holzer(ciffile)                     { Out_CIF_wavelength_nikb4_holzer(ciffile,, CIF_ID,,) }
+macro Out_CIF_wavelength_nikb4_holzer(ciffile, kv, ma)             { Out_CIF_wavelength_nikb4_holzer(ciffile,, CIF_ID, kv, ma) }
+macro Out_CIF_wavelength_nikb4_holzer(ciffile, rad_id, kv, ma)     { Out_CIF_wavelength_nikb4_holzer(ciffile, rad_id, CIF_ID, kv, ma) }
+macro Out_CIF_wavelength_nikb4_holzer(ciffile, rad_id, id, kv, ma) {
+    Out_CIF_wavelength(ciffile, rad_id, id, 0.0001,
+        0.450, 1.5001100, 0.6824449,,
+        0.258, 1.5004731, 0.7880970,,
+        0.203, 1.5016253, 2.4915953,,
+        0.089, 1.4994406, 0.9393379,)
+    Out_CIF2_tube_settings(kv, ma)
+    Out_String("\n_diffrn_source.target\tNi")
+}
+
+
+
+
+'##############################################################'
+' Macros for preferred orientation                             '
+'##############################################################'
+
+
+'use these POMD ones.
+macro Out_pdCIF2_PO_March_Dollase(ciffile, po1, po1_v, h1,k1,l1) {
+    Out_pdCIF2_PO_March_Dollase(ciffile,CIF_ID, po1, po1_v, h1,k1,l1)
+}
+macro Out_pdCIF2_PO_Two_Directions_March_Dollase(ciffile, po1, po1_v, h1,k1,l1, po2, po2_v, h2,k2,l2, mix, mix_v) {
+    Out_pdCIF2_PO_Two_Directions_March_Dollase(ciffile,CIF_ID, po1, po1_v, h1,k1,l1, po2, po2_v, h2,k2,l2, mix, mix_v)
+}
+macro Out_pdCIF2_PO_Three_Directions_March_Dollase(ciffile, po1, po1_v, h1,k1,l1, po2, po2_v, h2,k2,l2, po3, po3_v, h3,k3,l3, mix1, mix1_v, mix2, mix2_v, mix3_v) {
+    Out_pdCIF2_PO_Three_Directions_March_Dollase(ciffile,CIF_ID, po1, po1_v, h1,k1,l1, po2, po2_v, h2,k2,l2, po3, po3_v, h3,k3,l3, mix1, mix1_v, mix2, mix2_v, mix3_v)
+}
+macro Out_pdCIF2_PO_symmetric_reflection_March_Dollase(ciffile, r_c, r_v, h,k,l) {
+    Out_pdCIF2_PO_symmetric_reflection_March_Dollase(ciffile,CIF_ID, r_c, r_v, h,k,l)
+}
+macro Out_pdCIF2_PO_capillary_transmission_March_Dollase(ciffile, r_c, r_v, h,k,l) {
+    Out_pdCIF2_PO_capillary_transmission_March_Dollase(ciffile,CIF_ID, r_c, r_v, h,k,l)
+}
+macro Out_pdCIF2_PO_symmetric_transmission_March_Dollase(ciffile, r_c, r_v, h,k,l) {
+    Out_pdCIF2_PO_symmetric_transmission_March_Dollase(ciffile,CIF_ID, r_c, r_v, h,k,l)
+}
+macro Out_pdCIF2_PO_asymmetric_transmission_March_Dollase(ciffile, r_c, r_v,omega_v, hkl) {
+    Out_pdCIF2_PO_asymmetric_transmission_March_Dollase(ciffile,CIF_ID, r_c, r_v,omega_v, hkl)
+}
+macro Out_pdCIF2_PO_asymmetric_reflection_March_Dollase(ciffile, r_c, r_v,omega_v, hkl) {
+    Out_pdCIF2_PO_asymmetric_reflection_March_Dollase(ciffile,CIF_ID, r_c, r_v,omega_v, hkl)
+}
+
+'use these POSH ones.
+macro Out_pdCIF2_PO_Spherical_Harmonics(ciffile, sh, order) {
+    Out_pdCIF2_PO_Spherical_Harmonics(ciffile, CIF_ID, "srefln",,0, sh, order)
+}
+macro Out_pdCIF2_PO_symmetric_reflection_Spherical_Harmonics(ciffile, sh, order) {
+    Out_pdCIF2_PO_Spherical_Harmonics(ciffile, CIF_ID, "srefln",,0, sh, order)
+}
+macro Out_pdCIF2_PO_symmetric_transmission_Spherical_Harmonics(ciffile, sh, order) {
+    Out_pdCIF2_PO_Spherical_Harmonics(ciffile, CIF_ID, "strans",,90, sh, order)
+}
+macro Out_pdCIF2_PO_capillary_transmission_Spherical_Harmonics(ciffile, sh, order) {
+    Out_pdCIF2_PO_Spherical_Harmonics(ciffile, CIF_ID, "cap",,90, sh, order)
+}
+macro Out_pdCIF2_PO_asymmetric_transmission_Spherical_Harmonics(ciffile, omega_v, sh, order) {
+    Out_pdCIF2_PO_asymmetric_transmission_Spherical_Harmonics(ciffile, CIF_ID, , omega_v, sh, order)
+}
+macro Out_pdCIF2_PO_asymmetric_reflection_Spherical_Harmonics(ciffile, omega_v, sh, order) {
+    Out_pdCIF2_PO_asymmetric_reflection_Spherical_Harmonics(ciffile, CIF_ID, , omega_v, sh, order)
+}
+
+
+
+'##############################################################'
+' Macros for specimen displacement                             '
+'##############################################################'
+
+macro pdCIF2_Bragg_Brentano_specimen_displacement(sd_v) {
+    pdCIF2_Bragg_Brentano_specimen_displacement(, 0, , sd_v)
+}
+macro pdCIF2_Bragg_Brentano_specimen_displacement(sd_c, sd_v) {
+    pdCIF2_Bragg_Brentano_specimen_displacement(, 0, sd_c, sd_v)
+}
+macro pdCIF2_Bragg_Brentano_specimen_displacement(ze_v, sd_c, sd_v) {
+    pdCIF2_Bragg_Brentano_specimen_displacement(, ze_v, sd_c, sd_v)
+}
+macro pdCIF2_Bragg_Brentano_specimen_displacement(ze_c, ze_v, sd_c, sd_v) {
+    #m_argu ze_c
+    #m_argu sd_c
+    If_Local_Eqn_Rpt(ze_c, ze_v,
+        min = Max(Val - 20 Yobs_dx_at(X1), -100 Yobs_dx_at(X1));
+        max = Min(Val + 20 Yobs_dx_at(X2),  100 Yobs_dx_at(X2));
+        del = .01 Yobs_dx_at(X1);
+        val_on_continue 0
+    )
+    If_Local_Eqn_Rpt(sd_c, sd_v, min = Val-.1; max = Val+.1; del 0.001)
+
+    local !CIF_TWOTHETA_ZERO = CeV(ze_c,ze_v);
+    local !CIF_BRAGG_BRENTANO_SPECIMEN_DISPLACEMENT = CeV(sd_c,sd_v);
+
+    th2_offset = pdCIF2_Bragg_Brentano_specimen_displacement_eqn(Th);
+
+}
+
+macro pdCIF2_Debye_Scherrer_specimen_displacement(spa_v, spe_v) {
+    pdCIF2_Debye_Scherrer_specimen_displacement(, 0, , spa_v, , spe_v)
+}
+macro pdCIF2_Debye_Scherrer_specimen_displacement(spa_c, spa_v, spe_c, spe_v) {
+    pdCIF2_Debye_Scherrer_specimen_displacement(, 0, spa_c, spa_v, spe_c, spe_v)
+}
+macro pdCIF2_Debye_Scherrer_specimen_displacement(ze_v, spa_c, spa_v, spe_c, spe_v) {
+    pdCIF2_Debye_Scherrer_specimen_displacement(, ze_v, spa_c, spa_v, spe_c, spe_v)
+}
+macro pdCIF2_Debye_Scherrer_specimen_displacement(ze_c, ze_v, spa_c, spa_v, spe_c, spe_v) {
+    #m_argu ze_c
+    #m_argu spa_c
+    #m_argu spe_c
+    If_Local_Eqn_Rpt(ze_c, ze_v,
+        min = Max(Val - 20 Yobs_dx_at(X1), -100 Yobs_dx_at(X1));
+        max = Min(Val + 20 Yobs_dx_at(X2),  100 Yobs_dx_at(X2));
+        del = .01 Yobs_dx_at(X1);
+        val_on_continue 0
+    )
+    If_Local_Eqn_Rpt(spa_c, spa_v, min = Val-.1; max = Val+.1; del 0.001)
+    If_Local_Eqn_Rpt(spe_c, spe_v, min = Val-.1; max = Val+.1; del 0.001)
+
+    local !CIF_TWOTHETA_ZERO = CeV(ze_c,ze_v);
+    local !CIF_DEBYE_SCHERRER_SPECIMEN_DISPLACEMENT_PARALLEL = CeV(spa_c, spa_v);
+    local !CIF_DEBYE_SCHERRER_SPECIMEN_DISPLACEMENT_PERPENDICULAR = CeV(spe_c, spe_v);
+
+    th2_offset = pdCIF2_Debye_Scherrer_specimen_displacement_eqn(Th);
+
+}
+
+macro & pdCIF2_Bragg_Brentano_specimen_displacement_eqn(& x) {
+    CIF_TWOTHETA_ZERO + (2 Rad CIF_BRAGG_BRENTANO_SPECIMEN_DISPLACEMENT Cos(x) / Rs)
+}
+
+macro & pdCIF2_Debye_Scherrer_specimen_displacement_eqn(& x) {
+    CIF_TWOTHETA_ZERO + (Rad/Rs) (CIF_DEBYE_SCHERRER_SPECIMEN_DISPLACEMENT_PERPENDICULAR Cos(2 x) - CIF_DEBYE_SCHERRER_SPECIMEN_DISPLACEMENT_PARALLEL Sin(2 x))
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 macro Out_pdCIF2_xdd_setup {
