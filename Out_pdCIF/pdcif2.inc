@@ -1734,32 +1734,9 @@ macro & pdCIF2_Debye_Scherrer_specimen_displacement_eqn(& x) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+'##############################################################'
+' Macros for outputting CIF                                    '
+'##############################################################'
 
 
 macro Out_pdCIF2_xdd_setup {
@@ -1795,13 +1772,13 @@ It also defines an ID prm, so you do not need to if there is only one xdd to wor
 
 macro Out_pdCIF2_STR(ciffile, id) {
 /*
-This macro constructs a crystal structure in CIF format that is likely
-to pass checkCIF with minimal issues. Probably.
+This macro constructs a crystal structure in CIF format that is probably likely
+to pass checkCIF with minimal issues.
 
 The construction of the phase_id is simply the concatenation of the
 phase_name and an identifier, most usually taken as the number of the xdd,
 either defined through the use of "Run_Number" if doing a sequential refinement
-using #list, or by setting a local variable in each xdd - local !id = 1; (and
+using #list, or by setting a local variable in each xdd - local !CIF_ID = 1; (and
 copying it and incrementing it in each xdd)
 
 The diffractogram_id of each diffraction pattern is the xdd_path_name with the id appended.
@@ -1812,7 +1789,7 @@ of the input file in a `for strs {}` construct.
 
 ciffile: the name of the file you want to write to. The data is appended.
 phase_id: a number uniquely identifying a str inside an xdd
-id: a number uniquely identifying an xdd
+id: a number uniquely identifying an xdd - normally defined as CIF_ID
 
 If you want to report molecular weight for a str, you must define a
 local parameter defining the number of formula units. ie:
@@ -1846,7 +1823,25 @@ You must name it "CIF_Z".
 }
 
 macro Out_pdCIF2_phase_diffractogram_data(ciffile, id) {
-	Out_CIF2_newfile(ciffile)
+/*
+This macro outputs data requiring knowledge of both phase and diffractogram ids.
+
+The construction of the phase_id is simply the concatenation of the
+phase_name and an identifier, most usually taken as the number of the xdd,
+either defined through the use of "Run_Number" if doing a sequential refinement
+using #list, or by setting a local variable in each xdd - local !CIF_ID = 1; (and
+copying it and incrementing it in each xdd)
+
+The diffractogram_id of each diffraction pattern is the xdd_path_name with the id appended.
+
+This macro can be placed into every str that you have, or better, placed at the end
+of the input file in a `for strs {}` construct.
+
+
+ciffile: the name of the file you want to write to. The data is appended.
+phase_id: a number uniquely identifying a str inside an xdd
+id: a number uniquely identifying an xdd - normally defined as CIF_ID
+*/	Out_CIF2_newfile(ciffile)
 	Out_String("\n")
 	Out_CIF2_section_break("Begin phase and diffractogram information")
 	Out_String("\ndata_") Out_unique_phase_id(id) Out_String("_") Out_unique_diffractogram_id(id)
@@ -1863,13 +1858,9 @@ macro Out_pdCIF2_phase_diffractogram_data(ciffile, id) {
 	Out_String("\n")
 }
 
-
-
-
-
 macro Out_pdCIF2_diffraction_data(ciffile, data_type, bkg_eqn, id) {
 /*
-This macro constructs a powder diffraction pattern in CIF format.
+This macro constructs a powder diffraction pattern, and associated information, in CIF format.
 
 The construction of the block_id is simply the concatenation of the
 string "pattern" and an identifier, most usually taken as the  number of the xdd,
@@ -1883,8 +1874,7 @@ at the end of the input file in a `for xdds {}` construct.
 ciffile: the name of the file you want to write to. The data is appended.
 data_type: "meas" - data as-measured; "proc" - data has been processed before analysis
 bkg_eqn: an equation with the bkg you want to record
-phase_id: a number uniquely identifiying a str in an xdd
-is: a number uniquely identifying an xdd, or group of xdds in the case of a multi-pattern refinement
+id: a number uniquely identifying an xdd, or group of xdds in the case of a multi-pattern refinement
 */
 	Out_CIF2_newfile(ciffile)
 	Out_String("\n")
@@ -1921,7 +1911,7 @@ macro Out_CIF2_magic_number(ciffile) {
         Out_String("#\#CIF_2.0\n")
     }
 }
-'##############################################################%#####################################     '
+'####################################################################################################     '
 '####################################################################################################     '
 '######################################################################################################   '
 '######################################################################################################   '
@@ -1951,8 +1941,8 @@ CIF_SCAN_METHOD - (per xdd) "step" - step scan; "cont" continuous scan; "fixed" 
 
 -Can be defined
 CIF_DATETIME	xdd	Date/time when data collection was initiated
-CIF_TEMP - (per xdd) Temperature (K) at which data were acquired.
-CIF_PRES - (per xdd) Pressure (kPa) at which data were acquired.
+CIF_TEMPERATURE - (per xdd) Temperature (K) at which data were acquired.
+CIF_PRESSURE - (per xdd) Pressure (kPa) at which data were acquired.
 CIF_Z - (per str) formula units per unit cell
 CIF_SUM_FORMULA - (per str) what is the chemical formula of the unit cell?
 CIF_CRYSTAL_SYSTEM - (per str) the crystal system of the space group
