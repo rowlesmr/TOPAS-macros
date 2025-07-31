@@ -2106,10 +2106,10 @@ Otherwise, use Out_pdCIF()
 }
 
 
-macro Out_pdCIF(ciffile)                     { Out_pdCIF(ciffile, "proc", =Get(bkg);) }
-macro Out_pdCIF(ciffile, data_type)          { Out_pdCIF(ciffile, data_type, =Get(bkg);) }
-macro Out_pdCIF(ciffile, data_type, bkq_eqn) { Out_pdCIF(ciffile, data_type, bkq_eqn, , ) }
-macro Out_pdCIF(ciffile, data_type, bkq_eqn, n, m) {
+macro Out_pdCIF2(ciffile)                     { Out_pdCIF2(ciffile, "proc", =Get(bkg);) }
+macro Out_pdCIF2(ciffile, data_type)          { Out_pdCIF2(ciffile, data_type, =Get(bkg);) }
+macro Out_pdCIF2(ciffile, data_type, bkq_eqn) { Out_pdCIF2(ciffile, data_type, bkq_eqn, , ) }
+macro Out_pdCIF2(ciffile, data_type, bkq_eqn, n, m) {
 /*
 This is the macro to use if the structures in each xdd are independent of each other
 ie, they are not being co-refined on multiple datasets
