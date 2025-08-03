@@ -100,6 +100,7 @@ CIF_SPACE_GROUP_ID - string. Per structure. Defaults to CIF_PHASE_ID
 
 CIF_DIFFRN_ID - string. Per diffraction conditions, ie temperature or pressure. Strictly, anything in DIFFRN that would cause a change in _diffrn.id
 CIF_INSTR_ID - string. Per instrument
+CIF_INSTR_DETECTOR_ID - string. Per instrument. Can only have a single value at a time.
 CIF_RADIATION_ID - string. Per radiation source
 
 CIF_TEMPERATURE - number, kelvin
@@ -229,7 +230,7 @@ macro If_Local_Eqn_Rpt(c, v, dets)
 
 
 '##############################################################'
-' Macros common to diffraction data and crystal structures'
+' Macros common to diffraction data and crystal structures     '
 '##############################################################'
 
 macro Out_CIF2_newfile(ciffile) {
@@ -266,6 +267,93 @@ macro Out_CIF2_audit_dataset {
     if Prm_There(CIF_AUDIT_DATASET) { Out_String("\n_audit_dataset.id\t") Out(CIF_AUDIT_DATASET, "%s") }
 }
 
+
+'##############################################################'
+' Macros to set values for reserved parameters                 '
+'##############################################################'
+
+
+macro CIF2_set_phase_id(idv) {
+    local !CIF_PHASE_ID = idv;
+}
+macro CIF2_set_diffractogram_id(idv) {
+    local !CIF_DIFFRACTOGRAM_ID = idv;
+}
+macro CIF2_set_audit_dataset_id(idv) {
+    local !CIF_AUDIT_DATASET = idv;
+}
+macro CIF2_set_model_id(idv) {
+    local !CIF_MODEL_ID = idv;
+}
+macro CIF2_set_structure_id(idv) {
+    local !CIF_STRUCTURE_ID = idv;
+}
+macro CIF2_set_space_group_id(idv) {
+    local !CIF_SPACE_GROUP_ID = idv;
+}
+macro CIF2_set_diffrn_id(idv) {
+    local !CIF_DIFFRN_ID = idv;
+}
+macro CIF2_set_instr_id(idv) {
+    local !CIF_INSTR_ID = idv;
+}
+macro CIF2_set_instr_detector_id(idv) {
+    local !CIF_INSTR_DETECTOR_ID = idv;
+}
+macro CIF2_set_radiation_id(idv) {
+    local !CIF_RADIATION_ID = idv;
+}
+macro CIF2_set_temperature(val) {
+    local !CIF_TEMPERATURE = val;
+}
+macro CIF2_set_pressure(val) {
+    local !CIF_PRESSURE = val;
+}
+macro CIF2_set_peak_cutoff(val) {
+    local !CIF_PEAK_CUTOFF = val;
+}
+macro CIF2_set_th2_fixed(val) {
+    local !CIF_TH2_FIXED = val;
+}
+macro CIF2_set_formula_units_Z(val) {
+    local !CIF_Z = val;
+}
+macro CIF2_set_sum_formula(val) {
+    local !CIF_SUM_FORMULA = val;
+}
+macro CIF2_set_crystal_system(val) {
+    if val == "triclinic"    { local !CIF_CRYSTAL_SYSTEM = val; } else {
+    if val == "monoclinic"   { local !CIF_CRYSTAL_SYSTEM = val; } else {
+    if val == "orthorhombic" { local !CIF_CRYSTAL_SYSTEM = val; } else {
+    if val == "tetragonal"   { local !CIF_CRYSTAL_SYSTEM = val; } else {
+    if val == "trigonal"     { local !CIF_CRYSTAL_SYSTEM = val; } else {
+    if val == "rhombohedral" { local !CIF_CRYSTAL_SYSTEM = "trigonal"; } else {
+    if val == "hexagonal"    { local !CIF_CRYSTAL_SYSTEM = val; } else {
+    if val == "cubic"        { local !CIF_CRYSTAL_SYSTEM = val; } else { CIF2_unknown_crystal_system } 'this is there to cause an error
+    }}}}}}}
+}
+macro CIF2_set_phase_text(val) {
+    local !CIF_PHASE_TEXT = val;
+}
+macro CIF2_set_datetime_initialised(val) {
+    local !CIF_DATETIME = val;
+}
+macro CIF2_set_diffractometer_name(val) {
+    local !CIF_DIFFRACTOMETER_NAME = val;
+}
+macro CIF2_set_scan_method(val) {
+    if val == "step"   { local !CIF_SCAN_METHOD = val; } else {
+    if val == "cont"   { local !CIF_SCAN_METHOD = val; } else {
+    if val == "tof"    { local !CIF_SCAN_METHOD = val; } else {
+    if val == "fixed"  { local !CIF_SCAN_METHOD = val; } else { CIF2_unknown_scan_method } 'this is there to cause an error
+    }}}
+}
+macro CIF2_set_diffractogram_text(val) {
+    local !CIF_DIFFRACTOGRAM_TEXT = val;
+}
+
+
+
 '##############################################################'
 ' ID macros for phase/diffractogram blocks'
 '##############################################################'
@@ -288,15 +376,16 @@ macro Out_pdCIF2_phaseblockIDs(id) {
 
 macro Out_pdCIF2_diffractogramblockIDs(id) {
     check_diffrn_id_presence(id)
+    check_instr_id_presence(id)
 
     Out_CIF2_audit_dataset
     Out_String("\n\n_pd_diffractogram.id\t") Out_unique_diffractogram_id(id)
 
-    if Prm_There(CIF_DIFFRN_ID) { Out_String("\n_diffrn.id\t") Out(CIF_DIFFRN_ID, "%s") }
+    if Prm_There(CIF_DIFFRN_ID) { Out(CIF_DIFFRN_ID, "\n_diffrn.id\t%s") }
 
     if Prm_There(CIF_INSTR_ID) {
-        Out_String("\n_pd_instr.id\t") Out(CIF_INSTR_ID, "%s")
-        if Prm_There(CIF_RADIATION_ID) { Out_String("\n_pd_instr.radiation_id\t") Out(CIF_RADIATION_ID, "%s") }
+        Out(CIF_INSTR_ID, "\n_pd_instr.id\t%s")
+        if Prm_There(CIF_RADIATION_ID) { Out(CIF_RADIATION_ID, "\n_pd_instr.radiation_id\t%s") }
     }
 
     if Prm_There(CIF_DIFFRN_ID) { Out_String("\n_pd_diffractogram.diffrn_id\t") Out(CIF_DIFFRN_ID, "%s") }
@@ -317,7 +406,16 @@ macro check_diffrn_id_presence(id) {
     }
 }
 
-
+'if CIF_RADIATION_ID is defined, and CIF_INSTR_ID is not defined,
+' make the diffractogram_id be the instr_id
+macro check_instr_id_presence(id) {
+    if Prm_There(CIF_RADIATION_ID) {
+        if Prm_There(CIF_INSTR_ID) {}
+        else {
+            local CIF_INSTR_ID = Concat(Get(xdd_path_name), "_", id);
+        }
+    }
+}
 macro Out_CIF2_free_text(text) {
 'Inserts a string into the CIF. Must conform to CIF standards'
 	Out_String(text)
