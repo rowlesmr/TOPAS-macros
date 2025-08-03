@@ -1501,6 +1501,7 @@ macro Out_CIF2_tube_settings(kv, ma) {
 
 
 macro Out_CIF_wavelength_coka3(ciffile)                     { Out_CIF_wavelength_coka3(ciffile,, CIF_ID,,) }
+macro Out_CIF_wavelength_coka3(ciffile, rad_id)             { Out_CIF_wavelength_coka3(ciffile, rad_id, CIF_ID,,) }
 macro Out_CIF_wavelength_coka3(ciffile, kv, ma)             { Out_CIF_wavelength_coka3(ciffile,, CIF_ID, kv, ma) }
 macro Out_CIF_wavelength_coka3(ciffile, rad_id, kv, ma)     { Out_CIF_wavelength_coka3(ciffile, rad_id, CIF_ID, kv, ma) }
 macro Out_CIF_wavelength_coka3(ciffile, rad_id, id, kv, ma) {
@@ -1514,6 +1515,7 @@ macro Out_CIF_wavelength_coka3(ciffile, rad_id, id, kv, ma) {
 
 }
 macro Out_CIF_wavelength_coka7_holzer(ciffile)                     { Out_CIF_wavelength_coka7_holzer(ciffile,, CIF_ID,,) }
+macro Out_CIF_wavelength_coka7_holzer(ciffile, rad_id)             { Out_CIF_wavelength_coka7_holzer(ciffile, rad_id, CIF_ID,,) }
 macro Out_CIF_wavelength_coka7_holzer(ciffile, kv, ma)             { Out_CIF_wavelength_coka7_holzer(ciffile,, CIF_ID, kv, ma) }
 macro Out_CIF_wavelength_coka7_holzer(ciffile, rad_id, kv, ma)     { Out_CIF_wavelength_coka7_holzer(ciffile, rad_id, CIF_ID, kv, ma) }
 macro Out_CIF_wavelength_coka7_holzer(ciffile, rad_id, id, kv, ma) {
@@ -1531,6 +1533,7 @@ macro Out_CIF_wavelength_coka7_holzer(ciffile, rad_id, id, kv, ma) {
 
 }
 macro Out_CIF_wavelength_cokb6_holzer(ciffile)                     { Out_CIF_wavelength_cokb6_holzer(ciffile,, CIF_ID,,) }
+macro Out_CIF_wavelength_cokb6_holzer(ciffile, rad_id)             { Out_CIF_wavelength_cokb6_holzer(ciffile, rad_id, CIF_ID,,) }
 macro Out_CIF_wavelength_cokb6_holzer(ciffile, kv, ma)             { Out_CIF_wavelength_cokb6_holzer(ciffile,, CIF_ID, kv, ma) }
 macro Out_CIF_wavelength_cokb6_holzer(ciffile, rad_id, kv, ma)     { Out_CIF_wavelength_cokb6_holzer(ciffile, rad_id, CIF_ID, kv, ma) }
 macro Out_CIF_wavelength_cokb6_holzer(ciffile, rad_id, id, kv, ma) {
@@ -1547,6 +1550,7 @@ macro Out_CIF_wavelength_cokb6_holzer(ciffile, rad_id, id, kv, ma) {
 
 }
 macro Out_CIF_wavelength_crka7_holzer(ciffile)                     { Out_CIF_wavelength_crka7_holzer(ciffile,, CIF_ID,,) }
+macro Out_CIF_wavelength_crka7_holzer(ciffile, rad_id)             { Out_CIF_wavelength_crka7_holzer(ciffile, rad_id, CIF_ID,,) }
 macro Out_CIF_wavelength_crka7_holzer(ciffile, kv, ma)             { Out_CIF_wavelength_crka7_holzer(ciffile,, CIF_ID, kv, ma) }
 macro Out_CIF_wavelength_crka7_holzer(ciffile, rad_id, kv, ma)     { Out_CIF_wavelength_crka7_holzer(ciffile, rad_id, CIF_ID, kv, ma) }
 macro Out_CIF_wavelength_crka7_holzer(ciffile, rad_id, id, kv, ma) {
@@ -1563,6 +1567,7 @@ macro Out_CIF_wavelength_crka7_holzer(ciffile, rad_id, id, kv, ma) {
    	Out_CIF2_section_break("End wavelength information")
 }
 macro Out_CIF_wavelength_crkb5_holzer(ciffile)                     { Out_CIF_wavelength_crkb5_holzer(ciffile,, CIF_ID,,) }
+macro Out_CIF_wavelength_crkb5_holzer(ciffile, rad_id)             { Out_CIF_wavelength_crkb5_holzer(ciffile, rad_id, CIF_ID,,) }
 macro Out_CIF_wavelength_crkb5_holzer(ciffile, kv, ma)             { Out_CIF_wavelength_crkb5_holzer(ciffile,, CIF_ID, kv, ma) }
 macro Out_CIF_wavelength_crkb5_holzer(ciffile, rad_id, kv, ma)     { Out_CIF_wavelength_crkb5_holzer(ciffile, rad_id, CIF_ID, kv, ma) }
 macro Out_CIF_wavelength_crkb5_holzer(ciffile, rad_id, id, kv, ma) {
@@ -1576,6 +1581,7 @@ macro Out_CIF_wavelength_crkb5_holzer(ciffile, rad_id, id, kv, ma) {
    	Out_CIF2_section_break("End wavelength information")
 }
 macro Out_CIF_wavelength_cuk1sharp(ciffile)                     { Out_CIF_wavelength_cuk1sharp(ciffile,, CIF_ID,,) }
+macro Out_CIF_wavelength_cuk1sharp(ciffile, rad_id)             { Out_CIF_wavelength_cuk1sharp(ciffile, rad_id, CIF_ID,,) }
 macro Out_CIF_wavelength_cuk1sharp(ciffile, kv, ma)             { Out_CIF_wavelength_cuk1sharp(ciffile,, CIF_ID, kv, ma) }
 macro Out_CIF_wavelength_cuk1sharp(ciffile, rad_id, kv, ma)     { Out_CIF_wavelength_cuk1sharp(ciffile, rad_id, CIF_ID, kv, ma) }
 macro Out_CIF_wavelength_cuk1sharp(ciffile, rad_id, id, kv, ma) {
@@ -1585,6 +1591,7 @@ macro Out_CIF_wavelength_cuk1sharp(ciffile, rad_id, id, kv, ma) {
    	Out_CIF2_section_break("End wavelength information")
 }
 macro Out_CIF_wavelength_cuka1(ciffile)                     { Out_CIF_wavelength_cuka1(ciffile,, CIF_ID,,) }
+macro Out_CIF_wavelength_cuka1(ciffile, rad_id)             { Out_CIF_wavelength_cuka1(ciffile, rad_id, CIF_ID,,) }
 macro Out_CIF_wavelength_cuka1(ciffile, kv, ma)             { Out_CIF_wavelength_cuka1(ciffile,, CIF_ID, kv, ma) }
 macro Out_CIF_wavelength_cuka1(ciffile, rad_id, kv, ma)     { Out_CIF_wavelength_cuka1(ciffile, rad_id, CIF_ID, kv, ma) }
 macro Out_CIF_wavelength_cuka1(ciffile, rad_id, id, kv, ma) {
@@ -1594,6 +1601,7 @@ macro Out_CIF_wavelength_cuka1(ciffile, rad_id, id, kv, ma) {
    	Out_CIF2_section_break("End wavelength information")
 }
 macro Out_CIF_wavelength_cuka2(ciffile)                     { Out_CIF_wavelength_cuka2(ciffile,, CIF_ID,,) }
+macro Out_CIF_wavelength_cuka2(ciffile, rad_id)             { Out_CIF_wavelength_cuka2(ciffile, rad_id, CIF_ID,,) }
 macro Out_CIF_wavelength_cuka2(ciffile, kv, ma)             { Out_CIF_wavelength_cuka2(ciffile,, CIF_ID, kv, ma) }
 macro Out_CIF_wavelength_cuka2(ciffile, rad_id, kv, ma)     { Out_CIF_wavelength_cuka2(ciffile, rad_id, CIF_ID, kv, ma) }
 macro Out_CIF_wavelength_cuka2(ciffile, rad_id, id, kv, ma) {
@@ -1605,6 +1613,7 @@ macro Out_CIF_wavelength_cuka2(ciffile, rad_id, id, kv, ma) {
    	Out_CIF2_section_break("End wavelength information")
 }
 macro Out_CIF_wavelength_cuka2_analyt(ciffile)                     { Out_CIF_wavelength_cuka2_analyt(ciffile,, CIF_ID,,) }
+macro Out_CIF_wavelength_cuka2_analyt(ciffile, rad_id)             { Out_CIF_wavelength_cuka2_analyt(ciffile, rad_id, CIF_ID,,) }
 macro Out_CIF_wavelength_cuka2_analyt(ciffile, kv, ma)             { Out_CIF_wavelength_cuka2_analyt(ciffile,, CIF_ID, kv, ma) }
 macro Out_CIF_wavelength_cuka2_analyt(ciffile, rad_id, kv, ma)     { Out_CIF_wavelength_cuka2_analyt(ciffile, rad_id, CIF_ID, kv, ma) }
 macro Out_CIF_wavelength_cuka2_analyt(ciffile, rad_id, id, kv, ma) {
@@ -1616,6 +1625,7 @@ macro Out_CIF_wavelength_cuka2_analyt(ciffile, rad_id, id, kv, ma) {
    	Out_CIF2_section_break("End wavelength information")
 }
 macro Out_CIF_wavelength_cuka4_holzer(ciffile)                     { Out_CIF_wavelength_cuka4_holzer(ciffile,, CIF_ID,,) }
+macro Out_CIF_wavelength_cuka4_holzer(ciffile, rad_id)             { Out_CIF_wavelength_cuka4_holzer(ciffile, rad_id, CIF_ID,,) }
 macro Out_CIF_wavelength_cuka4_holzer(ciffile, kv, ma)             { Out_CIF_wavelength_cuka4_holzer(ciffile,, CIF_ID, kv, ma) }
 macro Out_CIF_wavelength_cuka4_holzer(ciffile, rad_id, kv, ma)     { Out_CIF_wavelength_cuka4_holzer(ciffile, rad_id, CIF_ID, kv, ma) }
 macro Out_CIF_wavelength_cuka4_holzer(ciffile, rad_id, id, kv, ma) {
@@ -1629,6 +1639,7 @@ macro Out_CIF_wavelength_cuka4_holzer(ciffile, rad_id, id, kv, ma) {
    	Out_CIF2_section_break("End wavelength information")
 }
 macro Out_CIF_wavelength_cuka5(ciffile)                     { Out_CIF_wavelength_cuka5(ciffile,, CIF_ID,,) }
+macro Out_CIF_wavelength_cuka5(ciffile, rad_id)             { Out_CIF_wavelength_cuka5(ciffile, rad_id, CIF_ID,,) }
 macro Out_CIF_wavelength_cuka5(ciffile, kv, ma)             { Out_CIF_wavelength_cuka5(ciffile,, CIF_ID, kv, ma) }
 macro Out_CIF_wavelength_cuka5(ciffile, rad_id, kv, ma)     { Out_CIF_wavelength_cuka5(ciffile, rad_id, CIF_ID, kv, ma) }
 macro Out_CIF_wavelength_cuka5(ciffile, rad_id, id, kv, ma) {
@@ -1643,6 +1654,7 @@ macro Out_CIF_wavelength_cuka5(ciffile, rad_id, id, kv, ma) {
    	Out_CIF2_section_break("End wavelength information")
 }
 macro Out_CIF_wavelength_cuka5_berger(ciffile)                     { Out_CIF_wavelength_cuka5_berger(ciffile,, CIF_ID,,) }
+macro Out_CIF_wavelength_cuka5_berger(ciffile, rad_id)             { Out_CIF_wavelength_cuka5_berger(ciffile, rad_id, CIF_ID,,) }
 macro Out_CIF_wavelength_cuka5_berger(ciffile, kv, ma)             { Out_CIF_wavelength_cuka5_berger(ciffile,, CIF_ID, kv, ma) }
 macro Out_CIF_wavelength_cuka5_berger(ciffile, rad_id, kv, ma)     { Out_CIF_wavelength_cuka5_berger(ciffile, rad_id, CIF_ID, kv, ma) }
 macro Out_CIF_wavelength_cuka5_berger(ciffile, rad_id, id, kv, ma) {
@@ -1657,6 +1669,7 @@ macro Out_CIF_wavelength_cuka5_berger(ciffile, rad_id, id, kv, ma) {
    	Out_CIF2_section_break("End wavelength information")
 }
 macro Out_CIF_wavelength_cukb4_holzer(ciffile)                     { Out_CIF_wavelength_cukb4_holzer(ciffile,, CIF_ID,,) }
+macro Out_CIF_wavelength_cukb4_holzer(ciffile, rad_id)             { Out_CIF_wavelength_cukb4_holzer(ciffile, rad_id, CIF_ID,,) }
 macro Out_CIF_wavelength_cukb4_holzer(ciffile, kv, ma)             { Out_CIF_wavelength_cukb4_holzer(ciffile,, CIF_ID, kv, ma) }
 macro Out_CIF_wavelength_cukb4_holzer(ciffile, rad_id, kv, ma)     { Out_CIF_wavelength_cukb4_holzer(ciffile, rad_id, CIF_ID, kv, ma) }
 macro Out_CIF_wavelength_cukb4_holzer(ciffile, rad_id, id, kv, ma) {
@@ -1671,6 +1684,7 @@ macro Out_CIF_wavelength_cukb4_holzer(ciffile, rad_id, id, kv, ma) {
    	Out_CIF2_section_break("End wavelength information")
 }
 macro Out_CIF_wavelength_feka7_holzer(ciffile)                     { Out_CIF_wavelength_feka7_holzer(ciffile,, CIF_ID,,) }
+macro Out_CIF_wavelength_feka7_holzer(ciffile, rad_id)             { Out_CIF_wavelength_feka7_holzer(ciffile, rad_id, CIF_ID,,) }
 macro Out_CIF_wavelength_feka7_holzer(ciffile, kv, ma)             { Out_CIF_wavelength_feka7_holzer(ciffile,, CIF_ID, kv, ma) }
 macro Out_CIF_wavelength_feka7_holzer(ciffile, rad_id, kv, ma)     { Out_CIF_wavelength_feka7_holzer(ciffile, rad_id, CIF_ID, kv, ma) }
 macro Out_CIF_wavelength_feka7_holzer(ciffile, rad_id, id, kv, ma) {
@@ -1687,6 +1701,7 @@ macro Out_CIF_wavelength_feka7_holzer(ciffile, rad_id, id, kv, ma) {
    	Out_CIF2_section_break("End wavelength information")
 }
 macro Out_CIF_wavelength_fekb4_holzer(ciffile)                     { Out_CIF_wavelength_fekb4_holzer(ciffile,, CIF_ID,,) }
+macro Out_CIF_wavelength_fekb4_holzer(ciffile, rad_id)             { Out_CIF_wavelength_fekb4_holzer(ciffile, rad_id, CIF_ID,,) }
 macro Out_CIF_wavelength_fekb4_holzer(ciffile, kv, ma)             { Out_CIF_wavelength_fekb4_holzer(ciffile,, CIF_ID, kv, ma) }
 macro Out_CIF_wavelength_fekb4_holzer(ciffile, rad_id, kv, ma)     { Out_CIF_wavelength_fekb4_holzer(ciffile, rad_id, CIF_ID, kv, ma) }
 macro Out_CIF_wavelength_fekb4_holzer(ciffile, rad_id, id, kv, ma) {
@@ -1700,6 +1715,7 @@ macro Out_CIF_wavelength_fekb4_holzer(ciffile, rad_id, id, kv, ma) {
    	Out_CIF2_section_break("End wavelength information")
 }
 macro Out_CIF_wavelength_mnka7_holzer(ciffile)                     { Out_CIF_wavelength_mnka7_holzer(ciffile,, CIF_ID,,) }
+macro Out_CIF_wavelength_mnka7_holzer(ciffile, rad_id)             { Out_CIF_wavelength_mnka7_holzer(ciffile, rad_id, CIF_ID,,) }
 macro Out_CIF_wavelength_mnka7_holzer(ciffile, kv, ma)             { Out_CIF_wavelength_mnka7_holzer(ciffile,, CIF_ID, kv, ma) }
 macro Out_CIF_wavelength_mnka7_holzer(ciffile, rad_id, kv, ma)     { Out_CIF_wavelength_mnka7_holzer(ciffile, rad_id, CIF_ID, kv, ma) }
 macro Out_CIF_wavelength_mnka7_holzer(ciffile, rad_id, id, kv, ma) {
@@ -1716,6 +1732,7 @@ macro Out_CIF_wavelength_mnka7_holzer(ciffile, rad_id, id, kv, ma) {
    	Out_CIF2_section_break("End wavelength information")
 }
 macro Out_CIF_wavelength_mnkb5_holzer(ciffile)                     { Out_CIF_wavelength_mnkb5_holzer(ciffile,, CIF_ID,,) }
+macro Out_CIF_wavelength_mnkb5_holzer(ciffile, rad_id)             { Out_CIF_wavelength_mnkb5_holzer(ciffile, rad_id, CIF_ID,,) }
 macro Out_CIF_wavelength_mnkb5_holzer(ciffile, kv, ma)             { Out_CIF_wavelength_mnkb5_holzer(ciffile,, CIF_ID, kv, ma) }
 macro Out_CIF_wavelength_mnkb5_holzer(ciffile, rad_id, kv, ma)     { Out_CIF_wavelength_mnkb5_holzer(ciffile, rad_id, CIF_ID, kv, ma) }
 macro Out_CIF_wavelength_mnkb5_holzer(ciffile, rad_id, id, kv, ma) {
@@ -1730,6 +1747,7 @@ macro Out_CIF_wavelength_mnkb5_holzer(ciffile, rad_id, id, kv, ma) {
    	Out_CIF2_section_break("End wavelength information")
 }
 macro Out_CIF_wavelength_moka2(ciffile)                     { Out_CIF_wavelength_moka2(ciffile,, CIF_ID,,) }
+macro Out_CIF_wavelength_moka2(ciffile, rad_id)             { Out_CIF_wavelength_moka2(ciffile, rad_id, CIF_ID,,) }
 macro Out_CIF_wavelength_moka2(ciffile, kv, ma)             { Out_CIF_wavelength_moka2(ciffile,, CIF_ID, kv, ma) }
 macro Out_CIF_wavelength_moka2(ciffile, rad_id, kv, ma)     { Out_CIF_wavelength_moka2(ciffile, rad_id, CIF_ID, kv, ma) }
 macro Out_CIF_wavelength_moka2(ciffile, rad_id, id, kv, ma) {
@@ -1741,6 +1759,7 @@ macro Out_CIF_wavelength_moka2(ciffile, rad_id, id, kv, ma) {
    	Out_CIF2_section_break("End wavelength information")
 }
 macro Out_CIF_wavelength_nika5_holzer(ciffile)                     { Out_CIF_wavelength_nika5_holzer(ciffile,, CIF_ID,,) }
+macro Out_CIF_wavelength_nika5_holzer(ciffile, rad_id)             { Out_CIF_wavelength_nika5_holzer(ciffile, rad_id, CIF_ID,,) }
 macro Out_CIF_wavelength_nika5_holzer(ciffile, kv, ma)             { Out_CIF_wavelength_nika5_holzer(ciffile,, CIF_ID, kv, ma) }
 macro Out_CIF_wavelength_nika5_holzer(ciffile, rad_id, kv, ma)     { Out_CIF_wavelength_nika5_holzer(ciffile, rad_id, CIF_ID, kv, ma) }
 macro Out_CIF_wavelength_nika5_holzer(ciffile, rad_id, id, kv, ma) {
@@ -1755,6 +1774,7 @@ macro Out_CIF_wavelength_nika5_holzer(ciffile, rad_id, id, kv, ma) {
    	Out_CIF2_section_break("End wavelength information")
 }
 macro Out_CIF_wavelength_nikb4_holzer(ciffile)                     { Out_CIF_wavelength_nikb4_holzer(ciffile,, CIF_ID,,) }
+macro Out_CIF_wavelength_nikb4_holzer(ciffile, rad_id)             { Out_CIF_wavelength_nikb4_holzer(ciffile, rad_id, CIF_ID,,) }
 macro Out_CIF_wavelength_nikb4_holzer(ciffile, kv, ma)             { Out_CIF_wavelength_nikb4_holzer(ciffile,, CIF_ID, kv, ma) }
 macro Out_CIF_wavelength_nikb4_holzer(ciffile, rad_id, kv, ma)     { Out_CIF_wavelength_nikb4_holzer(ciffile, rad_id, CIF_ID, kv, ma) }
 macro Out_CIF_wavelength_nikb4_holzer(ciffile, rad_id, id, kv, ma) {
