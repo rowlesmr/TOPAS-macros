@@ -273,6 +273,9 @@ macro Out_CIF2_audit_dataset {
 '##############################################################'
 
 
+macro CIF2_set_cif_id(idv) {
+    local !CIF_ID = idv;
+}
 macro CIF2_set_phase_id(idv) {
     local !CIF_PHASE_ID = idv;
 }
@@ -371,6 +374,7 @@ macro Out_pdCIF2_phaseblockIDs(id) {
     Out_String("\n_model.structure_id\t")       if Prm_There(CIF_STRUCTURE_ID)   { Out(CIF_STRUCTURE_ID, "%s") }   else { Out_unique_phase_id(id) }
     if Prm_There(CIF_DIFFRN_ID) {  Out(CIF_DIFFRN_ID, "\n_structure.diffrn_id\t%s") }
     Out_String("\n_structure.space_group_id\t") if Prm_There(CIF_SPACE_GROUP_ID) { Out(CIF_SPACE_GROUP_ID, "%s") } else { Out_unique_phase_id(id) }
+    Out_String("\n_structure.phase_id\t") Out_unique_phase_id(id)
     Out_String("\n")
 }
 
@@ -2189,9 +2193,9 @@ macro Out_CIF2_magic_number(ciffile) {
 'write the CIF version number to file.'
 	out ciffile append
     if Obj_There(num_runs) {
-        #if Run_Number == 0;
+        if Run_Number == 0 {
             Out_String("#\#CIF_2.0\n")
-        #endif
+        }
     } else {
         Out_String("#\#CIF_2.0\n")
     }
