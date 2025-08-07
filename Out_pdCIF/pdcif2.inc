@@ -418,6 +418,10 @@ macro check_instr_id_presence(id) {
         else {
             local CIF_INSTR_ID = Concat(Get(xdd_path_name), "_", id);
         }
+        if Prm_There(CIF_INSTR_DETECTOR_ID) {}
+        else {
+            local CIF_INSTR_DETECTOR_ID = Concat(Get(xdd_path_name), "_", id);
+        }
     }
 }
 macro Out_CIF2_free_text(text) {
@@ -2190,16 +2194,17 @@ id: a number uniquely identifying an xdd, or group of xdds in the case of a mult
 }
 
 macro Out_CIF2_magic_number(ciffile) {
-'write the CIF version number to file.'
+'This should be the very first thing in your input file'
 	out ciffile append
-    if Obj_There(num_runs) {
-        if Run_Number == 0 {
-            Out_String("#\#CIF_2.0\n")
-        }
-    } else {
+    if Run_Number == 0 {
         Out_String("#\#CIF_2.0\n")
     }
 }
+
+
+
+
+
 '####################################################################################################     '
 '####################################################################################################     '
 '######################################################################################################   '
