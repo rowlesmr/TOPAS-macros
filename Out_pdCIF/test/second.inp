@@ -1,0 +1,200 @@
+#include "seq.inc"
+#include "..\pdcif2.inc"
+
+/*
+Sequential refinement macros explained here:
+http://topas.dur.ac.uk/topaswiki/doku.php?id=sequential_refinements
+*/
+
+#list Range_Number Temperature Date_Time DiffractogramID DiffrnID anastrid {
+1  { (30 +273) } { "2007-12-18T12:16:55+02:00" } { "degaussa_raw_01" } { "30C"  } { "ana_STR__01" }
+2  { (50 +273) } { "2007-12-18T12:38:21+02:00" } { "degaussa_raw_02" } { "50C"  } { "ana_STR__02" }
+3  { (100+273) } { "2007-12-18T13:01:03+02:00" } { "degaussa_raw_03" } { "100C" } { "ana_STR__03" }
+4  { (150+273) } { "2007-12-18T13:25:44+02:00" } { "degaussa_raw_04" } { "150C" } { "ana_STR__04" }
+5  { (200+273) } { "2007-12-18T13:49:16+02:00" } { "degaussa_raw_05" } { "200C" } { "ana_STR__05" }
+6  { (250+273) } { "2007-12-18T14:12:48+02:00" } { "degaussa_raw_06" } { "250C" } { "ana_STR__06" }
+7  { (300+273) } { "2007-12-18T14:36:22+02:00" } { "degaussa_raw_07" } { "300C" } { "ana_STR__07" }
+8  { (350+273) } { "2007-12-18T14:59:57+02:00" } { "degaussa_raw_08" } { "350C" } { "ana_STR__08" }
+9  { (400+273) } { "2007-12-18T15:23:39+02:00" } { "degaussa_raw_09" } { "400C" } { "ana_STR__09" }
+10 { (450+273) } { "2007-12-18T15:44:28+02:00" } { "degaussa_raw_10" } { "450C" } { "ana_STR__10" }
+11 { (500+273) } { "2007-12-18T16:05:08+02:00" } { "degaussa_raw_11" } { "500C" } { "ana_STR__11" }
+12 { (550+273) } { "2007-12-18T16:25:57+02:00" } { "degaussa_raw_12" } { "550C" } { "ana_STR__12" }
+13 { (600+273) } { "2007-12-18T16:46:47+02:00" } { "degaussa_raw_13" } { "600C" } { "ana_STR__13" }
+14 { (650+273) } { "2007-12-18T17:09:07+02:00" } { "degaussa_raw_14" } { "650C" } { "ana_STR__14" }
+15 { (700+273) } { "2007-12-18T17:31:45+02:00" } { "degaussa_raw_15" } { "700C" } { "ana_STR__15" }
+16 { (750+273) } { "2007-12-18T17:54:24+02:00" } { "degaussa_raw_16" } { "750C" } { "ana_STR__16" }
+17 { (800+273) } { "2007-12-18T18:17:04+02:00" } { "degaussa_raw_17" } { "800C" } { "ana_STR__17" }
+18 { (850+273) } { "2007-12-18T18:39:45+02:00" } { "degaussa_raw_18" } { "850C" } { "ana_STR__18" }
+19 { (900+273) } { "2007-12-18T19:02:26+02:00" } { "degaussa_raw_19" } { "900C" } { "ana_STR__19" }
+20 { (30 +273) } { "2007-12-18T20:46:00+02:00" } { "degaussa_raw_20" } { "30C"  } { "ana_STR__20" }
+}
+
+
+macro file { "degussa.raw" }
+macro seqno { Range_Number(Run_Number) }
+
+macro ciffile { "second.cif" }
+
+do_errors
+
+prm CIF_SCAN_METHOD = "cont";
+prm CIF_TEMPERATURE  =Temperature(Run_Number); :  303`
+prm CIF_DATETIME = Date_Time(Run_Number);
+prm CIF_DIFFRACTOGRAM_ID = DiffractogramID(Run_Number); 'if this isn't here, there should be an auto-generated name
+prm CIF_INSTR_ID = "INST";
+prm CIF_DIFFRN_ID = DiffrnID(Run_Number);
+
+Sequential_Refinement(20, seqno)
+
+#define CIF_OUTPUT
+
+#ifdef CIF_OUTPUT
+#if Run_Number == 0;
+system_before_save_OUT { del ciffile }
+#endif
+#endif
+
+Out_CIF2_magic_number(ciffile) 'this must appear first in the file
+prm CIF_AUDIT_DATASET = "3eb54f2e-5c48-4748-89f2-6d417efd205c";
+
+xdd file
+	r_exp  16.2132289 r_wp  17.5557011 weighted_Durbin_Watson  1.79101679 gof  1.08280104
+	range seqno
+	bkg @  26.2902158`_0.127780494 -24.3809613`_0.203398628  11.6455908`_0.16535344 -3.59533831`_0.127870066  2.72643155`_0.12088371
+	LP_Factor( 0)
+	pdCIF2_Bragg_Brentano_specimen_displacement(sd_c, 0.067304566`_0.0117892363)
+	Rp 250
+	Rs 250
+	lpsd_th2_angular_range_degrees  2.383
+		lpsd_equitorial_divergence_degrees  0.6
+	axial_conv
+		filament_length  12
+		sample_length  15
+		receiving_slit_length  12
+		primary_soller_angle  4
+		secondary_soller_angle  4
+		axial_n_beta  30
+	Absorption(abs, 19.7674534`_7.26890497)
+
+    Out_CIF2_wavelength_cuka5_berger(ciffile, "big_tube" , 40, 40)
+
+
+    Out_pdCIF2_simple_Bragg_Brentano_instr_prefilter_report_only(ciffile,
+                                                                 ,
+                                                                 250,
+                                                                 0.6, '1,
+                                                                 4, 4,
+                                                                 6.84)
+
+
+	local Ti_beq_del  0.38258936`_0.0589979999 min 0 max 3
+	local O_beq_del  0.749953636`_0.130584295 min 0 max 3
+
+	local Ti_beq = 0.39 + Ti_beq_del; :  0.77258936`_0.0589979999
+	local  O_beq = 0.61 + O_beq_del; :  1.35995364`_0.130584295
+
+	#if seqno < 19;
+	str
+		'9852 ICSD
+		phase_name "Anatase"
+
+		local CIF_Z  2`
+		local CIF_SUM_FORMULA = "O2 Ti";
+		local CIF_CRYSTAL_SYSTEM = "tetragonal";
+        local CIF_STRUCTURE_ID = anastrid(Run_Number);
+        local CIF_SPACE_GROUP_ID = Get(sp_grp_char);
+
+		local csL  37.1916702`_1.80209865 min 30 max 500
+		local csG  55.4943304`_4.81685602 min 30 max 500
+		local strL  0.166421984`_0.0327133112 min 0.00001 max 0.6
+		'local strG  0.00620783579_3.30047281 min 0.00001 max 0.6
+
+		local a_del  0.0032390254`_0.000786965781 min 0 max 0.02
+		local c_del -0.00415647166`_0.00203682312 min -0.2 max 0.1
+
+        'Out_pdCIF2_PO_Two_Directions_March_Dollase(ciffile, po1, 0.5_0.0398442347_LIMIT_MIN_0.5, 0,0,1,
+        '                                                    po2, 1_2.96104304_LIMIT_MIN_0.5, 0,1,1,
+        '                                                    mix, 1_0.0875453873_LIMIT_MAX_1)
+
+        prm = CIF_ID; :  10000
+
+		Phase_Density_g_on_cm3( 3.8884647`_0.00181787819)
+		CS_L(csL)
+		CS_G(csG)
+		Strain_L(strL)
+		'Strain_G(strG)
+		MVW( 319.463, 136.424`_0.064, 86.570`_0.381)
+		scale @  0.00042293513`_3.753e-06
+		Tetragonal(=3.7842+a_del; :  3.787439`_0.000787, =9.5146+c_del; :  9.510444`_0.002037)	'3.7842, 9.5146
+		space_group "I_41/a_m_d_S"
+		site Ti1 num_posns  4	x 0 y 0 z 0      occ Ti+4 1. beq = Ti_beq; :  0.77259`_0.05900
+		site O1  num_posns  8	x 0 y 0 z 0.2081 occ O-2  1. beq =  O_beq; :  1.35995`_0.13058
+
+
+	#endif
+
+	str
+		'33837 ICSD
+		phase_name "Rutile"
+
+		local CIF_Z  2`
+		local CIF_SUM_FORMULA = "O2 Ti";
+		local CIF_CRYSTAL_SYSTEM = "tetragonal";
+
+		local csL  33.6032957`_2.04258091 min 20 max 1000
+		'local csG  999.99999_49189.869 min 20 max 1000
+		'local strL  0.0615440841_0.193872858 min 0.00001 max 2
+		'local strG  1.00003725e-05_2050.07007 min 0.00001 max 2
+
+		local a_del  0.00514936331`_0.00114860457 min -0.2 max 0.2
+		local c_del  0.00185394481`_0.00109435993 min -0.2 max 0.2
+
+        Out_pdCIF2_PO_March_Dollase(ciffile,po1, 1.01245993`_0.0334157208, 1,1,0)
+        'Out_pdCIF2_PO_Three_Directions_March_Dollase(ciffile,po1, 1,  1,1,1,
+        '                                                     po2, 1,  1,0,0,
+        '                                                     po3, 1,  1,1,1,
+        '                                                     mix1, 0.33,
+        '                                                     mix2, 0.33, 0.34)
+
+		Phase_Density_g_on_cm3( 4.24024083`_0.00263580273)
+		CS_L(csL)
+		'CS_G(csG)
+		'Strain_L(strL)
+		'Strain_G(strG)
+		MVW( 159.732, 62.553`_0.039, 13.430`_0.381)
+		scale @  0.000286181759`_9.02e-06
+		Tetragonal(=4.5924+a_del; :  4.597549`_0.001149, =2.9575+c_del; :  2.959354`_0.001094)	'4.5924, 2.9575
+		space_group "P_42/m_n_m"
+		site Ti1 num_posns  2	x 0       y 0       z 0 occ Ti+4 1. beq  = Ti_beq; :  0.77259`_0.05900
+		site O1  num_posns  4	x 0.30499 y 0.30499 z 0 occ O-2  1. beq  =  O_beq; :  1.35995`_0.13058
+
+
+
+#ifdef CIF_OUTPUT
+	Out_pdCIF2(ciffile)
+#endif
+
+C_matrix_normalized
+{
+                             1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19  20
+bkg_rec19F37065A98_    1:  100 -53  57 -27  38  12  22   8 -14 -17  11 -17 -18 -12 -13 -17  23 -10  -9   3
+bkg_rec19F37065B40_    2:  -53 100 -57  58 -12   1  38  18  -0  42 -36  16 -24  -0  -1  27 -14  -0   0   1
+bkg_rec19F37065BE8_    3:   57 -57 100 -56  50  -4 -15 -10   6 -17  25 -11  21   5   6  -2  -2   5   3   5
+bkg_rec19F37065C90_    4:  -27  58 -56 100 -35   1  10  11  -2   9 -14   4 -13  -1  -2  -1   2  -1  -1  -8
+bkg_rec19F37065D38_    5:   38 -12  50 -35 100   1  13  20  -0   2  -0  -8  -9   1   0  17  -7   0  -0   8
+sd_c_1783346737968     6:   12   1  -4   1   1 100  14   7 -83   6 -28  50 -40 -59 -62 -11  45 -43 -37   3
+Ti_beq_del_1783346737  7:   22  38 -15  10  13  14 100  28 -15  64 -41   8 -51 -13 -15  30   2 -11  -9  13
+O_beq_del_17833467379  8:    8  18 -10  11  20   7  28 100  -9  35 -22  -1 -35  -8  -9  20  -0  -7  -6   6
+abs                    9:  -14  -0   6  -2  -0 -83 -15  -9 100  -6  32 -60  47  92  89  14 -53  70  52  -3
+scale19F370DAE60_     10:  -17  42 -17   9   2   6  64  35  -6 100 -47  30 -26  -5  -6  13   5  -6  -2   6
+csL_1783336865008     11:   11 -36  25 -14  -0 -28 -41 -22  32 -47 100 -60  79  29  29  -3 -19  25  17  -7
+csG_1783336865008     12:  -17  16 -11   4  -8  50   8  -1 -60  30 -60 100 -26 -55 -53 -13  35 -43 -30   3
+strL_1783336865008    13:  -18 -24  21 -13  -9 -40 -51 -35  47 -26  79 -26 100  42  43  -9 -23  36  28  -8
+a_del_1783336865008   14:  -12  -0   5  -1   1 -59 -13  -8  92  -5  29 -55  42 100  87  12 -48  74  52  -4
+c_del_1783336865008   15:  -13  -1   6  -2   0 -62 -15  -9  89  -6  29 -53  43  87 100  14 -45  69  49  -2
+scale19F370DB5B0_     16:  -17  27  -2  -1  17 -11  30  20  14  13  -3 -13  -9  12  14 100 -61  13   6  28
+csL_1783346785872     17:   23 -14  -2   2  -7  45   2  -0 -53   5 -19  35 -23 -48 -45 -61 100 -40 -27  -2
+a_del_1783346785872   18:  -10  -0   5  -1   0 -43 -11  -7  70  -6  25 -43  36  74  69  13 -40 100  19  -2
+c_del_1783346785872   19:   -9   0   3  -1  -0 -37  -9  -6  52  -2  17 -30  28  52  49   6 -27  19 100  -1
+po1_1783346785872     20:    3   1   5  -8   8   3  13   6  -3   6  -7   3  -8  -4  -2  28  -2  -2  -1 100
+}

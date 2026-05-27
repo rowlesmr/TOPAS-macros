@@ -1,0 +1,112 @@
+#include "../pdcif2.inc"
+Out_CIF2_magic_number(ciffile)
+CIF2_set_audit_dataset_id("975eb50d-3a40-4a3c-9625-68f11733da5f")
+
+
+macro ciffile { "multi_one.cif" }
+system_before_save_OUT { del ciffile }
+
+CIF2_set_scan_method("cont")
+CIF2_set_temperature(293)
+CIF2_set_diffrn_id("STP")
+
+yobs_eqn row_1_01.xy = 1 ;  min 10 max 70 del 5
+	CIF2_set_diffractogram_id("some_characters")
+    CIF2_set_datetime_initialised("2022-01-11T14:32:57+02:00")
+    CIF2_set_instr_id("chrome_dome")
+    CIF2_set_instr_detector_id("CD-detc")
+    Out_pdCIF2_simple_Bragg_Brentano_instr_premono_report_only(ciffile, 26.6, "mosaic graphite", 250, 0.2, 4, 4.5, )
+    'actual instrument details that need to go in the inp file go here
+
+	bkg 1 2 3
+    Out_CIF2_wavelength_crka7_holzer(ciffile, "CR_RAD", 30, 40)
+
+    pdCIF2_Bragg_Brentano_specimen_displacement(0)
+
+	str
+		scale 1e-4
+        Out_pdCIF2_PO_March_Dollase(ciffile, !po1, 0.9, 1,2,3)
+	str
+		scale 1e-4
+	str
+		scale 1e-4
+
+yobs_eqn row_1_02.xy = 2 ;  min 10 max 70 del 5
+	CIF2_set_diffractogram_id("a_couple_of_ascii_things")
+    CIF2_set_datetime_initialised("2022-01-12T13:36:23+02:00")
+    CIF2_set_instr_id("copper_top")
+    CIF2_set_instr_detector_id("CT_detc")
+    Out_pdCIF2_simple_Bragg_Brentano_instr_postmono_report_only(ciffile, 26.6, "mosaic graphite", 295, 0.15, 2, 2, )
+    'actual instrument details that need to go in the inp file go here
+
+	bkg 4 5 6
+    Out_CIF2_wavelength_cuka5_berger(ciffile, "copper", 40, 40)
+
+    pdCIF2_Bragg_Brentano_specimen_displacement(0.05)
+
+	str
+		scale 2e-4
+        Out_pdCIF2_PO_March_Dollase(ciffile, !po1, 0.8, 1,2,3)
+	str
+		scale 1e-4
+	str
+		scale 2e-4
+
+yobs_eqn row_1_03.xy = 3 ;  min 10 max 70 del 5
+	CIF2_set_diffractogram_id("another_string")
+    CIF2_set_datetime_initialised("2022-01-13T12:22:58+02:00")
+    CIF2_set_instr_id("the_best_wavelength")
+    CIF2_set_instr_detector_id("best-detc")
+    Out_pdCIF2_simple_Bragg_Brentano_instr_prefilter_report_only(ciffile, "Fe filter", 145, 0.25, 4, 4, )
+    'actual instrument details that need to go in the inp file go here
+
+	bkg 7 8 9
+    Out_CIF2_wavelength_coka7_holzer(ciffile, "cobalt_tube", 35, 15)
+
+    pdCIF2_Bragg_Brentano_specimen_displacement(-0.05)
+
+	str
+		scale 3e-4
+        Out_pdCIF2_PO_March_Dollase(ciffile, !po1, 0.7, 1,2,3)
+	str
+		scale 1e-4
+	str
+		scale 3e-4
+
+for xdds {
+
+	for strs 1 to 1 {
+		phase_name "Selenium"
+		CIF2_set_formula_units_Z(3)
+		CIF2_set_sum_formula("Se")
+        CIF2_set_crystal_system("hexagonal")
+		Hexagonal(3.9, 3.1)
+		space_group "R-3m"
+		site Se1 num_posns  3	x 0 y 0 z 0 occ Se 1 beq 1
+	}
+
+	for strs 2 to 2 {
+		phase_name "Second"
+		CIF2_set_formula_units_Z(2)
+		CIF2_set_sum_formula("Pa")
+        CIF2_set_crystal_system("tetragonal")
+		Tetragonal(3.9, 3.2)
+		space_group "I4/mmm"
+		site Pa1 num_posns  2	x 0.0 y 0.0 z 0.0 occ Pa 1.0 beq 1.
+	}
+
+	for strs 3 to 3 {
+		CIF2_set_phase_id("This_is_a_unique_string")
+		phase_name "Tin"
+		CIF2_set_formula_units_Z(2)
+		CIF2_set_sum_formula("Sn")
+        CIF2_set_crystal_system("tetragonal")
+		Tetragonal(3.4, 3.2)
+		space_group "I4/mmm"
+		site Sn1 num_posns  2 x 0 y 0 z 0 occ Sn 1 beq 1
+	}
+}
+
+
+Out_pdCIF2_multi(ciffile)
+

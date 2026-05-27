@@ -1,0 +1,48 @@
+
+macro outFileName { "output.txt" }
+
+xdd "degussa.raw"
+'xdd sd.xy x_calculation_step 0.01
+'xdd ref.xy x_calculation_step 0.01
+	range 1
+	bkg @  25.8645646` -23.9503225`  11.9579244` -3.7801333`  2.85699446`
+	LP_Factor( 0)
+    Specimen_Displacement(sd,-0.0999881279)
+    Rp 250
+    Rs 250
+	lam
+		ymin_on_ymax  1e-005
+		la  0.0159 lo  1.534753 lh  3.6854
+		la  0.5791 lo  1.540596 lh  0.437
+		la  0.0762 lo  1.541058 lh  0.6
+		la  0.2417 lo  1.54441 lh  0.52
+		la  0.0871 lo  1.544721 lh  0.62
+
+	str
+		phase_name "Anatase"
+		scale  @  0.000407031575`
+		Tetragonal(  3.8,   9.5)	'3.7842, 9.5146
+
+		CS_L(@,  49.1186457`)
+		CS_G(@, 46.3956916`)
+		Strain_L(@, 0.478955014`)
+
+		space_group "I_41/a_m_d_S"
+		site Ti1 num_posns  4	x 0 y 0 z 0      occ Ti+4 1. beq 0.77
+		site O1  num_posns  8	x 0 y 0 z 0.2081 occ O-2  1. beq 1.35
+
+	str
+		phase_name "Rutile"
+		scale @  0.000312386426`
+		Tetragonal(  4.6,   3.0)	'4.5924, 2.9575
+		CS_L(@,  2741.23223`_LIMIT_MIN_0.3)
+		CS_G(@, 3153.17919`_LIMIT_MIN_0.3)
+		Strain_L(@, 1.87506477`)
+		space_group "P_42/m_n_m"
+		site Ti1 num_posns  2	x 0       y 0       z 0 occ Ti+4 1. beq 0.77
+		site O1  num_posns  4	x 0.30499 y 0.30499 z 0 occ O-2  1. beq 1.35
+
+
+
+out outFileName
+

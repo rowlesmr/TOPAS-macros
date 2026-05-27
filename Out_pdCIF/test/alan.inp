@@ -1,0 +1,32 @@
+macro ciffile { "alan.txt" }
+
+num_runs 3
+#list File_Name {
+row_A.xy
+row_B.xy
+row_C.xy
+}
+
+yobs_eqn File_Name(Run_Number) = 1 Run_Number; min 10 max 70 del 5
+	bkg 3 4 5
+
+    out ciffile append
+    Out_String("\nHello")
+
+    lam ymin_on_ymax 0.0001 la 1 lo 1.5 lh 0.5
+
+	str
+		phase_name "Selenium"
+		scale 1e-4
+		Hexagonal(3.9, 3.1)
+		space_group "R-3m"
+		site Se1 num_posns  3	x 0 y 0 z 0 occ Se 1 beq 1
+
+	str
+		phase_name "Second"
+		Tetragonal(3.9, 3.2)
+		space_group "I4/mmm"
+		site Pa1 num_posns  2	x 0.0 y 0.0 z 0.0 occ Pa 1.0 beq 1.
+
+'Out_pdCIF2(ciffile)
+

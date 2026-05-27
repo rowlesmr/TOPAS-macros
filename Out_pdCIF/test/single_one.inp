@@ -7,9 +7,12 @@ system_before_save_OUT { del ciffile }
 CIF2_set_audit_dataset_id("c90a4a1d-fde3-43f4-9c71-bf71048649b5")
 yobs_eqn row_A = 1; min 10 max 70 del 5
     bkg 0 1 2
-    lam
-		ymin_on_ymax 0.0001
-		la 1 lo 1.54 lh 0.501844
+
+    CIF2_set_instr_id("main_lab")
+    CIF2_set_diffrn_id("STP")
+    CIF2_set_diffractogram_id("unique_string")
+
+    Out_CIF2_wavelength_cuk1sharp(ciffile, "sharp_tube")
 
 	CIF2_set_scan_method("cont")
 	CIF2_set_pressure(101.3)
@@ -22,7 +25,7 @@ yobs_eqn row_A = 1; min 10 max 70 del 5
 		scale 1e-4
 		Hexagonal(3.992, 3.119)
 		space_group "R-3m"
-		site Se1 num_posns  3	x 0 y 0 z 0 occ Se 1 beq 1
+		site Se1 num_posns  3 x 0 y 0 z 0 occ Se 1 beq 1
 
 	str
 		phase_name "Second"

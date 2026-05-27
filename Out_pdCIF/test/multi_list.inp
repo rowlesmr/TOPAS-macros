@@ -1,0 +1,81 @@
+#include "../pdcif2.inc"
+Out_CIF2_magic_number(ciffile)
+CIF2_set_audit_dataset_id("9f73f7ac-28c9-4a72-874b-11e7b82790ce")
+
+macro ciffile { "multi_list.cif" }
+if Run_Number == 0 { system_before_save_OUT { del ciffile } }
+out_file = Concat(String(INP_File), ".OUTPUT");
+
+num_runs 3
+#list File_Name_1 File_Name_2 File_Name_3 Temperature Date_Time Third_str_id diffrn_id {
+row_1_01.xy	row_1_02.xy	row_1_03.xy	111   { "2022-01-11T14:32:57+1100" } { "This_is_a_unique_string" }    { "111K"}
+row_2_01.xy	row_2_02.xy	row_2_03.xy	222   { "2022-01-11T14:59:22+1100" } { "Here_are_some_unique_chars" } {"222K"}
+row_3_01.xy	row_3_02.xy	row_3_03.xy	333   { "2022-01-11T15:31:52+1100" } { "This_is_just_a_string" } {"333K"}
+}
+
+CIF2_set_scan_method("cont")
+CIF2_set_datetime_initialised(Date_Time(Run_Number))
+CIF2_set_temperature(Temperature(Run_Number))
+CIF2_set_diffrn_id(diffrn_id(Run_Number))
+
+yobs_eqn File_Name_1(Run_Number) = 1 Run_Number; min 10 max 50 del 5
+	str
+		scale 1e-4
+	str
+		scale 1e-4
+	str
+		scale 1e-4
+yobs_eqn File_Name_2(Run_Number) = 2 Run_Number; min 20 max 60 del 5
+	str
+		scale 2e-4
+	str
+		scale 1e-4
+	str
+		scale 2e-4
+yobs_eqn File_Name_3(Run_Number) = 3 Run_Number; min 30 max 70 del 5
+	str
+		scale 3e-4
+	str
+		scale 1e-4
+	str
+		scale 3e-4
+
+for xdds {
+    Out_CIF2_wavelength_cuk1sharp(ciffile, "rad_id")
+
+	bkg 3 4 5
+
+	for strs 1 to 1 {
+		phase_name "First"
+		CIF2_set_formula_units_Z(3)
+		CIF2_set_sum_formula("Se")
+        CIF2_set_crystal_system("hexagonal")
+		Hexagonal(3.9, 3.1)
+		space_group "R-3m"
+		site Se1 num_posns  3	x 0 y 0 z 0 occ Se 1 beq 1
+	}
+
+	for strs 2 to 2 {
+		phase_name "Second"
+		CIF2_set_formula_units_Z(2)
+		CIF2_set_sum_formula("Pa")
+        CIF2_set_crystal_system("tetragonal")
+		Tetragonal(3.9, 3.2)
+		space_group "I4/mmm"
+		site Pa1 num_posns  2	x 0.0 y 0.0 z 0.0 occ Pa 1.0 beq 1.
+	}
+
+	for strs 3 to 3 {
+		phase_name "Third"
+		'CIF2_set_phase_id(Third_str_id(Run_Number))
+		CIF2_set_formula_units_Z(2)
+		CIF2_set_sum_formula("Sn")
+        CIF2_set_crystal_system("tetragonal")
+		Tetragonal(3.4, 3.2)
+		space_group "I4/mmm"
+		site Sn1 num_posns  2 x 0 y 0 z 0 occ Sn 1 beq 1
+	}
+}
+
+Out_pdCIF2_multi(ciffile)
+
