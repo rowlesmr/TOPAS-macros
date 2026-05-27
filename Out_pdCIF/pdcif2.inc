@@ -1465,7 +1465,7 @@ macro Out_CIF2_wavelength(ciffile, rad_id, id, yminmax,
 	Out_CIF2_section_break("Begin wavelength information")
 	Out_String("\ndata_") Out_unique_diffractogram_id(id) Out_String("_") Out_String("wavelength")
     Out_CIF2_audit_dataset
-    if Prm_There(CIF_RADIATION_ID) { Out_String("\n_diffrn_radiation.id\t") Out(CIF_RADIATION_ID, "%s") }
+    if Prm_There(CIF_RADIATION_ID) { Out(CIF_RADIATION_ID, "\n_diffrn_radiation.id\t%s") }
 
 	if Obj_There(neutron) {
 		Out_String("\n_diffrn_radiation.probe\tneutron")
