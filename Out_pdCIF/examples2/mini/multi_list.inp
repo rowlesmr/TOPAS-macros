@@ -1,8 +1,8 @@
 #include "../../pdcif2.inc"
 
 macro ciffile { "multi_list_2.cif" }
-Out_CIF2_initialise(ciffile)
 system_before_save_OUT { del ciffile }
+Out_CIF2_initialise(ciffile)
 
 num_runs 3
 #list File_Name_1 File_Name_2 File_Name_3 Temperature Date_Time Third_str_id{
