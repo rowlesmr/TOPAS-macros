@@ -37,6 +37,9 @@ macro outFileName { "output.txt" }
 
 macro ciffile { "second_2.cif" }
 
+Out_CIF2_initialise(ciffile)
+
+
 do_errors
 
 CIF2_set_scan_method("cont")

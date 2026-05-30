@@ -2,6 +2,8 @@
 
 macro ciffile { "first_2.cif" }
 
+Out_CIF2_initialise(ciffile)
+
 /*
 Input file and data used with permission from
 http://community.dur.ac.uk/john.evans/topas_workshop/tutorial_multitopas.htm
@@ -14,7 +16,7 @@ Some slight modification done.
 'Data collected with hot air blower so T(actual) < T(set) at high T
 'File set up so that either topas v6 #list command or topas <v6 + command file can be used
 '--------------------------------------------------------------
-r_wp  15.1765453 r_exp  9.61183652 r_p  11.5490056 r_wp_dash  27.3581401 r_p_dash  27.54228 r_exp_dash  17.3268663 weighted_Durbin_Watson  1.42610402 gof  1.57894334
+r_wp  15.1790402 r_exp  9.61183652 r_p  11.5511289 r_wp_dash  27.3627461 r_p_dash  27.5476265 r_exp_dash  17.3269349 weighted_Durbin_Watson  1.42570069 gof  1.57920291
 
 iters 100000
 chi2_convergence_criteria 0.001
@@ -59,37 +61,37 @@ xdd filename
     Out_CIF2_wavelength(ciffile, "synchrotron", CIF_ID, 0.00001, 1, 0.8257653_8.44468382e-008, 0.1, )
 
 	LP_Factor( 90) 'change the LP correction  or lh value if required
-    prm zero  0.70303833`_0.0431346337
+    prm zero  0.706172171`_0.0431321773
     pdCIF2_Debye_Scherrer_specimen_displacement(, (zero/1000), , 0, , 0)
-	bkg @  36.2167516`_0.0681744286 -15.9887684`_0.118589903 -1.56818441`_0.110161403  4.82606326`_0.108712139 -5.92552595`_0.108776052  10.8740969`_0.108408393 -7.23602485`_0.103728668  1.09813471`_0.101885511  5.27248167`_0.098694382 -4.72193911`_0.0992775133  4.44309185`_0.0957536199 -2.02722762`_0.0950697661 -0.303659545`_0.0931118538  3.91216107`_0.0932716295 -3.08572731`_0.0894924214  2.43800506`_0.0893043878 -1.43174687`_0.0811146097  0.751132298`_0.079141632
+	bkg @  36.2172668`_0.068185298 -15.988893`_0.118609145 -1.56877749`_0.110179414  4.82617687`_0.108729879 -5.92490499`_0.108793889  10.873796`_0.108426158 -7.23629859`_0.103745645  1.09805155`_0.101902251  5.27276949`_0.098710605 -4.72220545`_0.0992938322  4.4432914`_0.0957693542 -2.02712668`_0.0950853764 -0.303603929`_0.0931271436  3.91217967`_0.093286953 -3.0861541`_0.0895071197  2.43829819`_0.0893190373 -1.43186578`_0.0811279201  0.751121678`_0.0791546385
 
 
     str
 		phase_name "Al2O3"
 		CIF2_set_formula_units_Z(6)
         CIF2_set_sum_formula("Al2 O3")
-		Phase_Density_g_on_cm3( 3.90926392`_2.21293354e-05)
+		Phase_Density_g_on_cm3( 3.90926238`_2.2125383e-05)
 		'Sample size/strain include these lines for your sample
-  		LVol_FWHM_CS_G_L(1, 416.837263`_33.3380688, 0.89, 573.178954`_59.5141669, csgc, 3108.21827`_3229.83369_LIMIT_MIN_0.3 , cslc, 674.478842`_41.5843174)
-  		e0_from_Strain( 7.06771797e-05`_4.11692731e-06, sgc, 0.0265537015`_0.0015337971, slc, 0.010068123`_0.00181992477)
-		scale  scal_1  6.06437306e-05`_2.713e-07
-		MVW( 611.768, 259.861`_0.001, 72.184`_0.136)
-		Trigonal(lpa_1  4.789102`_0.000011, lpc_1  13.082845`_0.000044)
+  		LVol_FWHM_CS_G_L(1, 416.73765`_33.3226057, 0.89, 572.999774`_59.46924, csgc, 3100.55789`_3204.01004_LIMIT_MIN_0.3 , cslc, 674.401217`_41.5737373)
+  		e0_from_Strain( 7.05608074e-05`_4.11895038e-06, sgc, 0.0265068568`_0.00153504007, slc, 0.0100564843`_0.00181969259)
+		scale  scal_1  6.06390376e-05`_2.714e-07
+		MVW( 611.768, 259.861`_0.001, 72.181`_0.136)
+		Trigonal(lpa_1  4.789102`_0.000011, lpc_1  13.082846`_0.000044)
         CIF2_set_space_group_id("r_-3_c:H")
 		space_group "r_-3_c:H"
-		site Al1    x 0     y 0 z 0.148 occ Al+3 1 beq bval_1  0.80184`_0.01718
-		site O1     x 0.306 y 0 z 0.25  occ O-2  1 beq bval_1  0.80184`_0.01718
+		site Al1    x 0     y 0 z 0.148 occ Al+3 1 beq bval_1  0.80169`_0.01718
+		site O1     x 0.306 y 0 z 0.25  occ O-2  1 beq bval_1  0.80169`_0.01718
 
 	str
 		phase_name "Si"
 		CIF2_set_formula_units_Z(8)
-		Phase_Density_g_on_cm3( 2.30708397`_1.04011481e-05)
-		scale  scal_2  0.000102242253`_5.212e-07
-		MVW( 224.684, 161.718`_0.001, 27.816`_0.136)
-		Cubic(lpa_2  5.448196`_0.000008)
+		Phase_Density_g_on_cm3( 2.30708287`_1.03998524e-05)
+		scale  scal_2  0.00010224926`_5.213e-07
+		MVW( 224.684, 161.718`_0.001, 27.819`_0.136)
+		Cubic(lpa_2  5.448197`_0.000008)
         CIF2_set_space_group_id("Fd-3mS")
 		space_group "Fd-3mS"
-		site Si1    x 0 y 0 z 0 occ Si 1 beq bval_2  1.75633`_0.02095
+		site Si1    x 0 y 0 z 0 occ Si 1 beq bval_2  1.75691`_0.02096
 
 for strs {
 		'peak shape derived on 574646-mac-001_offline.xye on 21/4/2017
