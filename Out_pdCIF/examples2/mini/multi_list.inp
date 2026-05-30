@@ -55,7 +55,7 @@ for xdds {
 
 	for strs 2 to 2 {
 		phase_name "Second"
-		local CIF_SUM_FORMULA = "Pa";
+		CIF2_set_sum_formula("Pa")
 		CIF2_set_crystal_system("tetragonal")
 		Tetragonal(3.9, 3.2)
 		space_group "I4/mmm"
