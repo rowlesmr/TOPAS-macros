@@ -4,6 +4,10 @@
 Written by Matthew Rowles.
 Inspiration taken from topas.inc and http://topas.dur.ac.uk/topaswiki/doku.php?id=out_out_general_cif_test
 
+
+If you just want to use this library, start reading from line 1324
+
+
 The macros to be used by the user are:
 * Out_pdCIF2,
 * Out_pdCIF2_multi, and/or potentially,
@@ -87,34 +91,34 @@ pdCIF2_Debye_Scherrer_specimen_displacement(spa_c, spa_v, spe_c, spe_v) - Debye-
 
 ###############
 Reserved parameter names
-CIF_AUDIT_DATASET - string. Per dataset
+CIF_AUDIT_DATASET - UUID string. Per dataset
 
 CIF_ID - number, non-negative integer. Will be auto generated in most cases.
 
-CIF_PHASE_ID - string. Per phase. Defaults to phase name appended with CIF_ID. Must have no whitespace.
+CIF_PHASE_ID         - string. Per phase. Defaults to phase name appended with CIF_ID. Must have no whitespace.
 CIF_DIFFRACTOGRAM_ID - string. Per xdd. Defaults to xdd_path_name with CIF_ID. Must have no whitespace.
 
-CIF_MODEL_ID - string. Per structure. Defaults to CIF_PHASE_ID
-CIF_STRUCTURE_ID - string. Per structure. Defaults to CIF_PHASE_ID
+CIF_MODEL_ID       - string. Per structure. Defaults to CIF_PHASE_ID
+CIF_STRUCTURE_ID   - string. Per structure. Defaults to CIF_PHASE_ID
 CIF_SPACE_GROUP_ID - string. Per structure. Defaults to CIF_PHASE_ID
 
-CIF_DIFFRN_ID - string. Per diffraction conditions, ie temperature or pressure. Strictly, anything in DIFFRN that would cause a change in _diffrn.id
-CIF_INSTR_ID - string. Per instrument
+CIF_DIFFRN_ID         - string. Per diffraction conditions, ie temperature or pressure. Strictly, anything in DIFFRN that would cause a change in _diffrn.id
+CIF_INSTR_ID          - string. Per instrument
 CIF_INSTR_DETECTOR_ID - string. Per instrument. Can only have a single value at a time.
-CIF_RADIATION_ID - string. Per radiation source
+CIF_RADIATION_ID      - string. Per radiation source
 
-CIF_TEMPERATURE - number, kelvin
-CIF_PRESSURE - number, kilopascals
-CIF_PEAK_CUTOFF - number, fraction. See wavelength macros
-CIF_TH2_FIXED - number, 2Th degrees
-CIF_Z - number. Per structure. Formula units per cell
-CIF_SUM_FORMULA - string. Per structure
-CIF_CRYSTAL_SYSTEM - string, enumeration. Per structure
-CIF_PHASE_TEXT - string, CIF-compliant. Per phase
-CIF_DATETIME - string, DateTime. Per xdd
+CIF_TEMPERATURE         - number, kelvin
+CIF_PRESSURE            - number, kilopascals
+CIF_PEAK_CUTOFF         - number, fraction. See wavelength macros
+CIF_TH2_FIXED           - number, 2Th degrees
+CIF_Z                   - number. Per structure. Formula units per cell
+CIF_SUM_FORMULA         - string. Per structure
+CIF_CRYSTAL_SYSTEM      - string, enumeration. Per structure
+CIF_PHASE_TEXT          - string, CIF-compliant. Per phase
+CIF_DATETIME            - string, DateTime. Per xdd
 CIF_DIFFRACTOMETER_NAME - string, _pd_instr.special_details
-CIF_SCAN_METHOD - string, enumeration. Per xdd
-CIF_DIFFRACTOGRAM_TEXT - string, CIF-compliant. Per xdd
+CIF_SCAN_METHOD         - string, enumeration. Per xdd
+CIF_DIFFRACTOGRAM_TEXT  - string, CIF-compliant. Per xdd
 
 ###############
 
@@ -125,7 +129,7 @@ actual macros to use (and the comments immediately preceeding).
 
 To get maximum benefit, copy this file to your TOPAS directory and add
 the following line to your local.inc:
-#include cif.inc
+#include pdcif2.inc
 
 For updates, check http://topas.dur.ac.uk/topaswiki/doku.php?id=out_pdcif
 
@@ -2143,11 +2147,45 @@ id: a number uniquely identifying an xdd - normally defined as CIF_ID
     Out_String("\n_pd_diffractogram.id\t") Out_unique_diffractogram_id(id)
 	if Obj_There(str) {
 		Out_pdCIF2_phase_mass
-		Out_CIF2_hkls(ciffile)
 	}
     Out_pdCIF2_calc_component(ciffile)
     Out_CIF2_newfile(ciffile)
 	Out_CIF2_section_break("End phase and diffractogram information")
+	Out_String("\n")
+}
+
+macro Out_pdCIF2_structure_phase_diffractogram_data(ciffile, id) {
+/*
+This macro outputs data requiring knowledge of structure, phase, and diffractogram ids.
+
+The construction of the phase_id is simply the concatenation of the
+phase_name and an identifier, most usually taken as the number of the xdd,
+either defined through the use of "Run_Number" if doing a sequential refinement
+using #list, or by setting a local variable in each xdd - local !CIF_ID = 1; (and
+copying it and incrementing it in each xdd)
+
+The diffractogram_id of each diffraction pattern is the xdd_path_name with the id appended.
+
+This macro can be placed into every str that you have, or better, placed at the end
+of the input file in a `for strs {}` construct.
+
+
+ciffile: the name of the file you want to write to. The data is appended.
+phase_id: a number uniquely identifying a str inside an xdd
+id: a number uniquely identifying an xdd - normally defined as CIF_ID
+*/	Out_CIF2_newfile(ciffile)
+	Out_String("\n")
+	Out_CIF2_section_break("Begin structure, phase, and diffractogram information")
+	Out_String("\ndata_") Out_unique_phase_id(id) Out_String("_") Out_unique_diffractogram_id(id)
+    Out_CIF2_audit_dataset
+    Out_String("\n_structure.id\t")     if Prm_There(CIF_STRUCTURE_ID)   { Out(CIF_STRUCTURE_ID, "%s") }   else { Out_unique_phase_id(id) }
+    Out_String("\n_pd_phase.id\t") Out_unique_phase_id(id)
+    Out_String("\n_pd_diffractogram.id\t") Out_unique_diffractogram_id(id)
+	if Obj_There(str) {
+		Out_CIF2_hkls(ciffile)
+	}
+    Out_CIF2_newfile(ciffile)
+	Out_CIF2_section_break("End structure, phase, and diffractogram information")
 	Out_String("\n")
 }
 
@@ -2261,7 +2299,8 @@ Otherwise, use Out_pdCIF()
 */
 	Out_pdCIF2_xdd_setup
 	if Obj_There(str) { for strs { Out_pdCIF2_STR(ciffile, CIF_ID) } }
-    if Obj_There(str) { for strs { Out_pdCIF2_phase_diffractogram_data(ciffile, CIF_ID) } }
+    if Obj_There(str) { for strs { Out_pdCIF2_phase_diffractogram_data(ciffile, CIF_ID)
+                                   Out_pdCIF2_structure_phase_diffractogram_data(ciffile, CIF_ID) } }
 	Out_pdCIF2_diffraction_data(ciffile, data_type, bkq_eqn, CIF_ID)
 }
 
@@ -2478,7 +2517,8 @@ Out_pdCIF2_multi(CIF_OUTPUT_FILE, meas)
         if Obj_There(str) { for strs { Out_pdCIF2_STR(ciffile, CIF_ID) } }
     }
 	for xdds n_to_m(n,m) {
-        if Obj_There(str) { for strs { Out_pdCIF2_phase_diffractogram_data(ciffile, CIF_ID) } }
+        if Obj_There(str) { for strs { Out_pdCIF2_phase_diffractogram_data(ciffile, CIF_ID)
+                                       Out_pdCIF2_structure_phase_diffractogram_data(ciffile, CIF_ID) } }
     }
 	for xdds n_to_m(n,m) {
         Out_pdCIF2_diffraction_data(ciffile, data_type, bkg_eqn, CIF_ID)
