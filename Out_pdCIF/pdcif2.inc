@@ -441,6 +441,11 @@ macro Out_CIF2_free_text(text) {
 'Inserts a string into the CIF. Must conform to CIF standards'
 	Out_String(text)
 }
+macro Out_CIF2_free_text(ciffile, text) {
+'Inserts a string into the CIF. Must conform to CIF standards'
+    Out_CIF2_newfile(ciffile)
+	Out_String(text)
+}
 
 
 
@@ -902,6 +907,9 @@ macro Out_pdCIF2_2theta_fixed(th2) {
 
 macro Out_pdCIF2_phase_mass {
     if Obj_There(spiked_mwp) {
+        Out(Get(corrected_weight_percent), "\n_pd_phase_mass.absolute\t%V")
+    }
+    if Obj_There(corrected_weight_percent) {
         Out(Get(corrected_weight_percent), "\n_pd_phase_mass.absolute\t%V")
     }
     Out(Get(weight_percent), "\n_pd_phase_mass.percent\t%V")
@@ -1568,7 +1576,7 @@ macro Out_CIF2_wavelength(ciffile, rad_id, id, yminmax,
     #m_ifarg la8 "" #m_else Out("8", "\n%s\t") Out(la8, "%11.7f\t") Out(lo8, "%11.7f") #m_endif
     #m_ifarg la9 "" #m_else Out("9", "\n%s\t") Out(la9, "%11.7f\t") Out(lo9, "%11.7f") #m_endif
 
-	'Out_CIF2_section_break("End wavelength information")
+	Out_CIF2_section_break("End wavelength information")
 }
 
 
@@ -2223,7 +2231,7 @@ id: a number uniquely identifying an xdd - normally defined as CIF_ID
 	if Obj_There(str) {
 		Out_pdCIF2_phase_mass
 	}
-    Out_pdCIF2_calc_component(ciffile)
+    if Obj_There(conserve_memory) { } else { Out_pdCIF2_calc_component(ciffile) }
     Out_CIF2_newfile(ciffile)
 	Out_CIF2_section_break("End phase and diffractogram information")
 	Out_String("\n")
