@@ -86,8 +86,8 @@ Out_CIF2_wavelength(ciffile, rad_id, id, yminmax, la0, lo0, lh0, lg0 ...) - Sets
     see also Out_CIF2_wavelength_coka3(ciffile) and other specialised macros
 Out_pdCIF2_PO_March_Dollase(ciffile,po1, po1_v, h1,k1,l1) - March-Dollase PO correction & pdCIF output text. Also available in two and three-direction variants
 Out_pdCIF2_PO_Spherical_Harmonics(ciffile, sh, order) - Spherical harmonics PO correction & pdCIF text output
-pdCIF2_Bragg_Brentano_specimen_displacement(sd_c, sd_v) - Bragg-Brentano specimen displacement correction - also causes corrected2Th values to be written to CIF
-pdCIF2_Debye_Scherrer_specimen_displacement(spa_c, spa_v, spe_c, spe_v) - Debye-Sherrer specimen displacement correction - also causes corrected2Th values to be written to CIF
+pdCIF2_Bragg_Brentano_specimen_displacement(ze_c, ze_v, sd_c, sd_v) - Bragg-Brentano specimen displacement correction - also causes corrected2Th values to be written to CIF
+pdCIF2_Debye_Scherrer_specimen_displacement(ze_c, ze_v, spa_c, spa_v, spe_c, spe_v) - Debye-Sherrer specimen displacement correction - also causes corrected2Th values to be written to CIF
 
 ###############
 Reserved parameter names
