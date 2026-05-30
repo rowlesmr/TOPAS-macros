@@ -1,12 +1,12 @@
 #include "seq.inc"
-#include "..\cif.inc"
+#include "..\..\pdcif2.inc"
 
 /*
 Sequential refinement macros explained here:
 http://topas.dur.ac.uk/topaswiki/doku.php?id=sequential_refinements
 */
 
-#list Range_Number Temperature Date_Time {
+#list Range_Number Temperature Date_Time  {
 1  { (30 +273) } { "2007-12-18T12:16:55+0200" }
 2  { (50 +273) } { "2007-12-18T12:38:21+0200" }
 3  { (100+273) } { "2007-12-18T13:01:03+0200" }
@@ -32,16 +32,16 @@ http://topas.dur.ac.uk/topaswiki/doku.php?id=sequential_refinements
 
 macro file { "degussa.raw" }
 macro seqno { Range_Number(Run_Number) }
-prm !te = Temperature(Run_Number); :  373
+prm !te = Temperature(Run_Number); :  303
 macro outFileName { "output.txt" }
 
-macro ciffile { "second.cif" }
+macro ciffile { "second_2.cif" }
 
 do_errors
 
-prm CIF_SCAN_METHOD = "cont";
-prm CIF_TEMP  =te; :  373
-prm CIF_DATETIME = Date_Time(Run_Number);
+CIF2_set_scan_method("cont")
+CIF2_set_temperature(te)
+CIF2_set_datetime_initialised(Date_Time(Run_Number))
 
 Sequential_Refinement(20, seqno)
 
@@ -114,11 +114,11 @@ macro Output {
 
 
 xdd file
-	r_exp  16.2477732 r_wp  17.4104804 weighted_Durbin_Watson  1.75451232 gof  1.07156102
+	r_exp  16.214517 r_wp  17.5561831 weighted_Durbin_Watson  1.79098778 gof  1.08274474
 	range seqno
-	bkg @  26.2858385`_0.127479401 -24.0336274`_0.201386029  11.606399`_0.162969038 -3.47735627`_0.125777801  2.83434764`_0.119293989
+	bkg @  26.2877469`_0.127673931 -24.3850473`_0.203299499  11.6446324`_0.165154645 -3.59204602`_0.127397978  2.72201129`_0.120457561
 	LP_Factor( 0)
-	Specimen_Displacement(sd, -0.0602520714`_0.0105075877 )
+    pdCIF2_Bragg_Brentano_specimen_displacement(sd,  0.0663572898`_0.0118468269 )
 	Rp 250
 	Rs 250
 	lpsd_th2_angular_range_degrees  2.383
@@ -130,82 +130,76 @@ xdd file
 		primary_soller_angle  4
 		secondary_soller_angle  4
 		axial_n_beta  30
-	Absorption(abs, 15.3262311`_3.71826287)
-	lam
-		ymin_on_ymax  1e-005
-		la  0.0159 lo  1.534753 lh  3.6854
-		la  0.5791 lo  1.540596 lh  0.437
-		la  0.0762 lo  1.541058 lh  0.6
-		la  0.2417 lo  1.54441 lh  0.52
-		la  0.0871 lo  1.544721 lh  0.62
+	Absorption(abs, 20.3283902`_7.9624387)
+
+    Out_CIF2_wavelength_cuka5(ciffile, "COPPER")
 
 
-	local Ti_beq_del  0.399536299`_0.0590779076 min 0 max 3
-	local O_beq_del  0.756986608`_0.13108596 min 0 max 3
+	local Ti_beq_del  0.377544872`_0.0584545667 min 0 max 3
+	local O_beq_del  0.744658489`_0.130380855 min 0 max 3
 
-	local Ti_beq = 0.39 + Ti_beq_del; :  0.789536299`_0.0590779076
-	local  O_beq = 0.61 + O_beq_del; :  1.36698661`_0.13108596
+	local Ti_beq = 0.39 + Ti_beq_del; :  0.767544872`_0.0584545667
+	local  O_beq = 0.61 + O_beq_del; :  1.35465849`_0.130380855
 
 	#if seqno < 19;
 	str
 		'9852 ICSD
 		phase_name "Anatase"
 
-		local CIF_PHASE_ID  1`
-		local CIF_Z  2`
-		local CIF_SUM_FORMULA = "O2_Ti";
-		local CIF_CRYSTAL_SYSTEM = "tetragonal";
+		CIF2_set_formula_units_Z(2)
+		CIF2_set_sum_formula("O2 Ti")
+		CIF2_set_crystal_system("tetragonal")
 
-
-		local csL  35.3945844`_1.6732939 min 30 max 500
-		local csG  53.0916676`_4.05024885 min 30 max 500
-		local strL  0.118448032`_0.0347151738 min 0.00001 max 0.6
+		local csL  37.3955695`_1.82089116 min 30 max 500
+		local csG  54.9270565`_4.70269736 min 30 max 500
+		local strL  0.170471551`_0.0326041283 min 0.00001 max 0.6
 		'local strG  0.00620783579_3.30047281 min 0.00001 max 0.6
 
-		local a_del  0.00245501544`_0.000662822314 min 0 max 0.02
-		local c_del -0.00699771252`_0.00175243827 min -0.2 max 0.1
+		local a_del  0.00319011539`_0.000807937622 min 0 max 0.02
+		local c_del -0.00428628318`_0.00211823787 min -0.2 max 0.1
 
-		Phase_Density_g_on_cm3( 3.89123755`_0.00153952923)
+		Phase_Density_g_on_cm3( 3.88861821`_0.00187152966)
 		CS_L(csL)
 		CS_G(csG)
 		Strain_L(strL)
 		'Strain_G(strG)
-		MVW( 319.463, 136.327`_0.054, 87.330`_0.356)
-		scale @  0.000421178057`_3.717e-06
-		Tetragonal(=3.7842+a_del; :  3.786655`_0.000663, =9.5146+c_del; :  9.507602`_0.001752)	'3.7842, 9.5146
+		MVW( 319.463, 136.419`_0.066, 86.606`_0.364)
+		scale @  0.000422784165`_3.745e-06
+		Tetragonal(=3.7842+a_del; :  3.787390`_0.000808, =9.5146+c_del; :  9.510314`_0.002118)	'3.7842, 9.5146
+        CIF2_set_space_group_id("I_41/a_m_d_S")
 		space_group "I_41/a_m_d_S"
-		site Ti1 num_posns  4	x 0 y 0 z 0      occ Ti+4 1. beq = Ti_beq; :  0.78954`_0.05908
-		site O1  num_posns  8	x 0 y 0 z 0.2081 occ O-2  1. beq =  O_beq; :  1.36699`_0.13109
+		site Ti1 num_posns  4	x 0 y 0 z 0      occ Ti+4 1. beq = Ti_beq; :  0.76754`_0.05845
+		site O1  num_posns  8	x 0 y 0 z 0.2081 occ O-2  1. beq =  O_beq; :  1.35466`_0.13038
 	#endif
 
 	str
 		'33837 ICSD
 		phase_name "Rutile"
 
-		local CIF_PHASE_ID  2`
-		local CIF_Z  2`
-		local CIF_SUM_FORMULA = "O2_Ti";
-		local CIF_CRYSTAL_SYSTEM = "tetragonal";
+		CIF2_set_formula_units_Z(2)
+		CIF2_set_sum_formula("O2 Ti")
+		CIF2_set_crystal_system("tetragonal")
 
-		local csL  35.658958`_2.24138906 min 20 max 1000
+		local csL  33.5328919`_2.00618072 min 20 max 1000
 		'local csG  999.99999_49189.869 min 20 max 1000
 		'local strL  0.0615440841_0.193872858 min 0.00001 max 2
 		'local strG  1.00003725e-05_2050.07007 min 0.00001 max 2
 
-		local a_del  0.00321294404`_0.00103439558 min -0.2 max 0.2
-		local c_del  0.00281755486`_0.00106387034 min -0.2 max 0.2
+		local a_del  0.00508609911`_0.00116848988 min -0.2 max 0.2
+		local c_del  0.00173166948`_0.0011149412 min -0.2 max 0.2
 
-		Phase_Density_g_on_cm3( 4.24243354`_0.00244372869)
+		Phase_Density_g_on_cm3( 4.24053274`_0.00268307745)
 		CS_L(csL)
 		'CS_G(csG)
 		'Strain_L(strL)
 		'Strain_G(strG)
-		MVW( 159.732, 62.521`_0.036, 12.670`_0.356)
-		scale @  0.000266474851`_8.243e-06
-		Tetragonal(=4.5924+a_del; :  4.595613`_0.001034, =2.9575+c_del; :  2.960318`_0.001064)	'4.5924, 2.9575
+		MVW( 159.732, 62.549`_0.040, 13.394`_0.364)
+		scale @  0.000285206218`_8.597e-06
+		Tetragonal(=4.5924+a_del; :  4.597486`_0.001168, =2.9575+c_del; :  2.959232`_0.001115)	'4.5924, 2.9575
+        CIF2_set_space_group_id("P_42/m_n_m")
 		space_group "P_42/m_n_m"
-		site Ti1 num_posns  2	x 0       y 0       z 0 occ Ti+4 1. beq  = Ti_beq; :  0.78954`_0.05908
-		site O1  num_posns  4	x 0.30499 y 0.30499 z 0 occ O-2  1. beq  =  O_beq; :  1.36699`_0.13109
+		site Ti1 num_posns  2	x 0       y 0       z 0 occ Ti+4 1. beq  = Ti_beq; :  0.76754`_0.05845
+		site O1  num_posns  4	x 0.30499 y 0.30499 z 0 occ O-2  1. beq  =  O_beq; :  1.35466`_0.13038
 
 	#ifdef OUTPUT
 		Output
@@ -213,28 +207,28 @@ xdd file
 
 
 #ifdef CIF_OUTPUT
-	Out_pdCIF(ciffile, "meas")
+	Out_pdCIF2(ciffile, "meas")
 #endif
 C_matrix_normalized
 {
                              1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19
-bkg894768920           1:  100 -52  56 -25  38 -14 -16  23   8 -18  10 -20 -20 -13 -15 -18  23 -10  -9
-bkg894769136           2:  -52 100 -56  58 -11  -1  -2  38  18  43 -36  19 -23  -2  -3  28 -14  -2  -0
-bkg894769352           3:   56 -56 100 -54  49   4   7 -16 -10 -18  26 -12  21   7   8  -4  -2   5   4
-bkg894769568           4:  -25  58 -54 100 -34  -1  -3  12  12  10 -14   4 -14  -2  -3   1   2  -2  -1
-bkg894769784           5:   38 -11  49 -34 100  -3  -1  12  20   2  -0  -8  -9  -0  -1  15  -7  -1  -1
-sd                     6:  -14  -1   4  -1  -3 100  79 -17  -8  -6  29 -40  43  47  51   9 -39  28  26
-abs                    7:  -16  -2   7  -3  -1  79 100 -21 -12  -7  38 -50  57  89  86  11 -47  61  43
-Ti_beq_del_912954584   8:   23  38 -16  12  12 -17 -21 100  28  64 -42  10 -53 -18 -20  27   4 -14 -10
-O_beq_del_912954584    9:    8  18 -10  12  20  -8 -12  28 100  35 -23  -1 -36 -11 -11  19   1  -8  -6
-scale545690168_       10:  -18  43 -18  10   2  -6  -7  64  35 100 -48  32 -26  -6  -7  12   5  -6  -1
-csL_912954920         11:   10 -36  26 -14  -0  29  38 -42 -23 -48 100 -63  79  34  34  -3 -20  27  17
-csG_912954920         12:  -20  19 -12   4  -8 -40 -50  10  -1  32 -63 100 -26 -44 -42 -12  28 -31 -19
-strL_912954920        13:  -20 -23  21 -14  -9  43  57 -53 -36 -26  79 -26 100  51  50  -8 -25  39  27
-a_del_912954920       14:  -13  -2   7  -2  -0  47  89 -18 -11  -6  34 -44  51 100  83   8 -41  66  43
-c_del_912954920       15:  -15  -3   8  -3  -1  51  86 -20 -11  -7  34 -42  50  83 100  11 -38  60  39
-scale545690720_       16:  -18  28  -4   1  15   9  11  27  19  12  -3 -12  -8   8  11 100 -61   8   4
-csL_912955544         17:   23 -14  -2   2  -7 -39 -47   4   1   5 -20  28 -25 -41 -38 -61 100 -28 -19
-a_del_912955544       18:  -10  -2   5  -2  -1  28  61 -14  -8  -6  27 -31  39  66  60   8 -28 100   5
-c_del_912955544       19:   -9  -0   4  -1  -1  26  43 -10  -6  -1  17 -19  27  43  39   4 -19   5 100
+bkg_rec23D427E1198_    1:  100 -53  57 -26  38  12  21   8 -14 -17  11 -17 -18 -11 -13 -19  23 -10  -9
+bkg_rec23D427E1240_    2:  -53 100 -57  58 -12   1  39  18  -1  42 -35  17 -24  -1  -1  28 -14  -0  -0
+bkg_rec23D427E12E8_    3:   57 -57 100 -55  50  -4 -16 -10   6 -18  25 -12  21   6   7  -4  -2   5   4
+bkg_rec23D427E1390_    4:  -26  58 -55 100 -35   1  11  12  -2  10 -14   4 -14  -2  -3   1   2  -2  -1
+bkg_rec23D427E1438_    5:   38 -12  50 -35 100   1  12  20   0   2   1  -8  -9   1   0  15  -7   1  -0
+sd_2462134181448       6:   12   1  -4   1   1 100  14   8 -84   6 -29  50 -41 -60 -64 -13  45 -45 -39
+Ti_beq_del_2462134181  7:   21  39 -16  11  12  14 100  27 -16  64 -40   8 -50 -13 -15  28   3 -11 -10
+O_beq_del_24621341814  8:    8  18 -10  12  20   8  27 100 -10  35 -22  -0 -35  -9 -10  19   1  -8  -6
+abs                    9:  -14  -1   6  -2   0 -84 -16 -10 100  -7  34 -60  48  93  90  16 -53  72  54
+scale23D42852810_     10:  -17  42 -18  10   2   6  64  35  -7 100 -47  30 -26  -6  -7  12   5  -6  -2
+csL_2462436362488     11:   11 -35  25 -14   1 -29 -40 -22  34 -47 100 -61  79  30  31  -1 -20  26  19
+csG_2462436362488     12:  -17  17 -12   4  -8  50   8  -0 -60  30 -61 100 -27 -56 -54 -15  35 -43 -31
+strL_2462436362488    13:  -18 -24  21 -14  -9 -41 -50 -35  48 -26  79 -27 100  44  44  -7 -24  37  29
+a_del_2462436362488   14:  -11  -1   6  -2   1 -60 -13  -9  93  -6  30 -56  44 100  88  14 -49  75  54
+c_del_2462436362488   15:  -13  -1   7  -3   0 -64 -15 -10  90  -7  31 -54  44  88 100  16 -46  71  51
+scale23D42852F60_     16:  -19  28  -4   1  15 -13  28  19  16  12  -1 -15  -7  14  16 100 -62  15   7
+csL_2462436365848     17:   23 -14  -2   2  -7  45   3   1 -53   5 -20  35 -24 -49 -46 -62 100 -41 -27
+a_del_2462436365848   18:  -10  -0   5  -2   1 -45 -11  -8  72  -6  26 -43  37  75  71  15 -41 100  22
+c_del_2462436365848   19:   -9  -0   4  -1  -0 -39 -10  -6  54  -2  19 -31  29  54  51   7 -27  22 100
 }
