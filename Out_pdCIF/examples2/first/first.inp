@@ -55,8 +55,9 @@ xdd filename
 	'Si zero was -1.69258/1000 degrees
 	lam ymin_on_ymax 0.00001 la 1.0 lo   0.8257653_8.44468382e-008 lh 0.1
 	LP_Factor( 90) 'change the LP correction  or lh value if required
-   prm zero  0.703245788`_0.0431347596 th2_offset = (zero/1000);:  0.000703245788`_4.31347596e-05
 	bkg @  36.2167952`_0.068174935 -15.9887382`_0.118590809 -1.56823772`_0.110162259  4.82607437`_0.108712981 -5.92550022`_0.1087769  10.8740693`_0.108409237 -7.23603412`_0.103729474  1.09812792`_0.101886308  5.27248748`_0.0986951548 -4.72194211`_0.0992782906  4.4430904`_0.0957543689 -2.02721715`_0.095070509 -0.303651507`_0.0931125816  3.91215029`_0.0932723591 -3.0857172`_0.0894931209  2.4380098`_0.0893050841 -1.43174842`_0.0811152423  0.75112953`_0.0791422511
+    prm zero  0.706349925`_0.0431323295
+    pdCIF2_Debye_Scherrer_specimen_displacement(, (zero/1000), , 0, , 0)
 
 
     str
@@ -72,19 +73,19 @@ xdd filename
 		Trigonal(lpa_1  4.789102`_0.000011, lpc_1  13.082845`_0.000044)
         CIF2_set_space_group_id("r_-3_c:H")
 		space_group "r_-3_c:H"
-		site Al1    x 0     y 0 z 0.148 occ Al+3 1 beq bval_1  0.80183`_0.01718
-		site O1     x 0.306 y 0 z 0.25  occ O-2  1 beq bval_1  0.80183`_0.01718
+		site Al1    x 0     y 0 z 0.148 occ Al+3 1 beq bval_1  0.80168`_0.01718
+		site O1     x 0.306 y 0 z 0.25  occ O-2  1 beq bval_1  0.80168`_0.01718
 
 	str
 		phase_name "Si"
 		CIF2_set_formula_units_Z(8)
-		Phase_Density_g_on_cm3( 2.30708389`_1.04011767e-05)
-		scale  scal_2  0.000102242351`_5.212e-07
-		MVW( 224.684, 161.718`_0.001, 27.816`_0.136)
-		Cubic(lpa_2  5.448196`_0.000008)
+		Phase_Density_g_on_cm3( 2.3070828`_1.03998999e-05)
+		scale  scal_2  0.000102249539`_5.213e-07
+		MVW( 224.684, 161.718`_0.001, 27.819`_0.136)
+		Cubic(lpa_2  5.448197`_0.000008)
         CIF2_set_space_group_id("Fd-3mS")
 		space_group "Fd-3mS"
-		site Si1    x 0 y 0 z 0 occ Si 1 beq bval_2  1.75637`_0.02096
+		site Si1    x 0 y 0 z 0 occ Si 1 beq bval_2  1.75697`_0.02096
 
 for strs {
 		'peak shape derived on 574646-mac-001_offline.xye on 21/4/2017
