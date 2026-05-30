@@ -3,6 +3,7 @@
 
 #######  Begin wavelength information  #######
 data_row_1_01.xy_0_wavelength
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 _diffrn_radiation.id	rad_id
 _diffrn_radiation.probe	x-ray
 loop_
@@ -17,6 +18,7 @@ _diffrn_source.target	Cu
 
 #######  Begin wavelength information  #######
 data_row_1_02.xy_0_wavelength
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 _diffrn_radiation.id	rad_id
 _diffrn_radiation.probe	x-ray
 loop_
@@ -31,6 +33,7 @@ _diffrn_source.target	Cu
 
 #######  Begin wavelength information  #######
 data_row_1_03.xy_0_wavelength
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 _diffrn_radiation.id	rad_id
 _diffrn_radiation.probe	x-ray
 loop_
@@ -45,6 +48,7 @@ _diffrn_source.target	Cu
 
 #######  Begin powder crystal structure  #######
 data_First_0
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 
 _pd_phase.id	First_0
 _pd_phase.name	First
@@ -250,6 +254,7 @@ loop_
 
 #######  Begin powder crystal structure  #######
 data_Second_0
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 
 _pd_phase.id	Second_0
 _pd_phase.name	Second
@@ -399,6 +404,7 @@ loop_
 
 #######  Begin powder crystal structure  #######
 data_Third_0
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 
 _pd_phase.id	Third_0
 _pd_phase.name	Third
@@ -550,6 +556,7 @@ loop_
 
 #######  Begin phase and diffractogram information  #######
 data_First_0_row_1_01.xy_0
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 _pd_phase.id	First_0
 _pd_diffractogram.id	row_1_01.xy_0
 _pd_phase_mass.percent	23.623562
@@ -573,6 +580,7 @@ _pd_calc_component.intensity_net
 
 #######  Begin structure, phase, and diffractogram information  #######
 data_First_0_row_1_01.xy_0
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 _structure.id	First_0
 _pd_phase.id	First_0
 _pd_diffractogram.id	row_1_01.xy_0
@@ -594,6 +602,7 @@ _refln.F_squared_meas
 
 #######  Begin phase and diffractogram information  #######
 data_Second_0_row_1_01.xy_0
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 _pd_phase.id	Second_0
 _pd_diffractogram.id	row_1_01.xy_0
 _pd_phase_mass.percent	54.9267707
@@ -618,6 +627,7 @@ _pd_calc_component.intensity_net
 
 #######  Begin structure, phase, and diffractogram information  #######
 data_Second_0_row_1_01.xy_0
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 _structure.id	Second_0
 _pd_phase.id	Second_0
 _pd_diffractogram.id	row_1_01.xy_0
@@ -642,6 +652,7 @@ _refln.F_squared_meas
 
 #######  Begin phase and diffractogram information  #######
 data_Third_0_row_1_01.xy_0
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 _pd_phase.id	Third_0
 _pd_diffractogram.id	row_1_01.xy_0
 _pd_phase_mass.percent	21.4496673
@@ -666,6 +677,7 @@ _pd_calc_component.intensity_net
 
 #######  Begin structure, phase, and diffractogram information  #######
 data_Third_0_row_1_01.xy_0
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 _structure.id	Third_0
 _pd_phase.id	Third_0
 _pd_diffractogram.id	row_1_01.xy_0
@@ -688,6 +700,7 @@ _refln.F_squared_meas
 
 #######  Begin phase and diffractogram information  #######
 data_First_0_row_1_02.xy_0
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 _pd_phase.id	First_0
 _pd_diffractogram.id	row_1_02.xy_0
 _pd_phase_mass.percent	32.5677757
@@ -711,6 +724,7 @@ _pd_calc_component.intensity_net
 
 #######  Begin structure, phase, and diffractogram information  #######
 data_First_0_row_1_02.xy_0
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 _structure.id	First_0
 _pd_phase.id	First_0
 _pd_diffractogram.id	row_1_02.xy_0
@@ -732,6 +746,7 @@ _refln.F_squared_meas
 
 #######  Begin phase and diffractogram information  #######
 data_Second_0_row_1_02.xy_0
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 _pd_phase.id	Second_0
 _pd_diffractogram.id	row_1_02.xy_0
 _pd_phase_mass.percent	37.8614104
@@ -756,6 +771,7 @@ _pd_calc_component.intensity_net
 
 #######  Begin structure, phase, and diffractogram information  #######
 data_Second_0_row_1_02.xy_0
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 _structure.id	Second_0
 _pd_phase.id	Second_0
 _pd_diffractogram.id	row_1_02.xy_0
@@ -780,6 +796,7 @@ _refln.F_squared_meas
 
 #######  Begin phase and diffractogram information  #######
 data_Third_0_row_1_02.xy_0
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 _pd_phase.id	Third_0
 _pd_diffractogram.id	row_1_02.xy_0
 _pd_phase_mass.percent	29.5708139
@@ -804,6 +821,7 @@ _pd_calc_component.intensity_net
 
 #######  Begin structure, phase, and diffractogram information  #######
 data_Third_0_row_1_02.xy_0
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 _structure.id	Third_0
 _pd_phase.id	Third_0
 _pd_diffractogram.id	row_1_02.xy_0
@@ -826,6 +844,7 @@ _refln.F_squared_meas
 
 #######  Begin phase and diffractogram information  #######
 data_First_0_row_1_03.xy_0
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 _pd_phase.id	First_0
 _pd_diffractogram.id	row_1_03.xy_0
 _pd_phase_mass.percent	37.2716307
@@ -849,6 +868,7 @@ _pd_calc_component.intensity_net
 
 #######  Begin structure, phase, and diffractogram information  #######
 data_First_0_row_1_03.xy_0
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 _structure.id	First_0
 _pd_phase.id	First_0
 _pd_diffractogram.id	row_1_03.xy_0
@@ -870,6 +890,7 @@ _refln.F_squared_meas
 
 #######  Begin phase and diffractogram information  #######
 data_Second_0_row_1_03.xy_0
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 _pd_phase.id	Second_0
 _pd_diffractogram.id	row_1_03.xy_0
 _pd_phase_mass.percent	28.8865599
@@ -894,6 +915,7 @@ _pd_calc_component.intensity_net
 
 #######  Begin structure, phase, and diffractogram information  #######
 data_Second_0_row_1_03.xy_0
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 _structure.id	Second_0
 _pd_phase.id	Second_0
 _pd_diffractogram.id	row_1_03.xy_0
@@ -918,6 +940,7 @@ _refln.F_squared_meas
 
 #######  Begin phase and diffractogram information  #######
 data_Third_0_row_1_03.xy_0
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 _pd_phase.id	Third_0
 _pd_diffractogram.id	row_1_03.xy_0
 _pd_phase_mass.percent	33.8418093
@@ -942,6 +965,7 @@ _pd_calc_component.intensity_net
 
 #######  Begin structure, phase, and diffractogram information  #######
 data_Third_0_row_1_03.xy_0
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 _structure.id	Third_0
 _pd_phase.id	Third_0
 _pd_diffractogram.id	row_1_03.xy_0
@@ -964,6 +988,7 @@ _refln.F_squared_meas
 
 #######  Begin powder diffraction data  #######
 data_row_1_01.xy_0
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 
 _pd_diffractogram.id	row_1_01.xy_0
 _diffrn.id	row_1_01.xy_0
@@ -1005,6 +1030,7 @@ loop_
 
 #######  Begin powder diffraction data  #######
 data_row_1_02.xy_0
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 
 _pd_diffractogram.id	row_1_02.xy_0
 _diffrn.id	row_1_02.xy_0
@@ -1046,6 +1072,7 @@ loop_
 
 #######  Begin powder diffraction data  #######
 data_row_1_03.xy_0
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 
 _pd_diffractogram.id	row_1_03.xy_0
 _diffrn.id	row_1_03.xy_0
@@ -1088,6 +1115,7 @@ loop_
 
 #######  Begin wavelength information  #######
 data_row_2_01.xy_1_wavelength
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 _diffrn_radiation.id	rad_id
 _diffrn_radiation.probe	x-ray
 loop_
@@ -1102,6 +1130,7 @@ _diffrn_source.target	Cu
 
 #######  Begin wavelength information  #######
 data_row_2_02.xy_1_wavelength
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 _diffrn_radiation.id	rad_id
 _diffrn_radiation.probe	x-ray
 loop_
@@ -1116,6 +1145,7 @@ _diffrn_source.target	Cu
 
 #######  Begin wavelength information  #######
 data_row_2_03.xy_1_wavelength
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 _diffrn_radiation.id	rad_id
 _diffrn_radiation.probe	x-ray
 loop_
@@ -1130,6 +1160,7 @@ _diffrn_source.target	Cu
 
 #######  Begin powder crystal structure  #######
 data_First_1
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 
 _pd_phase.id	First_1
 _pd_phase.name	First
@@ -1335,6 +1366,7 @@ loop_
 
 #######  Begin powder crystal structure  #######
 data_Second_1
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 
 _pd_phase.id	Second_1
 _pd_phase.name	Second
@@ -1484,6 +1516,7 @@ loop_
 
 #######  Begin powder crystal structure  #######
 data_Third_1
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 
 _pd_phase.id	Third_1
 _pd_phase.name	Third
@@ -1635,6 +1668,7 @@ loop_
 
 #######  Begin phase and diffractogram information  #######
 data_First_1_row_2_01.xy_1
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 _pd_phase.id	First_1
 _pd_diffractogram.id	row_2_01.xy_1
 _pd_phase_mass.percent	23.623562
@@ -1658,6 +1692,7 @@ _pd_calc_component.intensity_net
 
 #######  Begin structure, phase, and diffractogram information  #######
 data_First_1_row_2_01.xy_1
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 _structure.id	First_1
 _pd_phase.id	First_1
 _pd_diffractogram.id	row_2_01.xy_1
@@ -1679,6 +1714,7 @@ _refln.F_squared_meas
 
 #######  Begin phase and diffractogram information  #######
 data_Second_1_row_2_01.xy_1
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 _pd_phase.id	Second_1
 _pd_diffractogram.id	row_2_01.xy_1
 _pd_phase_mass.percent	54.9267707
@@ -1703,6 +1739,7 @@ _pd_calc_component.intensity_net
 
 #######  Begin structure, phase, and diffractogram information  #######
 data_Second_1_row_2_01.xy_1
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 _structure.id	Second_1
 _pd_phase.id	Second_1
 _pd_diffractogram.id	row_2_01.xy_1
@@ -1727,6 +1764,7 @@ _refln.F_squared_meas
 
 #######  Begin phase and diffractogram information  #######
 data_Third_1_row_2_01.xy_1
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 _pd_phase.id	Third_1
 _pd_diffractogram.id	row_2_01.xy_1
 _pd_phase_mass.percent	21.4496673
@@ -1751,6 +1789,7 @@ _pd_calc_component.intensity_net
 
 #######  Begin structure, phase, and diffractogram information  #######
 data_Third_1_row_2_01.xy_1
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 _structure.id	Third_1
 _pd_phase.id	Third_1
 _pd_diffractogram.id	row_2_01.xy_1
@@ -1773,6 +1812,7 @@ _refln.F_squared_meas
 
 #######  Begin phase and diffractogram information  #######
 data_First_1_row_2_02.xy_1
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 _pd_phase.id	First_1
 _pd_diffractogram.id	row_2_02.xy_1
 _pd_phase_mass.percent	32.5677757
@@ -1796,6 +1836,7 @@ _pd_calc_component.intensity_net
 
 #######  Begin structure, phase, and diffractogram information  #######
 data_First_1_row_2_02.xy_1
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 _structure.id	First_1
 _pd_phase.id	First_1
 _pd_diffractogram.id	row_2_02.xy_1
@@ -1817,6 +1858,7 @@ _refln.F_squared_meas
 
 #######  Begin phase and diffractogram information  #######
 data_Second_1_row_2_02.xy_1
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 _pd_phase.id	Second_1
 _pd_diffractogram.id	row_2_02.xy_1
 _pd_phase_mass.percent	37.8614104
@@ -1841,6 +1883,7 @@ _pd_calc_component.intensity_net
 
 #######  Begin structure, phase, and diffractogram information  #######
 data_Second_1_row_2_02.xy_1
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 _structure.id	Second_1
 _pd_phase.id	Second_1
 _pd_diffractogram.id	row_2_02.xy_1
@@ -1865,6 +1908,7 @@ _refln.F_squared_meas
 
 #######  Begin phase and diffractogram information  #######
 data_Third_1_row_2_02.xy_1
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 _pd_phase.id	Third_1
 _pd_diffractogram.id	row_2_02.xy_1
 _pd_phase_mass.percent	29.5708139
@@ -1889,6 +1933,7 @@ _pd_calc_component.intensity_net
 
 #######  Begin structure, phase, and diffractogram information  #######
 data_Third_1_row_2_02.xy_1
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 _structure.id	Third_1
 _pd_phase.id	Third_1
 _pd_diffractogram.id	row_2_02.xy_1
@@ -1911,6 +1956,7 @@ _refln.F_squared_meas
 
 #######  Begin phase and diffractogram information  #######
 data_First_1_row_2_03.xy_1
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 _pd_phase.id	First_1
 _pd_diffractogram.id	row_2_03.xy_1
 _pd_phase_mass.percent	37.2716307
@@ -1934,6 +1980,7 @@ _pd_calc_component.intensity_net
 
 #######  Begin structure, phase, and diffractogram information  #######
 data_First_1_row_2_03.xy_1
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 _structure.id	First_1
 _pd_phase.id	First_1
 _pd_diffractogram.id	row_2_03.xy_1
@@ -1955,6 +2002,7 @@ _refln.F_squared_meas
 
 #######  Begin phase and diffractogram information  #######
 data_Second_1_row_2_03.xy_1
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 _pd_phase.id	Second_1
 _pd_diffractogram.id	row_2_03.xy_1
 _pd_phase_mass.percent	28.8865599
@@ -1979,6 +2027,7 @@ _pd_calc_component.intensity_net
 
 #######  Begin structure, phase, and diffractogram information  #######
 data_Second_1_row_2_03.xy_1
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 _structure.id	Second_1
 _pd_phase.id	Second_1
 _pd_diffractogram.id	row_2_03.xy_1
@@ -2003,6 +2052,7 @@ _refln.F_squared_meas
 
 #######  Begin phase and diffractogram information  #######
 data_Third_1_row_2_03.xy_1
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 _pd_phase.id	Third_1
 _pd_diffractogram.id	row_2_03.xy_1
 _pd_phase_mass.percent	33.8418093
@@ -2027,6 +2077,7 @@ _pd_calc_component.intensity_net
 
 #######  Begin structure, phase, and diffractogram information  #######
 data_Third_1_row_2_03.xy_1
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 _structure.id	Third_1
 _pd_phase.id	Third_1
 _pd_diffractogram.id	row_2_03.xy_1
@@ -2049,6 +2100,7 @@ _refln.F_squared_meas
 
 #######  Begin powder diffraction data  #######
 data_row_2_01.xy_1
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 
 _pd_diffractogram.id	row_2_01.xy_1
 _diffrn.id	row_2_01.xy_1
@@ -2090,6 +2142,7 @@ loop_
 
 #######  Begin powder diffraction data  #######
 data_row_2_02.xy_1
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 
 _pd_diffractogram.id	row_2_02.xy_1
 _diffrn.id	row_2_02.xy_1
@@ -2131,6 +2184,7 @@ loop_
 
 #######  Begin powder diffraction data  #######
 data_row_2_03.xy_1
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 
 _pd_diffractogram.id	row_2_03.xy_1
 _diffrn.id	row_2_03.xy_1
@@ -2173,6 +2227,7 @@ loop_
 
 #######  Begin wavelength information  #######
 data_row_3_01.xy_2_wavelength
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 _diffrn_radiation.id	rad_id
 _diffrn_radiation.probe	x-ray
 loop_
@@ -2187,6 +2242,7 @@ _diffrn_source.target	Cu
 
 #######  Begin wavelength information  #######
 data_row_3_02.xy_2_wavelength
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 _diffrn_radiation.id	rad_id
 _diffrn_radiation.probe	x-ray
 loop_
@@ -2201,6 +2257,7 @@ _diffrn_source.target	Cu
 
 #######  Begin wavelength information  #######
 data_row_3_03.xy_2_wavelength
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 _diffrn_radiation.id	rad_id
 _diffrn_radiation.probe	x-ray
 loop_
@@ -2215,6 +2272,7 @@ _diffrn_source.target	Cu
 
 #######  Begin powder crystal structure  #######
 data_First_2
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 
 _pd_phase.id	First_2
 _pd_phase.name	First
@@ -2420,6 +2478,7 @@ loop_
 
 #######  Begin powder crystal structure  #######
 data_Second_2
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 
 _pd_phase.id	Second_2
 _pd_phase.name	Second
@@ -2569,6 +2628,7 @@ loop_
 
 #######  Begin powder crystal structure  #######
 data_Third_2
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 
 _pd_phase.id	Third_2
 _pd_phase.name	Third
@@ -2720,6 +2780,7 @@ loop_
 
 #######  Begin phase and diffractogram information  #######
 data_First_2_row_3_01.xy_2
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 _pd_phase.id	First_2
 _pd_diffractogram.id	row_3_01.xy_2
 _pd_phase_mass.percent	23.623562
@@ -2743,6 +2804,7 @@ _pd_calc_component.intensity_net
 
 #######  Begin structure, phase, and diffractogram information  #######
 data_First_2_row_3_01.xy_2
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 _structure.id	First_2
 _pd_phase.id	First_2
 _pd_diffractogram.id	row_3_01.xy_2
@@ -2764,6 +2826,7 @@ _refln.F_squared_meas
 
 #######  Begin phase and diffractogram information  #######
 data_Second_2_row_3_01.xy_2
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 _pd_phase.id	Second_2
 _pd_diffractogram.id	row_3_01.xy_2
 _pd_phase_mass.percent	54.9267707
@@ -2788,6 +2851,7 @@ _pd_calc_component.intensity_net
 
 #######  Begin structure, phase, and diffractogram information  #######
 data_Second_2_row_3_01.xy_2
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 _structure.id	Second_2
 _pd_phase.id	Second_2
 _pd_diffractogram.id	row_3_01.xy_2
@@ -2812,6 +2876,7 @@ _refln.F_squared_meas
 
 #######  Begin phase and diffractogram information  #######
 data_Third_2_row_3_01.xy_2
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 _pd_phase.id	Third_2
 _pd_diffractogram.id	row_3_01.xy_2
 _pd_phase_mass.percent	21.4496673
@@ -2836,6 +2901,7 @@ _pd_calc_component.intensity_net
 
 #######  Begin structure, phase, and diffractogram information  #######
 data_Third_2_row_3_01.xy_2
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 _structure.id	Third_2
 _pd_phase.id	Third_2
 _pd_diffractogram.id	row_3_01.xy_2
@@ -2858,6 +2924,7 @@ _refln.F_squared_meas
 
 #######  Begin phase and diffractogram information  #######
 data_First_2_row_3_02.xy_2
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 _pd_phase.id	First_2
 _pd_diffractogram.id	row_3_02.xy_2
 _pd_phase_mass.percent	32.5677757
@@ -2881,6 +2948,7 @@ _pd_calc_component.intensity_net
 
 #######  Begin structure, phase, and diffractogram information  #######
 data_First_2_row_3_02.xy_2
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 _structure.id	First_2
 _pd_phase.id	First_2
 _pd_diffractogram.id	row_3_02.xy_2
@@ -2902,6 +2970,7 @@ _refln.F_squared_meas
 
 #######  Begin phase and diffractogram information  #######
 data_Second_2_row_3_02.xy_2
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 _pd_phase.id	Second_2
 _pd_diffractogram.id	row_3_02.xy_2
 _pd_phase_mass.percent	37.8614104
@@ -2926,6 +2995,7 @@ _pd_calc_component.intensity_net
 
 #######  Begin structure, phase, and diffractogram information  #######
 data_Second_2_row_3_02.xy_2
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 _structure.id	Second_2
 _pd_phase.id	Second_2
 _pd_diffractogram.id	row_3_02.xy_2
@@ -2950,6 +3020,7 @@ _refln.F_squared_meas
 
 #######  Begin phase and diffractogram information  #######
 data_Third_2_row_3_02.xy_2
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 _pd_phase.id	Third_2
 _pd_diffractogram.id	row_3_02.xy_2
 _pd_phase_mass.percent	29.5708139
@@ -2974,6 +3045,7 @@ _pd_calc_component.intensity_net
 
 #######  Begin structure, phase, and diffractogram information  #######
 data_Third_2_row_3_02.xy_2
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 _structure.id	Third_2
 _pd_phase.id	Third_2
 _pd_diffractogram.id	row_3_02.xy_2
@@ -2996,6 +3068,7 @@ _refln.F_squared_meas
 
 #######  Begin phase and diffractogram information  #######
 data_First_2_row_3_03.xy_2
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 _pd_phase.id	First_2
 _pd_diffractogram.id	row_3_03.xy_2
 _pd_phase_mass.percent	37.2716307
@@ -3019,6 +3092,7 @@ _pd_calc_component.intensity_net
 
 #######  Begin structure, phase, and diffractogram information  #######
 data_First_2_row_3_03.xy_2
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 _structure.id	First_2
 _pd_phase.id	First_2
 _pd_diffractogram.id	row_3_03.xy_2
@@ -3040,6 +3114,7 @@ _refln.F_squared_meas
 
 #######  Begin phase and diffractogram information  #######
 data_Second_2_row_3_03.xy_2
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 _pd_phase.id	Second_2
 _pd_diffractogram.id	row_3_03.xy_2
 _pd_phase_mass.percent	28.8865599
@@ -3064,6 +3139,7 @@ _pd_calc_component.intensity_net
 
 #######  Begin structure, phase, and diffractogram information  #######
 data_Second_2_row_3_03.xy_2
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 _structure.id	Second_2
 _pd_phase.id	Second_2
 _pd_diffractogram.id	row_3_03.xy_2
@@ -3088,6 +3164,7 @@ _refln.F_squared_meas
 
 #######  Begin phase and diffractogram information  #######
 data_Third_2_row_3_03.xy_2
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 _pd_phase.id	Third_2
 _pd_diffractogram.id	row_3_03.xy_2
 _pd_phase_mass.percent	33.8418093
@@ -3112,6 +3189,7 @@ _pd_calc_component.intensity_net
 
 #######  Begin structure, phase, and diffractogram information  #######
 data_Third_2_row_3_03.xy_2
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 _structure.id	Third_2
 _pd_phase.id	Third_2
 _pd_diffractogram.id	row_3_03.xy_2
@@ -3134,6 +3212,7 @@ _refln.F_squared_meas
 
 #######  Begin powder diffraction data  #######
 data_row_3_01.xy_2
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 
 _pd_diffractogram.id	row_3_01.xy_2
 _diffrn.id	row_3_01.xy_2
@@ -3175,6 +3254,7 @@ loop_
 
 #######  Begin powder diffraction data  #######
 data_row_3_02.xy_2
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 
 _pd_diffractogram.id	row_3_02.xy_2
 _diffrn.id	row_3_02.xy_2
@@ -3216,6 +3296,7 @@ loop_
 
 #######  Begin powder diffraction data  #######
 data_row_3_03.xy_2
+_audit_dataset.id	7ac6c702-95ac-4f31-a398-9efc0ca7ae22
 
 _pd_diffractogram.id	row_3_03.xy_2
 _diffrn.id	row_3_03.xy_2

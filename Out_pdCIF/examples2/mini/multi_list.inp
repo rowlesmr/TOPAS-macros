@@ -11,6 +11,8 @@ row_2_01.xy	row_2_02.xy	row_2_03.xy	222   { "2022-01-11T14:59:22+1100" } { "Here
 row_3_01.xy	row_3_02.xy	row_3_03.xy	333   { "2022-01-11T15:31:52+1100" } { "This_is_just_a_string" }
 }
 
+
+CIF2_set_audit_dataset_id("7ac6c702-95ac-4f31-a398-9efc0ca7ae22")
 CIF2_set_scan_method("cont")
 CIF2_set_datetime_initialised(Date_Time(Run_Number))
 CIF2_set_temperature(Temperature(Run_Number))
