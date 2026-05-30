@@ -102,10 +102,11 @@ CIF_MODEL_ID       - string. Per structure. Defaults to CIF_PHASE_ID
 CIF_STRUCTURE_ID   - string. Per structure. Defaults to CIF_PHASE_ID
 CIF_SPACE_GROUP_ID - string. Per structure. Defaults to CIF_PHASE_ID
 
-CIF_DIFFRN_ID         - string. Per diffraction conditions, ie temperature or pressure. Strictly, anything in DIFFRN that would cause a change in _diffrn.id
-CIF_INSTR_ID          - string. Per instrument
-CIF_INSTR_DETECTOR_ID - string. Per instrument. Can only have a single value at a time.
-CIF_RADIATION_ID      - string. Per radiation source
+CIF_DIFFRN_ID          - string. Per diffraction conditions, ie temperature or pressure. Strictly, anything in DIFFRN that would cause a change in _diffrn.id
+CIF_INSTR_ID           - string. Per instrument
+CIF_INSTR_DETECTOR_ID  - string. Per instrument. Can only have a single value at a time.
+CIF_RADIATION_ID       - string. Per radiation source
+CIF_TOF_DETECT_BANK_ID - string. Per xdd. identifies dectector bank
 
 CIF_TEMPERATURE         - number, kelvin
 CIF_PRESSURE            - number, kilopascals
@@ -119,6 +120,11 @@ CIF_DATETIME            - string, DateTime. Per xdd
 CIF_DIFFRACTOMETER_NAME - string, _pd_instr.special_details
 CIF_SCAN_METHOD         - string, enumeration. Per xdd
 CIF_DIFFRACTOGRAM_TEXT  - string, CIF-compliant. Per xdd
+
+CIF_TOF_T0 - number. TOF-calibration zero offset
+CIF_TOF_T1 - number. TOF-calibration linear d offset
+CIF_TOF_T2 - number. TOF-calibration d^2 offset
+
 
 ###############
 
@@ -309,6 +315,9 @@ macro CIF2_set_instr_detector_id(idv) {
 }
 macro CIF2_set_radiation_id(idv) {
     local !CIF_RADIATION_ID = idv;
+}
+macro CIF2_set_tof_detect_bank_id(idv) {
+    local !CIF_TOF_DETECT_BANK_ID = idv;
 }
 macro CIF2_set_temperature(val) {
     local !CIF_TEMPERATURE = val;
@@ -765,6 +774,69 @@ macro Out_pdCIF2_PO_asymmetric_reflection_March_Dollase(ciffile,id, r_c, r_v,ome
 	generalised_POMD_eqn(ciffile,id, r_c, r_v, , h,k,l, , Delta, "arefln")
 }
 
+'##############################################################'
+' Macros for TOF calibration and output                        '
+'##############################################################'
+
+
+macro Out_pdCIF2_calib_dtotof(ciffile, t0, t0v, t1, t1v, t2, t2v) {
+    Out_pdCIF2_calib_dtotof(ciffile,CIF_ID, t0, t0v, t1, t1v, t2, t2v)
+}
+
+macro Out_pdCIF2_calib_dtotof(ciffile,id, t0, t0v, t1, t1v, t2, t2v)
+{
+    #m_argu t0
+    #m_argu t1
+    #m_argu t2
+    If_Local_Eqn_Rpt(t0, t0v,
+        min = Val - 15 Yobs_dx_at(.5(X1+X2));
+        max = Val + 15 Yobs_dx_at(.5(X1+X2));
+        del = .3 Peak_Calculation_Step; )
+    If_Local_Eqn_Rpt(t1, t1v,
+        min = Val - 15 Yobs_dx_at(.5(X1+X2));
+        max = Val + 15 Yobs_dx_at(.5(X1+X2));
+        del .01)
+    If_Local_Eqn_Rpt(t2, t2v,
+        min = Val - 15 Yobs_dx_at(.5(X1+X2));
+        max = Val + 15 Yobs_dx_at(.5(X1+X2));
+        del .005)
+    pk_xo = CeV(t0,t0v) + CeV(t1,t1v) D_spacing + CeV(t2,t2v) D_spacing^2;
+    gui_tof_t0 = CeV(t0,t0v);
+    gui_tof_t1 = CeV(t1,t1v);
+
+    local !CIF_TOF_T0 = CeV(t0,t0v);
+    local !CIF_TOF_T1 = CeV(t1,t1v);
+    local !CIF_TOF_T2 = CeV(t2,t2v);
+
+    local !CIF_TOF_ID0 = String(t0);
+    local !CIF_TOF_ID1 = String(t1);
+    local !CIF_TOF_ID2 = String(t2);
+
+    Out_pdCIF2_calib_dtotof_text(ciffile,id, CIF_TOF_ID0,CIF_TOF_T0,  CIF_TOF_ID1, CIF_TOF_T1,  CIF_TOF_ID2,CIF_TOF_T2)
+}
+
+
+'the CIF text for calib d to tof
+macro Out_pdCIF2_calib_dtotof_text(ciffile,id, id0,t0,   id1,t1,   id2,t2) {
+	Out_CIF2_newfile(ciffile)
+	Out_String("\n")
+	Out_CIF2_section_break("Begin d-to-tof calib information")
+	Out_String("\ndata_") Out_unique_diffractogram_id(id) Out_String("_") Out_String("d-to-tof")
+    Out_CIF2_audit_dataset
+    Out_String("\n_pd_diffractogram.id\t") Out_unique_diffractogram_id(id)
+    Out_String("\nloop_")
+    Out_String("\n_pd_calib_d_to_tof.id")
+    Out_String("\n_pd_calib_d_to_tof.power")
+    Out_String("\n_pd_calib_d_to_tof.coeff")
+    Out(id0, "\n%s\t") Out_String("0\t") Out(t0, "%V")
+    Out(id1, "\n%s\t") Out_String("1\t") Out(t1, "%V")
+    Out(id2, "\n%s\t") Out_String("2\t") Out(t2, "%V")
+	Out_CIF2_section_break("End d-to-tof calib information")
+}
+
+
+
+
 
 
 
@@ -825,7 +897,7 @@ macro Out_pdCIF2_2theta_fixed(th2) {
 /*
    The 2\q diffraction angle in degrees for measurements in a white-beam fixed-angle experiment.
 */
-	Out(th2, "\n_pd_meas.2theta_fixed\t%s")
+	Out(th2, "\n_pd_meas.2theta_fixed\t%V")
 }
 
 macro Out_pdCIF2_phase_mass {
@@ -944,16 +1016,17 @@ bkg_eqn - topas equation. The equation you arre using for your background.
 }
 
 macro Out_pdCIF2_time_of_flight_measured_data(ciffile) {
-	Out_pdCIF2_time_of_flight_data(ciffile, meas, =Get(bkg);)
+	Out_pdCIF2_time_of_flight_data(ciffile, meas, =Get(bkg);, "?")
 }
 macro Out_pdCIF2_time_of_flight_processed_data(ciffile) {
-	Out_pdCIF2_time_of_flight_data(ciffile, proc, =Get(bkg);)
+	Out_pdCIF2_time_of_flight_data(ciffile, proc, =Get(bkg);, "?")
 }
-macro Out_pdCIF2_time_of_flight_data(ciffile, type, bkg_eqn) {
+macro Out_pdCIF2_time_of_flight_data(ciffile, type, bkg_eqn, bank_id) {
 	Out_CIF2_newfile(ciffile)
 	Out_String("\nloop_")
 	Out_String("\n\t_pd_data.point_id")
 	Out_String("\n\t_pd_meas.time_of_flight")
+    Out_String("\n\t_pd_meas.detector_id")
 	Out_String("\n\t_pd_proc.d_spacing")
 	#if type == "meas";
 		Out_String("\n\t_pd_meas.intensity_total")
@@ -967,7 +1040,8 @@ macro Out_pdCIF2_time_of_flight_data(ciffile, type, bkg_eqn) {
 			load out_record out_fmt out_eqn {
                 "\n%9.0f  "  = Xi;
                 "  %11.6f  " = X;
-                "  %11.6f  " = d_spacing_from_TOF(t0, t1, t2);
+                "  %s  "     = bank_id;
+                "  %11.6f  " = d_spacing_from_TOF(CIF_TOF_T0, CIF_TOF_T1, CIF_TOF_T2);
                 "  %11.6f  " = Yobs;
                 "  %11.6f  " = Get(weighting);
                 "  %11.6f  " = Ycalc;
@@ -978,7 +1052,8 @@ macro Out_pdCIF2_time_of_flight_data(ciffile, type, bkg_eqn) {
 			load out_record out_fmt out_eqn {
                 "\n%9.0f  "  = Xi;
                 "  %11.6f  " = X;
-                "  %11.6f  " = d_spacing_from_TOF(t0, t1, t2);
+                "  %s  "     = bank_id;
+                "  %11.6f  " = d_spacing_from_TOF(CIF_TOF_T0, CIF_TOF_T1, CIF_TOF_T2);
                 "  %11.6f  " = Yobs;
                 "  %11.6f  " = Get(weighting);
                 "  %11.6f  " = Ycalc;
@@ -2215,6 +2290,7 @@ id: a number uniquely identifying an xdd, or group of xdds in the case of a mult
 	if Prm_There(CIF_DATETIME) { Out_pdCIF2_datetime_initiated(CIF_DATETIME) }
 	Out_String("\n_pd_calc.method\tRietveld")
 	if Prm_There(CIF_DIFFRACTOMETER_NAME) { Out_pdCIF2_instr_special_details(CIF_DIFFRACTOMETER_NAME) }
+	if Prm_There(CIF_TH2_FIXED) { Out_pdCIF2_2theta_fixed(CIF_TH2_FIXED) }
 	TOF_ED_CW(Out_pdCIF2_scan_method("tof"),
 	          Out_pdCIF2_scan_method("disp"),
 	          if Prm_There(CIF_SCAN_METHOD) { Out_pdCIF2_scan_method(CIF_SCAN_METHOD) } )
@@ -2223,7 +2299,7 @@ id: a number uniquely identifying an xdd, or group of xdds in the case of a mult
     if Prm_There(CIF_PEAK_CUTOFF) { Out_pdCIF2_peak_cutoff_ratio(CIF_PEAK_CUTOFF) }
 	Out_pdCIF2_Rfactors
 	if Prm_There(CIF_DIFFRACTOGRAM_TEXT) { Out_CIF2_free_text(CIF_DIFFRACTOGRAM_TEXT) }
-	TOF_ED_CW(Out_pdCIF2_time_of_flight_data(ciffile, data_type, bkg_eqn),
+	TOF_ED_CW(Out_pdCIF2_time_of_flight_data(ciffile, data_type, bkg_eqn, CIF_TOF_DETECT_BANK_ID),
 	          Out_pdCIF2_energy_dispersive_data(ciffile, data_type, bkg_eqn),
 	          Out_pdCIF2_angle_dispersive_data(ciffile, data_type, bkg_eqn))
 	Out_CIF2_newfile(ciffile)
