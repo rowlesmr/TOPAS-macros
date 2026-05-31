@@ -1587,7 +1587,7 @@ macro Out_CIF2_wavelength(ciffile, rad_id, id, yminmax,
     #m_ifarg la8 "" #m_else Out("8", "\n%s\t") Out(la8, "%11.7f\t") Out(lo8, "%11.7f") #m_endif
     #m_ifarg la9 "" #m_else Out("9", "\n%s\t") Out(la9, "%11.7f\t") Out(lo9, "%11.7f") #m_endif
 
-	Out_CIF2_section_break("End wavelength information")
+	'Out_CIF2_section_break("End wavelength information")
 }
 
 
