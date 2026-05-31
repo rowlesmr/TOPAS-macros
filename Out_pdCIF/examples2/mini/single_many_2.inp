@@ -1,12 +1,18 @@
-#include "../cif.inc"
+#include "../../pdcif2.inc"
 
-macro ciffile { "single_many_2.cif" }
+macro ciffile { "single_many_2_2.cif" }
 system_before_save_OUT { del ciffile }
 
-prm CIF_SCAN_METHOD = "step";
+
+Out_CIF2_initialise(ciffile)
+
+CIF2_set_audit_dataset_id("60d9f912-aa2f-4967-9d32-c82d00e75cd1")
+
+CIF2_set_scan_method("step")
+CIF2_set_instr_id("Bragg_Instr")
 
 yobs_eqn row_A = 1; min 10 max 70 del 5
-	local CIF_ID  1`
+	CIF2_set_cif_id(1)
 	str
 		scale 1e-4
 	str
@@ -15,7 +21,7 @@ yobs_eqn row_A = 1; min 10 max 70 del 5
 		scale 3e-4
 
 yobs_eqn row_B = 2; min 10 max 70 del 5
-	local CIF_ID  2`
+	CIF2_set_cif_id(2)
 	str
 		scale 1e-4
 	str
@@ -25,14 +31,11 @@ yobs_eqn row_B = 2; min 10 max 70 del 5
 
 for xdds {
 	bkg 1 2 4
-   lam
-		ymin_on_ymax 0.0001
-		la 1 lo 1.54 lh 0.501844
+    Out_CIF2_wavelength_cuka1(ciffile, "radiation_src")
 
 	for strs 1 to 1 {
 		phase_name "Selenium"
-		local CIF_PHASE_ID  1`
-		local CIF_Z = 3;
+		CIF2_set_formula_units_Z(3)
 		Hexagonal(3.9, 3.1)
 		space_group "R-3m"
 		site Se1 num_posns  3	x 0 y 0 z 0 occ Se 1 beq 1
@@ -40,8 +43,7 @@ for xdds {
 
 	for strs 2 to 2 {
 		phase_name "Second"
-		local CIF_PHASE_ID  2`
-		local CIF_Z = 2;
+		CIF2_set_formula_units_Z(2)
 		Tetragonal(3.9, 3.2)
 		space_group "I4/mmm"
 		site Pa1 num_posns  2	x 0.0 y 0.0 z 0.0 occ Pa 1.0 beq 1.
@@ -49,12 +51,11 @@ for xdds {
 
 	for strs 3 to 3 {
 		phase_name "Tin"
-		local CIF_PHASE_ID  3`
 		Tetragonal(3.4, 3.2)
 		space_group "I4/mmm"
 		site Sn1 num_posns  2 x 0 y 0 z 0 occ Sn 1 beq 1
 	}
 }
 
-Out_pdCIF(ciffile, "meas")
+Out_pdCIF2(ciffile, "meas")
 
