@@ -2270,7 +2270,7 @@ id: a number uniquely identifying an xdd - normally defined as CIF_ID
 */	Out_CIF2_newfile(ciffile)
 	Out_String("\n")
 	Out_CIF2_section_break("Begin structure, phase, and diffractogram information")
-	Out_String("\ndata_") Out_unique_phase_id(id) Out_String("_") Out_unique_diffractogram_id(id)
+	Out_String("\ndata_") if Prm_There(CIF_STRUCTURE_ID)   { Out(CIF_STRUCTURE_ID, "%s") }   else { Out_unique_phase_id(id) } Out_String("_") Out_unique_phase_id(id) Out_String("_") Out_unique_diffractogram_id(id)
     Out_CIF2_audit_dataset
     Out_String("\n_structure.id\t")     if Prm_There(CIF_STRUCTURE_ID)   { Out(CIF_STRUCTURE_ID, "%s") }   else { Out_unique_phase_id(id) }
     Out_String("\n_pd_phase.id\t") Out_unique_phase_id(id)
