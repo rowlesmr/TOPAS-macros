@@ -2,10 +2,10 @@
 
 macro ciffile { "fourth_2.cif" }
 
-Out_CIF2_initialise(ciffile)
-
 system_before_save_OUT { del ciffile }
 
+
+Out_CIF2_initialise(ciffile)
 
 CIF2_set_audit_dataset_id("307b509c-34b0-4d9b-8fa4-1d4871b919dc")
 
@@ -129,7 +129,73 @@ macro analcime(num) {
 	analcime(na_occ_anal_##num, al_occ_anal_##num, si_occ_anal_##num, o_occ_anal_##num, OW_occ_anal_##num)
 }
 
-
+#define do_filename_2
+#define do_filename_4
+#define do_filename_6
+#define do_filename_8
+#define do_filename_10
+#define do_filename_12
+#define do_filename_14
+#define do_filename_16
+#define do_filename_18
+#define do_filename_18_5
+#define do_filename_19
+#define do_filename_20
+#define do_filename_20_5
+#define do_filename_21
+#define do_filename_21_5
+#define do_filename_22
+#define do_filename_22_5
+#define do_filename_23
+#define do_filename_24
+#define do_filename_26
+#define do_filename_28
+#define do_filename_30
+#define do_filename_32
+#define do_filename_34
+#define do_filename_36
+#define do_filename_38
+#define do_filename_40
+#define do_filename_42
+#define do_filename_44
+#define do_filename_46
+#define do_filename_48
+#define do_filename_50
+#define do_filename_52
+#define do_filename_54
+#define do_filename_56
+#define do_filename_58
+#define do_filename_60
+#define do_filename_62
+#define do_filename_64
+#define do_filename_66
+#define do_filename_68
+#define do_filename_70
+#define do_filename_72
+#define do_filename_74
+#define do_filename_76
+#define do_filename_78
+#define do_filename_80
+#define do_filename_82
+#define do_filename_84
+#define do_filename_86
+#define do_filename_88
+#define do_filename_90
+#define do_filename_92
+#define do_filename_94
+#define do_filename_96
+#define do_filename_98
+#define do_filename_100
+#define do_filename_102
+#define do_filename_104
+#define do_filename_106
+#define do_filename_108
+#define do_filename_110
+#define do_filename_112
+#define do_filename_114
+#define do_filename_116
+#define do_filename_118
+#define do_filename_120
 
 macro	filename_2	   {	xy_data\LK-N1_002-002_mergeRollSum	}  macro	datetime_2	   {	"2007-11-21T13:17:02+1000"	}
 macro	filename_4	   {	xy_data\LK-N1_004-004_mergeRollSum	}  macro	datetime_4	   {	"2007-11-21T13:18:11+1000"	}
@@ -217,6 +283,8 @@ prm gakao_2_19	89.815479`		min 89.7 	max 89.9
 prm cskao_2_19	101.61882`	min 50 		max 150
 
 'General info
+
+#ifdef do_filename_2
 XY(filename_2, 0.002)
 	CIF2_set_datetime_initialised(datetime_2)
 	CIF2_set_cif_id(2)
@@ -263,6 +331,8 @@ XY(filename_2, 0.002)
 '**************************************************************
 
 'General info
+#endif
+#ifdef do_filename_4
 XY(filename_4, 0.002)
 	CIF2_set_datetime_initialised(datetime_4)
 	CIF2_set_cif_id(4)
@@ -310,6 +380,8 @@ XY(filename_4, 0.002)
 '**************************************************************
 
 'General info
+#endif
+#ifdef do_filename_6
 XY(filename_6, 0.002)
 	CIF2_set_datetime_initialised(datetime_6)
 	CIF2_set_cif_id(6)
@@ -356,6 +428,8 @@ XY(filename_6, 0.002)
 '**************************************************************
 
 'General info
+#endif
+#ifdef do_filename_8
 XY(filename_8, 0.002)
 	CIF2_set_datetime_initialised(datetime_8)
 	CIF2_set_cif_id(8)
@@ -398,6 +472,8 @@ XY(filename_8, 0.002)
 '**************************************************************
 
 'General info
+#endif
+#ifdef do_filename_10
 XY(filename_10, 0.002)
 	CIF2_set_datetime_initialised(datetime_10)
 	CIF2_set_cif_id(10)
@@ -438,6 +514,8 @@ XY(filename_10, 0.002)
 '**************************************************************
 
 'General info
+#endif
+#ifdef do_filename_12
 XY(filename_12, 0.002)
 	CIF2_set_datetime_initialised(datetime_12)
 	CIF2_set_cif_id(12)
@@ -479,6 +557,8 @@ XY(filename_12, 0.002)
 '**************************************************************
 
 'General info
+#endif
+#ifdef do_filename_14
 XY(filename_14, 0.002)
 	CIF2_set_datetime_initialised(datetime_14)
 	CIF2_set_cif_id(14)
@@ -521,6 +601,8 @@ XY(filename_14, 0.002)
 '**************************************************************
 
 'General info
+#endif
+#ifdef do_filename_16
 XY(filename_16, 0.002)
 	CIF2_set_datetime_initialised(datetime_16)
 	CIF2_set_cif_id(16)
@@ -563,6 +645,8 @@ XY(filename_16, 0.002)
 '**************************************************************
 
 'General info
+#endif
+#ifdef do_filename_18
 XY(filename_18, 0.002)
 	CIF2_set_datetime_initialised(datetime_18)
 	CIF2_set_cif_id(18)
@@ -605,6 +689,8 @@ XY(filename_18, 0.002)
 '**************************************************************
 
 'General info
+#endif
+#ifdef do_filename_18_5
 XY(filename_18_5, 0.002)
 	local CIF_DATETIME = datetime_18_5;
 	local CIF_ID  18.5`
@@ -647,6 +733,8 @@ XY(filename_18_5, 0.002)
 '**************************************************************
 
 'General info
+#endif
+#ifdef do_filename_19
 XY(filename_19, 0.002)
 	CIF2_set_datetime_initialised(datetime_19)
 	CIF2_set_cif_id(19)
@@ -699,6 +787,8 @@ XY(filename_19, 0.002)
 '****************************************************************************************************************************
 
 'General info
+#endif
+#ifdef do_filename_20
 XY(filename_20, 0.002)
 	CIF2_set_datetime_initialised(datetime_20)
 	CIF2_set_cif_id(20)
@@ -788,6 +878,8 @@ XY(filename_20, 0.002)
 '**************************************************************
 
 'General info
+#endif
+#ifdef do_filename_20_5
 XY(filename_20_5, 0.002)
 	local CIF_DATETIME = datetime_20_5;
 	local CIF_ID  20.5`
@@ -877,6 +969,8 @@ XY(filename_20_5, 0.002)
 '**************************************************************
 
 'General info
+#endif
+#ifdef do_filename_21
 XY(filename_21, 0.002)
 	CIF2_set_datetime_initialised(datetime_21)
 	CIF2_set_cif_id(21)
@@ -966,6 +1060,8 @@ XY(filename_21, 0.002)
 '**************************************************************
 
 'General info
+#endif
+#ifdef do_filename_21_5
 XY(filename_21_5, 0.002)
 	local CIF_DATETIME = datetime_21_5;
 	local CIF_ID  21.5`
@@ -1055,6 +1151,8 @@ XY(filename_21_5, 0.002)
 '**************************************************************
 
 'General info
+#endif
+#ifdef do_filename_22
 XY(filename_22, 0.002)
 	CIF2_set_datetime_initialised(datetime_22)
 	CIF2_set_cif_id(22)
@@ -1144,6 +1242,8 @@ XY(filename_22, 0.002)
 '**************************************************************
 
 'General info
+#endif
+#ifdef do_filename_22_5
 XY(filename_22_5, 0.002)
 	local CIF_DATETIME = datetime_22_5;
 	local CIF_ID  22.5`
@@ -1233,6 +1333,8 @@ XY(filename_22_5, 0.002)
 '**************************************************************
 
 'General info
+#endif
+#ifdef do_filename_23
 XY(filename_23, 0.002)
 	CIF2_set_datetime_initialised(datetime_23)
 	CIF2_set_cif_id(23)
@@ -1337,6 +1439,8 @@ prm gakao_24_end	89.8242315`		min 89.7		max 89.9
 prm cskao_24_end	120.730297`	min 50		max 150
 
 'General info
+#endif
+#ifdef do_filename_24
 XY(filename_24, 0.002)
 	CIF2_set_datetime_initialised(datetime_24)
 	CIF2_set_cif_id(24)
@@ -1426,6 +1530,8 @@ XY(filename_24, 0.002)
 '**************************************************************
 
 'General info
+#endif
+#ifdef do_filename_26
 XY(filename_26, 0.002)
 	CIF2_set_datetime_initialised(datetime_26)
 	CIF2_set_cif_id(26)
@@ -1515,6 +1621,8 @@ XY(filename_26, 0.002)
 '**************************************************************
 
 'General info
+#endif
+#ifdef do_filename_28
 XY(filename_28, 0.002)
 	CIF2_set_datetime_initialised(datetime_28)
 	CIF2_set_cif_id(28)
@@ -1604,6 +1712,8 @@ XY(filename_28, 0.002)
 '**************************************************************
 
 'General info
+#endif
+#ifdef do_filename_30
 XY(filename_30, 0.002)
 	CIF2_set_datetime_initialised(datetime_30)
 	CIF2_set_cif_id(30)
@@ -1707,6 +1817,8 @@ XY(filename_30, 0.002)
 '****************************************************************************************************************************
 
 'General info
+#endif
+#ifdef do_filename_32
 XY(filename_32, 0.002)
 	CIF2_set_datetime_initialised(datetime_32)
 	CIF2_set_cif_id(32)
@@ -1802,7 +1914,7 @@ XY(filename_32, 0.002)
 	'these are parameters that are common to the two analcime structures
 	str
 
-		phase_name "Analcime_1C_#28274_1"
+		phase_name "Analcime_1C_$28274_1"
 		Cubic(aanal1_32  13.750000` min 13.65 max 13.75)
 		CS_L(csanal1_32, 209.375` min 100 max 600)
 		scale scaleanal1_32  1e-15`
@@ -1810,13 +1922,15 @@ XY(filename_32, 0.002)
 
 	str
 
-		phase_name "Analcime_1C_#28274_2"
+		phase_name "Analcime_1C_$28274_2"
 		Cubic(aanal2_32  13.750000` min 13.65 max 13.75)
 		CS_L(csanal2_32, 187.5` min 100 max 500)
 		scale scaleanal2_32  1e-15`
 		analcime(na_occ_anal_32, al_occ_anal_32, si_occ_anal_32, o_occ_anal_32, OW_occ_anal_32)
 
 'General info
+#endif
+#ifdef do_filename_34
 XY(filename_34, 0.002)
 	CIF2_set_datetime_initialised(datetime_34)
 	CIF2_set_cif_id(34)
@@ -1912,7 +2026,7 @@ XY(filename_34, 0.002)
 	'these are parameters that are common to the two analcime structures
 	str
 
-		phase_name "Analcime_1C_#28274_1"
+		phase_name "Analcime_1C_$28274_1"
 		Cubic(aanal1_34  13.748214` min 13.65 max 13.75)
 		CS_L(csanal1_34, 459.375` min 100 max 600)
 		scale scaleanal1_34  1e-15`
@@ -1920,7 +2034,7 @@ XY(filename_34, 0.002)
 
 	str
 
-		phase_name "Analcime_1C_#28274_2"
+		phase_name "Analcime_1C_$28274_2"
 		Cubic(aanal2_34  13.692857` min 13.65 max 13.75)
 		CS_L(csanal2_34, 430.357143` min 100 max 500)
 		scale scaleanal2_34  1e-15`
@@ -1930,6 +2044,8 @@ XY(filename_34, 0.002)
 '**************************************************************
 
 'General info
+#endif
+#ifdef do_filename_36
 XY(filename_36, 0.002)
 	CIF2_set_datetime_initialised(datetime_36)
 	CIF2_set_cif_id(36)
@@ -2025,7 +2141,7 @@ XY(filename_36, 0.002)
 	'these are parameters that are common to the two analcime structures
 	str
 
-		phase_name "Analcime_1C_#28274_1"
+		phase_name "Analcime_1C_$28274_1"
 		Cubic(aanal1_36  13.673661` min 13.65 max 13.75)
 		CS_L(csanal1_36, 582.142857` min 100 max 600)
 		scale scaleanal1_36  1e-15`
@@ -2033,7 +2149,7 @@ XY(filename_36, 0.002)
 
 	str
 
-		phase_name "Analcime_1C_#28274_2"
+		phase_name "Analcime_1C_$28274_2"
 		Cubic(aanal2_36  13.747321` min 13.65 max 13.75)
 		CS_L(csanal2_36, 408.928571` min 100 max 500)
 		scale scaleanal2_36  1e-15`
@@ -2043,6 +2159,8 @@ XY(filename_36, 0.002)
 '**************************************************************
 
 'General info
+#endif
+#ifdef do_filename_38
 XY(filename_38, 0.002)
 	CIF2_set_datetime_initialised(datetime_38)
 	CIF2_set_cif_id(38)
@@ -2138,7 +2256,7 @@ XY(filename_38, 0.002)
 	'these are parameters that are common to the two analcime structures
 	str
 
-		phase_name "Analcime_1C_#28274_1"
+		phase_name "Analcime_1C_$28274_1"
 		Cubic(aanal1_38  13.750000` min 13.65 max 13.75)
 		CS_L(csanal1_38, 100` min 100 max 600)
 		scale scaleanal1_38  1e-15`
@@ -2146,7 +2264,7 @@ XY(filename_38, 0.002)
 
 	str
 
-		phase_name "Analcime_1C_#28274_2"
+		phase_name "Analcime_1C_$28274_2"
 		Cubic(aanal2_38  13.750000` min 13.65 max 13.75)
 		CS_L(csanal2_38, 100` min 100 max 500)
 		scale scaleanal2_38  1e-15`
@@ -2156,6 +2274,8 @@ XY(filename_38, 0.002)
 '**************************************************************
 
 'General info
+#endif
+#ifdef do_filename_40
 XY(filename_40, 0.002)
 	CIF2_set_datetime_initialised(datetime_40)
 	CIF2_set_cif_id(40)
@@ -2251,7 +2371,7 @@ XY(filename_40, 0.002)
 	'these are parameters that are common to the two analcime structures
 	str
 
-		phase_name "Analcime_1C_#28274_1"
+		phase_name "Analcime_1C_$28274_1"
 		Cubic(aanal1_40  13.682730` min 13.65 max 13.75)
 		CS_L(csanal1_40, 346.422456` min 100 max 600)
 		scale scaleanal1_40  1e-15`
@@ -2259,7 +2379,7 @@ XY(filename_40, 0.002)
 
 	str
 
-		phase_name "Analcime_1C_#28274_2"
+		phase_name "Analcime_1C_$28274_2"
 		Cubic(aanal2_40  13.674340` min 13.65 max 13.75)
 		CS_L(csanal2_40, 477.12818` min 100 max 500)
 		scale scaleanal2_40  1e-15`
@@ -2269,6 +2389,8 @@ XY(filename_40, 0.002)
 '**************************************************************
 
 'General info
+#endif
+#ifdef do_filename_42
 XY(filename_42, 0.002)
 	CIF2_set_datetime_initialised(datetime_42)
 	CIF2_set_cif_id(42)
@@ -2364,7 +2486,7 @@ XY(filename_42, 0.002)
 	'these are parameters that are common to the two analcime structures
 	str
 
-		phase_name "Analcime_1C_#28274_1"
+		phase_name "Analcime_1C_$28274_1"
 		Cubic(aanal1_42  13.749119` min 13.65 max 13.75)
 		CS_L(csanal1_42, 591.185897` min 100 max 600)
 		scale scaleanal1_42  1e-15`
@@ -2372,7 +2494,7 @@ XY(filename_42, 0.002)
 
 	str
 
-		phase_name "Analcime_1C_#28274_2"
+		phase_name "Analcime_1C_$28274_2"
 		Cubic(aanal2_42  13.667949` min 13.65 max 13.75)
 		CS_L(csanal2_42, 243.589744` min 100 max 500)
 		scale scaleanal2_42  1e-15`
@@ -2382,6 +2504,8 @@ XY(filename_42, 0.002)
 '**************************************************************
 
 'General info
+#endif
+#ifdef do_filename_44
 XY(filename_44, 0.002)
 	CIF2_set_datetime_initialised(datetime_44)
 	CIF2_set_cif_id(44)
@@ -2477,7 +2601,7 @@ XY(filename_44, 0.002)
 	'these are parameters that are common to the two analcime structures
 	str
 
-		phase_name "Analcime_1C_#28274_1"
+		phase_name "Analcime_1C_$28274_1"
 		Cubic(aanal1_44  13.748818` min 13.65 max 13.75)
 		CS_L(csanal1_44, 502.00391` min 100 max 600)
 		scale scaleanal1_44  1e-15`
@@ -2485,7 +2609,7 @@ XY(filename_44, 0.002)
 
 	str
 
-		phase_name "Analcime_1C_#28274_2"
+		phase_name "Analcime_1C_$28274_2"
 		Cubic(aanal2_44  13.674599` min 13.65 max 13.75)
 		CS_L(csanal2_44, 265.353128` min 100 max 500)
 		scale scaleanal2_44  1e-15`
@@ -2495,6 +2619,8 @@ XY(filename_44, 0.002)
 '**************************************************************
 
 'General info
+#endif
+#ifdef do_filename_46
 XY(filename_46, 0.002)
 	CIF2_set_datetime_initialised(datetime_46)
 	CIF2_set_cif_id(46)
@@ -2590,7 +2716,7 @@ XY(filename_46, 0.002)
 	'these are parameters that are common to the two analcime structures
 	str
 
-		phase_name "Analcime_1C_#28274_1"
+		phase_name "Analcime_1C_$28274_1"
 		Cubic(aanal1_46  13.740874` min 13.65 max 13.75)
 		CS_L(csanal1_46, 600` min 100 max 600)
 		scale scaleanal1_46  2.89493954e-09`
@@ -2598,7 +2724,7 @@ XY(filename_46, 0.002)
 
 	str
 
-		phase_name "Analcime_1C_#28274_2"
+		phase_name "Analcime_1C_$28274_2"
 		Cubic(aanal2_46  13.651541` min 13.65 max 13.75)
 		CS_L(csanal2_46, 125` min 100 max 500)
 		scale scaleanal2_46  2.19834434e-13`
@@ -2608,6 +2734,8 @@ XY(filename_46, 0.002)
 '**************************************************************
 
 'General info
+#endif
+#ifdef do_filename_48
 XY(filename_48, 0.002)
 	CIF2_set_datetime_initialised(datetime_48)
 	CIF2_set_cif_id(48)
@@ -2703,7 +2831,7 @@ XY(filename_48, 0.002)
 	'these are parameters that are common to the two analcime structures
 	str
 
-		phase_name "Analcime_1C_#28274_1"
+		phase_name "Analcime_1C_$28274_1"
 		Cubic(aanal1_48  13.693047` min 13.65 max 13.75)
 		CS_L(csanal1_48, 505.970982` min 100 max 600)
 		scale scaleanal1_48  1.13754141e-09`
@@ -2711,7 +2839,7 @@ XY(filename_48, 0.002)
 
 	str
 
-		phase_name "Analcime_1C_#28274_2"
+		phase_name "Analcime_1C_$28274_2"
 		Cubic(aanal2_48  13.692885` min 13.65 max 13.75)
 		CS_L(csanal2_48, 449.107143` min 100 max 500)
 		scale scaleanal2_48  1.57603802e-09`
@@ -2721,6 +2849,8 @@ XY(filename_48, 0.002)
 '**************************************************************
 
 'General info
+#endif
+#ifdef do_filename_50
 XY(filename_50, 0.002)
 	CIF2_set_datetime_initialised(datetime_50)
 	CIF2_set_cif_id(50)
@@ -2816,7 +2946,7 @@ XY(filename_50, 0.002)
 	'these are parameters that are common to the two analcime structures
 	str
 
-		phase_name "Analcime_1C_#28274_1"
+		phase_name "Analcime_1C_$28274_1"
 		Cubic(aanal1_50  13.734144` min 13.65 max 13.75)
 		CS_L(csanal1_50, 600` min 100 max 600)
 		scale scaleanal1_50  1.09999898e-08`
@@ -2824,7 +2954,7 @@ XY(filename_50, 0.002)
 
 	str
 
-		phase_name "Analcime_1C_#28274_2"
+		phase_name "Analcime_1C_$28274_2"
 		Cubic(aanal2_50  13.749874` min 13.65 max 13.75)
 		CS_L(csanal2_50, 228.385867` min 100 max 500)
 		scale scaleanal2_50  8.04094906e-09`
@@ -2834,6 +2964,8 @@ XY(filename_50, 0.002)
 '**************************************************************
 
 'General info
+#endif
+#ifdef do_filename_52
 XY(filename_52, 0.002)
 	CIF2_set_datetime_initialised(datetime_52)
 	CIF2_set_cif_id(52)
@@ -2929,7 +3061,7 @@ XY(filename_52, 0.002)
 	'these are parameters that are common to the two analcime structures
 	str
 
-		phase_name "Analcime_1C_#28274_1"
+		phase_name "Analcime_1C_$28274_1"
 		Cubic(aanal1_52  13.733429` min 13.65 max 13.75)
 		CS_L(csanal1_52, 584.375` min 100 max 600)
 		scale scaleanal1_52  3.02770072e-09`
@@ -2937,7 +3069,7 @@ XY(filename_52, 0.002)
 
 	str
 
-		phase_name "Analcime_1C_#28274_2"
+		phase_name "Analcime_1C_$28274_2"
 		Cubic(aanal2_52  13.736302` min 13.65 max 13.75)
 		CS_L(csanal2_52, 500` min 100 max 500)
 		scale scaleanal2_52  7.44020029e-09`
@@ -2947,6 +3079,8 @@ XY(filename_52, 0.002)
 '**************************************************************
 
 'General info
+#endif
+#ifdef do_filename_54
 XY(filename_54, 0.002)
 	CIF2_set_datetime_initialised(datetime_54)
 	CIF2_set_cif_id(54)
@@ -3042,7 +3176,7 @@ XY(filename_54, 0.002)
 	'these are parameters that are common to the two analcime structures
 	str
 
-		phase_name "Analcime_1C_#28274_1"
+		phase_name "Analcime_1C_$28274_1"
 		Cubic(aanal1_54  13.733664` min 13.65 max 13.75)
 		CS_L(csanal1_54, 584.375` min 100 max 600)
 		scale scaleanal1_54  2.16104444e-08`
@@ -3050,7 +3184,7 @@ XY(filename_54, 0.002)
 
 	str
 
-		phase_name "Analcime_1C_#28274_2"
+		phase_name "Analcime_1C_$28274_2"
 		Cubic(aanal2_54  13.726151` min 13.65 max 13.75)
 		CS_L(csanal2_54, 487.5` min 100 max 500)
 		scale scaleanal2_54  6.3901666e-09`
@@ -3060,6 +3194,8 @@ XY(filename_54, 0.002)
 '**************************************************************
 
 'General info
+#endif
+#ifdef do_filename_56
 XY(filename_56, 0.002)
 	CIF2_set_datetime_initialised(datetime_56)
 	CIF2_set_cif_id(56)
@@ -3155,7 +3291,7 @@ XY(filename_56, 0.002)
 	'these are parameters that are common to the two analcime structures
 	str
 
-		phase_name "Analcime_1C_#28274_1"
+		phase_name "Analcime_1C_$28274_1"
 		Cubic(aanal1_56  13.748115` min 13.65 max 13.75)
 		CS_L(csanal1_56, 518.650794` min 100 max 600)
 		scale scaleanal1_56  1.09903813e-09`
@@ -3164,7 +3300,7 @@ XY(filename_56, 0.002)
 
 	str
 
-		phase_name "Analcime_1C_#28274_2"
+		phase_name "Analcime_1C_$28274_2"
 		Cubic(aanal2_56  13.731937` min 13.65 max 13.75)
 		CS_L(csanal2_56, 486.741094` min 100 max 500)
 		scale scaleanal2_56  4.47746113e-08`
@@ -3173,6 +3309,8 @@ XY(filename_56, 0.002)
 '**************************************************************
 '**************************************************************
 
+#endif
+#ifdef do_filename_58
 XY(filename_58, 0.002)
 	CIF2_set_datetime_initialised(datetime_58)
 	CIF2_set_cif_id(58)
@@ -3268,7 +3406,7 @@ XY(filename_58, 0.002)
 	'these are parameters that are common to the two analcime structures
 	str
 
-		phase_name "Analcime_1C_#28274_1"
+		phase_name "Analcime_1C_$28274_1"
 		Cubic(aanal1_58  13.725877` min 13.65 max 13.75)
 		CS_L(csanal1_58, 584.375` min 100 max 600)
 		scale scaleanal1_58  3.61035556e-08`
@@ -3276,7 +3414,7 @@ XY(filename_58, 0.002)
 
 	str
 
-		phase_name "Analcime_1C_#28274_2"
+		phase_name "Analcime_1C_$28274_2"
 		Cubic(aanal2_58  13.735003` min 13.65 max 13.75)
 		CS_L(csanal2_58, 487.5` min 100 max 500)
 		scale scaleanal2_58  1.81930203e-08`
@@ -3286,6 +3424,8 @@ XY(filename_58, 0.002)
 '**************************************************************
 
 'General info
+#endif
+#ifdef do_filename_60
 XY(filename_60, 0.002)
 	CIF2_set_datetime_initialised(datetime_60)
 	CIF2_set_cif_id(60)
@@ -3381,7 +3521,7 @@ XY(filename_60, 0.002)
 	'these are parameters that are common to the two analcime structures
 	str
 
-		phase_name "Analcime_1C_#28274_1"
+		phase_name "Analcime_1C_$28274_1"
 		Cubic(aanal1_60  13.731377` min 13.65 max 13.75)
 		CS_L(csanal1_60, 553.943314` min 100 max 600)
 		scale scaleanal1_60  4.95309822e-08`
@@ -3389,7 +3529,7 @@ XY(filename_60, 0.002)
 
 	str
 
-		phase_name "Analcime_1C_#28274_2"
+		phase_name "Analcime_1C_$28274_2"
 		Cubic(aanal2_60  13.718570` min 13.65 max 13.75)
 		CS_L(csanal2_60, 487.5` min 100 max 500)
 		scale scaleanal2_60  3.25244449e-08`
@@ -3399,6 +3539,8 @@ XY(filename_60, 0.002)
 '**************************************************************
 
 'General info
+#endif
+#ifdef do_filename_62
 XY(filename_62, 0.002)
 	CIF2_set_datetime_initialised(datetime_62)
 	CIF2_set_cif_id(62)
@@ -3494,7 +3636,7 @@ XY(filename_62, 0.002)
 	'these are parameters that are common to the two analcime structures
 	str
 
-		phase_name "Analcime_1C_#28274_1"
+		phase_name "Analcime_1C_$28274_1"
 		Cubic(aanal1_62  13.729943` min 13.65 max 13.75)
 		CS_L(csanal1_62, 523.960341` min 100 max 600)
 		scale scaleanal1_62  6.23064751e-08`
@@ -3502,7 +3644,7 @@ XY(filename_62, 0.002)
 
 	str
 
-		phase_name "Analcime_1C_#28274_2"
+		phase_name "Analcime_1C_$28274_2"
 		Cubic(aanal2_62  13.718031` min 13.65 max 13.75)
 		CS_L(csanal2_62, 490.401215` min 100 max 500)
 		scale scaleanal2_62  4.44963076e-08`
@@ -3512,6 +3654,8 @@ XY(filename_62, 0.002)
 '**************************************************************
 
 'General info
+#endif
+#ifdef do_filename_64
 XY(filename_64, 0.002)
 	CIF2_set_datetime_initialised(datetime_64)
 	CIF2_set_cif_id(64)
@@ -3607,7 +3751,7 @@ XY(filename_64, 0.002)
 	'these are parameters that are common to the two analcime structures
 	str
 
-		phase_name "Analcime_1C_#28274_1"
+		phase_name "Analcime_1C_$28274_1"
 		Cubic(aanal1_64  13.728834` min 13.65 max 13.75)
 		CS_L(csanal1_64, 453.145635` min 100 max 600)
 		scale scaleanal1_64  6.57657867e-08`
@@ -3615,7 +3759,7 @@ XY(filename_64, 0.002)
 
 	str
 
-		phase_name "Analcime_1C_#28274_2"
+		phase_name "Analcime_1C_$28274_2"
 		Cubic(aanal2_64  13.719145` min 13.65 max 13.75)
 		CS_L(csanal2_64, 500` min 100 max 500)
 		scale scaleanal2_64  6.26945373e-08`
@@ -3625,6 +3769,8 @@ XY(filename_64, 0.002)
 '**************************************************************
 
 'General info
+#endif
+#ifdef do_filename_66
 XY(filename_66, 0.002)
 	CIF2_set_datetime_initialised(datetime_66)
 	CIF2_set_cif_id(66)
@@ -3720,7 +3866,7 @@ XY(filename_66, 0.002)
 	'these are parameters that are common to the two analcime structures
 	str
 
-		phase_name "Analcime_1C_#28274_1"
+		phase_name "Analcime_1C_$28274_1"
 		Cubic(aanal1_66  13.715507` min 13.65 max 13.75)
 		CS_L(csanal1_66, 484.09813` min 100 max 600)
 		scale scaleanal1_66  6.36942058e-08`
@@ -3728,7 +3874,7 @@ XY(filename_66, 0.002)
 
 	str
 
-		phase_name "Analcime_1C_#28274_2"
+		phase_name "Analcime_1C_$28274_2"
 		Cubic(aanal2_66  13.725883` min 13.65 max 13.75)
 		CS_L(csanal2_66, 408.318952` min 100 max 500)
 		scale scaleanal2_66  1.00326323e-07`
@@ -3738,6 +3884,8 @@ XY(filename_66, 0.002)
 '**************************************************************
 
 'General info
+#endif
+#ifdef do_filename_68
 XY(filename_68, 0.002)
 	CIF2_set_datetime_initialised(datetime_68)
 	CIF2_set_cif_id(68)
@@ -3833,7 +3981,7 @@ XY(filename_68, 0.002)
 	'these are parameters that are common to the two analcime structures
 	str
 
-		phase_name "Analcime_1C_#28274_1"
+		phase_name "Analcime_1C_$28274_1"
 		Cubic(aanal1_68  13.716737` min 13.65 max 13.75)
 		CS_L(csanal1_68, 369.524293` min 100 max 600)
 		scale scaleanal1_68  1.361551e-07`
@@ -3841,7 +3989,7 @@ XY(filename_68, 0.002)
 
 	str
 
-		phase_name "Analcime_1C_#28274_2"
+		phase_name "Analcime_1C_$28274_2"
 		Cubic(aanal2_68  13.728395` min 13.65 max 13.75)
 		CS_L(csanal2_68, 413.671355` min 100 max 500)
 		scale scaleanal2_68  7.61217706e-08`
@@ -3851,6 +3999,8 @@ XY(filename_68, 0.002)
 '**************************************************************
 
 'General info
+#endif
+#ifdef do_filename_70
 XY(filename_70, 0.002)
 	CIF2_set_datetime_initialised(datetime_70)
 	CIF2_set_cif_id(70)
@@ -3931,7 +4081,7 @@ XY(filename_70, 0.002)
 	'these are parameters that are common to the two analcime structures
 	str
 
-		phase_name "Analcime_1C_#28274_1"
+		phase_name "Analcime_1C_$28274_1"
 		Cubic(aanal1_70  13.725937` min 13.65 max 13.75)
 		CS_L(csanal1_70, 428.795664` min 100 max 600)
 		scale scaleanal1_70  1.08500317e-07`
@@ -3939,7 +4089,7 @@ XY(filename_70, 0.002)
 
 	str
 
-		phase_name "Analcime_1C_#28274_2"
+		phase_name "Analcime_1C_$28274_2"
 		Cubic(aanal2_70  13.714340` min 13.65 max 13.75)
 		CS_L(csanal2_70, 482.8683` min 100 max 500)
 		scale scaleanal2_70  1.161606e-07`
@@ -3949,6 +4099,8 @@ XY(filename_70, 0.002)
 '**************************************************************
 
 'General info
+#endif
+#ifdef do_filename_72
 XY(filename_72, 0.002)
 	CIF2_set_datetime_initialised(datetime_72)
 	CIF2_set_cif_id(72)
@@ -4029,7 +4181,7 @@ XY(filename_72, 0.002)
 	'these are parameters that are common to the two analcime structures
 	str
 
-		phase_name "Analcime_1C_#28274_1"
+		phase_name "Analcime_1C_$28274_1"
 		Cubic(aanal1_72  13.724810` min 13.65 max 13.75)
 		CS_L(csanal1_72, 362.531383` min 100 max 600)
 		scale scaleanal1_72  1.28506271e-07`
@@ -4037,7 +4189,7 @@ XY(filename_72, 0.002)
 
 	str
 
-		phase_name "Analcime_1C_#28274_2"
+		phase_name "Analcime_1C_$28274_2"
 		Cubic(aanal2_72  13.712976` min 13.65 max 13.75)
 		CS_L(csanal2_72, 380.976355` min 100 max 500)
 		scale scaleanal2_72  1.59557994e-07`
@@ -4047,6 +4199,8 @@ XY(filename_72, 0.002)
 '**************************************************************
 
 'General info
+#endif
+#ifdef do_filename_74
 XY(filename_74, 0.002)
 	CIF2_set_datetime_initialised(datetime_74)
 	CIF2_set_cif_id(74)
@@ -4127,7 +4281,7 @@ XY(filename_74, 0.002)
 	'these are parameters that are common to the two analcime structures
 	str
 
-		phase_name "Analcime_1C_#28274_1"
+		phase_name "Analcime_1C_$28274_1"
 		Cubic(aanal1_74  13.709453` min 13.65 max 13.75)
 		CS_L(csanal1_74, 490.79038` min 100 max 600)
 		scale scaleanal1_74  1.10826517e-07`
@@ -4135,7 +4289,7 @@ XY(filename_74, 0.002)
 
 	str
 
-		phase_name "Analcime_1C_#28274_2"
+		phase_name "Analcime_1C_$28274_2"
 		Cubic(aanal2_74  13.720796` min 13.65 max 13.75)
 		CS_L(csanal2_74, 333.634061` min 100 max 500)
 		scale scaleanal2_74  2.06979674e-07`
@@ -4145,6 +4299,8 @@ XY(filename_74, 0.002)
 '**************************************************************
 
 'General info
+#endif
+#ifdef do_filename_76
 XY(filename_76, 0.002)
 	CIF2_set_datetime_initialised(datetime_76)
 	CIF2_set_cif_id(76)
@@ -4225,7 +4381,7 @@ XY(filename_76, 0.002)
 	'these are parameters that are common to the two analcime structures
 	str
 
-		phase_name "Analcime_1C_#28274_1"
+		phase_name "Analcime_1C_$28274_1"
 		Cubic(aanal1_76  13.710847` min 13.65 max 13.75)
 		CS_L(csanal1_76, 399.827653` min 100 max 600)
 		scale scaleanal1_76  2.04452755e-07`
@@ -4233,7 +4389,7 @@ XY(filename_76, 0.002)
 
 	str
 
-		phase_name "Analcime_1C_#28274_2"
+		phase_name "Analcime_1C_$28274_2"
 		Cubic(aanal2_76  13.722343` min 13.65 max 13.75)
 		CS_L(csanal2_76, 328.851566` min 100 max 500)
 		scale scaleanal2_76  1.73376798e-07`
@@ -4243,6 +4399,8 @@ XY(filename_76, 0.002)
 '**************************************************************
 
 'General info
+#endif
+#ifdef do_filename_78
 XY(filename_78, 0.002)
 	CIF2_set_datetime_initialised(datetime_78)
 	CIF2_set_cif_id(78)
@@ -4323,7 +4481,7 @@ XY(filename_78, 0.002)
 	'these are parameters that are common to the two analcime structures
 	str
 
-		phase_name "Analcime_1C_#28274_1"
+		phase_name "Analcime_1C_$28274_1"
 		Cubic(aanal1_78  13.708362` min 13.65 max 13.75)
 		CS_L(csanal1_78, 402.275562` min 100 max 600)
 		scale scaleanal1_78  2.00783266e-07`
@@ -4331,7 +4489,7 @@ XY(filename_78, 0.002)
 
 	str
 
-		phase_name "Analcime_1C_#28274_2"
+		phase_name "Analcime_1C_$28274_2"
 		Cubic(aanal2_78  13.720100` min 13.65 max 13.75)
 		CS_L(csanal2_78, 327.210656` min 100 max 500)
 		scale scaleanal2_78  2.26539133e-07`
@@ -4341,6 +4499,8 @@ XY(filename_78, 0.002)
 '**************************************************************
 
 'General info
+#endif
+#ifdef do_filename_80
 XY(filename_80, 0.002)
 	CIF2_set_datetime_initialised(datetime_80)
 	CIF2_set_cif_id(80)
@@ -4421,7 +4581,7 @@ XY(filename_80, 0.002)
 	'these are parameters that are common to the two analcime structures
 	str
 
-		phase_name "Analcime_1C_#28274_1"
+		phase_name "Analcime_1C_$28274_1"
 		Cubic(aanal1_80  13.706805` min 13.65 max 13.75)
 		CS_L(csanal1_80, 427.16763` min 100 max 600)
 		scale scaleanal1_80  1.97141263e-07`
@@ -4429,7 +4589,7 @@ XY(filename_80, 0.002)
 
 	str
 
-		phase_name "Analcime_1C_#28274_2"
+		phase_name "Analcime_1C_$28274_2"
 		Cubic(aanal2_80  13.718464` min 13.65 max 13.75)
 		CS_L(csanal2_80, 302.535735` min 100 max 500)
 		scale scaleanal2_80  2.96092841e-07`
@@ -4439,6 +4599,8 @@ XY(filename_80, 0.002)
 '**************************************************************
 
 'General info
+#endif
+#ifdef do_filename_82
 XY(filename_82, 0.002)
 	CIF2_set_datetime_initialised(datetime_82)
 	CIF2_set_cif_id(82)
@@ -4519,7 +4681,7 @@ XY(filename_82, 0.002)
 	'these are parameters that are common to the two analcime structures
 	str
 
-		phase_name "Analcime_1C_#28274_1"
+		phase_name "Analcime_1C_$28274_1"
 		Cubic(aanal1_82  13.705195` min 13.65 max 13.75)
 		CS_L(csanal1_82, 417.232401` min 100 max 600)
 		scale scaleanal1_82  2.10670991e-07`
@@ -4527,7 +4689,7 @@ XY(filename_82, 0.002)
 
 	str
 
-		phase_name "Analcime_1C_#28274_2"
+		phase_name "Analcime_1C_$28274_2"
 		Cubic(aanal2_82  13.716297` min 13.65 max 13.75)
 		CS_L(csanal2_82, 277.866689` min 100 max 500)
 		scale scaleanal2_82  3.55182677e-07`
@@ -4537,6 +4699,8 @@ XY(filename_82, 0.002)
 '**************************************************************
 
 'General info
+#endif
+#ifdef do_filename_84
 XY(filename_84, 0.002)
 	CIF2_set_datetime_initialised(datetime_84)
 	CIF2_set_cif_id(84)
@@ -4617,7 +4781,7 @@ XY(filename_84, 0.002)
 	'these are parameters that are common to the two analcime structures
 	str
 
-		phase_name "Analcime_1C_#28274_1"
+		phase_name "Analcime_1C_$28274_1"
 		Cubic(aanal1_84  13.703818` min 13.65 max 13.75)
 		CS_L(csanal1_84, 436.814754` min 100 max 600)
 		scale scaleanal1_84  2.18497976e-07`
@@ -4625,7 +4789,7 @@ XY(filename_84, 0.002)
 
 	str
 
-		phase_name "Analcime_1C_#28274_2"
+		phase_name "Analcime_1C_$28274_2"
 		Cubic(aanal2_84  13.715287` min 13.65 max 13.75)
 		CS_L(csanal2_84, 289.950212` min 100 max 500)
 		scale scaleanal2_84  4.05891945e-07`
@@ -4635,6 +4799,8 @@ XY(filename_84, 0.002)
 '**************************************************************
 
 'General info
+#endif
+#ifdef do_filename_86
 XY(filename_86, 0.002)
 	CIF2_set_datetime_initialised(datetime_86)
 	CIF2_set_cif_id(86)
@@ -4715,7 +4881,7 @@ XY(filename_86, 0.002)
 	'these are parameters that are common to the two analcime structures
 	str
 
-		phase_name "Analcime_1C_#28274_1"
+		phase_name "Analcime_1C_$28274_1"
 		Cubic(aanal1_86  13.702831` min 13.65 max 13.75)
 		CS_L(csanal1_86, 492.187207` min 100 max 600)
 		scale scaleanal1_86  2.19588344e-07`
@@ -4723,7 +4889,7 @@ XY(filename_86, 0.002)
 
 	str
 
-		phase_name "Analcime_1C_#28274_2"
+		phase_name "Analcime_1C_$28274_2"
 		Cubic(aanal2_86  13.714514` min 13.65 max 13.75)
 		CS_L(csanal2_86, 281.437968` min 100 max 500)
 		scale scaleanal2_86  4.69405597e-07`
@@ -4733,6 +4899,8 @@ XY(filename_86, 0.002)
 '**************************************************************
 
 'General info
+#endif
+#ifdef do_filename_88
 XY(filename_88, 0.002)
 	CIF2_set_datetime_initialised(datetime_88)
 	CIF2_set_cif_id(88)
@@ -4813,7 +4981,7 @@ XY(filename_88, 0.002)
 	'these are parameters that are common to the two analcime structures
 	str
 
-		phase_name "Analcime_1C_#28274_1"
+		phase_name "Analcime_1C_$28274_1"
 		Cubic(aanal1_88  13.702561` min 13.65 max 13.75)
 		CS_L(csanal1_88, 463.022318` min 100 max 600)
 		scale scaleanal1_88  2.95946304e-07`
@@ -4821,7 +4989,7 @@ XY(filename_88, 0.002)
 
 	str
 
-		phase_name "Analcime_1C_#28274_2"
+		phase_name "Analcime_1C_$28274_2"
 		Cubic(aanal2_88  13.714607` min 13.65 max 13.75)
 		CS_L(csanal2_88, 289.625635` min 100 max 500)
 		scale scaleanal2_88  4.57002712e-07`
@@ -4831,6 +4999,8 @@ XY(filename_88, 0.002)
 '**************************************************************
 
 'General info
+#endif
+#ifdef do_filename_90
 XY(filename_90, 0.002)
 	CIF2_set_datetime_initialised(datetime_90)
 	CIF2_set_cif_id(90)
@@ -4911,7 +5081,7 @@ XY(filename_90, 0.002)
 	'these are parameters that are common to the two analcime structures
 	str
 
-		phase_name "Analcime_1C_#28274_1"
+		phase_name "Analcime_1C_$28274_1"
 		Cubic(aanal1_90  13.700949` min 13.65 max 13.75)
 		CS_L(csanal1_90, 419.478575` min 100 max 600)
 		scale scaleanal1_90  3.2704368e-07`
@@ -4919,7 +5089,7 @@ XY(filename_90, 0.002)
 
 	str
 
-		phase_name "Analcime_1C_#28274_2"
+		phase_name "Analcime_1C_$28274_2"
 		Cubic(aanal2_90  13.713543` min 13.65 max 13.75)
 		CS_L(csanal2_90, 280.002374` min 100 max 500)
 		scale scaleanal2_90  5.08171991e-07`
@@ -4929,6 +5099,8 @@ XY(filename_90, 0.002)
 '**************************************************************
 
 'General info
+#endif
+#ifdef do_filename_92
 XY(filename_92, 0.002)
 	CIF2_set_datetime_initialised(datetime_92)
 	CIF2_set_cif_id(92)
@@ -5009,7 +5181,7 @@ XY(filename_92, 0.002)
 	'these are parameters that are common to the two analcime structures
 	str
 
-		phase_name "Analcime_1C_#28274_1"
+		phase_name "Analcime_1C_$28274_1"
 		Cubic(aanal1_92  13.700229` min 13.65 max 13.75)
 		CS_L(csanal1_92, 403.268802` min 100 max 600)
 		scale scaleanal1_92  3.82492375e-07`
@@ -5017,7 +5189,7 @@ XY(filename_92, 0.002)
 
 	str
 
-		phase_name "Analcime_1C_#28274_2"
+		phase_name "Analcime_1C_$28274_2"
 		Cubic(aanal2_92  13.713116` min 13.65 max 13.75)
 		CS_L(csanal2_92, 299.782167` min 100 max 500)
 		scale scaleanal2_92  5.28180529e-07`
@@ -5027,6 +5199,8 @@ XY(filename_92, 0.002)
 '**************************************************************
 
 'General info
+#endif
+#ifdef do_filename_94
 XY(filename_94, 0.002)
 	CIF2_set_datetime_initialised(datetime_94)
 	CIF2_set_cif_id(94)
@@ -5107,7 +5281,7 @@ XY(filename_94, 0.002)
 	'these are parameters that are common to the two analcime structures
 	str
 
-		phase_name "Analcime_1C_#28274_1"
+		phase_name "Analcime_1C_$28274_1"
 		Cubic(aanal1_94  13.699686` min 13.65 max 13.75)
 		CS_L(csanal1_94, 397.470454` min 100 max 600)
 		scale scaleanal1_94  4.12858239e-07`
@@ -5115,7 +5289,7 @@ XY(filename_94, 0.002)
 
 	str
 
-		phase_name "Analcime_1C_#28274_2"
+		phase_name "Analcime_1C_$28274_2"
 		Cubic(aanal2_94  13.712584` min 13.65 max 13.75)
 		CS_L(csanal2_94, 269.754942` min 100 max 500)
 		scale scaleanal2_94  5.89005624e-07`
@@ -5125,6 +5299,8 @@ XY(filename_94, 0.002)
 '**************************************************************
 
 'General info
+#endif
+#ifdef do_filename_96
 XY(filename_96, 0.002)
 	CIF2_set_datetime_initialised(datetime_96)
 	CIF2_set_cif_id(96)
@@ -5205,7 +5381,7 @@ XY(filename_96, 0.002)
 	'these are parameters that are common to the two analcime structures
 	str
 
-		phase_name "Analcime_1C_#28274_1"
+		phase_name "Analcime_1C_$28274_1"
 		Cubic(aanal1_96  13.699208` min 13.65 max 13.75)
 		CS_L(csanal1_96, 369.740778` min 100 max 600)
 		scale scaleanal1_96  5.03163099e-07`
@@ -5213,7 +5389,7 @@ XY(filename_96, 0.002)
 
 	str
 
-		phase_name "Analcime_1C_#28274_2"
+		phase_name "Analcime_1C_$28274_2"
 		Cubic(aanal2_96  13.712320` min 13.65 max 13.75)
 		CS_L(csanal2_96, 284.641926` min 100 max 500)
 		scale scaleanal2_96  5.84593778e-07`
@@ -5223,6 +5399,8 @@ XY(filename_96, 0.002)
 '**************************************************************
 
 'General info
+#endif
+#ifdef do_filename_98
 XY(filename_98, 0.002)
 	CIF2_set_datetime_initialised(datetime_98)
 	CIF2_set_cif_id(98)
@@ -5303,7 +5481,7 @@ XY(filename_98, 0.002)
 	'these are parameters that are common to the two analcime structures
 	str
 
-		phase_name "Analcime_1C_#28274_1"
+		phase_name "Analcime_1C_$28274_1"
 		Cubic(aanal1_98  13.697952` min 13.65 max 13.75)
 		CS_L(csanal1_98, 364.111003` min 100 max 600)
 		scale scaleanal1_98  5.28802709e-07`
@@ -5311,7 +5489,7 @@ XY(filename_98, 0.002)
 
 	str
 
-		phase_name "Analcime_1C_#28274_2"
+		phase_name "Analcime_1C_$28274_2"
 		Cubic(aanal2_98  13.711112` min 13.65 max 13.75)
 		CS_L(csanal2_98, 279.894507` min 100 max 500)
 		scale scaleanal2_98  6.55366206e-07`
@@ -5321,6 +5499,8 @@ XY(filename_98, 0.002)
 '**************************************************************
 
 'General info
+#endif
+#ifdef do_filename_100
 XY(filename_100, 0.002)
 	CIF2_set_datetime_initialised(datetime_100)
 	CIF2_set_cif_id(100)
@@ -5401,7 +5581,7 @@ XY(filename_100, 0.002)
 	'these are parameters that are common to the two analcime structures
 	str
 
-		phase_name "Analcime_1C_#28274_1"
+		phase_name "Analcime_1C_$28274_1"
 		Cubic(aanal1_100  13.697611` min 13.65 max 13.75)
 		CS_L(csanal1_100, 371.371718` min 100 max 600)
 		scale scaleanal1_100  5.96662284e-07`
@@ -5409,7 +5589,7 @@ XY(filename_100, 0.002)
 
 	str
 
-		phase_name "Analcime_1C_#28274_2"
+		phase_name "Analcime_1C_$28274_2"
 		Cubic(aanal2_100  13.710649` min 13.65 max 13.75)
 		CS_L(csanal2_100, 269.163903` min 100 max 500)
 		scale scaleanal2_100  7.06291139e-07`
@@ -5419,6 +5599,8 @@ XY(filename_100, 0.002)
 '**************************************************************
 
 'General info
+#endif
+#ifdef do_filename_102
 XY(filename_102, 0.002)
 	CIF2_set_datetime_initialised(datetime_102)
 	CIF2_set_cif_id(102)
@@ -5499,7 +5681,7 @@ XY(filename_102, 0.002)
 	'these are parameters that are common to the two analcime structures
 	str
 
-		phase_name "Analcime_1C_#28274_1"
+		phase_name "Analcime_1C_$28274_1"
 		Cubic(aanal1_102  13.696536` min 13.65 max 13.75)
 		CS_L(csanal1_102, 378.139798` min 100 max 600)
 		scale scaleanal1_102  6.34208844e-07`
@@ -5507,7 +5689,7 @@ XY(filename_102, 0.002)
 
 	str
 
-		phase_name "Analcime_1C_#28274_2"
+		phase_name "Analcime_1C_$28274_2"
 		Cubic(aanal2_102  13.709892` min 13.65 max 13.75)
 		CS_L(csanal2_102, 261.445452` min 100 max 500)
 		scale scaleanal2_102  7.85311148e-07`
@@ -5517,6 +5699,8 @@ XY(filename_102, 0.002)
 '**************************************************************
 
 'General info
+#endif
+#ifdef do_filename_104
 XY(filename_104, 0.002)
 	CIF2_set_datetime_initialised(datetime_104)
 	CIF2_set_cif_id(104)
@@ -5597,7 +5781,7 @@ XY(filename_104, 0.002)
 	'these are parameters that are common to the two analcime structures
 	str
 
-		phase_name "Analcime_1C_#28274_1"
+		phase_name "Analcime_1C_$28274_1"
 		Cubic(aanal1_104  13.696299` min 13.65 max 13.75)
 		CS_L(csanal1_104, 360.971455` min 100 max 600)
 		scale scaleanal1_104  7.00174796e-07`
@@ -5605,7 +5789,7 @@ XY(filename_104, 0.002)
 
 	str
 
-		phase_name "Analcime_1C_#28274_2"
+		phase_name "Analcime_1C_$28274_2"
 		Cubic(aanal2_104  13.709269` min 13.65 max 13.75)
 		CS_L(csanal2_104, 269.009617` min 100 max 500)
 		scale scaleanal2_104  8.10922641e-07`
@@ -5615,6 +5799,8 @@ XY(filename_104, 0.002)
 '**************************************************************
 
 'General info
+#endif
+#ifdef do_filename_106
 XY(filename_106, 0.002)
 	CIF2_set_datetime_initialised(datetime_106)
 	CIF2_set_cif_id(106)
@@ -5695,7 +5881,7 @@ XY(filename_106, 0.002)
 	'these are parameters that are common to the two analcime structures
 	str
 
-		phase_name "Analcime_1C_#28274_1"
+		phase_name "Analcime_1C_$28274_1"
 		Cubic(aanal1_106  13.695819` min 13.65 max 13.75)
 		CS_L(csanal1_106, 344.010029` min 100 max 600)
 		scale scaleanal1_106  8.07175946e-07`
@@ -5703,7 +5889,7 @@ XY(filename_106, 0.002)
 
 	str
 
-		phase_name "Analcime_1C_#28274_2"
+		phase_name "Analcime_1C_$28274_2"
 		Cubic(aanal2_106  13.709348` min 13.65 max 13.75)
 		CS_L(csanal2_106, 267.298779` min 100 max 500)
 		scale scaleanal2_106  8.40272087e-07`
@@ -5713,6 +5899,8 @@ XY(filename_106, 0.002)
 '**************************************************************
 
 'General info
+#endif
+#ifdef do_filename_108
 XY(filename_108, 0.002)
 	CIF2_set_datetime_initialised(datetime_108)
 	CIF2_set_cif_id(108)
@@ -5793,7 +5981,7 @@ XY(filename_108, 0.002)
 	'these are parameters that are common to the two analcime structures
 	str
 
-		phase_name "Analcime_1C_#28274_1"
+		phase_name "Analcime_1C_$28274_1"
 		Cubic(aanal1_108  13.694767` min 13.65 max 13.75)
 		CS_L(csanal1_108, 368.562762` min 100 max 600)
 		scale scaleanal1_108  7.68963317e-07`
@@ -5801,7 +5989,7 @@ XY(filename_108, 0.002)
 
 	str
 
-		phase_name "Analcime_1C_#28274_2"
+		phase_name "Analcime_1C_$28274_2"
 		Cubic(aanal2_108  13.707729` min 13.65 max 13.75)
 		CS_L(csanal2_108, 257.183356` min 100 max 500)
 		scale scaleanal2_108  9.63715882e-07`
@@ -5811,6 +5999,8 @@ XY(filename_108, 0.002)
 '**************************************************************
 
 'General info
+#endif
+#ifdef do_filename_110
 XY(filename_110, 0.002)
 	CIF2_set_datetime_initialised(datetime_110)
 	CIF2_set_cif_id(110)
@@ -5891,7 +6081,7 @@ XY(filename_110, 0.002)
 	'these are parameters that are common to the two analcime structures
 	str
 
-		phase_name "Analcime_1C_#28274_1"
+		phase_name "Analcime_1C_$28274_1"
 		Cubic(aanal1_110  13.693953` min 13.65 max 13.75)
 		CS_L(csanal1_110, 347.819844` min 100 max 600)
 		scale scaleanal1_110  8.51873078e-07`
@@ -5899,7 +6089,7 @@ XY(filename_110, 0.002)
 
 	str
 
-		phase_name "Analcime_1C_#28274_2"
+		phase_name "Analcime_1C_$28274_2"
 		Cubic(aanal2_110  13.707613` min 13.65 max 13.75)
 		CS_L(csanal2_110, 261.368008` min 100 max 500)
 		scale scaleanal2_110  9.9812205e-07`
@@ -5909,6 +6099,8 @@ XY(filename_110, 0.002)
 '**************************************************************
 
 'General info
+#endif
+#ifdef do_filename_112
 XY(filename_112, 0.002)
 	CIF2_set_datetime_initialised(datetime_112)
 	CIF2_set_cif_id(112)
@@ -5989,7 +6181,7 @@ XY(filename_112, 0.002)
 	'these are parameters that are common to the two analcime structures
 	str
 
-		phase_name "Analcime_1C_#28274_1"
+		phase_name "Analcime_1C_$28274_1"
 		Cubic(aanal1_112  13.692804` min 13.65 max 13.75)
 		CS_L(csanal1_112, 361.20175` min 100 max 600)
 		scale scaleanal1_112  8.11631192e-07`
@@ -5997,7 +6189,7 @@ XY(filename_112, 0.002)
 
 	str
 
-		phase_name "Analcime_1C_#28274_2"
+		phase_name "Analcime_1C_$28274_2"
 		Cubic(aanal2_112  13.706134` min 13.65 max 13.75)
 		CS_L(csanal2_112, 248.01437` min 100 max 500)
 		scale scaleanal2_112  1.15942845e-06`
@@ -6007,6 +6199,8 @@ XY(filename_112, 0.002)
 '**************************************************************
 
 'General info
+#endif
+#ifdef do_filename_114
 XY(filename_114, 0.002)
 	CIF2_set_datetime_initialised(datetime_114)
 	CIF2_set_cif_id(114)
@@ -6087,7 +6281,7 @@ XY(filename_114, 0.002)
 	'these are parameters that are common to the two analcime structures
 	str
 
-		phase_name "Analcime_1C_#28274_1"
+		phase_name "Analcime_1C_$28274_1"
 		Cubic(aanal1_114  13.692701` min 13.65 max 13.75)
 		CS_L(csanal1_114, 344.516282` min 100 max 600)
 		scale scaleanal1_114  9.34453664e-07`
@@ -6095,7 +6289,7 @@ XY(filename_114, 0.002)
 
 	str
 
-		phase_name "Analcime_1C_#28274_2"
+		phase_name "Analcime_1C_$28274_2"
 		Cubic(aanal2_114  13.706231` min 13.65 max 13.75)
 		CS_L(csanal2_114, 247.57738` min 100 max 500)
 		scale scaleanal2_114  1.16346972e-06`
@@ -6105,6 +6299,8 @@ XY(filename_114, 0.002)
 '**************************************************************
 
 'General info
+#endif
+#ifdef do_filename_116
 XY(filename_116, 0.002)
 	CIF2_set_datetime_initialised(datetime_116)
 	CIF2_set_cif_id(116)
@@ -6185,7 +6381,7 @@ XY(filename_116, 0.002)
 	'these are parameters that are common to the two analcime structures
 	str
 
-		phase_name "Analcime_1C_#28274_1"
+		phase_name "Analcime_1C_$28274_1"
 		Cubic(aanal1_116  13.691743` min 13.65 max 13.75)
 		CS_L(csanal1_116, 351.279624` min 100 max 600)
 		scale scaleanal1_116  9.16915359e-07`
@@ -6193,7 +6389,7 @@ XY(filename_116, 0.002)
 
 	str
 
-		phase_name "Analcime_1C_#28274_2"
+		phase_name "Analcime_1C_$28274_2"
 		Cubic(aanal2_116  13.705205` min 13.65 max 13.75)
 		CS_L(csanal2_116, 242.642942` min 100 max 500)
 		scale scaleanal2_116  1.2913746e-06`
@@ -6203,6 +6399,8 @@ XY(filename_116, 0.002)
 '**************************************************************
 
 'General info
+#endif
+#ifdef do_filename_118
 XY(filename_118, 0.002)
 	CIF2_set_datetime_initialised(datetime_118)
 	CIF2_set_cif_id(118)
@@ -6283,7 +6481,7 @@ XY(filename_118, 0.002)
 	'these are parameters that are common to the two analcime structures
 	str
 
-		phase_name "Analcime_1C_#28274_1"
+		phase_name "Analcime_1C_$28274_1"
 		Cubic(aanal1_118  13.689786` min 13.65 max 13.75)
 		CS_L(csanal1_118, 391.743494` min 100 max 600)
 		scale scaleanal1_118  7.91768876e-07`
@@ -6291,7 +6489,7 @@ XY(filename_118, 0.002)
 
 	str
 
-		phase_name "Analcime_1C_#28274_2"
+		phase_name "Analcime_1C_$28274_2"
 		Cubic(aanal2_118  13.703605` min 13.65 max 13.75)
 		CS_L(csanal2_118, 232.223961` min 100 max 500)
 		scale scaleanal2_118  1.54070755e-06`
@@ -6301,6 +6499,8 @@ XY(filename_118, 0.002)
 '**************************************************************
 
 'General info
+#endif
+#ifdef do_filename_120
 XY(filename_120, 0.002)
 	CIF2_set_datetime_initialised(datetime_120)
 	CIF2_set_cif_id(120)
@@ -6382,7 +6582,7 @@ XY(filename_120, 0.002)
 	'these are parameters that are common to the two analcime structures
 	str
 
-		phase_name "Analcime_1C_#28274_1"
+		phase_name "Analcime_1C_$28274_1"
 		Cubic(aanal1_120  13.689960` min 13.65 max 13.75)
 		CS_L(csanal1_120, 369.657335` min 100 max 600)
 		scale scaleanal1_120  9.16439118e-07`
@@ -6390,7 +6590,7 @@ XY(filename_120, 0.002)
 
 	str
 
-		phase_name "Analcime_1C_#28274_2"
+		phase_name "Analcime_1C_$28274_2"
 		Cubic(aanal2_120  13.703861` min 13.65 max 13.75)
 		CS_L(csanal2_120, 236.51676` min 100 max 500)
 		scale scaleanal2_120  1.52751218e-06`
@@ -6398,7 +6598,7 @@ XY(filename_120, 0.002)
 
 '**************************************************************
 '**************************************************************
-
+#endif
 for xdds {
 	information
 	'Zero_Error(zero2T)
@@ -6429,32 +6629,32 @@ for xdds 1 to 41 {
 		space_group P1
         CIF2_set_space_group_id("P1")
 		r_bragg  2.67890986
-		site Al	num_posns  1		x  0.34355 	y  0.49110 	z  0.42696	occ Al+3  1 	beq !cation 1
-		site Al	num_posns  1	 	x  0.37012 	y  0.81953 	z  0.45687 	occ Al+3  1 	beq !cation 1
-		site Al	num_posns  1	 	x  0.86369 	y  -0.01189 z  0.47668 	occ Al+3  1 	beq !cation 1
-		site Al	num_posns  1	 	x  0.86593 	y  0.32032 	z  0.47597 	occ Al+3  1 	beq !cation 1
-		site Si	num_posns  1	 	x  0.06736 	y  0.33551 	z  0.09513 	occ Si+4  1 	beq !cation 1
-		site Si	num_posns  1	 	x  0.06741 	y  0.65776 	z  0.06823 	occ Si+4  1 	beq !cation 1
-		site Si	num_posns  1	 	x  0.54835 	y  0.83009 	z  0.07102  occ Si+4  1 	beq !cation 1
-		site Si	num_posns  1	 	x  0.57599 	y  0.16505 	z  0.09039 	occ Si+4  1 	beq !cation 1
-		site O 	num_posns  1		x  0.12376 	y  0.33847 	z  0.31946 	occ O-2  1 		beq !oxy 1.3336
-		site O 	num_posns  1		x  0.16574 	y  0.65904 	z  0.30160 	occ O-2  1 		beq !oxy 1.3336
-		site O 	num_posns  1		x  0.06566 	y  0.47405 	z  -0.00127	occ O-2  1 		beq !oxy 1.3336
-		site O 	num_posns  1		x  0.22288 	y  0.18584 	z  -0.01139	occ O-2  1 		beq !oxy 1.3336
-		site O 	num_posns  1		x  0.24801 	y  0.77559 	z  -0.02451	occ O-2  1 		beq !oxy 1.3336
-		site O 	num_posns  1		x  0.63140 	y  0.83857 	z  0.29369 	occ O-2  1 		beq !oxy 1.3336
-		site O 	num_posns  1		x  0.66584 	y  0.16055 	z  0.31368 	occ O-2  1 		beq !oxy 1.3336
-		site O 	num_posns  1		x  0.55702 	y  0.01161 	z  -0.00503	occ O-2  1 		beq !oxy 1.3336
-		site O 	num_posns  1		x  0.77815 	y  0.73913 	z  0.01655 	occ O-2  1 		beq !oxy 1.3336
-		site O 	num_posns  1		x  0.77357 	y  0.24861 	z  0.00772	occ O-2  1 		beq !oxy 1.3336
-		site O 	num_posns  1		x  0.12405 	y  -0.04110 z  0.32115 	occ O-2  1 		beq !oxy 1.3336
-		site O 	num_posns  1		x  0.05937 	y  0.17502 	z  0.60637 	occ O-2  1 		beq !oxy 1.3336
-		site O 	num_posns  1		x  0.10070 	y  0.46306 	z  0.60978 	occ O-2  1 		beq !oxy 1.3336
-		site O 	num_posns  1		x  0.08496 	y  0.82388 	z  0.58345 	occ O-2  1 		beq !oxy 1.3336
-		site O 	num_posns  1		x  0.58733 	y  0.46108 	z  0.22819 	occ O-2  1 		beq !oxy 1.3336
-		site O 	num_posns  1		x  0.51764 	y  0.67235 	z  0.58570 	occ O-2  1 		beq !oxy 1.3336
-		site O 	num_posns  1		x  0.60442 	y  -0.04330 z  0.59836 	occ O-2  1 		beq !oxy 1.3336
-		site O 	num_posns  1		x  0.56589 	y  0.34116 	z  0.58175 	occ O-2  1 		beq !oxy 1.3336
+		site Al1	num_posns  1		x  0.34355 	y  0.49110 	z  0.42696	occ Al+3  1 	beq !cation 1
+		site Al2	num_posns  1	 	x  0.37012 	y  0.81953 	z  0.45687 	occ Al+3  1 	beq !cation 1
+		site Al3	num_posns  1	 	x  0.86369 	y  -0.01189 z  0.47668 	occ Al+3  1 	beq !cation 1
+		site Al4	num_posns  1	 	x  0.86593 	y  0.32032 	z  0.47597 	occ Al+3  1 	beq !cation 1
+		site Si1	num_posns  1	 	x  0.06736 	y  0.33551 	z  0.09513 	occ Si+4  1 	beq !cation 1
+		site Si2	num_posns  1	 	x  0.06741 	y  0.65776 	z  0.06823 	occ Si+4  1 	beq !cation 1
+		site Si3	num_posns  1	 	x  0.54835 	y  0.83009 	z  0.07102  occ Si+4  1 	beq !cation 1
+		site Si4	num_posns  1	 	x  0.57599 	y  0.16505 	z  0.09039 	occ Si+4  1 	beq !cation 1
+		site O1 	num_posns  1		x  0.12376 	y  0.33847 	z  0.31946 	occ O-2  1 		beq !oxy 1.3336
+		site O2 	num_posns  1		x  0.16574 	y  0.65904 	z  0.30160 	occ O-2  1 		beq !oxy 1.3336
+		site O3 	num_posns  1		x  0.06566 	y  0.47405 	z  -0.00127	occ O-2  1 		beq !oxy 1.3336
+		site O4 	num_posns  1		x  0.22288 	y  0.18584 	z  -0.01139	occ O-2  1 		beq !oxy 1.3336
+		site O5 	num_posns  1		x  0.24801 	y  0.77559 	z  -0.02451	occ O-2  1 		beq !oxy 1.3336
+		site O6 	num_posns  1		x  0.63140 	y  0.83857 	z  0.29369 	occ O-2  1 		beq !oxy 1.3336
+		site O7 	num_posns  1		x  0.66584 	y  0.16055 	z  0.31368 	occ O-2  1 		beq !oxy 1.3336
+		site O8 	num_posns  1		x  0.55702 	y  0.01161 	z  -0.00503	occ O-2  1 		beq !oxy 1.3336
+		site O9 	num_posns  1		x  0.77815 	y  0.73913 	z  0.01655 	occ O-2  1 		beq !oxy 1.3336
+		site O10 	num_posns  1		x  0.77357 	y  0.24861 	z  0.00772	occ O-2  1 		beq !oxy 1.3336
+		site O11 	num_posns  1		x  0.12405 	y  -0.04110 z  0.32115 	occ O-2  1 		beq !oxy 1.3336
+		site O12 	num_posns  1		x  0.05937 	y  0.17502 	z  0.60637 	occ O-2  1 		beq !oxy 1.3336
+		site O13 	num_posns  1		x  0.10070 	y  0.46306 	z  0.60978 	occ O-2  1 		beq !oxy 1.3336
+		site O14 	num_posns  1		x  0.08496 	y  0.82388 	z  0.58345 	occ O-2  1 		beq !oxy 1.3336
+		site O15 	num_posns  1		x  0.58733 	y  0.46108 	z  0.22819 	occ O-2  1 		beq !oxy 1.3336
+		site O16 	num_posns  1		x  0.51764 	y  0.67235 	z  0.58570 	occ O-2  1 		beq !oxy 1.3336
+		site O17 	num_posns  1		x  0.60442 	y  -0.04330 z  0.59836 	occ O-2  1 		beq !oxy 1.3336
+		site O18 	num_posns  1		x  0.56589 	y  0.34116 	z  0.58175 	occ O-2  1 		beq !oxy 1.3336
 
 	}
 }

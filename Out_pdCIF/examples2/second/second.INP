@@ -1,5 +1,9 @@
 #include "seq.inc"
 #include "..\..\pdcif2.inc"
+macro ciffile { "second_2.cif" }
+
+Out_CIF2_initialise(ciffile)
+CIF2_set_audit_dataset_id("d388649e-8f95-48b7-9ef9-70df6739fcdc")
 
 /*
 Sequential refinement macros explained here:
@@ -35,9 +39,9 @@ macro seqno { Range_Number(Run_Number) }
 prm !te = Temperature(Run_Number); :  303
 macro outFileName { "output.txt" }
 
-macro ciffile { "second_2.cif" }
 
-Out_CIF2_initialise(ciffile)
+
+
 
 
 do_errors
@@ -45,6 +49,8 @@ do_errors
 CIF2_set_scan_method("cont")
 CIF2_set_temperature(te)
 CIF2_set_datetime_initialised(Date_Time(Run_Number))
+CIF2_set_instr_id("main_lab")
+
 
 Sequential_Refinement(20, seqno)
 
