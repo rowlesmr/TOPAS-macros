@@ -55,12 +55,12 @@ macro wifd_mic_new(two_theta,two_thetav,tspow,tspowv,tauf_0,tauf_0v,tauf_1,tauf_
 '{{{ r-factors and control information
 r_exp 		1.0115576
 r_exp_dash 	1.98395068
-r_wp 			8.2683743
-r_wp_dash 	16.2166216
-r_p 			3.86411063
-r_p_dash 	12.04769
-gof 			8.1739036
-weighted_Durbin_Watson  0.767201884
+r_wp 			8.2671233
+r_wp_dash 	16.2141681
+r_p 			3.86279329
+r_p_dash 	12.0435827
+gof 			8.1726669
+weighted_Durbin_Watson  0.776829781
 iters 1000
 'continue_after_convergence
 no_LIMIT_warnings
@@ -94,25 +94,25 @@ TOF_XYE(filename_bank1, 1.9) start_end_bank1
 	Out_pdCIF2_calib_dtotof(ciffile, t0_bank1,=t0;, difc_bank1, =t1;, difa_bank1,  =t2;)
 	local !bank_two_theta 9.39
     CIF2_set_th2_fixed(bank_two_theta)
-	r_wp  6.112847 'bank 1
+	r_wp  6.11285362 'bank 1
 	bkg    0.488563679_0.00153320451 -0.0200327774_0.00267694524  0.0137786402_0.00244335005  0.0105826723_0.0022584263 -0.0104199491_0.00217688378  0.0112563262_0.00194167435  0.00252062122_0.00180864174 -0.00195712671_0.00152693494  0.00962334497_0.00123526011
 	local !mu -0.09453_0.02556 min -10
 	local !fixb -0.98488_0.32127
 
    str
 		tof_sample_peakshape(!lor_bank1, 0.237045863_0.0303157014,!dsp_bank1, 27.48013_0.21702,!dspsq_bank1,0)
-		r_bragg  1.48754527
-		scale scal_bank1  2.41531257e-05`_4.848e-07
+		r_bragg  1.48757112
+		scale scal_bank1  2.41531359e-05`_4.847e-07
 
    str
 		tof_sample_peakshape(!lor_bank1, 0.237045863_0.0303157014,!dsp_bank1, 27.48013_0.21702,!dspsq_bank1,0)
-		r_bragg  1.30667141
-		scale scal_bank1V  2.08861472`_1.378
+		r_bragg  1.30677306
+		scale scal_bank1V  2.08862876`_1.377
 
    str
 		tof_sample_peakshape(!lor_bank1, 0.237045863_0.0303157014,!dsp_bank1, 27.48013_0.21702,!dspsq_bank1,0)
-		r_bragg  0.938205659
-		scale scal_bank1Ce2O2Se  0.000436883482`_0.0001705
+		r_bragg  0.938051982
+		scale scal_bank1Ce2O2Se  0.000436881691`_0.0001705
 #endif
 '}}}
 
@@ -126,25 +126,25 @@ TOF_XYE(filename_bank2, 1.9) start_end_bank2
 	Out_pdCIF2_calib_dtotof(ciffile, t0_bank2,=t0;, difc_bank2, =t1;, difa_bank2, =t2;)
 	local !bank_two_theta 17.98
     CIF2_set_th2_fixed(bank_two_theta)
-	r_wp  12.6754524 'bank 2
+	r_wp  12.6754586 'bank 2
 	bkg    0.309965812_0.000866123656 -0.0238656588_0.00153644605  0.0136572659_0.00131335727  0.0084207101_0.00116106342  0.000784838575_0.000821999  0.0074534486_0.0007070701
 	local !mu  0.08345_0.00486 min -10
 	local !fixb  0.22862_0.09267
    exclude 9100 9800
    str
 		tof_sample_peakshape(!lor_bank2, 0.0548107723_0.0145484526,!dsp_bank2, 40.92952_0.14886,!dspsq_bank2,0)
-		r_bragg  1.71706256
-		scale scal_bank2  6.00702337e-05`_6.612e-07
+		r_bragg  1.71708177
+		scale scal_bank2  6.007024e-05`_6.611e-07
 
    str
 		tof_sample_peakshape(!lor_bank2, 0.0548107723_0.0145484526,!dsp_bank2, 40.92952_0.14886,!dspsq_bank2,0)
-		r_bragg  1.01395136
-		scale scal_bank2V  4.75875346`_1.25
+		r_bragg  1.01312193
+		scale scal_bank2V  4.75880404`_1.25
 
    str
 		tof_sample_peakshape(!lor_bank2, 0.0548107723_0.0145484526,!dsp_bank2, 40.92952_0.14886,!dspsq_bank2,0)
-		r_bragg  0.512571382
-		scale scal_bank2Ce2O2Se  0.00025575889`_0.0001385
+		r_bragg  0.512458857
+		scale scal_bank2Ce2O2Se  0.000255758621`_0.0001385
 #endif
 '}}}
 
@@ -158,25 +158,25 @@ TOF_XYE(filename_bank3, 1.9) start_end_bank3
 	Out_pdCIF2_calib_dtotof(ciffile, t0_bank3,=t0;, difc_bank3, =t1;, difa_bank3, =t2;)
 	local !bank_two_theta 34.96
     CIF2_set_th2_fixed(bank_two_theta)
-	r_wp  12.7077302 'bank 3
+	r_wp  12.7077258 'bank 3
 	bkg    0.171444681_0.000365998081 -0.0263838258_0.000535093006  0.018252942_0.000479206424 -0.00675595062_0.000451953144  0.00100976713_0.000404090854 -0.00110088237_0.000409987394 -0.00237100292_0.000375848096 -0.00152445293_0.00035462067 -4.29001608e-006_0.000324855234 -0.000776878466_0.000317248695  0.00011726725_0.000269254864 -0.00211941969_0.000265701403
 	local !mu  0.12861_0.00429 min -10
 	local !fixb  0.17900_0.02301
 
    str
 		tof_sample_peakshape(!lor_bank3, 0.164477346_0.00805942809,!dsp_bank3, 41.93403_0.10277,!dspsq_bank3,0)
-		r_bragg  2.60915494
-		scale scal_bank3  0.00013062055`_6.409e-07
+		r_bragg  2.60918536
+		scale scal_bank3  0.000130620532`_6.408e-07
 
    str
 		tof_sample_peakshape(!lor_bank3, 0.164477346_0.00805942809,!dsp_bank3, 41.93403_0.10277,!dspsq_bank3,0)
-		r_bragg  1.00512887
-		scale scal_bank3V  2.36908894`_0.5762
+		r_bragg  1.00271588
+		scale scal_bank3V  2.36932785`_0.5761
 
    str
 		tof_sample_peakshape(!lor_bank3, 0.164477346_0.00805942809,!dsp_bank3, 41.93403_0.10277,!dspsq_bank3,0)
-		r_bragg  0.613106686
-		scale scal_bank3Ce2O2Se  0.000398714958`_6.553e-05
+		r_bragg  0.613126213
+		scale scal_bank3Ce2O2Se  0.000398711817`_6.552e-05
 #endif
 '}}}
 
@@ -190,25 +190,25 @@ TOF_XYE(filename_bank4, 1.9) start_end_bank4
 	Out_pdCIF2_calib_dtotof(ciffile, t0_bank4,=t0;, difc_bank4, =t1;, difa_bank4, =t2;)
 	local !bank_two_theta 63.62
     CIF2_set_th2_fixed(bank_two_theta)
-	r_wp  8.33413554 'bank 4
+	r_wp  8.33218976 'bank 4
 	bkg    0.080126736_0.000244585444 -0.0182646858_0.00042132257  0.0119157891_0.000377706648 -0.00667700548_0.000345342232  0.00485677494_0.000314625777 -0.00461187999_0.000299950108  0.00236199999_0.000276263253 -0.00321471039_0.000266547997  0.00192817578_0.00024498338 -0.00282873928_0.000225438445  0.000726213125_0.000170612339 -0.00182201518_0.000139636268
 	local !mu  0.10349_0.00182 min -10
 	local !fixb  0.03478_0.01401
 
    str
 		tof_sample_peakshape(!lor_bank4, 0.117321368_0.00446208058,!dsp_bank4, 35.41271_0.06322,!dspsq_bank4,0)
-		r_bragg  1.75748847
-		scale scal_bank4  0.000215985961`_6.08e-07
+		r_bragg  1.75728827
+		scale scal_bank4  0.000215984679`_6.079e-07
 
    str
 		tof_sample_peakshape(!lor_bank4, 0.117321368_0.00446208058,!dsp_bank4, 35.41271_0.06322,!dspsq_bank4,0)
-		r_bragg  1.19156509
-		scale scal_bank4V  1.91464284`_0.3075
+		r_bragg  1.18796897
+		scale scal_bank4V  1.91480652`_0.3074
 
    str
 		tof_sample_peakshape(!lor_bank4, 0.117321368_0.00446208058,!dsp_bank4, 35.41271_0.06322,!dspsq_bank4,0)
-		r_bragg  1.17501412
-		scale scal_bank4Ce2O2Se  0.000555051281`_5.689e-05
+		r_bragg  1.17416986
+		scale scal_bank4Ce2O2Se  0.000555033523`_5.688e-05
 #endif
 '}}}
 
@@ -222,25 +222,25 @@ TOF_XYE(filename_bank5, 1.9) start_end_bank5
 	Out_pdCIF2_calib_dtotof(ciffile, t0_bank5,=t0;, difc_bank5, =t1;, difa_bank5, =t2;)
 	local !bank_two_theta 91.3
     CIF2_set_th2_fixed(bank_two_theta)
-	r_wp  5.8141566 'bank 5
+	r_wp  5.81222092 'bank 5
 	bkg    0.0714080962_0.000243572408 -0.0235324804_0.000372586008  0.013540717_0.000322612754 -0.0058648331_0.000288027095  0.0044498639_0.000262268427 -0.00276916962_0.000255034333  0.00207010566_0.000246985481 -0.00194263606_0.00024177908  0.00206931504_0.000234624196 -0.00160797983_0.000231204247  0.00239986241_0.000220483016 -0.00145769471_0.000218261838  0.00188723047_0.000207445841 -0.000774876046_0.000201885017  0.000246880934_0.000186369368 -5.74573641e-005_0.000172573597 -0.000146771988_0.000135526997  0.000277030887_0.000124100314
 	local !mu  0.11670_0.00258 min -10
 	local !fixb  0.01320_0.01277
 
    str
 		tof_sample_peakshape(!lor_bank5, 0.0737396756_0.00577578126,!dsp_bank5, 24.37839_0.07249,!dspsq_bank5,0)
-		r_bragg  1.27827507
-		scale scal_bank5  0.000300927476`_9.433e-07
+		r_bragg  1.27845759
+		scale scal_bank5  0.000300926627`_9.431e-07
 
    str
 		tof_sample_peakshape(!lor_bank5, 0.0737396756_0.00577578126,!dsp_bank5, 24.37839_0.07249,!dspsq_bank5,0)
-		r_bragg  0.640790208
-		scale scal_bank5V  1.47039785`_0.4443
+		r_bragg  0.646517112
+		scale scal_bank5V  1.47023907`_0.4442
 
    str
 		tof_sample_peakshape(!lor_bank5, 0.0737396756_0.00577578126,!dsp_bank5, 24.37839_0.07249,!dspsq_bank5,0)
-		r_bragg  0.954155888
-		scale scal_bank5Ce2O2Se  0.00086501886`_0.000104
+		r_bragg  0.954767066
+		scale scal_bank5Ce2O2Se  0.000864991683`_0.0001039
 #endif
 '}}}
 
@@ -254,25 +254,25 @@ TOF_XYE(filename_bank6, 1.9) start_end_bank6
 	Out_pdCIF2_calib_dtotof(ciffile, t0_bank6,=t0;, difc_bank6, =t1;, difa_bank6, =t2;)
 	local !bank_two_theta 154.4
     CIF2_set_th2_fixed(bank_two_theta)
-	r_wp  1.3687929 'bank 6
+	r_wp  1.35752832 'bank 6
 	bkg    0.252617623_0.000573930592 -0.0595905925_0.000848308528  0.0157566765_0.000804898522 -0.00795675559_0.000619954403  0.00209397864_0.000616271659 -0.00249627966_0.000594689236  0.000477907586_0.000567935803 -0.000897348225_0.000558138628 -0.000818934929_0.000527973727 -0.000238740812_0.000516967482 -0.00082421635_0.000491713674 -0.000224191283_0.000478631431 -0.000915654197_0.000447662238 -0.000253298884_0.000426848913  0.00119686786_0.000390100322 -0.000813619878_0.000366789178  0.000425937464_0.000295664284 -0.00139198065_0.000279909618
 	local !mu  0.14381_0.00630 min -10
 	local !fixb  0.00000
 
    str
 		tof_sample_peakshape(!lor_bank6, 0.107634285_0.0191371934,!dsp_bank6, 19.81915_0.22647,!dspsq_bank6,0)
-		r_bragg  0.602777438
-		scale scal_bank6  0.000429614847`_2.919e-06
+		r_bragg  0.566979439
+		scale scal_bank6  0.000429672707`_2.919e-06
 
    str
 		tof_sample_peakshape(!lor_bank6, 0.107634285_0.0191371934,!dsp_bank6, 19.81915_0.22647,!dspsq_bank6,0)
-		r_bragg  0.508944532
-		scale scal_bank6V  8.93829144`_3.473
+		r_bragg  0.46119855
+		scale scal_bank6V  8.70991045`_3.473
 
    str
 		tof_sample_peakshape(!lor_bank6, 0.107634285_0.0191371934,!dsp_bank6, 19.81915_0.22647,!dspsq_bank6,0)
-		r_bragg  0.696002742
-		scale scal_bank6Ce2O2Se  0.00104419918`_0.0004015
+		r_bragg  0.738861706
+		scale scal_bank6Ce2O2Se  0.00103618729`_0.0004015
 #endif
 '}}}
 
@@ -442,11 +442,11 @@ for xdds {
 		CIF2_set_sum_formula("V")
 		CIF2_set_crystal_system("cubic")
 		phase_name "Vanadium"
-		Cubic(lpa_V  3.011860`_0.001638)
-		volume  27.321`_0.045
+		Cubic(lpa_V  3.011885`_0.001650)
+		volume  27.322`_0.045
 		space_group "Im-3m"
 		site V1 num_posns  2 x 0 y 0 z 0 occ V 1 beq !beq3_V  0.67933_0.24194
-		Phase_Density_g_on_cm3( 6.19222639`_0.0100986276)
+		Phase_Density_g_on_cm3( 6.19207149`_0.0101745095)
 	}
 
 	for strs 3 to 3 {
@@ -454,8 +454,8 @@ for xdds {
 		CIF2_set_sum_formula("Mn Se")
 		CIF2_set_crystal_system("cubic")
 		phase_name "MnSe"
-		Cubic(lpa_MnSe  5.446396`_0.001615)
-		volume  161.558`_0.144
+		Cubic(lpa_MnSe  5.446406`_0.001616)
+		volume  161.559`_0.144
 		space_group "Fm-3m"
 		site Mn1 num_posns  4 x 0   y 0   z 0   occ Mn+2 1 beq !beqMnSe_Mn  0.26735_0.45819
 		site Se1 num_posns  4 x 0.5 y 0.5 z 0.5 occ Se   1 beq !beqMnSe_Se  0.44655_0.26578
@@ -468,25 +468,25 @@ Out_pdCIF2_multi(ciffile, "proc")
 C_matrix_normalized
 {
                              1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19  20
-scal_bank1             1:  100  -4   0 -13   0  -0  -0   0  -0  -0   0  -0   0   0  -0   0   0  -0   0   0
-scal_bank1V            2:   -4 100  -0   0  -0   0   0  -0  -0   0   0  -0   0  -0  -0  -0  -0   0  -0  -0
-lpa_V                  3:    0  -0 100  -0   0  -0  -0   0   0  -0  -0   0  -0  -0   0   1  -0  -0   1   1
-scal_bank1Ce2O2Se      4:  -13   0  -0 100  -0   0   0  -0   0  -0  -0   0  -0  -0   0  -0  -0   0   0  -0
-scal_bank2             5:    0  -0   0  -0 100  -3  -9   0   0  -0   0  -0  -0   0  -0   0   0  -0   0   0
-scal_bank2V            6:   -0   0  -0   0  -3 100   0   0  -0   0   0  -0   0   0  -0  -0   0   0  -0  -0
-scal_bank2Ce2O2Se      7:   -0   0  -0   0  -9   0 100  -0   0   0  -0   0  -0  -0   0  -0  -0   0  -0  -0
-lpa_MnSe               8:    0  -0   0  -0   0   0  -0 100  -0   0   1  -1   0   5  -1   0   3  -0  -0   1
-scal_bank3             9:   -0  -0   0   0   0  -0   0  -0 100  -6 -10   0  -0  -0   0   0  -0   0   0  -0
-scal_bank3V           10:   -0   0  -0  -0  -0   0   0   0  -6 100  -0  -0   0   0  -0  -0   0   0  -0  -0
-scal_bank3Ce2O2Se     11:    0   0  -0  -0   0   0  -0   1 -10  -0 100  -0   0   0  -0  -0   0  -0  -0   0
-scal_bank4            12:   -0  -0   0   0  -0  -0   0  -1   0  -0  -0 100  -6  -9   0   0  -0   0   0  -0
-scal_bank4V           13:    0   0  -0  -0  -0   0  -0   0  -0   0   0  -6 100  -0  -0  -0   0  -0  -0   0
-scal_bank4Ce2O2Se     14:    0  -0  -0  -0   0   0  -0   5  -0   0   0  -9  -0 100  -0  -0   0  -0  -0   0
-scal_bank5            15:   -0  -0   0   0  -0  -0   0  -1   0  -0  -0   0  -0  -0 100  -9 -12   0   0  -0
-scal_bank5V           16:    0  -0   1  -0   0  -0  -0   0   0  -0  -0   0  -0  -0  -9 100  -0  -0   0   0
-scal_bank5Ce2O2Se     17:    0  -0  -0  -0   0   0  -0   3  -0   0   0  -0   0   0 -12  -0 100  -0  -0   0
-scal_bank6            18:   -0   0  -0   0  -0   0   0  -0   0   0  -0   0  -0  -0   0  -0  -0 100 -20 -14
-scal_bank6V           19:    0  -0   1   0   0  -0  -0  -0   0  -0  -0   0  -0  -0   0   0  -0 -20 100  -1
-scal_bank6Ce2O2Se     20:    0  -0   1  -0   0  -0  -0   1  -0  -0   0  -0   0   0  -0   0   0 -14  -1 100
+scal_bank1             1:  100  -4 -13   0  -0  -0  -0  -0   0   0  -0   0   0  -0   0   0   0  -0   0   0
+scal_bank1V            2:   -4 100   0  -0   0   0  -0   0   0  -0  -0   0  -0  -0  -0  -0  -0   0  -0  -0
+scal_bank1Ce2O2Se      3:  -13   0 100  -0   0   0   0  -0  -0  -0   0  -0  -0   0  -0  -0  -0   0   0  -0
+scal_bank2             4:    0  -0  -0 100  -3  -9   0  -0   0   0  -0  -0   0  -0   0   0   0  -0   0   0
+scal_bank2V            5:   -0   0   0  -3 100   0  -0   0   0   0  -0   0   0  -0  -0  -0   0   0  -0  -0
+scal_bank2Ce2O2Se      6:   -0   0   0  -9   0 100   0   0  -0  -0   0  -0  -0   0  -0  -0  -0   0  -0  -0
+scal_bank3             7:   -0  -0   0   0  -0   0 100  -6 -10  -0   0  -0  -0   0   0   0  -0   0   0  -0
+scal_bank3V            8:   -0   0  -0  -0   0   0  -6 100  -0   0  -0   0   0  -0  -0  -0   0   0  -0  -0
+scal_bank3Ce2O2Se      9:    0   0  -0   0   0  -0 -10  -0 100   1  -0   0   0  -0  -0  -0   0  -0  -0   0
+lpa_MnSe              10:    0  -0  -0   0   0  -0  -0   0   1 100  -1   0   5  -1   0   0   3  -0  -0   1
+scal_bank4            11:   -0  -0   0  -0  -0   0   0  -0  -0  -1 100  -6  -9   0   0   0  -0   0   0  -0
+scal_bank4V           12:    0   0  -0  -0   0  -0  -0   0   0   0  -6 100  -0  -0  -0  -0   0   0  -0   0
+scal_bank4Ce2O2Se     13:    0  -0  -0   0   0  -0  -0   0   0   5  -9  -0 100  -0  -0  -0   0  -0  -0   0
+scal_bank5            14:   -0  -0   0  -0  -0   0   0  -0  -0  -1   0  -0  -0 100  -9   0 -12   0   0  -0
+scal_bank5V           15:    0  -0  -0   0  -0  -0   0  -0  -0   0   0  -0  -0  -9 100   1  -0  -0   0   0
+lpa_V                 16:    0  -0  -0   0  -0  -0   0  -0  -0   0   0  -0  -0   0   1 100  -0  -0   1   1
+scal_bank5Ce2O2Se     17:    0  -0  -0   0   0  -0  -0   0   0   3  -0   0   0 -12  -0  -0 100  -0  -0   0
+scal_bank6            18:   -0   0   0  -0   0   0   0   0  -0  -0   0   0  -0   0  -0  -0  -0 100 -20 -14
+scal_bank6V           19:    0  -0   0   0  -0  -0   0  -0  -0  -0   0  -0  -0   0   0   1  -0 -20 100  -1
+scal_bank6Ce2O2Se     20:    0  -0  -0   0  -0  -0  -0  -0   0   1  -0   0   0  -0   0   1   0 -14  -1 100
 }
 
