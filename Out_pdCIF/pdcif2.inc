@@ -98,9 +98,10 @@ CIF_ID - number, non-negative integer. Will be auto generated in most cases.
 CIF_PHASE_ID         - string. Per phase. Defaults to phase name appended with CIF_ID. Must have no whitespace.
 CIF_DIFFRACTOGRAM_ID - string. Per xdd. Defaults to xdd_path_name with CIF_ID. Must have no whitespace.
 
-CIF_MODEL_ID       - string. Per structure. Defaults to CIF_PHASE_ID
-CIF_STRUCTURE_ID   - string. Per structure. Defaults to CIF_PHASE_ID
-CIF_SPACE_GROUP_ID - string. Per structure. Defaults to CIF_PHASE_ID
+CIF_MODEL_ID            - string. Per structure. Defaults to CIF_PHASE_ID
+CIF_STRUCTURE_ID        - string. Per structure. Defaults to CIF_PHASE_ID
+CIF_SPACE_GROUP_ID      - string. Per structure. Defaults to CIF_PHASE_ID
+CIF_SPACE_GROUP_MAGN_ID - string. Per structure. Defaults to CIF_PHASE_ID
 
 CIF_DIFFRN_ID          - string. Per diffraction conditions, ie temperature or pressure. Strictly, anything in DIFFRN that would cause a change in _diffrn.id
 CIF_INSTR_ID           - string. Per instrument
@@ -318,6 +319,11 @@ macro CIF2_set_structure_id(idv) {
 macro CIF2_set_space_group_id(idv) {
     local !CIF_SPACE_GROUP_ID = idv;
 }
+'Yes, it sets both.
+macro CIF2_set_space_group_magn_id(idv) {
+    local !CIF_SPACE_GROUP_MAGN_ID = idv;
+    local !CIF_SPACE_GROUP_ID = idv;
+}
 macro CIF2_set_diffrn_id(idv) {
     local !CIF_DIFFRN_ID = idv;
 }
@@ -397,10 +403,12 @@ macro Out_pdCIF2_phaseblockIDs(id) {
     Out_String("\n_model.id\t")         if Prm_There(CIF_MODEL_ID)       { Out(CIF_MODEL_ID, "%s") }       else { Out_unique_phase_id(id) }
     Out_String("\n_structure.id\t")     if Prm_There(CIF_STRUCTURE_ID)   { Out(CIF_STRUCTURE_ID, "%s") }   else { Out_unique_phase_id(id) }
     Out_String("\n_space_group.id\t")   if Prm_There(CIF_SPACE_GROUP_ID) { Out(CIF_SPACE_GROUP_ID, "%s") } else { Out_unique_phase_id(id) }
+    if Obj_There(mag_sg) { Out_String("\n_space_group_magn.id\t")   if Prm_There(CIF_SPACE_GROUP_MAGN_ID) { Out(CIF_SPACE_GROUP_MAGN_ID, "%s") } else { Out_unique_phase_id(id) } }
 
     Out_String("\n_model.structure_id\t")       if Prm_There(CIF_STRUCTURE_ID)   { Out(CIF_STRUCTURE_ID, "%s") }   else { Out_unique_phase_id(id) }
     if Prm_There(CIF_DIFFRN_ID) {  Out(CIF_DIFFRN_ID, "\n_structure.diffrn_id\t%s") }
     Out_String("\n_structure.space_group_id\t") if Prm_There(CIF_SPACE_GROUP_ID) { Out(CIF_SPACE_GROUP_ID, "%s") } else { Out_unique_phase_id(id) }
+    if Obj_There(mag_sg) { Out_String("\n_structure.space_group_magn_id\t") if Prm_There(CIF_SPACE_GROUP_MAGN_ID) { Out(CIF_SPACE_GROUP_MAGN_ID, "%s") } else { Out_unique_phase_id(id) } }
     Out_String("\n_structure.phase_id\t") Out_unique_phase_id(id)
     Out_String("\n")
 }
