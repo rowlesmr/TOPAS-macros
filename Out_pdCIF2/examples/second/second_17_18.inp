@@ -1,0 +1,243 @@
+#include "seq.inc"
+#include "..\..\pdcif2.inc"
+macro ciffile { "second_2.cif" }
+
+Out_CIF2_initialise(ciffile)
+CIF2_set_audit_dataset_id("d388649e-8f95-48b7-9ef9-70df6739fcdc")
+
+/*
+Sequential refinement macros explained here:
+http://topas.dur.ac.uk/topaswiki/doku.php?id=sequential_refinements
+*/
+
+#list Range_Number Temperature Date_Time  {
+1  { (30 +273) } { "2007-12-18T12:16:55+0200" }
+2  { (50 +273) } { "2007-12-18T12:38:21+0200" }
+3  { (100+273) } { "2007-12-18T13:01:03+0200" }
+4  { (150+273) } { "2007-12-18T13:25:44+0200" }
+5  { (200+273) } { "2007-12-18T13:49:16+0200" }
+6  { (250+273) } { "2007-12-18T14:12:48+0200" }
+7  { (300+273) } { "2007-12-18T14:36:22+0200" }
+8  { (350+273) } { "2007-12-18T14:59:57+0200" }
+9  { (400+273) } { "2007-12-18T15:23:39+0200" }
+10 { (450+273) } { "2007-12-18T15:44:28+0200" }
+11 { (500+273) } { "2007-12-18T16:05:08+0200" }
+12 { (550+273) } { "2007-12-18T16:25:57+0200" }
+13 { (600+273) } { "2007-12-18T16:46:47+0200" }
+14 { (650+273) } { "2007-12-18T17:09:07+0200" }
+15 { (700+273) } { "2007-12-18T17:31:45+0200" }
+16 { (750+273) } { "2007-12-18T17:54:24+0200" }
+17 { (800+273) } { "2007-12-18T18:17:04+0200" }
+18 { (850+273) } { "2007-12-18T18:39:45+0200" }
+19 { (900+273) } { "2007-12-18T19:02:26+0200" }
+20 { (30 +273) } { "2007-12-18T20:46:00+0200" }
+}
+
+
+macro file { "degussa.raw" }
+macro seqno { Range_Number(Run_Number) }
+prm !te = Temperature(Run_Number); :  1073
+macro outFileName { "output.txt" }
+
+
+
+
+
+
+do_errors
+
+CIF2_set_scan_method("cont")
+CIF2_set_temperature(te)
+CIF2_set_datetime_initialised(Date_Time(Run_Number))
+CIF2_set_instr_id("main_lab")
+
+
+Sequential_Refinement(20, seqno)
+
+
+#define OUTPUT
+#define CIF_OUTPUT
+
+#ifdef OUTPUT
+#if Run_Number == 0;
+system_before_save_OUT { del outFileName }
+system_before_save_OUT { del ciffile }
+#endif
+#endif
+
+macro Output {
+	 #if Run_Number == 0;
+	 Out_Header(outFileName)
+	 	O_H(temp)
+	 	O_H(spec_disp)
+	 	O_H(abs)
+	 	O_H(csL)
+	 	O_H(csG)
+	 	O_H(strL)
+	 	O_H(strG)
+	 	O_H(Ti_beq)
+	 	O_H(O_beq)
+	 	O_H(a_del)
+	 	O_H(c_del)
+	 	O_H_cellprms
+	 	O_H(Lvol)
+	 	O_H(e0)
+	 	O_H(density)
+	 	O_H(LAC)
+	 	O_H(scale)
+	 	O_H(wtpct)
+	 	O_H(RBragg)
+	 	O_H(Rwp)
+	 	O_H(Rexp)
+	 	O_H(gof)
+	 #endif
+
+	for strs {
+		Out_Results(outFileName) {
+			O_R(te)
+			O_R(sd)
+			O_R(abs)
+			O_R(csL)
+			O_R(csG)
+			O_R(strL)
+			O_R(strG)
+			O_R(Ti_beq)
+			O_R(O_beq)
+			O_R(a_del)
+			O_R(c_del)
+			O_R_cellprms(1)
+			O_R(LVol_v(csG, csL))
+			O_R(e0_v(strG, strL))
+			O_R(Phase_Density_Eqn_g_on_cm3)
+			O_R(Phase_LAC_Eqn_1_on_cm)
+			O_R(Get(scale))
+			O_R(Get(weight_percent))
+			O_R(Get(r_bragg))
+			O_R(Get(r_wp))
+			O_R(Get(r_exp))
+			O_R(Get(gof))
+		}
+	}
+}
+
+
+
+xdd file
+	r_exp  17.0354895 r_wp  19.1133119 weighted_Durbin_Watson  1.67627469 gof  1.12197022
+	range seqno
+	bkg @  26.7498401`_0.114643088 -22.6386216`_0.183715797  10.8203181`_0.159106135 -3.52937526`_0.1251996  2.80349788`_0.117260072
+	LP_Factor( 0)
+    pdCIF2_Bragg_Brentano_specimen_displacement(sd,  0.196982219`_0.00507290968 )
+	Rp 250
+	Rs 250
+	lpsd_th2_angular_range_degrees  2.383
+		lpsd_equitorial_divergence_degrees  0.6
+	axial_conv
+		filament_length  12
+		sample_length  15
+		receiving_slit_length  12
+		primary_soller_angle  4
+		secondary_soller_angle  4
+		axial_n_beta  30
+	Absorption(abs, 42.5583928`_8.53779437)
+
+    Out_CIF2_wavelength_cuka5(ciffile, "COPPER")
+
+
+	local Ti_beq_del  0.93864071`_0.0615229612 min 0 max 3
+	local O_beq_del  0.574848314`_0.123908478 min 0 max 3
+
+	local Ti_beq = 0.39 + Ti_beq_del; :  1.32864071`_0.0615229612
+	local  O_beq = 0.61 + O_beq_del; :  1.18484831`_0.123908478
+
+	#if seqno < 19;
+	str
+		'9852 ICSD
+		phase_name "Anatase"
+
+		CIF2_set_formula_units_Z(2)
+		CIF2_set_sum_formula("O2 Ti")
+		CIF2_set_crystal_system("tetragonal")
+
+		local csL  184.480222`_113.066005 min 30 max 500
+		local csG  135.476321`_83.1618408_LIMIT_MIN_30 min 30 max 500
+		local strL  0.591714625`_0.0896288302_LIMIT_MAX_0.6 min 0.00001 max 0.6
+		'local strG  0.00620783579_3.30047281 min 0.00001 max 0.6
+
+		local a_del  0.0178428169`_0.000535307528 min 0 max 0.02
+		local c_del  0.0851143743`_0.0028255957 min -0.2 max 0.1
+
+		Phase_Density_g_on_cm3( 3.82276775`_0.00155717994)
+		CS_L(csL)
+		CS_G(csG)
+		Strain_L(strL)
+		'Strain_G(strG)
+		MVW( 319.463, 138.769`_0.057, 18.513`_0.418)
+		scale @  7.06621085e-05`_1.814e-06
+		Tetragonal(=3.7842+a_del; :  3.802043`_0.000535, =9.5146+c_del; :  9.599714`_0.002826)	'3.7842, 9.5146
+        CIF2_set_space_group_id("I_41/a_m_d_S")
+		space_group "I_41/a_m_d_S"
+		site Ti1 num_posns  4	x 0 y 0 z 0      occ Ti+4 1. beq = Ti_beq; :  1.32864`_0.06152
+		site O1  num_posns  8	x 0 y 0 z 0.2081 occ O-2  1. beq =  O_beq; :  1.18485`_0.12391
+	#endif
+
+	str
+		'33837 ICSD
+		phase_name "Rutile"
+
+		CIF2_set_formula_units_Z(2)
+		CIF2_set_sum_formula("O2 Ti")
+		CIF2_set_crystal_system("tetragonal")
+
+		local csL  84.5105078`_2.03763144 min 20 max 1000
+		'local csG  999.99999_49189.869 min 20 max 1000
+		'local strL  0.0615440841_0.193872858 min 0.00001 max 2
+		'local strG  1.00003725e-05_2050.07007 min 0.00001 max 2
+
+		local a_del  0.0315478082`_0.000251467944 min -0.2 max 0.2
+		local c_del  0.0261920794`_0.000188072367 min -0.2 max 0.2
+
+		Phase_Density_g_on_cm3( 4.15776929`_0.000522681548)
+		CS_L(csL)
+		'CS_G(csG)
+		'Strain_L(strL)
+		'Strain_G(strG)
+		MVW( 159.732, 63.794`_0.008, 81.487`_0.418)
+		scale @  0.00135308867`_1.423e-05
+		Tetragonal(=4.5924+a_del; :  4.623948`_0.000251, =2.9575+c_del; :  2.983692`_0.000188)	'4.5924, 2.9575
+        CIF2_set_space_group_id("P_42/m_n_m")
+		space_group "P_42/m_n_m"
+		site Ti1 num_posns  2	x 0       y 0       z 0 occ Ti+4 1. beq  = Ti_beq; :  1.32864`_0.06152
+		site O1  num_posns  4	x 0.30499 y 0.30499 z 0 occ O-2  1. beq  =  O_beq; :  1.18485`_0.12391
+
+	#ifdef OUTPUT
+		Output
+	#endif
+
+
+#ifdef CIF_OUTPUT
+	Out_pdCIF2(ciffile, "meas")
+#endif
+C_matrix_normalized
+{
+                             1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19
+bkg_rec22E1E293550_    1:  100 -63  63 -31  36   7   7   6 -11 -37  17 -24  -4  -2  -3  -8  19  -7  -7
+bkg_rec22E1E2935F8_    2:  -63 100 -57  55 -20  -7  19  12  10  31 -19  19  -4   3   1  22 -15   7   7
+bkg_rec22E1E2936A0_    3:   63 -57 100 -51  52   2 -13  -8  -3 -14  15 -10   9  -1   2  -9   1  -1  -2
+bkg_rec22E1E293748_    4:  -31  55 -51 100 -36   1  -4   4  -1   2  -8   5  -6   0  -2  -4   3  -1  -1
+bkg_rec22E1E2937F0_    5:   36 -20  52 -36 100  -1  -2   7   3  -7   5  -6   1   2   0   4  -5   3   2
+sd_2397100192136       6:    7  -7   2   1  -1 100  -5  -2 -69  -1  -2   4  -2  10   3 -14  48  -1 -21
+Ti_beq_del_2397100192  7:    7  19 -13  -4  -2  -5 100  33   8  22 -14   3 -15   3  -1  73  -4   5   7
+O_beq_del_23971001921  8:    6  12  -8   4   7  -2  33 100   4  11 -11  -1 -15   2  -2  41  -2   2   3
+abs                    9:  -11  10  -3  -1   3 -69   8   4 100   1   2  -7   2  24  10  22 -73  66  65
+scale22E1E304470_     10:  -37  31 -14   2  -7  -1  22  11   1 100 -33  49   9   0  -2  15   2  -0   1
+csL_2397110307288     11:   17 -19  15  -8   5  -2 -14 -11   2 -33 100 -61  80  -1  -0  -9  -4   2   0
+csG_2397110307288     12:  -24  19 -10   5  -6   4   3  -1  -7  49 -61 100 -11  -4  -0  -0   6  -5  -4
+strL_2397110307288    13:   -4  -4   9  -6   1  -2 -15 -15   2   9  80 -11 100  -1  -1 -11  -3   2   1
+a_del_2397110307288   14:   -2   3  -1   0   2  10   3   2  24   0  -1  -4  -1 100 -20   5 -17  38  27
+c_del_2397110307288   15:   -3   1   2  -2   0   3  -1  -2  10  -2  -0  -0  -1 -20 100   4 -10  17  10
+scale22E1E304BC0_     16:   -8  22  -9  -4   4 -14  73  41  22  15  -9  -0 -11   5   4 100 -33  16  15
+csL_2397100117648     17:   19 -15   1   3  -5  48  -4  -2 -73   2  -4   6  -3 -17 -10 -33 100 -50 -48
+a_del_2397100117648   18:   -7   7  -1  -1   3  -1   5   2  66  -0   2  -5   2  38  17  16 -50 100  51
+c_del_2397100117648   19:   -7   7  -2  -1   2 -21   7   3  65   1   0  -4   1  27  10  15 -48  51 100
+}
